@@ -1,14 +1,23 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Batch 65: spideroak to subsurface-icon."""
 import math
-from lm import *
+from lm import (
+    AMBER, AMBER_DEEP, BLUE, BLUE_DARK, BLUE_DEEP, BLUE_GREY, BLUE_GREY_DARK, BLUE_GREY_LIGHT,
+    BROWN_DARK, BROWN_LIGHT, BROWN_SOFT, circle, cpath, cut, CYAN_DEEP, CYAN_SOFT,
+    DEEP_ORANGE_LIGHT, DEEP_PURPLE, DEEP_PURPLE_LIGHT, DEEP_PURPLE_SOFT, f, g, GREY, GREY_DARK,
+    GREY_DEEP, GREY_SOFT, HOLE, INDIGO_DEEP, INDIGO_LIGHT, INK, LIGHT_BLUE, LIGHT_BLUE_DEEP,
+    LIGHT_BLUE_SOFT, line, ORANGE_DEEP, path, poly, pt, PURPLE_LIGHT, PURPLE_SOFT, RED,
+    RED_DEEP, rrect, stroke, TEAL, TEAL_DARK, TEAL_DEEP, TEAL_SOFT, YELLOW_DARK,
+)
 from glyphs.kit import _gear, registry, _star_d
 
 ICONS, SMALL, reg, small = registry()
 
+
 def _cloud(fill):
     return (circle(25, 31, 7, fill) + circle(34, 26, 9.5, fill) + circle(42, 32, 6, fill)
             + rrect(15, 30, 34, 13, 6.5, fill))
+
 
 def _db(cx, top, bot, rx, ry, seps):
     body = path(f"M{f(cx - rx)} {f(top)}A{f(rx)} {f(ry)} 0 0 1 {f(cx + rx)} {f(top)}"
@@ -17,12 +26,14 @@ def _db(cx, top, bot, rx, ry, seps):
                     for y in [top] + seps)
     return body + lines
 
+
 def _sr(w=4.2):
     s = stroke("M28.5 18.5C26.5 16.5 24.5 16 22.5 16C19.5 16 17.5 18 17.5 21"
                "C17.5 27 28.5 26 28.5 34C28.5 38 26 40.5 22.5 40.5C20 40.5 18 39.5 16.5 37.5", INK, w)
     r = stroke("M35 42V16H40.5C44.5 16 46.5 18.5 46.5 22.5C46.5 26.5 44 29 40.5 29H35"
                "M40.5 29L47 42", INK, w)
     return s + r
+
 
 def _crescent(ox, oy, r1, ix, iy, r2, fill):
     d = math.hypot(ix - ox, iy - oy)
@@ -36,10 +47,12 @@ def _crescent(ox, oy, r1, ix, iy, r2, fill):
           f"A{f(r2)} {f(r2)} 0 1 1 {f(p1[0])} {f(p1[1])}Z")
     return path(dd, fill)
 
+
 @reg("spideroak", DEEP_ORANGE_LIGHT)
 def spideroak():
     arrow = line(32, 40, 32, 28.5, HOLE, 3.4) + stroke("M27 32.5L32 27.5L37 32.5", HOLE, 3.4)
     return g(_cloud(INK) + arrow, "translate(0 -2)")
+
 
 @reg("sportstracker", BLUE_DARK)
 def sportstracker():
@@ -50,6 +63,7 @@ def sportstracker():
             stroke("M30.5 32L26.5 39.5H18.5", INK, 3.8))
     return head + body + arms + legs
 
+
 @reg("spotify-qt", CYAN_DEEP)
 def spotify_qt():
     qt = poly([(22, 14), (48, 14), (48, 38), (42, 46), (16, 46), (16, 22)], INK, 3)
@@ -58,12 +72,14 @@ def spotify_qt():
             stroke("M24 36.5C29 35.3 33.5 35.7 38 38", HOLE, 2.6))
     return qt + bars
 
+
 @reg("spring-tool-suite", DEEP_PURPLE_SOFT)
 def spring_tool_suite():
     gear = _gear(32, 30, 17, 13.5, 12, INK)
     leaf = path("M24.5 38C23.5 29 29 21.5 41 20.5C41.5 32 34.5 38.5 24.5 38Z", HOLE)
     vein = stroke("M25.5 37C29 32 33 28.5 37 25.5", INK, 2.2)
     return gear + circle(32, 30, 14, INK) + leaf + vein
+
 
 @reg("spyder", RED_DEEP)
 def spyder():
@@ -74,16 +90,19 @@ def spyder():
                "C35.8 35.5 46.5 34 46.5 40C46.5 43 44 45 40.5 45C38 45 36 44 34.8 42.3", INK, 4.4)
     return web + s
 
+
 @reg("sqldeveloper", BLUE_GREY)
 def sqldeveloper():
     db = _db(28, 18, 41, 13, 4.5, [26.5, 34])
-    badge = (f'<circle cx="41.5" cy="39.5" r="9" fill="#7D94A0" stroke="{HOLE}" stroke-width="2.4"/>'
+    badge = (f'<circle cx="41.5" cy="39.5" r="9" fill="{BLUE_GREY_LIGHT}" stroke="{HOLE}" stroke-width="2.4"/>'
              + poly([(39, 35), (46, 39.5), (39, 44)], INK, 1.5))
     return db + badge
+
 
 @reg("sqlitebrowser", GREY_DARK)
 def sqlitebrowser():
     return _db(32, 18, 42, 15, 5, [26.5, 34.5])
+
 
 @reg("squeak", GREY_DEEP)
 def squeak():
@@ -98,20 +117,24 @@ def squeak():
              stroke("M51 32.5L45.2 34M50.5 39L44.5 37", INK, 2.2))
     return ears + inner + head + face + whisk
 
+
 @reg("sr-editor", GREY_DARK)
 def sr_editor():
-    badge = (f'<circle cx="43" cy="40" r="8.5" fill="#7D94A0" stroke="{HOLE}" stroke-width="2.4"/>'
+    badge = (f'<circle cx="43" cy="40" r="8.5" fill="{BLUE_GREY_LIGHT}" stroke="{HOLE}" stroke-width="2.4"/>'
              + _gear(43, 40, 5.4, 4, 8, INK) + circle(43, 40, 1.8, BLUE_GREY_LIGHT))
     return g(_sr(4.2), "translate(32 29) scale(.92) translate(-32 -29)") + badge
+
 
 @reg("ssdeep", TEAL_DEEP)
 def ssdeep():
     ring = f'<circle cx="28" cy="26" r="9.5" fill="none" stroke="{INK}" stroke-width="5"/>'
     return ring + line(35.5, 33.5, 45.5, 43.5, INK, 6.5)
 
+
 @reg("st", GREY_DARK)
 def st():
     return stroke("M16 38H22.5V22H47.5V38M35 22V38", INK, 5.2)
+
 
 @reg("stacer", BLUE_GREY_DARK)
 def stacer():
@@ -120,11 +143,13 @@ def stacer():
     needle = poly([(32, 27.2), (45, 32.5), (32, 32.8)], INK, 1.5)
     return dots + hub + needle
 
+
 @reg("stack", INDIGO_LIGHT)
 def stack():
     top = poly([(32, 13.5), (47, 21), (32, 28.5), (17, 21)], INK, 2.5)
     return (top + stroke("M17 28.5L32 36L47 28.5", INK, 4.2) +
             stroke("M17 36.5L32 44L47 36.5", INK, 4.2))
+
 
 @reg("stage", BLUE)
 def stage():
@@ -133,12 +158,14 @@ def stage():
     play = poly([(29, 29.5), (38, 35.5), (29, 41.5)], HOLE, 2)
     return g(tabs + card + play, "translate(0 -1)")
 
+
 @reg("standard-notes", BLUE_DEEP)
 def standard_notes():
     page = rrect(16, 12, 32, 36, 4.5, INK)
     head = line(16, 20.5, 48, 20.5, HOLE, 2.4, "butt")
     lines = "".join(rrect(21, y, w, 2.8, 1.4, HOLE) for y, w in [(25.5, 22), (31, 18), (36.5, 22), (42, 13)])
     return page + head + lines
+
 
 @reg("starbound", DEEP_PURPLE_LIGHT)
 def starbound():
@@ -147,6 +174,7 @@ def starbound():
     planet = path("M14 26C31 26 44 34.5 49.5 47.5H14Z", INK,
                   f' stroke="{HOLE}" stroke-width="2.6" stroke-linejoin="round"')
     return rays + sun + planet
+
 
 @reg("stardew-valley", BLUE_GREY)
 def stardew_valley():
@@ -160,6 +188,7 @@ def stardew_valley():
     return legs + comb + beak + body + wing + circle(21.5, 19.5, 1.4, HOLE) + \
         circle(18.8, 25.5, 1.8, RED)
 
+
 @reg("stardict", BROWN_LIGHT)
 def stardict():
     back = rrect(28.5, 12.5, 18, 34, 3.5, INK)
@@ -170,6 +199,7 @@ def stardict():
     return back + pages + line(33.5, 12.5, 33.5, 16.2, HOLE, 2.2, "butt") + front + \
         line(21.5, 19.3, 21.5, 45.3, HOLE, 2.2, "butt") + line(24, 40.5, 30, 40.5, HOLE, 2.2)
 
+
 @reg("stargus", GREY_DARK)
 def stargus():
     left = path("M30 40C22.5 37 17 29 16.5 17C20.5 25 25.5 28.5 31 29.5Z", INK)
@@ -178,11 +208,13 @@ def stargus():
     eye = circle(32, 31.5, 2.6, CYAN_SOFT)
     return left + right + body + eye
 
+
 @reg("staruml", RED)
 def staruml():
     star = _star_d(32, 31, 18, 8, INK, -90, 3)
     cuts = "".join(line(32, 31, *pt(32, 31, 9, -90 + 36 * (2 * k + 1)), HOLE, 2.2) for k in range(5))
     return star + cuts
+
 
 @reg("stata", BLUE_GREY)
 def stata():
@@ -191,10 +223,12 @@ def stata():
     cells = [(0, 1), (0, 2), (1, 0), (1, 1), (1, 2), (2, 0), (2, 1)]
     return "".join(rrect(x0 + c * (s + gap), y0 + r * (s + gap), s, s, 1.6, INK) for r, c in cells)
 
+
 @reg("steadyflow", LIGHT_BLUE)
 def steadyflow():
     arrow = line(32, 27, 32, 38.5, HOLE, 3.4) + stroke("M27 34L32 39L37 34", HOLE, 3.4)
     return g(_cloud(INK) + arrow, "translate(0 -2)")
+
 
 @reg("stealth-bastard-deluxe", BROWN_LIGHT)
 def stealth_bastard():
@@ -204,6 +238,7 @@ def stealth_bastard():
                circle(38.5, 26, 6, BROWN_DARK) + circle(38.5, 26, 4, AMBER))
     mouth = rrect(29, 38, 6, 2.6, 1.3, BROWN_SOFT)
     return head + strap + goggles + mouth
+
 
 @reg("steam-rom-manager", BLUE_GREY_DARK)
 def steam_rom_manager():
@@ -216,6 +251,7 @@ def steam_rom_manager():
            poly([(29.5, 43.5), (30.5, 37.5), (35, 41)], INK, 1.2))
     return cards + pen
 
+
 @reg("steam_icon_341800", RED_DEEP)
 def keep_talking():
     bomb = circle(29, 33, 14, INK)
@@ -224,6 +260,7 @@ def keep_talking():
     spark = _star_d(47.5, 13.5, 4.5, 1.8, INK, -90, 0.8)
     ring = f'<circle cx="29" cy="33" r="8.5" fill="none" stroke="{HOLE}" stroke-width="2.4"/>'
     return bomb + cap + fuse + spark + ring
+
 
 @reg("steam_icon_553850", AMBER_DEEP)
 def helldivers():
@@ -234,6 +271,7 @@ def helldivers():
     teeth = stroke("M29 39V45M35 39V45", HOLE, 2.2)
     return skull + eyes + nose + teeth
 
+
 @reg("steamdeck-gaming-return", BLUE_GREY_DARK)
 def steamdeck_return():
     arc = stroke("M27.5 14A16 16 0 0 1 27.5 46", INK, 5)
@@ -241,12 +279,14 @@ def steamdeck_return():
     arrow = stroke("M31.5 30H23.5M27 26.5L23.5 30L27 33.5", HOLE, 2.4)
     return g(arc + dot + arrow, "translate(1.5 0)")
 
+
 @reg("steamlink", BLUE_DEEP)
 def steamlink():
     base = circle(32, 30, 16.5, INK)
     pad = path("M24 23.5H40C43 23.5 44.5 25.5 45 28.5L45.5 34.5C46 37.5 43 39 41 37L37.5 33.5"
                "H26.5L23 37C21 39 18 37.5 18.5 34.5L19 28.5C19.5 25.5 21 23.5 24 23.5Z", HOLE)
     return base + pad + circle(25.5, 29, 2.3, INK) + circle(38.5, 29, 2.3, INK)
+
 
 @reg("steamvr", LIGHT_BLUE_DEEP)
 def steamvr():
@@ -256,12 +296,14 @@ def steamvr():
                  "H23C20.5 36 19.5 34.5 19.5 32V26.5C19.5 24 20.5 22.5 23 22.5Z", HOLE)
     return knobs + body + visor
 
+
 @reg("stella", ORANGE_DEEP)
 def stella():
     mid = rrect(29.8, 13, 4.4, 34, 1.2, INK)
     left = path("M23 13H28V27C28 37 24.5 44.5 16 47.5L14 43C20.5 40 23 34 23 27Z", INK)
     right = path("M41 13H36V27C36 37 39.5 44.5 48 47.5L50 43C43.5 40 41 34 41 27Z", INK)
     return mid + left + right
+
 
 @reg("stellaris", TEAL_DARK)
 def stellaris():
@@ -272,12 +314,14 @@ def stellaris():
                 f' stroke="{HOLE}" stroke-width="2.2" stroke-linejoin="round"')
     return planet + land + ship
 
+
 @reg("stellarium", INDIGO_DEEP)
 def stellarium():
     moon = _crescent(35.5, 30, 15, 27, 25, 12.5, INK)
     stars = (_star_d(20.5, 37, 5.8, 2.6, INK, -90, 1.2) + _star_d(24, 22, 4.2, 1.9, INK, -90, 1) +
              _star_d(18, 14.5, 3, 1.4, INK, -90, 0.8))
     return moon + stars
+
 
 @reg("step", TEAL)
 def step():
@@ -286,9 +330,11 @@ def step():
     balls = "".join(circle(x, 37.5, 4.6, INK) for x in (22.5, 32, 41.5))
     return bar + strings + balls
 
+
 @reg("stepmania-ssc", AMBER_DEEP)
 def stepmania():
     return line(20, 42, 41.5, 20.5, INK, 8.5) + stroke("M25 18.5H44V37.5", INK, 8.5)
+
 
 @reg("sticky", PURPLE_LIGHT)
 def sticky():
@@ -298,13 +344,15 @@ def sticky():
     curl = path("M40.5 44.5V40.5H44.5Z", INK)
     return note + band + fold + curl
 
+
 @reg("stock_xfburn-burn-cd", BLUE_GREY)
 def xfburn():
     disc_ = cut(cpath(29, 28.5, 15.5) + cpath(29, 28.5, 4), INK)
     ring = f'<circle cx="29" cy="28.5" r="7.5" fill="none" stroke="{HOLE}" stroke-width="2.2"/>'
-    badge = (f'<circle cx="42" cy="40" r="8.5" fill="#CB7900" stroke="{HOLE}" stroke-width="2.4"/>'
+    badge = (f'<circle cx="42" cy="40" r="8.5" fill="{ORANGE_DEEP}" stroke="{HOLE}" stroke-width="2.4"/>'
              + line(39, 43, 45, 37, INK, 3.2) + poly([(37, 45), (37.7, 42), (40, 44.3)], INK, 0.8))
     return disc_ + ring + badge
+
 
 @reg("stoken-gui", RED)
 def stoken():
@@ -313,6 +361,7 @@ def stoken():
     ball = circle(29, 26, 11, INK)
     handle = line(35.5, 32.5, 45, 42, INK, 9.5) + line(38.5, 35.5, 43, 40, HOLE, 3)
     return ring + link + ball + handle
+
 
 @reg("strawberry", RED_DEEP)
 def strawberry():
@@ -324,12 +373,14 @@ def strawberry():
                    (27.5, 24.5)], LIGHT_BLUE_SOFT, 2)
     return berry + seeds + leaves
 
+
 @reg("streamtuner", BLUE)
 def streamtuner():
     note = stroke("M25.5 40V18L43.5 13.5V31", INK, 4) + circle(20.5, 40, 5.5, INK)
     badge = f'<circle cx="41" cy="39" r="9" fill="{INK}" stroke="{HOLE}" stroke-width="2.4"/>'
     hash_ = stroke("M38.5 34.5V43.5M43.5 34.5V43.5M36.5 37H45.5M36.5 41H45.5", HOLE, 2)
     return note + badge + hash_
+
 
 @reg("stremio", DEEP_PURPLE)
 def stremio():
@@ -338,6 +389,7 @@ def stremio():
     play = poly([(28.5, 23), (39, 30), (28.5, 37)], HOLE, 2)
     return top + bot + play
 
+
 @reg("stretchly", TEAL_DARK)
 def stretchly():
     base = circle(32, 30, 16.5, INK)
@@ -345,12 +397,14 @@ def stretchly():
                "C26.8 29 38 28.5 38 34.5C38 38 35 40.5 31 40.5C28.5 40.5 26 39.5 24.5 37.5", HOLE, 4.2)
     return base + s
 
+
 @reg("stride", BLUE_DEEP)
 def stride():
     leg = poly([(29, 13), (36.5, 13), (49.5, 46), (41.5, 46)], INK, 2.5)
     ramp = path("M14.5 46.5C21 43.5 25 37 27.5 29.5L33 43.5L31.5 46.5Z", INK,
                 f' stroke="{HOLE}" stroke-width="2.2" stroke-linejoin="round"')
     return leg + ramp
+
 
 @reg("studio-3t", PURPLE_SOFT)
 def studio_3t():
@@ -360,9 +414,11 @@ def studio_3t():
     legs = rrect(25.5, 34, 6, 9, 3, INK) + rrect(39.5, 34, 6, 9, 3, INK)
     return shell + head + legs + circle(18.5, 31.5, 1.4, HOLE) + stroke("M26 36H46", HOLE, 1.8)
 
+
 @reg("stuntrally", YELLOW_DARK)
 def stuntrally():
     return _sr(4.6)
+
 
 @reg("subdownloader", ORANGE_DEEP)
 def subdownloader():
@@ -370,11 +426,13 @@ def subdownloader():
     lines = "".join(line(21, y, 43, y, HOLE, 2.6) for y in (20.5, 26.5, 32.5))
     return bubble + lines
 
+
 @reg("sublime-merge", TEAL_DEEP)
 def sublime_merge():
     upper = poly([(17, 18.5), (22.5, 13.5), (39, 27), (33, 32)], TEAL_SOFT, 2.5)
     lower = poly([(16, 41.5), (32.5, 27.5), (48, 27.5), (48, 34), (35, 34), (21.5, 46)], INK, 2.5)
     return upper + lower
+
 
 @reg("subsonic", AMBER_DEEP)
 def subsonic():
@@ -385,9 +443,11 @@ def subsonic():
     ports = "".join(circle(x, 33, 2.8, HOLE) for x in (27, 34, 41))
     return scope + tower + tail + hull + ports
 
+
 @reg("substance", RED_DEEP)
 def substance():
     return stroke("M45 18.5L39.5 13.5H24.5L18.5 21L45 36.5L39.5 46.5H24.5L19 41.5", INK, 5.8)
+
 
 @reg("subsurface-icon", BLUE_DARK)
 def subsurface():
@@ -402,16 +462,19 @@ def subsurface():
             poly([(32, 44.5), (36.5, 42.5), (38, 48)], INK, 1.5))
     return wave + tank + head + torso + arms + legs + fins
 
+
 @small("spotify-qt")
 def spotify_qt_s():
     qt = poly([(22, 13), (49, 13), (49, 39), (42, 47), (15, 47), (15, 21)], INK, 3)
     return qt + stroke("M21 25.5C28 22.5 36 23 43 27", HOLE, 4.5) + stroke("M23.5 34C29 32.5 34.5 33 40 36", HOLE, 4)
+
 
 @small("spring-tool-suite")
 def spring_tool_suite_s():
     gear = _gear(32, 30, 17.5, 13.5, 8, INK, 0.55)
     leaf = path("M23.5 39C22.5 29 29 21 42 20C42.5 32.5 34.5 40 23.5 39Z", HOLE)
     return gear + circle(32, 30, 14, INK) + leaf
+
 
 @small("spyder")
 def spyder_s():
@@ -420,16 +483,19 @@ def spyder_s():
                "C35 36 47.5 34.5 47.5 41C47.5 44.5 44.5 46.5 40.5 46.5C37.5 46.5 35.5 45.5 34 43.5", INK, 5)
     return web + s
 
+
 @small("sqldeveloper")
 def sqldeveloper_s():
     db = _db(27, 18, 41, 13, 4.5, [29.5])
-    badge = (f'<circle cx="41" cy="39" r="10" fill="#9E9D9E" stroke="{HOLE}" stroke-width="2.6"/>'
+    badge = (f'<circle cx="41" cy="39" r="10" fill="{GREY}" stroke="{HOLE}" stroke-width="2.6"/>'
              + poly([(38, 34), (46, 39), (38, 44)], INK, 1.5))
     return db + badge
+
 
 @small("sqlitebrowser")
 def sqlitebrowser_s():
     return _db(32, 18, 42, 15, 5, [30])
+
 
 @small("squeak")
 def squeak_s():
@@ -437,33 +503,36 @@ def squeak_s():
     head = circle(32, 32, 13.5, INK)
     return ears + head + circle(26.5, 30.5, 3, HOLE) + circle(37.5, 30.5, 3, HOLE)
 
+
+@small("stuntrally")
 @small("sr-editor")
 def sr_editor_s():
     return _sr(5.2)
 
-@small("stuntrally")
-def stuntrally_s():
-    return _sr(5.2)
 
 @small("stacer")
 def stacer_s():
     dots = "".join(circle(*pt(32, 30, 15, a), 2.8, INK) for a in range(135, 406, 45) if a != 360)
     return dots + circle(32, 30, 5, INK) + poly([(32, 26.5), (46, 32.5), (32, 33.5)], INK, 1.5)
 
+
 @small("stack")
 def stack_s():
     top = poly([(32, 12), (48, 20.5), (32, 29), (16, 20.5)], INK, 2.5)
     return top + stroke("M16 32L32 40.5L48 32", INK, 5.5)
+
 
 @small("stage")
 def stage_s():
     return (rrect(19, 13, 26, 5.5, 2.5, INK) + rrect(14, 21, 36, 26, 4.5, INK) +
             poly([(28, 27), (39, 34), (28, 41)], HOLE, 2))
 
+
 @small("standard-notes")
 def standard_notes_s():
     page = rrect(15, 12, 34, 36, 5, INK) + line(15, 21, 49, 21, HOLE, 3, "butt")
     return page + "".join(rrect(21, y, w, 4, 2, HOLE) for y, w in [(27, 22), (35, 15)])
+
 
 @small("starbound")
 def starbound_s():
@@ -471,6 +540,7 @@ def starbound_s():
     planet = path("M13 27C31 27 44 35 50 48H13Z", INK,
                   f' stroke="{HOLE}" stroke-width="3" stroke-linejoin="round"')
     return rays + circle(35, 26, 7, INK) + planet
+
 
 @small("stardew-valley")
 def stardew_valley_s():
@@ -481,15 +551,18 @@ def stardew_valley_s():
                 "C49.5 25 48.5 30 46.5 33.5C43.5 39 38.5 43 32 43C23.5 43 17.5 37 17.5 29Z", INK)
     return comb + beak + body + stroke("M32 43V47", AMBER, 3)
 
+
 @small("stardict")
 def stardict_s():
     back = rrect(29, 12, 18, 35, 3.5, INK)
     front = rrect(16, 18, 17, 29, 3.5, INK, f' stroke="{HOLE}" stroke-width="3"')
     return back + front + line(22, 19.5, 22, 45.5, HOLE, 3, "butt")
 
+
 @small("staruml")
 def staruml_s():
     return _star_d(32, 31, 18.5, 8.5, INK, -90, 3)
+
 
 @small("steam-rom-manager")
 def steam_rom_manager_s():
@@ -497,11 +570,13 @@ def steam_rom_manager_s():
     pen = line(48, 19, 30, 42, HOLE, 11) + line(48, 19, 31, 40.5, INK, 6)
     return cards + pen
 
+
 @small("steam_icon_341800")
 def keep_talking_s():
     bomb = circle(29, 33, 14.5, INK)
     cap = g(rrect(34, 16, 9, 7.5, 2, INK), "rotate(45 38.5 19.75)")
     return bomb + cap + _star_d(47, 13.5, 5, 2.2, INK, -90, 0.8)
+
 
 @small("steam_icon_553850")
 def helldivers_s():
@@ -509,10 +584,12 @@ def helldivers_s():
                   (19, 34), (15, 24)], INK, 3)
     return skull + circle(25, 26, 5.5, HOLE) + circle(39, 26, 5.5, HOLE)
 
+
 @small("steamdeck-gaming-return")
 def steamdeck_return_s():
     return g(stroke("M27.5 13A17 17 0 0 1 27.5 47", INK, 6) + circle(27.5, 30, 9.5, INK),
              "translate(1.5 0)")
+
 
 @small("steamlink")
 def steamlink_s():
@@ -521,10 +598,12 @@ def steamlink_s():
                "H26.5L23 37.5C21 39.5 17.5 38 18 35L18.5 28C19 25 20.5 22.5 23.5 22.5Z", HOLE)
     return base + pad
 
+
 @small("steamvr")
 def steamvr_s():
     return (rrect(11.5, 24, 6, 12, 2, INK) + rrect(46.5, 24, 6, 12, 2, INK) +
             rrect(14.5, 17.5, 35, 25, 7.5, INK) + rrect(20, 23, 24, 14, 4, HOLE))
+
 
 @small("stella")
 def stella_s():
@@ -533,15 +612,18 @@ def stella_s():
     right = path("M42.5 12H36.5V27C36.5 37 40 45 48.5 48.5L51 43C44.5 40 42.5 34 42.5 27Z", INK)
     return mid + left + right
 
+
 @small("stellaris")
 def stellaris_s():
     ship = path("M49 11.5L41 31L37 27L23 44.5L33 23L37.5 26.5Z", INK,
                 f' stroke="{HOLE}" stroke-width="3" stroke-linejoin="round"')
     return circle(29, 34, 14, INK) + ship
 
+
 @small("stellarium")
 def stellarium_s():
     return _crescent(36, 30, 15.5, 27, 25, 12.5, INK) + _star_d(20, 36, 7.5, 3.4, INK, -90, 1.2)
+
 
 @small("step")
 def step_s():
@@ -549,20 +631,24 @@ def step_s():
     strings = "".join(line(x, 16, x, 32, INK, 2.8) for x in (21.5, 32, 42.5))
     return bar + strings + "".join(circle(x, 37, 5.2, INK) for x in (21.5, 32, 42.5))
 
+
 @small("sticky")
 def sticky_s():
     note = path("M19 13H45A4 4 0 0 1 49 17V35L38 46H19A4 4 0 0 1 15 42V17A4 4 0 0 1 19 13Z", INK)
     return note + path("M38 46V38H49Z", HOLE)
 
+
 @small("stock_xfburn-burn-cd")
 def xfburn_s():
     disc_ = cut(cpath(29, 28.5, 16) + cpath(29, 28.5, 4.5), INK)
-    badge = f'<circle cx="42" cy="40" r="9" fill="#CB7900" stroke="{HOLE}" stroke-width="2.8"/>'
+    badge = f'<circle cx="42" cy="40" r="9" fill="{ORANGE_DEEP}" stroke="{HOLE}" stroke-width="2.8"/>'
     return disc_ + badge + line(38.5, 43.5, 45.5, 36.5, INK, 3.4)
+
 
 @small("stoken-gui")
 def stoken_s():
     return circle(28, 25, 12.5, INK) + line(35, 32, 45, 42, INK, 11)
+
 
 @small("strawberry")
 def strawberry_s():
@@ -571,16 +657,19 @@ def strawberry_s():
     leaves = poly([(19.5, 21), (27, 18.5), (32, 12), (37, 18.5), (44.5, 21), (32, 27)], GREY_SOFT, 2)
     return berry + leaves + circle(26, 32, 1.9, HOLE) + circle(38, 32, 1.9, HOLE) + circle(32, 39, 1.9, HOLE)
 
+
 @small("streamtuner")
 def streamtuner_s():
     note = stroke("M25.5 40V18L43.5 13.5V30", INK, 5) + circle(20.5, 40, 6.2, INK)
     return note + f'<circle cx="41" cy="39" r="9.5" fill="{INK}" stroke="{HOLE}" stroke-width="2.8"/>' + \
         stroke("M38 34.5V43.5M44 34.5V43.5", HOLE, 2.6)
 
+
 @small("stremio")
 def stremio_s():
     return (poly([(14, 30), (32, 12), (50, 30)], INK, 3.5) + poly([(14, 30), (50, 30), (32, 48)], DEEP_PURPLE_SOFT, 3.5)
             + poly([(28, 22), (40, 30), (28, 38)], HOLE, 2))
+
 
 @small("stretchly")
 def stretchly_s():
@@ -588,16 +677,19 @@ def stretchly_s():
                "C26.5 29.5 38.5 28.5 38.5 35C38.5 38.5 35 41 31 41C28 41 25.5 40 24 38", HOLE, 5)
     return circle(32, 30, 17, INK) + s
 
+
 @small("studio-3t")
 def studio_3t_s():
     shell = path("M21 36C21 25 28 18 36.5 18C45 18 49.5 25 49.5 33C49.5 35.5 48.5 37 46.5 37H22C21.5 37 21 36.5 21 36Z", INK)
     head = path("M13 35C13 30.5 16 28 19.5 28C23 28 25 30.5 25 33.5V37H15C13.8 37 13 36.2 13 35Z", INK)
     return shell + head + rrect(25, 35, 7, 9, 3, INK) + rrect(39.5, 35, 7, 9, 3, INK)
 
+
 @small("subdownloader")
 def subdownloader_s():
     bubble = rrect(13, 13, 38, 27, 5, INK) + poly([(27, 39), (37, 39), (32, 46)], INK, 2)
     return bubble + line(20.5, 21.5, 43.5, 21.5, HOLE, 3.6) + line(20.5, 30.5, 43.5, 30.5, HOLE, 3.6)
+
 
 @small("subsonic")
 def subsonic_s():
@@ -605,6 +697,7 @@ def subsonic_s():
     hull = rrect(17, 23, 34, 20, 10, INK)
     tail = poly([(11.5, 26.5), (19, 31), (19, 35), (11.5, 39.5)], INK, 2)
     return tower + tail + hull + circle(28, 33, 3.2, HOLE) + circle(38, 33, 3.2, HOLE)
+
 
 @small("subsurface-icon")
 def subsurface_s():

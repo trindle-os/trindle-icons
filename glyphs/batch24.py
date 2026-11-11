@@ -1,9 +1,18 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Batch 24: double-action-boogaloo to eid-viewer."""
-from lm import *
+from lm import (
+    AMBER, AMBER_DEEP, AMBER_SOFT, BLUE, BLUE_DARK, BLUE_DEEP, BLUE_GREY, BLUE_GREY_DARK,
+    BLUE_GREY_LIGHT, BLUE_GREY_SOFT, BLUE_LIGHT, BLUE_SOFT, circle, cpath, cut, CX, CY, CYAN,
+    CYAN_DEEP, CYAN_SOFT, DEEP_ORANGE, DEEP_ORANGE_DEEP, DEEP_ORANGE_SOFT, DEEP_PURPLE,
+    DEEP_PURPLE_DARK, DEEP_PURPLE_LIGHT, g, GREY_DARK, GREY_DEEP, GREY_SOFT, HOLE, INDIGO, INK,
+    LIGHT_BLUE_DEEP, LIGHT_BLUE_LIGHT, LIGHT_BLUE_SOFT, line, ORANGE, ORANGE_DEEP, ORANGE_SOFT,
+    path, PINK_DEEP, PINK_LIGHT, PINK_SOFT, poly, pt, PURPLE_DEEP, PURPLE_SOFT, RED, RED_DEEP,
+    rrect, stroke, TEAL_SOFT, YELLOW_LIGHT,
+)
 from glyphs.kit import registry, _ring, _star_d
 
 ICONS, SMALL, reg, small = registry()
+
 
 @reg("double-action-boogaloo", AMBER_DEEP)
 def double_action():
@@ -11,10 +20,12 @@ def double_action():
     a = stroke("M34 43L41 17L48 43", INK, 4.4) + line(36.8, 34.5, 45.2, 34.5, INK, 4)
     return d + a
 
+
 @reg("doublecmd", RED_DEEP)
 def doublecmd():
     return (stroke("M14 18H18A9.5 12 0 0 1 18 42H14", INK, 5) +
             stroke("M50 18H46A9.5 12 0 0 0 46 42H50", INK, 5))
+
 
 @reg("dusk", RED_DEEP)
 def dusk():
@@ -26,11 +37,13 @@ def dusk():
     k = line(44.5, 23, 44.5, 37, INK, w) + stroke("M50 23L44.8 30.2L50 37", INK, w)
     return d + u + s + k
 
+
 @reg("dying-light", DEEP_ORANGE_DEEP)
 def dying_light():
     d = stroke("M18 16V44H21C27.5 44 30 38 30 30C30 22 27.5 16 21 16Z", INK, 5)
     l_ = stroke("M37 16V44H46", INK, 5)
     return d + l_
+
 
 @reg("echomixer", RED)
 def echomixer():
@@ -42,12 +55,14 @@ def echomixer():
     o = f'<ellipse cx="45.8" cy="30" rx="4.2" ry="7" fill="none" stroke="{INK}" stroke-width="{w}"/>'
     return e + c + h + o
 
+
 @reg("eagle", ORANGE_DEEP)
 def eagle():
     wing = path("M17 13C22 16 24 21 24 30C24 39 22 44 17 47C15 41 14.5 35 14.5 30"
                 "C14.5 25 15 19 17 13Z", ORANGE_SOFT)
     e = stroke("M45 17H33C28 17 26 22 26 30C26 38 28 43 33 43H45", INK, 5) + line(30, 30, 42, 30, INK, 5)
     return wing + e
+
 
 @reg("edex-ui", BLUE_GREY_DARK)
 def edex_ui():
@@ -56,23 +71,28 @@ def edex_ui():
                "C25.5 36 28 39 32.5 39C35 39 37 38 38.3 36.5", INK, 4)
     return frame + e
 
+
 @reg("downline", BLUE)
 def downline():
     return stroke("M43 17L22 38", INK, 6) + stroke("M21 23V39H37", INK, 6)
+
 
 @reg("downloader-arrow", BLUE_GREY_LIGHT)
 def downloader_arrow():
     return poly([(26, 13), (38, 13), (38, 27), (47, 27), (32, 45), (17, 27), (26, 27)], INK, 3)
 
+
 @reg("dse", LIGHT_BLUE_DEEP)
 def dse():
     return line(32, 13, 32, 35, INK, 5.5) + poly([(21, 32), (43, 32), (32, 46)], INK, 3)
+
 
 @reg("dupeguru", DEEP_ORANGE_DEEP)
 def dupeguru():
     down = poly([(19, 13), (27, 13), (27, 30), (32, 30), (23, 41), (14, 30), (19, 30)], INK, 2.5)
     up = poly([(37, 47), (45, 47), (45, 30), (50, 30), (41, 19), (32, 30), (37, 30)], DEEP_ORANGE_SOFT, 2.5)
     return up + down
+
 
 @reg("dragon-ball-online-global", ORANGE_DEEP)
 def dbo():
@@ -81,12 +101,14 @@ def dbo():
                     [(26, 23.5), (38, 23.5), (26, 36.5), (38, 36.5)])
     return ball + stars
 
+
 @reg("dragon-ball-xenoverse", ORANGE_DEEP)
 def dbx():
     stars = "".join(_star_d(x, y, 5.2, 2.2, INK) for x, y in [(19, 17.5), (32, 15.5), (45, 17.5)])
     xv = (line(18, 27, 29, 44, INK, 4.4) + line(29, 27, 18, 44, INK, 4.4) +
           stroke("M35 27L40.5 44L46 27", INK, 4.4))
     return stars + xv
+
 
 @reg("dragonframe4", BLUE_GREY)
 def dragonframe():
@@ -98,6 +120,7 @@ def dragonframe():
             poly([(40, 27), (34.5, 29.5), (38, 31)], BLUE_GREY_SOFT, 1))
     return head + eyes
 
+
 @reg("dragonplayer", DEEP_PURPLE_DARK)
 def dragonplayer():
     head = path("M14 27C17 22 22 19 28 18L38 11L35 19C41 20 46 24 48 30"
@@ -107,11 +130,13 @@ def dragonplayer():
              stroke("M20 45C24 42.5 28 42.5 31.5 45C35 47.5 40 47.5 44 45", TEAL_SOFT, 3.4))
     return head + eye + waves
 
+
 @reg("draw.io", ORANGE_DEEP)
 def drawio():
     lines = stroke("M32 22L21 36M32 22L43 36", INK, 2.8)
     return (lines + rrect(25, 12, 14, 11, 3, INK) +
             rrect(14, 35, 14, 11, 3, INK) + rrect(36, 35, 14, 11, 3, INK))
+
 
 @reg("driconf", BLUE_DEEP)
 def driconf():
@@ -119,11 +144,13 @@ def driconf():
     return (lines + rrect(14, 14, 15, 11, 3, INK) +
             rrect(36, 19, 14, 11, 3, INK) + rrect(21, 36, 13, 10, 3, INK))
 
+
 @reg("eeschema", PURPLE_SOFT)
 def eeschema():
     wires = stroke("M27 14V46M27 30H47M27 36L17 44", INK, 2.8)
     dots = "".join(circle(x, y, 3.6, YELLOW_LIGHT) for x, y in [(27, 14), (27, 30), (47, 30), (27, 46), (17, 44)])
     return wires + dots
+
 
 @reg("drawpile", CYAN_DEEP)
 def drawpile():
@@ -133,6 +160,7 @@ def drawpile():
     pencil = line(15, 44, 45, 17, BLUE_GREY_DARK, 5.5) + poly([(45, 17), (50, 12), (48.3, 19.2)], BLUE_GREY_DARK, 1.5)
     return globe + land + pencil
 
+
 @reg("drill-search-gtk", GREY_DEEP)
 def drill():
     chuck = rrect(20, 12, 24, 7, 2, INK)
@@ -140,6 +168,7 @@ def drill():
     cuts = (line(24, 24.5, 40, 29, HOLE, 2.2) + line(26.5, 31, 37.8, 34.5, HOLE, 2.2) +
             line(29, 37.5, 35.5, 39.5, HOLE, 2.2))
     return chuck + bit + cuts
+
 
 @reg("droidcam", GREY_DEEP)
 def droidcam():
@@ -151,6 +180,7 @@ def droidcam():
     lens = circle(32, 34.5, 7, HOLE) + circle(32, 34.5, 4.5, INK) + circle(32, 34.5, 2, HOLE)
     return dome + ants + eyes + body + arms + lens
 
+
 @reg("drweb-gui", PURPLE_SOFT)
 def drweb():
     base = circle(CX, CY, 16.5, INK)
@@ -161,10 +191,12 @@ def drweb():
             legs += g(stroke(d, HOLE, 2.2), f"translate(64 0) scale(-1 1)") if s < 0 else stroke(d, HOLE, 2.2)
     return base + legs + body
 
+
 @reg("ds9", LIGHT_BLUE_DEEP)
 def ds9():
     pts = [pt(CX, CY, 16.5 if k % 2 == 0 else 10, -90 + 15 * k) for k in range(24)]
     return poly(pts, AMBER_SOFT, 1) + circle(CX, CY, 9.5, AMBER)
+
 
 @reg("dsda-doom", BLUE_GREY)
 def dsda():
@@ -175,6 +207,7 @@ def dsda():
     feet = stroke("M27 42.5L25 48M34 43.5L35 48", ORANGE, 2.6)
     eye = circle(20.5, 17.5, 1.3, HOLE)
     return feet + goose + beak + eye
+
 
 @reg("duckduckgo", DEEP_ORANGE_DEEP)
 def duckduckgo():
@@ -187,6 +220,7 @@ def duckduckgo():
     bow = poly([(29, 35), (33, 37), (29, 39)], AMBER_DEEP, 1.2) + poly([(37, 35), (33, 37), (37, 39)], AMBER_DEEP, 1.2)
     return ring + duck + eye + beak + bow
 
+
 @reg("duckstation", ORANGE_DEEP)
 def duckstation():
     head = rrect(28, 12, 13, 13, 1.5, INK)
@@ -198,10 +232,12 @@ def duckstation():
     eye = rrect(35, 16, 3, 3, .5, HOLE)
     return legs + tail + body + head + beak + wing + eye
 
+
 @reg("dukto", CYAN_DEEP)
 def dukto():
     pipe = rrect(20, 23, 24, 25, 1.5, INK) + rrect(15, 12, 34, 11, 2.5, INK)
     return pipe + line(20, 23, 44, 23, HOLE, 2)
+
 
 @reg("duolingo", PURPLE_SOFT)
 def duolingo():
@@ -212,11 +248,13 @@ def duolingo():
     beak = poly([(29.5, 35.5), (34.5, 35.5), (32, 39.5)], AMBER, 2)
     return body + eyes + beak
 
+
 @reg("duplicati", BLUE_DEEP)
 def duplicati():
     big = rrect(24, 13, 26, 21, 4, INK) + rrect(27.5, 16.5, 19, 14, 2, BLUE_DARK)
     small_ = rrect(12, 28, 22, 18, 4, HOLE) + rrect(14, 30, 18, 14, 3, INK) + rrect(17, 33, 12, 8, 1.5, BLUE_LIGHT)
     return big + small_
+
 
 @reg("duskplayer", PINK_DEEP)
 def duskplayer():
@@ -225,11 +263,13 @@ def duskplayer():
     pads = rrect(17, 33.5, 5, 10, 2.5, PINK_SOFT) + rrect(42, 33.5, 5, 10, 2.5, PINK_SOFT)
     return band + cups + pads
 
+
 @reg("dust3d", GREY_DARK)
 def dust3d():
     head = path("M14 26C17 21.5 23 19 29 19.5C35 20 39 18 44 17C47 23 49 32 49 42"
                 "C45 38 41 34.5 37 32.5C32 33.5 26 33 21 31.5C17.5 30.5 14.5 28.5 14 26Z", INK)
     return head + circle(24, 24.5, 1.6, HOLE)
+
 
 @reg("dvanalyzer", ORANGE_DEEP)
 def dvanalyzer():
@@ -237,12 +277,14 @@ def dvanalyzer():
     p = _ring(34, 33, 6.3, INK, 4.2) + line(27.7, 33, 27.7, 46, INK, 4.2)
     return dot + p
 
+
 @reg("dvdisaster", BLUE_GREY)
 def dvdisaster():
     disc = cut(cpath(29, 28, 15) + cpath(29, 28, 3), INK) + _ring(29, 28, 6, BLUE_GREY_SOFT, 3)
     badge = circle(42.5, 39.5, 8.5, INDIGO)
     bang = line(42.5, 35, 42.5, 40.5, INK, 3) + circle(42.5, 44.3, 1.6, INK)
     return disc + circle(42.5, 39.5, 10.5, HOLE) + badge + bang
+
 
 @reg("eBook-speaker", PURPLE_DEEP)
 def ebook_speaker():
@@ -254,12 +296,14 @@ def ebook_speaker():
     wave = stroke("M25 15.5C26 16.5 26 18.5 25 19.5", INK, 1.8)
     return sheet + lines + bubble + spk + wave
 
+
 @reg("ease", DEEP_ORANGE)
 def ease():
     sheet = rrect(18, 13, 28, 34, 4, INK)
     pie = path("M27 20A6 6 0 1 0 33 26H27Z", HOLE)
     bars = rrect(34.5, 20, 7.5, 2.8, 1.4, HOLE) + rrect(34.5, 25.5, 7.5, 2.8, 1.4, HOLE) + rrect(22, 35, 20, 2.8, 1.4, HOLE)
     return sheet + pie + bars
+
 
 @reg("easy-ebook-viewer", BLUE_DEEP)
 def easy_ebook():
@@ -269,12 +313,14 @@ def easy_ebook():
     head = circle(32, 14, 4.2, BLUE_SOFT)
     return book + spine + head
 
+
 @reg("easyeda", BLUE)
 def easyeda():
     cloud = path("M20.5 42C16 42 13 38.5 13 34.5C13 30.5 16 27.5 20 27.5C20.5 21 25.5 16.5 32 16.5"
                  "C37.5 16.5 42 20 43.5 25C48 25.5 51 29 51 33.5C51 38 47.5 42 43 42Z", INK)
     trace = stroke("M29.5 35H40V28", HOLE, 3.2) + circle(26, 35, 4, HOLE) + circle(26, 35, 1.8, INK)
     return cloud + trace
+
 
 @reg("easymp3gain", GREY_DEEP)
 def easymp3gain():
@@ -285,11 +331,13 @@ def easymp3gain():
                    for k, h in enumerate([3, 5, 7.5, 10]))
     return note + badge + bars
 
+
 @reg("easystroke", INDIGO)
 def easystroke():
     loops = "".join(g(f'<ellipse cx="32" cy="23" rx="7" ry="10" fill="none" stroke="{INK}" stroke-width="3.2"/>',
                       f"rotate({120 * k} 32 31)") for k in range(3))
     return loops
+
 
 @reg("easytag", BLUE_LIGHT)
 def easytag():
@@ -299,11 +347,13 @@ def easytag():
                "C26.8 38.8 28.9 41.5 32.3 41.5C34.4 41.5 36 40.7 37 39.4", HOLE, 3.2)
     return g(tag + hole + e, "rotate(-35 32 30) translate(32 30) scale(.92) translate(-32 -30)")
 
+
 @reg("echonest", BLUE_GREY_DARK)
 def echonest():
     c = stroke("M45 23.5A15 15 0 1 0 45 36.5", INK, 5.5)
     inner = stroke("M25.5 30A6.5 6.5 0 0 1 38.5 30", LIGHT_BLUE_LIGHT, 4)
     return c + inner
+
 
 @reg("eclipse", DEEP_PURPLE_DARK)
 def eclipse():
@@ -312,12 +362,14 @@ def eclipse():
     bands = "".join(rrect(20.5, y, 27, 2.8, 1.4, INK) for y in (23, 28.6, 34.2))
     return moon + disc + bands
 
+
 @reg("eclipse-cdt", DEEP_PURPLE_DARK)
 def eclipse_cdt():
     moon = cut(cpath(25, 30, 13) + cpath(27.5, 30, 11.2), ORANGE)
     c = stroke("M32.5 25A7 7 0 1 0 32.5 35", INK, 3.8)
     plus = "".join(line(x - 3.2, 30, x + 3.2, 30, INK, 2.6) + line(x, 26.8, x, 33.2, INK, 2.6) for x in (39.5, 47.5))
     return moon + c + plus
+
 
 @reg("eco", BLUE_DEEP)
 def eco():
@@ -326,12 +378,14 @@ def eco():
         rrect(33, 20, 6, 4, 0, HOLE) + rrect(24, 30, 5, 5, 0, HOLE) + rrect(38, 37, 7, 4, 0, HOLE)
     return globe + sea + circle(33.5, 17.5, 2.2, INK)
 
+
 @reg("edb-debugger", BLUE_DARK)
 def edb():
     arcs = (stroke("M15 44C19 29 31 20 48 16", INK, 3.4) +
             stroke("M20 44C24 33 33 26 47 23.5", INK, 3.2) +
             stroke("M25 44C28.5 37.5 35 32.5 45 31", INK, 3))
     return arcs
+
 
 @reg("edge-game", DEEP_PURPLE)
 def edge_game():
@@ -340,6 +394,7 @@ def edge_game():
     left = poly([(23, 25), (32, 30), (32, 41), (23, 36)], PINK_LIGHT, 1.5)
     right = poly([(41, 25), (32, 30), (32, 41), (41, 36)], PINK_DEEP, 1.5)
     return hexa + top + left + right
+
 
 @reg("edu.stanford.Almond", ORANGE_DEEP)
 def almond():
@@ -350,11 +405,13 @@ def almond():
             stroke("M29 38.5Q32 41 35 38.5", HOLE, 2.2))
     return nut + face
 
+
 @reg("eekboard", BLUE_GREY_DARK)
 def eekboard():
     board = rrect(13, 17, 38, 27, 4.5, INK)
     keys = "".join(rrect(17 + 6.2 * c, 21 + 6 * r, 4.4, 4, 1, HOLE) for r in range(2) for c in range(5))
     return board + keys + rrect(22, 34.5, 20, 4.5, 1.5, HOLE)
+
 
 @reg("eiciel", LIGHT_BLUE_DEEP)
 def eiciel():
@@ -364,6 +421,7 @@ def eiciel():
                "C27.5 41.8 29.3 44 32.2 44C34 44 35.3 43.3 36.2 42.2", HOLE, 2.8)
     return head + body + e
 
+
 @reg("eid-viewer", BLUE_GREY)
 def eid_viewer():
     card = rrect(13, 17, 38, 27, 4, INK)
@@ -371,13 +429,16 @@ def eid_viewer():
     glass = _ring(26, 28.5, 6, HOLE, 3.2) + line(30.5, 33, 35, 37.5, HOLE, 3.6)
     return card + person + glass
 
+
 @small("dusk")
 def dusk_s():
     return stroke("M20 16V44H24C33 44 36 38 36 30C36 22 33 16 24 16Z", INK, 5.5)
 
+
 @small("echomixer")
 def echomixer_s():
     return stroke("M42 17H24V43H42", INK, 5.5) + line(24, 30, 38, 30, INK, 5.5)
+
 
 @small("drweb-gui")
 def drweb_s():
@@ -385,6 +446,7 @@ def drweb_s():
     legs = "".join(stroke(d, HOLE, 3) + g(stroke(d, HOLE, 3), "translate(64 0) scale(-1 1)")
                    for d in ["M27 28L20 21", "M27 38L20 43"])
     return base + legs + f'<ellipse cx="32" cy="32" rx="6.5" ry="9" fill="{HOLE}"/>' + circle(32, 22, 4, HOLE)
+
 
 @small("eBook-speaker")
 def ebook_speaker_s():
@@ -394,10 +456,12 @@ def ebook_speaker_s():
     spk = poly([(17, 15.5), (20, 15.5), (24, 13), (24, 23), (20, 20.5), (17, 20.5)], INK, 1)
     return sheet + lines + bubble + spk
 
+
 @small("easymp3gain")
 def easymp3gain_s():
     note = circle(20.5, 39, 6, INK) + line(25, 39, 25, 16, INK, 4) + stroke("M25 16L43 12V21", INK, 4)
     return note + circle(40, 37, 11.5, HOLE) + circle(40, 37, 9.5, LIGHT_BLUE_SOFT)
+
 
 @small("eekboard")
 def eekboard_s():
@@ -405,18 +469,22 @@ def eekboard_s():
     keys = "".join(rrect(17 + 11 * c, 21, 8, 6, 1.5, HOLE) for c in range(3))
     return board + keys + rrect(21, 33, 22, 6, 2, HOLE)
 
+
 @small("eid-viewer")
 def eid_viewer_s():
     return rrect(12, 16, 40, 29, 5, INK) + _ring(28, 29, 7, HOLE, 4) + line(33, 34, 38, 39, HOLE, 4.5)
+
 
 @small("dragon-ball-online-global")
 def dbo_s():
     return circle(CX, CY, 17, INK) + _star_d(CX, CY, 10, 4.5, RED)
 
+
 @small("dragon-ball-xenoverse")
 def dbx_s():
     return (line(15, 16, 29, 44, INK, 6) + line(29, 16, 15, 44, INK, 6) +
             stroke("M35 16L42 44L49 16", INK, 6))
+
 
 @small("droidcam")
 def droidcam_s():
@@ -424,15 +492,18 @@ def droidcam_s():
     body = rrect(19, 24, 26, 22, 4, INK)
     return dome + body + circle(32, 35, 7, HOLE) + circle(32, 35, 3.5, INK)
 
+
 @small("drill-search-gtk")
 def drill_s():
     return (rrect(19, 11, 26, 8, 2, INK) + poly([(21, 21), (43, 21), (32, 49)], INK, 2) +
             line(24.5, 26, 39.5, 31, HOLE, 3.2))
 
+
 @small("duckduckgo")
 def duckduckgo_s():
     return (circle(CX, CY, 16.5, INK) + circle(29, 26, 8, HOLE) + circle(31, 24, 2.2, INK) +
             path("M34 30C39 28.5 44 29.5 44 31.5C43 33.5 38.5 34 34.5 33Z", AMBER))
+
 
 @small("eclipse")
 def eclipse_s():
@@ -440,10 +511,12 @@ def eclipse_s():
     disc = circle(34.5, 30, 14, DEEP_PURPLE_LIGHT)
     return moon + disc + rrect(20.5, 23, 28, 4, 2, INK) + rrect(20.5, 32.5, 28, 4, 2, INK)
 
+
 @small("eclipse-cdt")
 def eclipse_cdt_s():
     moon = cut(cpath(27, 30, 16) + cpath(30, 30, 13.5), ORANGE)
     return moon + stroke("M37 23A9 9 0 1 0 37 37", INK, 5)
+
 
 @small("easytag")
 def easytag_s():
@@ -452,14 +525,17 @@ def easytag_s():
                "C26 39.5 28.5 42.5 32.3 42.5C34.7 42.5 36.5 41.5 37.6 40", HOLE, 4)
     return g(tag + e, "rotate(-35 32 30)")
 
+
 @small("dvdisaster")
 def dvdisaster_s():
     disc = cut(cpath(29, 28, 16) + cpath(29, 28, 4), INK)
     return disc + circle(43, 41, 10, HOLE) + circle(43, 41, 8.5, INDIGO) + line(43, 37, 43, 45, INK, 4)
 
+
 @small("edb-debugger")
 def edb_s():
     return stroke("M15 45C19 29 31 20 48 15", INK, 4.4) + stroke("M24 45C28 35.5 35 30 47 27", INK, 4.4)
+
 
 @small("dragonplayer")
 def dragonplayer_s():

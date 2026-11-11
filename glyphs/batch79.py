@@ -1,10 +1,17 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-"""Batch 79: Flathub apps that Papirus lacks, drawn from their own logos."""
+"""Batch 79: Flathub apps that Papirus lacks, drawn to look like each app."""
 import math
-from lm import *
+from lm import (
+    AMBER, AMBER_DARK, AMBER_DEEP, AMBER_LIGHT, BLUE_DEEP, BLUE_GREY, BLUE_GREY_DARK,
+    BLUE_GREY_DEEP, BROWN, BROWN_LIGHT, circle, cpath, cut, CX, CY, CYAN_DARK, CYAN_DEEP,
+    DEEP_ORANGE_DARK, DEEP_PURPLE, DEEP_PURPLE_DARK, DEEP_PURPLE_LIGHT, f, g, GREY, GREY_DEEP,
+    HOLE, INDIGO, INDIGO_LIGHT, INK, LIGHT_BLUE, LIGHT_BLUE_DARK, line, ORANGE_DEEP,
+    ORANGE_LIGHT, path, PINK_DARK, poly, pt, PURPLE_SOFT, RED, RED_DEEP, rrect, stroke, TEAL,
+)
 from glyphs.kit import arc_b, ellipse, registry, ring_e
 
 ICONS, SMALL, reg, small = registry()
+
 
 @reg("com.adamcake.Bolt", BLUE_GREY_DARK)
 def bolt():
@@ -12,6 +19,7 @@ def bolt():
                  (43.5, 11)], AMBER_LIGHT, 2)
     echo = line(28.5, 12, 15.5, 30.5, AMBER_LIGHT, 2.6)
     return main + echo
+
 
 @reg("org.gnome.gitlab.wwarner.Solitaire", AMBER_DARK)
 def solitaire():
@@ -22,6 +30,7 @@ def solitaire():
              poly([(36, 31), (33.8, 37), (38.2, 37)], HOLE, 1))
     front = g(rrect(24, 14.5, 24, 32, 3.5, INK, sep) + spade, "rotate(8 36 30.5)")
     return back + front
+
 
 @reg("at.vintagestory.VintageStory", BLUE_DEEP)
 def vintage_story():
@@ -34,6 +43,7 @@ def vintage_story():
                 "C21.5 44 17 43 14.5 39.5Z", INK)
     return crown + trunk + boughs + isle
 
+
 @reg("io.gdevelop.ide", DEEP_PURPLE)
 def gdevelop():
     outer = stroke("M46.5 17H24a8.5 8.5 0 0 0-8.5 8.5v9a8.5 8.5 0 0 0 8.5 8.5H38"
@@ -42,12 +52,14 @@ def gdevelop():
                    INK, 4.2)
     return outer + inner
 
+
 @reg("org.zdoom.UZDoom", CYAN_DARK)
 def uzdoom():
     shield = poly([(15, 12), (27, 12), (32, 18.5), (37, 12), (49, 12), (49, 34),
                    (32, 48), (15, 34)], INK, 2.5)
     u = stroke("M25 21.5V31Q25 37.5 32 37.5Q39 37.5 39 31V21.5", HOLE, 4.2)
     return shield + u
+
 
 @reg("io.github.CyberTimon.RapidRAW", BLUE_GREY_DARK)
 def rapidraw():
@@ -61,9 +73,11 @@ def rapidraw():
     r = stroke("M29 35.5V24.5H33.3a3.2 3.2 0 0 1 0 6.4H29M33 31L36 35.5", INK, 2.6)
     return out + r
 
+
 @reg("com.markopejic.downloader", CYAN_DARK)
 def marko_downloader():
     return ring_e(CX, CY, 16, INK, 3.2) + poly([(28, 22), (28, 38), (40.5, 30)], INK, 3.5)
+
 
 @reg("page.codeberg.M23Snezhok.Vinyl", BROWN)
 def vinyl():
@@ -71,6 +85,7 @@ def vinyl():
     sleeve = rrect(13, 16, 28, 28, 3.5, INK, f' stroke="{HOLE}" stroke-width="2"')
     bars = "".join(line(19 + 4 * k, 22.5, 19 + 4 * k, 37.5, HOLE, 2.4) for k in range(5))
     return record + sleeve + bars
+
 
 @reg("io.github.amit9838.mousam", LIGHT_BLUE)
 def mousam():
@@ -80,6 +95,7 @@ def mousam():
     cloud = (circle(24, 34, 7, INK) + circle(33, 30.5, 9, INK) + circle(42, 35.5, 6.5, INK) +
              rrect(17, 34, 31.5, 8, 4, INK))
     return sun + rays + cloud
+
 
 @reg("jp.nonbili.noutube", BLUE_DEEP)
 def noutube():
@@ -91,9 +107,11 @@ def noutube():
     play = poly([(22.5, 34.5), (22.5, 42.5), (29.5, 38.5)], INK, 1.5)
     return head + face + badge + play
 
+
 @reg("com.warlordsoftwares.media-downloader", RED)
 def warlord_downloader():
     return rrect(14.5, 18.5, 35, 24, 5.5, INK) + poly([(28, 24), (28, 37), (38.5, 30.5)], HOLE, 2)
+
 
 @reg("page.codeberg.impromptux.ytdl-gui", RED)
 def ytdl_gui():
@@ -101,6 +119,7 @@ def ytdl_gui():
     head = poly([(20, 26), (44, 26), (32, 39)], INK, 3)
     bar = line(20, 45, 44, 45, INK, 3.6)
     return shaft + head + bar
+
 
 @reg("com.warlordsoftwares.wallpaper-app-4kwall", BROWN_LIGHT)
 def fourkwall():
@@ -110,9 +129,11 @@ def fourkwall():
               stroke("M19 47Q32 40.5 46.5 44.5", INK, 3))
     return four + k + fields
 
+
 @reg("io.github.chidiwilliams.Buzz", RED_DEEP)
 def buzz():
     return ring_e(CX, CY, 15, INK, 4.5) + circle(CX, CY, 8.5, INK)
+
 
 @reg("com.indomitusgroup.indipdf", BLUE_DEEP)
 def indipdf():
@@ -122,6 +143,7 @@ def indipdf():
     pen = (line(49, 15, 38.5, 25.5, ORANGE_LIGHT, 5.5) +
            poly([(40.5, 27.5), (36.5, 23.5), (31.5, 33)], ORANGE_LIGHT, 2))
     return page + fold + sig + pen
+
 
 @reg("io.github.seinedkoda.kisel", PINK_DARK)
 def kisel():
@@ -135,6 +157,7 @@ def kisel():
     leaf = ellipse(43.5, 26, 4.5, 2.2, GREY, -25)
     return jug + rim + handle + leaf + berries
 
+
 @reg("io.github.flattool.Ignition", RED_DEEP)
 def ignition():
     frame = rrect(14, 12, 36, 36, 7, "none",
@@ -146,12 +169,14 @@ def ignition():
               poly([(30.5, 35.5), (33.5, 35.5), (32, 38.5)], HOLE, 1))
     return frame + button + g(rocket, "rotate(45 32 30)")
 
+
 @reg("io.github.alper_han.crossmacro", BLUE_GREY_DEEP)
 def crossmacro():
     body = rrect(20.5, 11.5, 23, 37, 11.5, INK)
     split = line(32, 11.5, 32, 19.5, HOLE, 1.6, "butt")
     wheel = rrect(30.2, 17.5, 3.6, 7.5, 1.8, HOLE)
     return body + split + wheel
+
 
 @reg("org.cubocore.CoreKeyboard", GREY_DEEP)
 def corekeyboard():
@@ -160,6 +185,7 @@ def corekeyboard():
     a_big = stroke("M20.5 37.5L26.5 20.5L32.5 37.5M23 31.5H30", INK, 2.8)
     a_small = ring_e(38.3, 32.8, 4, INK, 2.6) + line(42.3, 27.5, 42.3, 37.5, INK, 2.6)
     return cap + top + a_big + a_small
+
 
 @reg("net.codelogistics.clicker", TEAL)
 def clicker():
@@ -175,6 +201,7 @@ def clicker():
     pts = [(35, 29), (35, 45.5), (39, 41.7), (42, 48), (45.2, 46.5), (42.3, 40.3), (47.5, 40)]
     return loop + head + dots + poly(pts, HOLE, 4.5) + poly(pts, INK, 1)
 
+
 @reg("io.github.prateekmedia.appimagepool", BLUE_DEEP)
 def appimagepool():
     shaft = line(32, 12, 32, 28, INK, 5)
@@ -182,6 +209,7 @@ def appimagepool():
     ripples = (stroke("M16.5 36A15.5 7 0 0 0 47.5 36", INK, 3) +
                stroke("M23.5 38A8.5 3.5 0 0 0 40.5 38", INK, 3))
     return shaft + head + ripples
+
 
 @reg("me.iepure.devtoolbox", BLUE_DEEP)
 def devtoolbox():
@@ -193,6 +221,7 @@ def devtoolbox():
             line(34, 31.5, 30, 42.5, HOLE, 2.6))
     return handle + box + lid + code
 
+
 @reg("dev.skynomads.Seabird", BLUE_DEEP)
 def seabird():
     head = path("M20 47V26.5C20 18.5 25.5 13 32 13C38.5 13 44 18.5 44 26.5V47Z", INK)
@@ -200,12 +229,14 @@ def seabird():
     eyes = circle(26, 24, 1.9, HOLE) + circle(38, 24, 1.9, HOLE)
     return head + beak + eyes
 
+
 @reg("io.github.hakandundar34coding.system-monitoring-center", BLUE_DEEP)
 def sysmon():
     lens = ring_e(29, 27, 13.5, INK, 3.6)
     handle = line(38.8, 36.8, 47.5, 45.5, INK, 5.5)
     pulse = stroke("M18.5 29.5H22.5L25 22L29 35L32.5 24.5L35 29.5H39", INK, 2.6)
     return lens + handle + pulse
+
 
 @reg("io.github.nozwock.Packet", BLUE_GREY)
 def packet():
@@ -215,6 +246,7 @@ def packet():
     bits = (line(26, 22, 26, 26, HOLE, 2.2) + ring_e(32, 24, 2, HOLE, 1.8) + line(38, 22, 38, 26, HOLE, 2.2) +
             ring_e(26, 36, 2, HOLE, 1.8) + line(32, 34, 32, 38, HOLE, 2.2) + ring_e(38, 36, 2, HOLE, 1.8))
     return pillars + studs + panel + bits
+
 
 @reg("io.github.debasish_patra_1987.linuxthemestore", CYAN_DEEP)
 def themestore():
@@ -227,6 +259,7 @@ def themestore():
                    [(26, 29), (30.5, 24.5), (36.5, 27.5), (28.5, 34.5)])
     return halo + path(d, INK) + dots
 
+
 @reg("io.github.mfat.sshpilot", BLUE_GREY_DEEP)
 def sshpilot():
     sq = (rrect(16, 14, 14.5, 14.5, 2.5, INK) + rrect(33.5, 14, 14.5, 14.5, 2.5, INK) +
@@ -238,6 +271,7 @@ def sshpilot():
     hash_ = stroke("M38.5 35V43M43 35V43M36.5 37.2H45M36.5 40.8H45", HOLE, 1.9)
     return sq + dollar + note + prompt + hash_
 
+
 @reg("top.akizip.akizip", BLUE_DEEP)
 def akizip():
     win = rrect(13.5, 15, 37, 30, 3.5, INK)
@@ -245,6 +279,7 @@ def akizip():
     zip_ = line(22, 23, 22, 36, HOLE, 2.6, "butt", ' stroke-dasharray="1.6 1.4"')
     pull = rrect(19.5, 35, 5, 7, 1.8, AMBER)
     return win + bar + zip_ + pull
+
 
 @reg("io.github.hkdb.Aerion", DEEP_PURPLE_LIGHT)
 def aerion():
@@ -254,12 +289,14 @@ def aerion():
              line(15.5, 36, 18, 36, INK, 3.4))
     return env + flap + speed
 
+
 @reg("com.tomjwatson.Emote", AMBER_DEEP)
 def emote():
     sun = circle(CX, CY, 16, INK)
     bands = (stroke("M16.5 31.5Q32 21.5 47.5 31.5", HOLE, 2.2) +
              stroke("M19 40Q32 31 45 40", HOLE, 2.2))
     return sun + bands
+
 
 @reg("io.github.totoshko88.RustConn", DEEP_ORANGE_DARK)
 def rustconn():
@@ -270,11 +307,13 @@ def rustconn():
     berries = "".join(circle(x, y, 3, INK) for x, y in [(36, 24.5), (40, 30), (34.5, 31.5)])
     return teeth + gear + twig + leaf + berries
 
+
 @reg("com.github.jkotra.eovpn", ORANGE_DEEP)
 def eovpn():
     ring_ = arc_b(CX, 28, 14, 125, 55, INK, 5.5)
     hole = circle(CX, 26, 5, INK) + poly([(29.5, 28), (34.5, 28), (36, 44), (28, 44)], INK, 2)
     return ring_ + hole
+
 
 @reg("app.comaps.comaps", LIGHT_BLUE_DARK)
 def comaps():
@@ -282,6 +321,7 @@ def comaps():
     side = arc_b(CX, CY, 14.5, -32, 32, INK, 5)
     nav = poly([(24.5, 24), (39, 28.5), (33, 31), (30.5, 37)], INK, 2.5)
     return c + side + nav
+
 
 @reg("com.github.marhkb.Pods", BLUE_GREY_DEEP)
 def pods():
@@ -292,11 +332,13 @@ def pods():
     crates = rrect(20, 36.5, 11, 9, 1.5, HOLE) + rrect(33, 36.5, 11, 9, 1.5, HOLE)
     return box + lid + shutter + shelf + crates
 
+
 @reg("app.fluxer.Fluxer", INDIGO)
 def fluxer():
     w1 = stroke("M15.5 25.5C20.5 19 26 19 32 25.5S43.5 32 48.5 25.5", INK, 4.6)
     w2 = stroke("M15.5 35.5C20.5 29 26 29 32 35.5S43.5 42 48.5 35.5", INK, 4.6)
     return w1 + w2
+
 
 @reg("io.github.shonebinu.Brief", INDIGO_LIGHT)
 def brief():
@@ -305,6 +347,7 @@ def brief():
     d = stroke("M17 33V46.5H20.5a6.75 6.75 0 0 0 0-13.5Z", INK, 3.6)
     r = stroke("M32 46.5V33H37a4 4 0 0 1 0 8H32M37 41L41.5 46.5", INK, 3.6)
     return tl + semi + d + r
+
 
 @reg("xyz.ketok.Speedtest", DEEP_PURPLE_DARK)
 def speedtest():
@@ -315,10 +358,12 @@ def speedtest():
     hub = circle(CX, 31, 3.6, INK)
     return dial + ticks + needle + hub
 
+
 @reg("io.appflowy.AppFlowy", DEEP_PURPLE)
 def appflowy():
     return (ellipse(23.5, 20, 9, 5.5, INK, 50) + ellipse(41, 20.5, 9, 5.5, INK, 40) +
             ellipse(22.5, 39.5, 9, 5.5, INK, 40) + ellipse(40.5, 40, 9, 5.5, INK, -40))
+
 
 @small("io.github.CyberTimon.RapidRAW")
 def rapidraw_s():
@@ -330,12 +375,14 @@ def rapidraw_s():
         out += line(x0, y0, x0 + 14 * dx, y0 + 14 * dy, HOLE, 2.6)
     return out + circle(CX, CY, 7.5, HOLE)
 
+
 @small("io.github.nozwock.Packet")
 def packet_s():
     pillars = rrect(13, 12.5, 8, 35, 4, INK) + rrect(43, 12.5, 8, 35, 4, INK)
     panel = rrect(23.5, 17, 17, 26, 2, INK)
     bits = line(28, 23, 36, 23, HOLE, 3) + line(28, 30, 36, 30, HOLE, 3) + line(28, 37, 36, 37, HOLE, 3)
     return pillars + panel + bits
+
 
 @small("io.github.totoshko88.RustConn")
 def rustconn_s():
@@ -344,6 +391,7 @@ def rustconn_s():
     berries = circle(28.5, 28, 3.2, INK) + circle(35.5, 28, 3.2, INK) + circle(32, 34, 3.2, INK)
     return teeth + gear + berries
 
+
 @small("com.github.marhkb.Pods")
 def pods_s():
     box = rrect(16.5, 11.5, 31, 37, 3.5, INK)
@@ -351,9 +399,11 @@ def pods_s():
     crates = rrect(20, 34, 11, 11, 1.5, HOLE) + rrect(33, 34, 11, 11, 1.5, HOLE)
     return box + shutter + crates
 
+
 @small("io.github.shonebinu.Brief")
 def brief_s():
     return stroke("M14 17H28M21 17V43M35 17V43H49", INK, 5)
+
 
 @small("io.github.mfat.sshpilot")
 def sshpilot_s():
@@ -362,11 +412,13 @@ def sshpilot_s():
     return (sq + stroke("M18.5 34L25.5 39.5L18.5 45", HOLE, 3.2) +
             stroke("M38.5 34.5V44.5M44.5 34.5V44.5M36 37.5H47M36 41.5H47", HOLE, 2.4))
 
+
 @small("xyz.ketok.Speedtest")
 def speedtest_s():
     dial = arc_b(CX, 31, 16, 135, 45, INK, 3.4)
     needle = line(CX, 31, *pt(CX, 31, 12.5, 30), PURPLE_SOFT, 4.4)
     return dial + needle + circle(CX, 31, 4.2, INK)
+
 
 @small("io.github.debasish_patra_1987.linuxthemestore")
 def themestore_s():
@@ -376,15 +428,18 @@ def themestore_s():
          f"A9 9 0 0 1 {f(p2[0])} {f(p2[1])}Z")
     return path(d, INK) + circle(25.5, 29, 3, HOLE) + circle(33.5, 26, 3, HOLE) + circle(29, 36, 3, HOLE)
 
+
 @small("app.comaps.comaps")
 def comaps_s():
     return (arc_b(CX, CY, 15, 65, 295, INK, 5.5) +
             poly([(22.5, 23), (41, 28.5), (33.5, 31.5), (30.5, 39)], INK, 3))
 
+
 @small("org.cubocore.CoreKeyboard")
 def corekeyboard_s():
     cap = rrect(13.5, 12, 37, 37, 7, INK) + rrect(18, 15.5, 28, 27, 5, HOLE)
     return cap + stroke("M23.5 38L32 19.5L40.5 38M26.5 32H37.5", INK, 3.4)
+
 
 @small("page.codeberg.M23Snezhok.Vinyl")
 def vinyl_s():
@@ -392,6 +447,7 @@ def vinyl_s():
     sleeve = rrect(13, 16, 28, 28, 3.5, INK, f' stroke="{HOLE}" stroke-width="2.4"')
     bars = "".join(line(20 + 7 * k, 22.5, 20 + 7 * k, 37.5, HOLE, 3.2) for k in range(3))
     return record + sleeve + bars
+
 
 @small("org.gnome.gitlab.wwarner.Solitaire")
 def solitaire_s():
@@ -401,16 +457,19 @@ def solitaire_s():
              poly([(32, 31), (29, 39), (35, 39)], HOLE, 1))
     return card + spade
 
+
 @small("com.warlordsoftwares.wallpaper-app-4kwall")
 def fourkwall_s():
     return (stroke("M25 16L15.5 32H30M25.5 24V38", INK, 4.6) +
             stroke("M36 16V38M48 16L38 27L48 38", INK, 4.6))
+
 
 @small("jp.nonbili.noutube")
 def noutube_s():
     head = (circle(22.5, 17, 3, INK) + circle(45.5, 17, 3, INK) + ellipse(34, 22.5, 13, 9.5, INK))
     badge = rrect(13, 29, 26, 20, 5.5, RED, f' stroke="{HOLE}" stroke-width="2.4"')
     return head + badge + poly([(22.5, 34), (22.5, 44), (31, 39)], INK, 1.5)
+
 
 @small("me.iepure.devtoolbox")
 def devtoolbox_s():
@@ -419,10 +478,12 @@ def devtoolbox_s():
     code = stroke("M27 29L21.5 34L27 39", HOLE, 3.2) + stroke("M37 29L42.5 34L37 39", HOLE, 3.2)
     return handle + box + code
 
+
 @small("io.github.hakandundar34coding.system-monitoring-center")
 def sysmon_s():
     return (ring_e(29, 27, 13.5, INK, 3.6) + line(38.8, 36.8, 47.5, 45.5, INK, 6) +
             stroke("M19 30H23L26.5 21L31 34L34.5 26H38.5", INK, 3))
+
 
 @small("com.indomitusgroup.indipdf")
 def indipdf_s():
@@ -431,10 +492,12 @@ def indipdf_s():
            poly([(41, 28), (36, 23), (30, 35)], ORANGE_LIGHT, 2.5))
     return page + pen
 
+
 @small("io.github.flattool.Ignition")
 def ignition_s():
     return (rrect(13.5, 11.5, 37, 37, 7.5, "none", f' stroke="{INK}" stroke-width="3.6"') +
             circle(CX, CY, 11.5, INK))
+
 
 @small("net.codelogistics.clicker")
 def clicker_s():

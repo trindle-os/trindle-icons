@@ -11,13 +11,13 @@
 
 Trindle Icons is a set of about 6,000 app icons for Linux desktops. Each icon is a simple mark on a round coloured tile. The theme is Trindle Circle, and it is the only one.
 
-Install the package and your apps get matching icons. Anything we do not draw comes from Papirus, which the packages depend on.
+Install the package and your apps get matching icons. Anything we do not draw comes from Papirus, which the package depends on.
 
 ![A sheet of Trindle Circle app icons, each a simple mark on a round coloured tile](docs/images/icon-sheet-circle-1.png)
 
 ## How it works
 
-![Three steps: get the Papirus release, build the themes, install the packages with apt](docs/images/how-it-works.png)
+![Three steps: get the Papirus release, build the theme, install the package with apt](docs/images/how-it-works.png)
 
 ## Quick start
 
@@ -29,11 +29,15 @@ sudo apt install ./trindle-circle-icon-theme_<version>_all.deb
 
 The `./` in front of the file name matters. Without it, apt looks for a package by that name in its online lists and does not find your file. Then choose the theme in your desktop's appearance or icon settings.
 
+To check the download, compare `sha256sum <file>` with the checksum on the release page.
+
 ## Features
 
-Each icon is drawn on its own, so each app gets a mark you can recognise at a glance. Where Papirus has an icon we have not drawn, the packages fall back to it.
+Each icon is drawn on its own, so each app gets a mark you can recognise at a glance. Where Papirus has an icon we have not drawn, the theme falls back to it.
 
 ![Trindle Circle app icons, second page](docs/images/icon-sheet-circle-2.png)
+
+Comments are stripped from the published code to keep it lean.
 
 ## What it does
 
@@ -41,11 +45,11 @@ Each icon is drawn on its own, so each app gets a mark you can recognise at a gl
 - Ships one theme, Trindle Circle, with round tiles.
 - Names icon files after the apps' own names, so the theme works on them.
 - Includes one-colour symbolic icons in `symbolic/`, MIT licensed.
-- Builds the themes and the packages from source with a few commands.
+- Builds the theme and the package from source with a few commands.
 
 ## Settings
 
-These are for building from source. The installed packages have no settings.
+These are for building from source. The installed package has no settings.
 
 | Name | Required | Default | What it does |
 |---|---|---|---|
@@ -57,11 +61,11 @@ These are for building from source. The installed packages have no settings.
 
 ## Where your data lives
 
-The themes store nothing of yours. The package installs into `/usr/share/icons/Trindle-Circle` and removes it again when you uninstall.
+The theme stores nothing of yours. The package installs into `/usr/share/icons/Trindle-Circle` and removes it again when you uninstall.
 
 ## Security
 
-The apt index is signed, so your system can check that the packages came from us. Reporting and supported versions are in [SECURITY.md](SECURITY.md).
+Installing through apt is checked: the apt index is signed, so your system can tell the package came from us. A `.deb` you download by hand is checked against the SHA-256 checksum on the release page. Reporting and supported versions are in [SECURITY.md](SECURITY.md).
 
 ## Building it yourself
 
@@ -76,13 +80,13 @@ venv/bin/pip install -r requirements.txt
 
 2. Fetch a named Papirus release from https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/releases and unpack the whole theme folder (with `index.theme` and `64x64/apps`) as `Papirus/` at the top of this repository. To use a tree somewhere else, set `PAPIRUS_DIR=/path/to/Papirus` when you run the build. The drawings were made against Papirus release `20260801`.
 
-3. Build the themes:
+3. Build the theme:
 
 ```bash
 venv/bin/python build.py
 ```
 
-Check the build with the tests. Each one prints `ok` when it passes:
+Check the build with the tests. Install `requirements.txt` first (it includes picosvg), and run the build above first: the green-icon test reads the built theme, and the build needs the Papirus folder (set `PAPIRUS_DIR` to it if it is not in `Papirus/`). Each test prints `ok` when it passes:
 
 ```bash
 for t in tests/test_*.py; do venv/bin/python "$t"; done
@@ -90,7 +94,7 @@ for t in tests/test_*.py; do venv/bin/python "$t"; done
 
 The `refs/` folder (reference PNGs for apps Papirus lacks) and `previews/` are only used by the preview tools in `tools/`. The build does not need them.
 
-4. To build the packages, set `GNUPGHOME` to a folder that holds your signing key, then run:
+4. To build the package, set `GNUPGHOME` to a folder that holds your signing key, then run:
 
 ```bash
 GNUPGHOME=/path/to/your/gnupg-home sh tools/apt/build.sh "$(cat VERSION)"
@@ -104,7 +108,8 @@ The current version is kept in one place, the `VERSION` file.
 - The one-colour (symbolic) icons in `symbolic/` are MIT licensed. See `symbolic/LICENSE`.
 - The coloured app icons and the rest of the code are GPL-3.0-or-later. See [LICENSE](LICENSE).
 - Credits: the Papirus icon theme (GPL-3.0), by the Papirus Development Team, is the reference for icon names and aliases and the fallback for icons we do not draw.
-- App names and logos are trademarks of their owners. Icons are original drawings that identify each app; they do not imply endorsement.
+- App names and logos are trademarks of their owners. The icons identify each app; they do not imply endorsement.
+- The original designs that any of these icons are based on remain the property of their owners.
 
 See [CHANGELOG.md](CHANGELOG.md) for version history, [SECURITY.md](SECURITY.md) for reporting problems and [CONTRIBUTING.md](CONTRIBUTING.md) for how to take part.
 

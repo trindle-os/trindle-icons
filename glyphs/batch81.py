@@ -1,12 +1,18 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Batch 81: apps Papirus lacks (ollama to parabolic)."""
-from lm import *
+from lm import (
+    AMBER, BLUE_DEEP, BLUE_GREY_DARK, BLUE_GREY_DEEP, circle, DEEP_PURPLE_LIGHT, f, GREY_SOFT,
+    HOLE, INK, LIGHT_BLUE_LIGHT, line, path, PINK_LIGHT, poly, RED_DEEP, rrect, stroke,
+    TEAL_DARK,
+)
 from glyphs.kit import ellipse, ering_c, registry
 
 ICONS, SMALL, reg, small = registry()
 
+
 LLAMA = ("M18 49V36.5C18 31.5 19.5 28.5 22 26.5V16.5C22 11.5 27 11.5 27 16.5V24"
          "C30 23 34 23 37 24V16.5C37 11.5 42 11.5 42 16.5V26.5C44.5 28.5 46 31.5 46 36.5V49")
+
 
 def _llama(detail=True):
     head = stroke(LLAMA, INK, 3.2)
@@ -15,13 +21,16 @@ def _llama(detail=True):
     nose = ellipse(32, 40.2, 1.6, 1.1, INK) if detail else ""
     return head + eyes + snout + nose
 
+
 @reg("ollama", GREY_SOFT)
 def ollama():
     return _llama()
 
+
 @small("ollama")
 def ollama_small():
     return _llama(False)
+
 
 @reg("anytype", BLUE_GREY_DARK)
 def anytype():
@@ -29,6 +38,7 @@ def anytype():
     dot = circle(24.5, 38.5, 9.5, INK)
     post = rrect(38.5, 22.5, 9.5, 26, 3.5, INK)
     return bar + dot + post
+
 
 def _tri_spiral(levels, widths):
     pts = [(32, 11.5), (50.5, 45), (13.5, 45)]
@@ -41,13 +51,16 @@ def _tri_spiral(levels, widths):
                 pts[i][1] + (pts[(i + 1) % 3][1] - pts[i][1]) * t) for i in range(3)]
     return out
 
+
 @reg("affine", BLUE_DEEP)
 def affine():
     return _tri_spiral(4, [3.4, 2.6, 2.3, 2.2])
 
+
 @small("affine")
 def affine_small():
     return _tri_spiral(2, [3.6, 3])
+
 
 @reg("appflowy", BLUE_GREY_DARK)
 def appflowy():
@@ -55,6 +68,7 @@ def appflowy():
             ellipse(40.5, 21, 11.5, 7, LIGHT_BLUE_LIGHT, 45) +
             ellipse(23.5, 39, 11.5, 7, PINK_LIGHT, 45) +
             ellipse(40.5, 39, 11.5, 7, AMBER, -45))
+
 
 def _penpot(pencils=3):
     out = ""
@@ -68,9 +82,11 @@ def _penpot(pencils=3):
     out += line(32, 34, 32, 48, HOLE, 1.8)
     return out
 
+
 @reg("penpot", TEAL_DARK)
 def penpot():
     return _penpot()
+
 
 @small("penpot")
 def penpot_small():
@@ -80,6 +96,7 @@ def penpot_small():
     box = [(14.5, 30), (32, 36), (49.5, 30), (49.5, 44), (32, 50), (14.5, 44)]
     out += poly(box, HOLE, 5) + poly(box, INK, 1.5)
     return out
+
 
 def _qpw(w, r):
     wires = (stroke("M16 18H20C27 18 26 30 32 30C38 30 37 42 44 42H48", INK, w) +
@@ -91,9 +108,11 @@ def _qpw(w, r):
             nodes += circle(x, y, r, INK) + circle(x, y, r * .42, HOLE)
     return wires + nodes
 
+
 @reg("qpwgraph", BLUE_GREY_DEEP)
 def qpwgraph():
     return _qpw(3, 4)
+
 
 @small("qpwgraph")
 def qpwgraph_small():
@@ -101,6 +120,7 @@ def qpwgraph_small():
             stroke("M17 40C28 40 36 20 47 20", INK, 3.6) +
             circle(17, 20, 4.5, INK) + circle(17, 40, 4.5, INK) +
             circle(47, 20, 4.5, INK) + circle(47, 40, 4.5, INK))
+
 
 @reg("grayjay", BLUE_GREY_DARK)
 def grayjay():
@@ -110,6 +130,7 @@ def grayjay():
     beak = poly([(44, 14), (49.5, 14.5), (45, 18.5)], INK, 1)
     tail = poly([(26, 32), (14, 44), (20, 44.5), (31.5, 37)], INK, 1.5)
     return tri + body + head + beak + tail
+
 
 def _dish(cols, rows):
     out = rrect(30, 38, 4, 11, 2, INK)
@@ -127,9 +148,11 @@ def _dish(cols, rows):
     out += circle(32, 12.5, 3, INK) + line(32, 13, 32, 36, HOLE, 2.2)
     return out
 
+
 @reg("parabolic", RED_DEEP)
 def parabolic():
     return _dish(3, 2)
+
 
 @small("parabolic")
 def parabolic_small():

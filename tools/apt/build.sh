@@ -1,12 +1,11 @@
 #!/bin/sh
 # SPDX-License-Identifier: GPL-3.0-or-later
-# Build the icon theme package and the signed apt index for it.
 set -eu
 
 here=$(cd "$(dirname "$0")/../.." && pwd)
 version=${1:-$(cat "$here/VERSION")}
 repo=${2:-$here/dist/apt}
-export GNUPGHOME=${GNUPGHOME:?set GNUPGHOME to the signing key folder}
+export GNUPGHOME="${GNUPGHOME:?set GNUPGHOME to the signing key folder}"
 key="Trindle Icons Archive"
 suite=stable
 component=main

@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-"""Shared drawing kit for the Trindle icon themes.
+"""Shared drawing kit for the Trindle icon theme.
 
-Every icon is a 64x64 canvas: a baked float shadow, a round
-disc, and a brand glyph centred on (CX, CY) inside a ~34px box.
+Every icon is a 64x64 canvas: a round
+disc and a brand glyph centred on (CX, CY) inside a ~34px box.
 """
 import math
 import re
@@ -14,7 +14,6 @@ CX, CY = 32, 30
 INK = "INK"
 HOLE = "HOLE"
 WHITE, BLACK = "#FAFAFA", "#09090B"
-
 RED_SOFT = "#F7847C"
 RED_LIGHT = "#F5645A"
 RED = "#F34236"
@@ -120,27 +119,32 @@ PALE = {BLUE_SOFT, LIGHT_BLUE_SOFT, CYAN_SOFT, CYAN_LIGHT, YELLOW_SOFT,
         AMBER, ORANGE_SOFT, ORANGE_LIGHT, ORANGE, DEEP_ORANGE_SOFT,
         GREY_SOFT, GREY_LIGHT, BRAND_YELLOW}
 
+
 GLYPH_SCALE = .94
+
 
 def disc(fill):
     return f'<circle cx="32" cy="32" r="25.5" fill="{fill}"/>'
+
 
 def _fit(glyph, extra=1):
     k = GLYPH_SCALE * extra
     return glyph if k == 1 else f'<g transform="translate(32 30) scale({k}) translate(-32 -30)">{glyph}</g>'
 
+
 def lift(glyph):
     """The mark's own silhouette dropped below it in three crisp steps,
     so the logo stands up off its tile. No blur filters."""
     flat = re.sub(r'(fill|stroke)="#[0-9A-Fa-f]{6}"', rf'\1="{BLACK}"', glyph)
-
     copies = [re.sub(r'(id="|url\(#)([\w-]+)', rf'\g<1>\g<2>-s{k}', flat) for k in range(3)]
     return "".join(f'<g opacity="{o}" transform="translate(0 {dy})">{c}</g>'
                    for c, (dy, o) in zip(copies, [(4.5, .07), (3, .11), (1.5, .16)]))
 
+
 def _inked(glyph, tile):
     ink = BLACK if tile in PALE else WHITE
     return glyph.replace('"INK"', f'"{ink}"').replace('"HOLE"', f'"{tile}"')
+
 
 def icon(glyph, tile, fit=1):
     """Full-size icon (32px and up): tile plus a logo lifted off it."""
@@ -153,8 +157,10 @@ def icon(glyph, tile, fit=1):
         + "</svg>\n"
     )
 
+
 def _thicken(glyph, k=1.3):
     return re.sub(r'stroke-width="([\d.]+)"', lambda m: f'stroke-width="{f(float(m[1]) * k)}"', glyph)
+
 
 def small_icon(glyph, tile, px, fit=1):
     """16/22/24px icon: no lift, tile fills the canvas, logo enlarged and
@@ -167,31 +173,39 @@ def small_icon(glyph, tile, px, fit=1):
         + "</svg>\n"
     )
 
+
 def circle(cx, cy, r, fill, extra=""):
     return f'<circle cx="{f(cx)}" cy="{f(cy)}" r="{f(r)}" fill="{fill}"{extra}/>'
+
 
 def cpath(cx, cy, r):
     """Circle as a path fragment, for evenodd cut-outs."""
     return (f"M{f(cx - r)} {f(cy)}a{f(r)} {f(r)} 0 1 0 {f(2 * r)} 0"
             f"a{f(r)} {f(r)} 0 1 0 {f(-2 * r)} 0Z")
 
+
 def path(d, fill, extra=""):
     return f'<path d="{d}" fill="{fill}"{extra}/>'
 
+
 def cut(d, fill):
     return f'<path d="{d}" fill="{fill}" fill-rule="evenodd"/>'
+
 
 def line(x1, y1, x2, y2, stroke, w, cap="round", extra=""):
     return (f'<path d="M{f(x1)} {f(y1)}L{f(x2)} {f(y2)}" stroke="{stroke}" '
             f'stroke-width="{f(w)}" stroke-linecap="{cap}" fill="none"{extra}/>')
 
+
 def stroke(d, colour, w, extra=""):
     return (f'<path d="{d}" fill="none" stroke="{colour}" stroke-width="{f(w)}" '
             f'stroke-linecap="round" stroke-linejoin="round"{extra}/>')
 
+
 def rrect(x, y, w, h, r, fill, extra=""):
     return (f'<rect x="{f(x)}" y="{f(y)}" width="{f(w)}" height="{f(h)}" '
             f'rx="{f(r)}" fill="{fill}"{extra}/>')
+
 
 def poly(pts, fill, rounding=0):
     d = "M" + "L".join(f"{f(x)} {f(y)}" for x, y in pts) + "Z"
@@ -200,9 +214,11 @@ def poly(pts, fill, rounding=0):
         extra = f' stroke="{fill}" stroke-width="{f(rounding)}" stroke-linejoin="round"'
     return path(d, fill, extra)
 
+
 def pt(cx, cy, r, deg):
     a = math.radians(deg)
     return cx + r * math.cos(a), cy + r * math.sin(a)
+
 
 def g(content, transform):
     return f'<g transform="{transform}">{content}</g>'

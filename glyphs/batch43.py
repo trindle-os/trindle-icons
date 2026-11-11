@@ -1,22 +1,35 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Batch 43: lskat .. mate-panel-drawer."""
 import math
-from lm import *
+from lm import (
+    AMBER, AMBER_DEEP, AMBER_LIGHT, AMBER_SOFT, BLUE, BLUE_DARK, BLUE_DEEP, BLUE_GREY_DARK,
+    BLUE_GREY_DEEP, BLUE_LIGHT, BROWN, BROWN_DARK, BROWN_LIGHT, BROWN_SOFT, circle, CX, CY,
+    CYAN_DEEP, CYAN_SOFT, DEEP_ORANGE_DARK, DEEP_ORANGE_DEEP, DEEP_ORANGE_LIGHT, DEEP_PURPLE,
+    DEEP_PURPLE_DARK, DEEP_PURPLE_LIGHT, DEEP_PURPLE_SOFT, f, g, GREY, GREY_DARK, GREY_DEEP,
+    GREY_SOFT, HOLE, INDIGO, INDIGO_DEEP, INDIGO_SOFT, INK, LIGHT_BLUE_DEEP, LIGHT_BLUE_LIGHT,
+    LIGHT_BLUE_SOFT, line, ORANGE, ORANGE_DARK, ORANGE_DEEP, path, PINK, PINK_SOFT, poly, pt,
+    PURPLE, PURPLE_LIGHT, RED, RED_DEEP, RED_LIGHT, RED_SOFT, rrect, stroke, TEAL, TEAL_LIGHT,
+    YELLOW_DARK,
+)
 from glyphs.kit import arc, ell_e, registry, _ring, _star
 
 ICONS, SMALL, reg, small = registry()
 
+
 def diamond(cx, cy, r, fill, rounding=0):
     return poly([(cx, cy - r), (cx + r, cy), (cx, cy + r), (cx - r, cy)], fill, rounding)
 
+
 def sparkle(cx, cy, r, fill):
     return poly(_star(cx, cy, r, r * .32, 4), fill, 1)
+
 
 @reg("lskat", RED_DEEP)
 def lskat():
     card = g(rrect(19, 12, 26, 36, 4, INK), "rotate(-6 32 30)")
     return (card + diamond(32, 30, 7.5, HOLE, 1.5)
             + g(diamond(24.5, 18.5, 2.6, HOLE) + diamond(39.5, 41.5, 2.6, HOLE), "rotate(-6 32 30)"))
+
 
 @reg("ltris", BLUE_DEEP)
 def ltris():
@@ -29,6 +42,7 @@ def ltris():
         out += rrect(x, y, 7, 7, 1.5, RED_SOFT)
     return out
 
+
 @reg("lugaru", BROWN_LIGHT)
 def lugaru():
     ears = (g(ell_e(25, 20, 4.2, 10.5, INK), "rotate(-14 25 20)") +
@@ -40,9 +54,11 @@ def lugaru():
             poly([(29.8, 39), (34.2, 39), (32, 41.5)], PINK_SOFT, 1.2))
     return ears + inner + head + face
 
+
 @reg("lzdoom", DEEP_PURPLE)
 def lzdoom():
     return stroke("M19.5 20V39.5H27", GREY_SOFT, 5) + stroke("M31 20.5H45L31 39.5H45", INK, 5)
+
 
 @reg("machinarium", YELLOW_DARK)
 def machinarium():
@@ -54,6 +70,7 @@ def machinarium():
     band = line(18, 42, 46, 42, HOLE, 2.4, "butt")
     return top + dome + seam + eyes + band
 
+
 @reg("magicka-2", RED_DEEP)
 def magicka():
     staff = line(19.5, 24, 21, 47, INK, 3)
@@ -63,15 +80,18 @@ def magicka():
     arm = stroke("M26 36L21 34", INK, 3.4)
     return staff + orb + hood + face + arm
 
+
 @reg("makehuman", ORANGE_DEEP)
 def makehuman():
     body = poly([(14, 18.5), (32, 29), (50, 18.5), (47.5, 25), (35, 32.5), (32, 47),
                  (29, 32.5), (16.5, 25)], INK, 2)
     return body + circle(32, 20.5, 4, INK)
 
+
 @reg("mame", BLUE_DEEP)
 def mame():
     return stroke("M15 41L27.5 19.5V36L41 19.5V41L49 32", INK, 5.5)
+
 
 @reg("manaplus", DEEP_ORANGE_DEEP)
 def manaplus():
@@ -80,11 +100,13 @@ def manaplus():
     plus = line(44, 14, 44, 25, INK, 3.8) + line(38.5, 19.5, 49.5, 19.5, INK, 3.8)
     return m + plus
 
+
 @reg("marsshooter", DEEP_ORANGE_DARK)
 def marsshooter():
     spots = "".join(circle(x, y, r, DEEP_ORANGE_DEEP) for x, y, r in
                     [(25.5, 23, 4.5), (38, 34.5, 5.5), (39.5, 21, 2.6), (24, 38, 3), (31, 30, 2)])
     return circle(CX, CY, 16.5, DEEP_ORANGE_LIGHT) + spots
+
 
 @reg("luakit", BLUE_DARK)
 def luakit():
@@ -92,11 +114,13 @@ def luakit():
     moon = circle(29.5, 31.5, 12, INK) + circle(35, 26.5, 10, BLUE_DEEP)
     return globe + moon
 
+
 @reg("lvim", DEEP_PURPLE_DARK)
 def lvim():
-    orbit = g(ell_e(32, 30, 19, 6, "none", ' stroke="#9C7EC8" stroke-width="2.6"'), "rotate(-20 32 30)")
+    orbit = g(ell_e(32, 30, 19, 6, "none", f' stroke="{DEEP_PURPLE_SOFT}" stroke-width="2.6"'), "rotate(-20 32 30)")
     return (_ring(CX, CY, 13, INK, 3.4) + stroke("M24 23V37H29", INK, 3.2)
             + stroke("M31.5 23L35.5 37L39.5 23", INK, 3.2) + orbit)
+
 
 @reg("lynx", BLUE_GREY_DEEP)
 def lynx():
@@ -104,16 +128,19 @@ def lynx():
     white = poly([(21, 41), (34.5, 32.5), (29.5, 27.5)], INK, 1.5)
     return _ring(CX, CY, 16, INK, 2.6) + red + white
 
+
 @reg("lyricfier", PURPLE)
 def lyricfier():
     return "".join(rrect(x - 2.4, 30 - h, 4.8, 2 * h, 2.4, INK)
                    for x, h in [(17.5, 8), (24.75, 13), (32, 16), (39.25, 11), (46.5, 7)])
+
 
 @reg("magnatune", BLUE_DARK)
 def magnatune():
     bars = (rrect(21, 25.5, 5.5, 9, 2.75, HOLE) + rrect(29.25, 21, 5.5, 18, 2.75, HOLE) +
             rrect(37.5, 24, 5.5, 12, 2.75, HOLE))
     return circle(CX, CY, 16.5, INK) + bars
+
 
 @reg("mail.ru-cloud", LIGHT_BLUE_DEEP)
 def mailru_cloud():
@@ -122,12 +149,14 @@ def mailru_cloud():
     dots = circle(28.5, 34, 5.5, ORANGE) + circle(37, 33, 4.5, AMBER)
     return cloud + dots
 
+
 @reg("mailspring", TEAL)
 def mailspring():
     env = rrect(15, 19, 34, 23, 4, INK)
     lines = (stroke("M18 22.5L32 33L46 22.5", HOLE, 2.8) +
              stroke("M18.5 38.5L26.5 31.5", HOLE, 2.4) + stroke("M45.5 38.5L37.5 31.5", HOLE, 2.4))
     return env + lines
+
 
 @reg("makemkv", GREY_DARK)
 def makemkv():
@@ -138,15 +167,18 @@ def makemkv():
            stroke("M37.5 38.5L41 45L44.5 38.5", INK, 2.3))
     return disc + band + mkv
 
+
 @reg("maltego", BLUE_GREY_DEEP)
 def maltego():
     return (circle(CX, CY, 16.5, INK) + circle(26.5, 23.5, 5, BLUE) +
             circle(38.5, 30.5, 5, BLUE_LIGHT) + circle(26.5, 37.5, 5, RED))
 
+
 @reg("masterpassword-gui", BLUE_GREY_DARK)
 def masterpassword():
     dots = circle(20.5, 30, 3.3, INK) + circle(29, 30, 3.3, INK) + circle(37.5, 30, 3.3, INK)
     return dots + rrect(42.5, 20.5, 4, 19, 2, BLUE_LIGHT)
+
 
 @reg("lsp-plugins", CYAN_DEEP)
 def lsp():
@@ -156,12 +188,14 @@ def lsp():
                    "C27.8 39 26 38 25 36.2", INK, 4)
             + stroke("M40 39V21H44.3A5 5 0 0 1 44.3 31H40", INK, 4))
 
+
 @reg("lucidchart", ORANGE_DEEP)
 def lucidchart():
     links = line(19, 30, 33.5, 20.5, INK, 3) + line(19, 30, 33.5, 39.5, INK, 3)
     dots = "".join(circle(x, y, r, INK) for x, y, r in
                    [(19, 30, 5.8), (33.5, 20.5, 5), (45, 20.5, 5), (33.5, 39.5, 5), (45, 39.5, 5)])
     return links + dots
+
 
 @reg("luckyBackup", BLUE)
 def luckybackup():
@@ -172,6 +206,7 @@ def luckybackup():
         out += poly([pt(CX, CY, 6.5, a1), pt(CX, CY, 18.5, a1), tip], INK, 2)
     return out
 
+
 @reg("luminance-hdr", RED_DEEP)
 def luminance():
     back = rrect(14, 13, 24, 22, 3.5, AMBER_LIGHT)
@@ -180,11 +215,13 @@ def luminance():
     hill = path("M26.5 44.5C31 44.5 32.5 31 37.5 31C42.5 31 44 44.5 47.5 44.5Z", HOLE)
     return back + mid + front + hill
 
+
 @reg("lunacy", LIGHT_BLUE_DEEP)
 def lunacy():
     bar = rrect(17, 14, 10.5, 32, 2, INK)
     tri = poly([(30.5, 46), (46.5, 46), (46.5, 27)], INK, 2.4)
     return bar + tri + sparkle(40.5, 18.5, 6.5, INK)
+
 
 @reg("lunarclient", BLUE_GREY_DARK)
 def lunarclient():
@@ -193,6 +230,7 @@ def lunarclient():
     stars = circle(38.5, 27, 1.4, INK) + circle(36.5, 37.5, 1.2, INK)
     return house + moon + stars
 
+
 @reg("lyne", PINK)
 def lyne():
     xs = [18.5, 27.5, 36.5, 45.5]
@@ -200,6 +238,7 @@ def lyne():
             + stroke("M34 19V13L39 19V13", INK, 2.2) + stroke("M48 13H43V19H48M43 16H47", INK, 2.2))
     grid = "".join(diamond(x, y, 3.8, INK, 1) for x in xs for y in [27, 35.5, 44])
     return word + grid
+
 
 @reg("lyrebird", BROWN)
 def lyrebird():
@@ -211,11 +250,13 @@ def lyrebird():
     legs = line(25, 44, 24, 48, INK, 2.2) + line(29, 44, 30, 48, INK, 2.2)
     return tail + body + beak + legs + circle(18, 34.3, 1.1, HOLE)
 
+
 @reg("lyx", INDIGO_DEEP)
 def lyx():
     return (stroke("M16 18V38H24", INK, 4.2) +
             stroke("M26.5 24L31 33M36 24L29.5 44", AMBER_LIGHT, 4.2) +
             stroke("M38.5 19L48 38M48 19L38.5 38", RED_SOFT, 4.2))
+
 
 @reg("magictree", BLUE_DEEP)
 def magictree():
@@ -226,6 +267,7 @@ def magictree():
                     [(29, 26), (35, 33), (27.5, 34.5), (24, 44), (32, 42), (40, 44)])
     return tiers + balls + poly(_star(32, 15.5, 5.5, 2.4), AMBER_SOFT, 1)
 
+
 @reg("makagiga", CYAN_DEEP)
 def makagiga():
     stripes = "".join(line(x, 47, x + 5, 41.5, CYAN_SOFT, 2.6) for x in (19, 27, 35, 43))
@@ -234,6 +276,7 @@ def makagiga():
     plus = "".join(line(x, 28.5, x, 34, HOLE, 2.4) + line(x - 2.75, 31.25, x + 2.75, 31.25, HOLE, 2.4)
                    for x in (27, 38))
     return stripes + cloud + plus
+
 
 @reg("mandelbulber2", YELLOW_DARK)
 def mandelbulber():
@@ -246,6 +289,7 @@ def mandelbulber():
     d = "M" + "L".join(f"{f(x)} {f(y)}" for x, y in pts)
     return stroke(d, INK, 3)
 
+
 @reg("mangareader", BLUE_GREY_DEEP)
 def mangareader():
     arches = stroke("M17 38V24.5C17 20.5 19.5 18.5 23 18.5C26.5 18.5 29 20.5 29 24.5"
@@ -253,6 +297,7 @@ def mangareader():
     eyes = _ring(23, 30, 3, INK, 2.6) + _ring(35, 30, 3, INK, 2.6)
     foot = stroke("M26 42.5H41C44 42.5 46 44 46 46.5", INK, 3.6)
     return arches + eyes + foot
+
 
 @reg("manjaro-architect", BLUE_GREY_DEEP)
 def manjaro_architect():
@@ -263,6 +308,7 @@ def manjaro_architect():
     arrow = line(39, 31, 39, 42.5, INK, 3) + stroke("M34.5 38.5L39 43L43.5 38.5", INK, 3)
     return hash_ + under + badge + arrow
 
+
 @reg("manjaro-settings-manager", TEAL)
 def manjaro_settings():
     logo = (rrect(15, 13, 9, 34, 1.5, INK) + rrect(15, 13, 22, 9, 1.5, INK) +
@@ -272,6 +318,7 @@ def manjaro_settings():
     gear = teeth + circle(42.5, 40.5, 4.6, INK) + circle(42.5, 40.5, 1.9, DEEP_PURPLE_LIGHT)
     return logo + badge + gear
 
+
 @reg("manuskript", GREY_DEEP)
 def manuskript():
     vane = path("M19 43C18.5 29 30 16 47 13.5C45.5 30 34 42 19 43Z", INK)
@@ -280,11 +327,13 @@ def manuskript():
     quill = line(20, 42, 15, 47, INK, 2.8)
     return vane + spine + notch + quill
 
+
 @reg("manyverse", INDIGO)
 def manyverse():
     m = stroke("M19.5 37.5V20L32 34L44.5 20V37.5", INK, 4.4)
     ends = _ring(19.5, 41.5, 3.3, INK, 2.6) + _ring(44.5, 41.5, 3.3, INK, 2.6)
     return m + ends
+
 
 @reg("maple", BLUE_DARK)
 def maple():
@@ -293,12 +342,14 @@ def maple():
     left = [(64 - x, y) for x, y in reversed(right)]
     return poly(right + left, INK, 1.4)
 
+
 @reg("maps", BLUE)
 def maps():
     base = ell_e(32, 44, 11, 3.6, "none", f' stroke="{INK}" stroke-width="2.4"')
     pin = path("M32 12C25.5 12 20.5 17 20.5 23.5C20.5 31.5 32 44 32 44C32 44 43.5 31.5 43.5 23.5"
                "C43.5 17 38.5 12 32 12Z", INK)
     return base + pin + circle(32, 23.5, 4.6, HOLE)
+
 
 @reg("maps-alt", BROWN_LIGHT)
 def maps_alt():
@@ -307,6 +358,7 @@ def maps_alt():
     pin = (path("M41 30C37.7 30 35.5 32.4 35.5 35.3C35.5 39 41 44.5 41 44.5C41 44.5 46.5 39 46.5 35.3"
                 "C46.5 32.4 44.3 30 41 30Z", RED_LIGHT) + circle(41, 35.3, 2, INK))
     return curve + road + pin
+
 
 @reg("marble", BLUE_DARK)
 def marble():
@@ -318,6 +370,7 @@ def marble():
     white = poly([(20, 42), (34.3, 32.3), (29.7, 27.7)], INK, 1.5)
     return globe + land + red + white
 
+
 @reg("marknoto", AMBER_DEEP)
 def marknoto():
     note = path("M20 14H44A3 3 0 0 1 47 17V35L35 47H20A3 3 0 0 1 17 44V17A3 3 0 0 1 20 14Z", INK)
@@ -326,16 +379,19 @@ def marknoto():
             + stroke("M34 22.5L30 36.5", HOLE, 3))
     return note + curl + code
 
+
 @reg("markpado", BROWN)
 def markpado():
     return (stroke("M24 21L15 30L24 39", INK, 4.6) + stroke("M40 21L49 30L40 39", INK, 4.6)
             + stroke("M35.5 17L28.5 43", INK, 4.6))
+
 
 @reg("marktext", BLUE_DARK)
 def marktext():
     m = stroke("M17 41V19L32 31L47 19V41", INK, 5)
     chev = stroke("M24.5 38.5L32 44L39.5 38.5", LIGHT_BLUE_SOFT, 4)
     return m + chev
+
 
 @reg("massif-visualizer", PURPLE_LIGHT)
 def massif():
@@ -345,9 +401,11 @@ def massif():
                     for y in (16.5, 24.5, 32.5, 40.5))
     return page + chart + rings
 
+
 @reg("masterpdfeditor", RED)
 def masterpdf():
     return stroke("M16 42L24.5 20.5L33 36.5L40 24.5L48 42", INK, 6)
+
 
 @reg("mat", RED_DEEP)
 def mat():
@@ -358,11 +416,13 @@ def mat():
                stroke("M38.5 18H45.5M42 18V26", HOLE, 2.4))
     return board + post + letters
 
+
 @reg("mate", BROWN_SOFT)
 def mate():
     arcs = stroke(arc(35, 30, 13.5, -135, 135), INK, 4.2) + stroke(arc(35, 30, 7, -120, 120), INK, 3.6)
     tri_pts = [(17, 19), (34, 30), (17, 41)]
     return arcs + poly(tri_pts, HOLE, 7) + poly(tri_pts, INK, 2.5)
+
 
 @reg("mate-inhibit-applet", ORANGE_DARK)
 def mate_inhibit():
@@ -371,6 +431,7 @@ def mate_inhibit():
     zz = stroke("M25 25H35L25 37H35", HOLE, 3.8) + stroke("M38.5 21H44L38.5 27.5H44", HOLE, 2.4)
     return pole + board + zz
 
+
 @reg("mate-panel-drawer", AMBER_DEEP)
 def mate_drawer():
     body = rrect(14, 15, 36, 30, 5, INK)
@@ -378,25 +439,30 @@ def mate_drawer():
     handle = rrect(25.5, 28, 13, 4.5, 2.25, BROWN_DARK)
     return body + face + handle
 
+
 @small("lsp-plugins")
 def lsp_s():
     return (stroke("M17 19V41H27", INK, 5.5) +
             stroke("M45 22.5C43.8 20.3 41.7 19 39 19C35.5 19 33 21 33 24"
                    "C33 31 46 28 46 35.5C46 39 43 41 39 41C36.3 41 34 39.8 32.8 37.5", INK, 5.5))
 
+
 @small("lyne")
 def lyne_s():
     return "".join(diamond(x, y, 5, INK, 1) for x in (21, 32, 43) for y in (19, 30, 41))
+
 
 @small("lvim")
 def lvim_s():
     return (_ring(CX, CY, 15, INK, 3.6) + stroke("M23 22V38H29", INK, 4)
             + stroke("M32 22L36.5 38L41 22", INK, 4))
 
+
 @small("makemkv")
 def makemkv_s():
     disc = circle(32, 25, 14, INK) + circle(32, 25, 5, HOLE)
     return disc + rrect(15, 36, 34, 12, 3.5, INDIGO_SOFT)
+
 
 @small("mat")
 def mat_s():
@@ -404,11 +470,13 @@ def mat_s():
     post = rrect(28.5, 31, 7, 16, 2.5, INK)
     return board + post + stroke("M24 28V17.5L32 24L40 17.5V28", HOLE, 3.6)
 
+
 @small("massif-visualizer")
 def massif_s():
     page = rrect(18, 12, 31, 36, 4, INK)
     chart = poly([(22, 44), (29, 29), (34, 35), (40, 22), (45, 44)], HOLE, 2)
     return page + chart
+
 
 @small("manjaro-architect")
 def manjaro_architect_s():
@@ -418,11 +486,13 @@ def manjaro_architect_s():
     arrow = line(39, 30.5, 39, 43, INK, 3.8) + stroke("M34 38.5L39 43.5L44 38.5", INK, 3.8)
     return hash_ + badge + arrow
 
+
 @small("manjaro-settings-manager")
 def manjaro_settings_s():
     logo = (rrect(15, 13, 9, 34, 1.5, INK) + rrect(15, 13, 22, 9, 1.5, INK) +
             rrect(28, 26, 9, 21, 1.5, INK) + rrect(41, 13, 9, 34, 1.5, INK))
     return logo + circle(42.5, 40.5, 11, HOLE) + circle(42.5, 40.5, 9.5, DEEP_PURPLE_LIGHT) + circle(42.5, 40.5, 4, INK)
+
 
 @small("lyrebird")
 def lyrebird_s():
@@ -430,14 +500,17 @@ def lyrebird_s():
             stroke("M31 36C28 30 25.5 24.5 27.5 18.5C28.5 15.5 31.5 15.5 32 18", INK, 3.6))
     return tail + ell_e(26, 39, 9, 6, INK) + circle(18.5, 35, 4.2, INK)
 
+
 @small("mate-panel-drawer")
 def mate_drawer_s():
     return rrect(13, 15, 38, 30, 5, INK) + rrect(24, 27, 16, 6, 3, HOLE)
+
 
 @small("lyx")
 def lyx_s():
     return (stroke("M16 16V40H26", INK, 5.5) +
             stroke("M31.5 17L47 40M47 17L31.5 40", RED_SOFT, 5.5))
+
 
 @small("mandelbulber2")
 def mandelbulber_s():
@@ -449,15 +522,18 @@ def mandelbulber_s():
         pts.append((CX + r * math.cos(t), CY + r * math.sin(t)))
     return stroke("M" + "L".join(f"{f(x)} {f(y)}" for x, y in pts), INK, 4)
 
+
 @small("marknoto")
 def marknoto_s():
     note = path("M19 13H45A3 3 0 0 1 48 16V35L35 48H19A3 3 0 0 1 16 45V16A3 3 0 0 1 19 13Z", INK)
     code = stroke("M27 23L20.5 30L27 37", HOLE, 4) + stroke("M37 23L43.5 30L37 37", HOLE, 4)
     return note + code
 
+
 @small("mate-inhibit-applet")
 def mate_inhibit_s():
     return rrect(15, 15, 34, 30, 5, INK) + stroke("M23.5 22.5H40.5L23.5 38H40.5", HOLE, 5)
+
 
 @small("mangareader")
 def mangareader_s():

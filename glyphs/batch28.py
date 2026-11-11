@@ -6,10 +6,19 @@ The mark is drawn in INK (white, or near-black on pale tiles); HOLE is
 the tile colour showing through the mark; any other shade is another
 step from the same palette.
 """
-from lm import *
+from lm import (
+    AMBER, AMBER_DARK, AMBER_DEEP, AMBER_LIGHT, AMBER_SOFT, BLUE, BLUE_DARK, BLUE_DEEP,
+    BLUE_GREY, BLUE_GREY_DARK, BLUE_GREY_LIGHT, BLUE_SOFT, BROWN, BROWN_SOFT, circle, CYAN_DARK,
+    CYAN_DEEP, DEEP_ORANGE_DEEP, DEEP_PURPLE, DEEP_PURPLE_DEEP, DEEP_PURPLE_LIGHT,
+    DEEP_PURPLE_SOFT, f, g, GREY_DARK, GREY_DEEP, HOLE, INDIGO, INDIGO_DARK, INK, LIGHT_BLUE,
+    LIGHT_BLUE_DEEP, line, ORANGE, ORANGE_DEEP, path, PINK, PINK_DEEP, PINK_LIGHT, poly, pt,
+    PURPLE, PURPLE_DEEP, PURPLE_SOFT, RED, RED_DEEP, RED_LIGHT, rrect, stroke, TEAL_DEEP,
+    TEAL_LIGHT, TEAL_SOFT, YELLOW, YELLOW_DARK,
+)
 from glyphs.kit import arc_arrow_b, gear, registry
 
 ICONS, SMALL, reg, small = registry()
+
 
 @reg("forkgram", DEEP_PURPLE_LIGHT)
 def forkgram():
@@ -17,11 +26,13 @@ def forkgram():
     fold = poly([(26.5, 34), (41, 22.5), (32, 36.5)], DEEP_PURPLE_DEEP, 1)
     return plane + fold
 
+
 @reg("foursquare", PINK)
 def foursquare():
     badge = poly([(19, 12.5), (46, 12.5), (42, 33), (33.5, 33), (24.5, 47.5), (19, 47.5)], INK, 3.5)
     f_ = stroke("M25.5 40V19H39.5", HOLE, 3.8) + stroke("M25.5 26.5H36", HOLE, 3.8)
     return badge + f_
+
 
 @reg("franz", LIGHT_BLUE_DEEP)
 def franz():
@@ -30,6 +41,7 @@ def franz():
                  "C48 31.5 45 31.5 43 29.5C40 26.5 35 26.5 32 31Z", INK)
     horn = path("M18 25C15 21 15 16 18 12.5C18.5 16.5 20.5 19.5 24 21.5Z", INK)
     return tache + horn + g(horn, "matrix(-1 0 0 1 64 0)")
+
 
 def _forti():
     shield = path("M32 11.5L47 16V28.5C47 38.5 40.5 45 32 48.5C23.5 45 17 38.5 17 28.5V16Z", INK)
@@ -40,13 +52,12 @@ def _forti():
         cells += "".join(rrect(x, y, w, 5, 1.5, HOLE) for x, w in row)
     return shield + cells
 
+
+@reg("forticlientsslvpn", RED_DEEP)
 @reg("forticlient", BLUE_DEEP)
 def forticlient():
     return _forti()
 
-@reg("forticlientsslvpn", RED_DEEP)
-def forticlientsslvpn():
-    return _forti()
 
 @reg("fr.romainvigier.MetadataCleaner", DEEP_PURPLE_LIGHT)
 def metadatacleaner():
@@ -58,11 +69,13 @@ def metadatacleaner():
     holes = circle(19.5, 40, 1.4, AMBER_DEEP) + circle(25, 38.5, 1.4, AMBER_DEEP)
     return prints + sponge + holes
 
+
 @reg("fslint_icon", GREY_DEEP)
 def fslint():
     page = rrect(18, 12, 28, 36, 4, INK)
     lens = f'<circle cx="31" cy="27.5" r="6.5" fill="none" stroke="{HOLE}" stroke-width="3.4"/>'
     return page + lens + line(35.8, 32.3, 40.5, 37.5, HOLE, 4.2)
+
 
 @reg("fwupd", DEEP_PURPLE)
 def fwupd():
@@ -74,9 +87,11 @@ def fwupd():
     arrow = arc_arrow_b(41, 39.5, 4.2, 150, 60, HOLE, 2.4, 2.6)
     return pins + chip + slots + badge + arrow
 
+
 @reg("fr.romainvigier.zap", AMBER_DEEP)
 def zap():
     return poly([(37.5, 11), (18.5, 33), (30.5, 33), (26.5, 49), (45.5, 25.5), (33.5, 25.5), (38, 11)], INK, 2.5)
+
 
 @reg("foxit-reader", ORANGE_DEEP)
 def foxit():
@@ -86,6 +101,7 @@ def foxit():
                 "C41 24 39 21 34.5 17.5Z", INK)
     return ring + tail
 
+
 @reg("freac", BLUE_GREY)
 def freac():
     body = gear(32, 30, 17, 13, 9, INK)
@@ -94,11 +110,13 @@ def freac():
             + stroke("M31.8 24.2C33.5 25 35.5 25.8 35.5 28.2", INK, 2.2))
     return body + hole + note
 
+
 @reg("freedesktop", BLUE)
 def freedesktop():
     links = line(22, 20, 42, 26, INK, 2.2) + line(22, 20, 28, 40, INK, 2.2) + line(42, 26, 28, 40, INK, 2.2)
     return (links + rrect(14, 13, 16, 13, 3, INK) + rrect(35, 20, 15, 12, 3, INK)
             + rrect(23.5, 36, 9, 8, 2.2, INK))
+
 
 @reg("freedownloadmanager", LIGHT_BLUE_DEEP)
 def fdm():
@@ -106,10 +124,12 @@ def fdm():
     arrow = line(24, 30, 42, 30, INK, 5.5) + poly([(39.5, 20.5), (50, 30), (39.5, 39.5)], INK, 3)
     return box + arrow
 
+
 @reg("freefilesync", BROWN_SOFT)
 def freefilesync():
     return (arc_arrow_b(32, 30, 13, 195, 330, INK, 4.5, 5)
             + arc_arrow_b(32, 30, 13, 15, 150, INK, 4.5, 5))
+
 
 @reg("frescobaldi", TEAL_DEEP)
 def frescobaldi():
@@ -118,10 +138,12 @@ def frescobaldi():
     front = poly([pt(32, 30, 13 if k % 2 == 0 else 5.5, -90 + 22.5 * k) for k in range(16)], INK, 2)
     return pad + back + front + circle(32, 30, 4, AMBER_LIGHT)
 
+
 @reg("friture", DEEP_ORANGE_DEEP)
 def friture():
     ring = f'<circle cx="37" cy="24" r="10.5" fill="none" stroke="{INK}" stroke-width="4.2"/>'
     return line(29.5, 31.5, 17, 44, INK, 6.5) + ring + circle(37, 24, 5.2, INK)
+
 
 @reg("fspy", BLUE_GREY_DARK)
 def fspy():
@@ -129,20 +151,24 @@ def fspy():
     tri = stroke("M23.5 31H40.5L32 45Z", INK, 3.6)
     return arms + tri
 
+
 @reg("fusion-icon", RED_DEEP)
 def fusion():
     half = path("M37 11C24 12.5 14.5 21.5 17.5 31C19.5 37.5 28 39 31.5 33.5"
                 "C34 29.5 30 25.5 26.5 28.5C25 22.5 28.5 16 37 11Z", INK)
     return g(half + g(half, "rotate(180 32 30)"), "translate(32 30) scale(1.12) translate(-32 -30)")
 
+
 def _freeoffice(letter):
     frame = f'<rect x="14.5" y="12.5" width="35" height="35" rx="3.5" fill="none" stroke="{INK}" stroke-width="2.4"/>'
     corner = rrect(18, 41, 3.5, 3.5, 1, INK)
     return frame + corner + letter
 
+
 @reg("freeoffice-planmaker", BLUE_GREY)
 def fo_planmaker():
     return _freeoffice(stroke("M27 40V20.5H33.5A5.5 5.5 0 0 1 33.5 31.5H27", INK, 5))
+
 
 @reg("freeoffice-presentations", ORANGE_DEEP)
 def fo_presentations():
@@ -150,9 +176,11 @@ def fo_presentations():
                               "C26.5 30 37.8 28.5 37.8 34.5C37.8 37.8 35.3 40 32 40"
                               "C29.3 40 27.2 39 26 37", INK, 4.6))
 
+
 @reg("freeoffice-textmaker", RED_DEEP)
 def fo_textmaker():
     return _freeoffice(stroke("M23.5 20.5H40.5M32 20.5V40", INK, 5))
+
 
 @reg("freeplane", ORANGE_DEEP)
 def freeplane():
@@ -164,12 +192,14 @@ def freeplane():
     grin = stroke("M36 36C39 37.5 42 36.5 44 34", HOLE, 2.4)
     return body + stripes + eyes + grin
 
+
 @reg("fritzing", RED_DEEP)
 def fritzing():
     f_ = stroke("M39.5 17.5C38 15 36 14 33.5 14C30 14 28 16.5 28 20V35", INK, 5)
     bar = line(21.5, 24.5, 35, 24.5, INK, 5)
     ring = f'<circle cx="28" cy="41" r="5" fill="none" stroke="{INK}" stroke-width="4"/>'
     return f_ + bar + ring
+
 
 @reg("freecad", RED_DEEP)
 def freecad():
@@ -178,10 +208,12 @@ def freecad():
     cog = circle(40.5, 39.5, 11.5, HOLE) + gear(40.5, 39.5, 9.5, 7, 8, BLUE_SOFT, rounding=1.5)
     return f_ + cog + circle(40.5, 39.5, 3, HOLE)
 
+
 @reg("freetube", RED_DEEP)
 def freetube():
     return (rrect(16, 13, 7.5, 34, 3.75, INK) + rrect(16, 13, 31, 7.5, 3.75, INK)
             + poly([(29.5, 26), (46.5, 35), (29.5, 44)], INK, 3.5))
+
 
 @reg("freezer", PINK_DEEP)
 def freezer():
@@ -189,6 +221,7 @@ def freezer():
     shelves = "".join(line(19, y, 45, y, HOLE, 2.2, "butt") for y in (21, 30, 39.5))
     handles = line(24, 14.8, 24, 17.8, HOLE, 2.2) + line(24, 24.3, 24, 27, HOLE, 2.2)
     return body + shelves + handles
+
 
 @reg("frostwire", LIGHT_BLUE_DEEP)
 def frostwire():
@@ -198,6 +231,7 @@ def frostwire():
              + line(29.5, 38, 34.5, 24, INK, 2.8))
     return w1 + w2 + barbs
 
+
 @reg("forza-horizon-5", PINK_LIGHT)
 def forza():
     blade = poly([(13.5, 28.5), (23.5, 19.5), (50.5, 19.5), (46.5, 25.5), (25.5, 25.5)], INK, 1.8)
@@ -205,6 +239,7 @@ def forza():
             + poly([(26, 41), (32.5, 29), (38, 29), (32, 41)], INK, 1.8)
             + poly([(35.5, 41), (41, 29), (45.5, 29), (40.5, 41)], INK, 1.8))
     return blade + bars
+
 
 @reg("four-in-a-row", BLUE_DEEP)
 def four_in_a_row():
@@ -216,6 +251,7 @@ def four_in_a_row():
             out += circle(18.5 + 9 * c, 16.5 + 9 * r, 3.9, col)
     return out
 
+
 @reg("fran-bow", BLUE_GREY_DARK)
 def fran_bow():
     hair = path("M16 38V26C16 17 22.5 12 32 12C41.5 12 48 17 48 26V38"
@@ -225,9 +261,11 @@ def fran_bow():
     tears = line(25.5, 33.5, 25.5, 37, RED_DEEP, 2.2) + line(38.5, 33.5, 38.5, 36.5, RED_DEEP, 2.2)
     return hair + body + eyes + tears
 
+
 @reg("freeciv-client", AMBER_DARK)
 def freeciv_client():
     return _freeciv()
+
 
 def _freeciv():
     globe = circle(32, 30, 14.5, INK)
@@ -240,11 +278,13 @@ def _freeciv():
             f'fill="none" stroke="{INK}" stroke-width="2.6"/>')
     return globe + land + band
 
+
 @reg("freeciv-server", AMBER_DARK)
 def freeciv_server():
     world = g(_freeciv(), "translate(29 28) scale(.86) translate(-32 -30)")
     badge = circle(42.5, 40, 9.5, HOLE) + gear(42.5, 40, 7.6, 5.6, 8, INK, rounding=1) + circle(42.5, 40, 2.3, HOLE)
     return world + badge
+
 
 def _doom():
     d = stroke("M14 22V38H17.5Q21.5 38 21.5 30Q21.5 22 17.5 22Z", INK, 3.2)
@@ -253,13 +293,12 @@ def _doom():
     m = stroke("M44.5 38V22L47.25 30L50 22V38", INK, 3.2)
     return d + o1 + o2 + m
 
+
+@reg("freedoom2", RED_DEEP)
 @reg("freedoom1", INDIGO)
 def freedoom1():
     return _doom()
 
-@reg("freedoom2", RED_DEEP)
-def freedoom2():
-    return _doom()
 
 @reg("freedroid", RED)
 def freedroid():
@@ -270,6 +309,7 @@ def freedroid():
               + stroke("M37 26.8L39.8 25V35", HOLE, 2.6))
     return st + band + digits
 
+
 @reg("freedroidrpg", CYAN_DARK)
 def freedroidrpg():
     rods = line(20, 21, 14.5, 15.5, INK, 2.4) + line(44, 21, 49.5, 15.5, INK, 2.4)
@@ -279,19 +319,22 @@ def freedroidrpg():
     beak = poly([(24.5, 34), (39.5, 34), (32, 41.5)], ORANGE, 3)
     return rods + knobs + head + eyes + beak
 
+
 @reg("freegish", RED_DEEP)
 def freegish():
     blob = path("M13 38C13 24.5 21 17 32 17C43 17 51 24.5 51 38C51 42.5 46 44 32 44C18 44 13 42.5 13 38Z", INK)
     eye = path("M18.5 35C20 30 24.5 28.5 29.5 31.5L27.5 35.5C26.5 36.5 19.5 36.5 18.5 35Z", HOLE)
     return blob + eye + g(eye, "matrix(-1 0 0 1 64 0)")
 
+
 @reg("freeorion", BLUE_DARK)
 def freeorion():
-    ring = f'<circle cx="32" cy="30" r="11" fill="none" stroke="#6FBAF6" stroke-width="4.5"/>'
+    ring = f'<circle cx="32" cy="30" r="11" fill="none" stroke="{BLUE_SOFT}" stroke-width="4.5"/>'
     pts = [pt(32, 30, (18 if k in (0, 4) else 17) if k % 2 == 0 else 3.2, -90 + 45 * k) for k in range(8)]
     d = "M" + "L".join(f"{f(x)} {f(y)}" for x, y in pts) + "Z"
     return (ring + path(d, "none", f' stroke="{HOLE}" stroke-width="5" stroke-linejoin="round"')
             + poly(pts, INK, 1))
+
 
 @reg("freetennis", YELLOW_DARK)
 def freetennis():
@@ -299,6 +342,7 @@ def freetennis():
     seams = (stroke("M20.5 18.5C27 24.5 27 35.5 20.5 41.5", HOLE, 3)
              + stroke("M43.5 18.5C37 24.5 37 35.5 43.5 41.5", HOLE, 3))
     return ball + seams
+
 
 @reg("frogatto", GREY_DEEP)
 def frogatto():
@@ -310,6 +354,7 @@ def frogatto():
     mouth = stroke("M21 39Q24.5 36 28 39T35 39T42 39", HOLE, 2.4)
     return head + eyes + mouth
 
+
 @reg("frogr", CYAN_DEEP)
 def frogr():
     legs = "".join(stroke(d, INK, 3.6) for d in [
@@ -320,6 +365,7 @@ def frogr():
                    for x in (26, 38))
     return legs + body + eyes
 
+
 @reg("frozen-bubble", PURPLE_DEEP)
 def frozen_bubble():
     body = path("M19.5 24C21 15.5 29 12 37.5 13.5C46 15 51 23 50 32C49 42 42 47.5 33 47.5"
@@ -329,6 +375,7 @@ def frozen_bubble():
     eyes = (circle(22.5, 20, 4.5, INK) + circle(31.5, 19, 5.2, INK)
             + circle(23, 20.5, 2, HOLE) + circle(32.5, 19.5, 2.3, HOLE))
     return body + belly + beak + eyes
+
 
 @reg("fs-uae-arcade", INDIGO_DARK)
 def fs_uae_arcade():
@@ -341,6 +388,7 @@ def fs_uae_arcade():
                 out += rrect(14.5 + c * u - .15, 15 + r * u - .15, u + .3, u + .3, .6, INK)
     return out
 
+
 @reg("fs-uae-launcher", PURPLE_DEEP)
 def fs_uae_launcher():
     back = stroke("M14 33L23 21L32 33", YELLOW, 5)
@@ -350,6 +398,7 @@ def fs_uae_launcher():
                    "C50 46.1 48.8 47 47.2 47C46 47 45 46.5 44.4 45.8", INK, 2.4))
     return back + front + fs
 
+
 @reg("ftb-app", BLUE_GREY_DARK)
 def ftb():
     f_ = stroke("M14.5 43V25H22.5M14.5 33.5H21", INK, 4)
@@ -357,11 +406,13 @@ def ftb():
     b = stroke("M40 25H44.5A4 4 0 0 1 44.5 33H40M40 25V43H45A5 5 0 0 0 45 33H40", INK, 4)
     return f_ + t + b
 
+
 @reg("ftl-faster-than-light", GREY_DARK)
 def ftl():
     return (stroke("M15 40V20H23.5M15 30H21.5", INK, 4.6)
             + stroke("M26.5 20H38M32.25 20V40", INK, 4.6)
             + stroke("M41.5 20V40H49.5", INK, 4.6))
+
 
 @reg("full-throttle-remastered", BROWN)
 def full_throttle():
@@ -371,13 +422,16 @@ def full_throttle():
          + stroke("M37.25 46.5H46.25", INK, 3))
     return f_ + t
 
+
 def _arrow(cx, cy, rot, fill):
     a = poly([(0, -5.5), (5.3, 0), (2.4, 0), (2.4, 5), (-2.4, 5), (-2.4, 0), (-5.3, 0)], fill, 2)
     return g(a, f"translate({f(cx)} {f(cy)}) rotate({rot})")
 
+
 @reg("funkin", PINK_DEEP)
 def funkin():
     return "".join(_arrow(16 + 10.67 * k, 30, rot, INK) for k, rot in enumerate((-90, 180, 0, 90)))
+
 
 @reg("fuse", BLUE_GREY_DARK)
 def fuse():
@@ -386,12 +440,14 @@ def fuse():
     stripes = "".join(line(22 + 6 * k, 49, 50, 21 + 6 * k, c, 4.4, "butt") for k, c in enumerate(cols))
     return zx + stripes
 
+
 @reg("fyi.zoey.Boop-GTK", DEEP_PURPLE)
 def boop():
     back = rrect(14, 12, 20, 20, 5, AMBER_SOFT)
     mid = rrect(21.5, 19, 20, 20, 6, ORANGE, f' stroke="{HOLE}" stroke-width="2.4"')
     front = circle(39.5, 37.5, 10.5, INK, f' stroke="{HOLE}" stroke-width="2.4"')
     return back + mid + front
+
 
 def _forti_s():
     shield = path("M32 11L48 15.5V28.5C48 39 41 45.5 32 49C23 45.5 16 39 16 28.5V15.5Z", INK)
@@ -400,13 +456,12 @@ def _forti_s():
                     for x, w in row)
     return shield + cells
 
+
+@small("forticlientsslvpn")
 @small("forticlient")
 def forticlient_s():
     return _forti_s()
 
-@small("forticlientsslvpn")
-def forticlientsslvpn_s():
-    return _forti_s()
 
 @small("four-in-a-row")
 def four_in_a_row_s():
@@ -414,11 +469,13 @@ def four_in_a_row_s():
     return "".join(circle(20 + 12 * c, 18 + 12 * r, 5.3, {".": BLUE_DARK, "W": INK, "Y": AMBER_LIGHT}[ch])
                    for r, row in enumerate(board) for c, ch in enumerate(row))
 
+
 @small("fr.romainvigier.MetadataCleaner")
 def metadatacleaner_s():
     prints = "".join(stroke(f"M{f(34 - r)} 40V27A{f(r)} {f(r)} 0 0 1 {f(34 + r)} 27V40", INK, 3)
                      for r in (4, 11))
     return prints + g(rrect(13, 34, 17, 12, 4, AMBER_LIGHT, f' stroke="{HOLE}" stroke-width="2.4"'), "rotate(-15 21.5 40)")
+
 
 @small("freedroid")
 def freedroid_s():
@@ -426,18 +483,18 @@ def freedroid_s():
     band = f'<ellipse cx="32" cy="30" rx="12.5" ry="8.5" fill="{INK}" stroke="{HOLE}" stroke-width="2.4"/>'
     return st + band + stroke("M30 26.8L33.5 24.5V35.5", HOLE, 3)
 
+
 @small("freefilesync")
 def freefilesync_s():
     return (arc_arrow_b(32, 30, 12, 200, 320, INK, 4.5, 6.5)
             + arc_arrow_b(32, 30, 12, 20, 140, INK, 4.5, 6.5))
 
+
+@small("freedoom2")
 @small("freedoom1")
 def freedoom1_s():
     return _doom_s()
 
-@small("freedoom2")
-def freedoom2_s():
-    return _doom_s()
 
 def _doom_s():
     d = stroke("M13.5 21V39H17.5Q22 39 22 30Q22 21 17.5 21Z", INK, 2.6)
@@ -445,20 +502,24 @@ def _doom_s():
     o2 = f'<rect x="34" y="21" width="7" height="18" rx="3.5" fill="none" stroke="{INK}" stroke-width="2.6"/>'
     return d + o1 + o2 + stroke("M44 39V21L47.25 30L50.5 21V39", INK, 2.6)
 
+
 @small("frostwire")
 def frostwire_s():
     w = stroke("M13 31C17.5 26 22 26 26 31S34.5 36 38.5 31S46.5 26 51 31", INK, 3)
     return w + line(25, 15, 37, 45, INK, 3.2) + line(39, 15, 27, 45, INK, 3.2)
+
 
 @small("fs-uae-launcher")
 def fs_uae_launcher_s():
     return (stroke("M13 30L20 39L32 16", YELLOW, 5.5)
             + stroke("M24 30L31 39L43 16", INK, 5.5))
 
+
 @small("funkin")
 def funkin_s():
     return "".join(g(_arrow(0, 0, rot, INK), f"translate({x} {y}) scale(1.45)")
                    for x, y, rot in [(22, 21, -90), (42, 21, 180), (22, 40, 0), (42, 40, 90)])
+
 
 @small("fwupd")
 def fwupd_s():
@@ -466,13 +527,15 @@ def fwupd_s():
     badge = circle(41, 39, 11.5, HOLE) + circle(41, 39, 9.5, INK)
     return chip + badge + arc_arrow_b(41, 39, 4.8, 150, 60, HOLE, 2.6, 3)
 
+
 @small("freeorion")
 def freeorion_s():
     pts = [pt(32, 30, 19 if k % 2 == 0 else 4, -90 + 45 * k) for k in range(8)]
     d = "M" + "L".join(f"{f(x)} {f(y)}" for x, y in pts) + "Z"
-    ring = f'<circle cx="32" cy="30" r="11" fill="none" stroke="#6FBAF6" stroke-width="5"/>'
+    ring = f'<circle cx="32" cy="30" r="11" fill="none" stroke="{BLUE_SOFT}" stroke-width="5"/>'
     return (ring + path(d, "none", f' stroke="{HOLE}" stroke-width="5" stroke-linejoin="round"')
             + poly(pts, INK, 1))
+
 
 @small("fuse")
 def fuse_s():

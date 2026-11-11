@@ -1,18 +1,21 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-"""Batch 10: betaflight-configurator to boostnote.
-
-Same rules as batch01: palette tile nearest the brand colour, the mark in
-INK, HOLE for cut-outs, a second shade only where the logo needs it.
-"""
+"""Batch 10: betaflight-configurator to boostnote."""
 import math
-from lm import *
+from lm import (
+    AMBER, AMBER_DEEP, AMBER_SOFT, BLACK, BLUE, BLUE_DARK, BLUE_DEEP, BLUE_GREY, BLUE_GREY_DARK,
+    BLUE_LIGHT, BLUE_SOFT, BROWN_DEEP, circle, CX, CY, CYAN_DEEP, CYAN_LIGHT, CYAN_SOFT,
+    DEEP_ORANGE, DEEP_ORANGE_DEEP, DEEP_ORANGE_LIGHT, f, g, GREY_DARK, GREY_LIGHT, HOLE, INDIGO,
+    INDIGO_DARK, INDIGO_LIGHT, INDIGO_SOFT, INK, LIGHT_BLUE, LIGHT_BLUE_DEEP, line, ORANGE,
+    ORANGE_DARK, ORANGE_DEEP, ORANGE_LIGHT, path, PINK, poly, pt, PURPLE, PURPLE_LIGHT,
+    PURPLE_SOFT, RED, RED_DARK, RED_DEEP, RED_SOFT, rrect, stroke, TEAL_DEEP, TEAL_LIGHT, WHITE,
+)
 from glyphs.kit import registry, ring_b
 
 ICONS, SMALL, reg, small = registry()
 
+
 @reg("betaflight-configurator", AMBER_DEEP)
 def betaflight():
-
     wings = (path("M31 27C25 22 18 17 13.5 14.5C16 19.5 21.5 25.5 28.5 29.5Z", INK) +
              path("M29 31C23.5 29.5 18 29 14 30C18.5 33 24 34.5 29.5 34Z", INK))
     thorax = circle(34, 30, 5, INK)
@@ -20,6 +23,7 @@ def betaflight():
     body = g(rrect(26, 34, 21, 12, 6, INK), "rotate(20 36.5 40)")
     stripes = (line(33, 34.5, 29.5, 43, HOLE, 2.4) + line(38.5, 36.5, 35.5, 45, HOLE, 2.4))
     return wings + thorax + head + body + g(stripes, "")
+
 
 @reg("betterbird", DEEP_ORANGE)
 def betterbird():
@@ -30,9 +34,9 @@ def betterbird():
                    "C38 26.5 38.5 31 35.5 32.5", HOLE, 3.6)
     return disc + crest + swirl
 
+
 @reg("beyond-a-steel-sky", BLUE_DARK)
 def steel_sky():
-
     man = (circle(26, 16, 3.6, INK) +
            path("M21 22.5C21 21 22.5 20 24 20H28C29.5 20 31 21 31 22.5V35H29.5V48H22.5V35H21Z",
                 INK, f' stroke="{INK}" stroke-width="1.5" stroke-linejoin="round"'))
@@ -40,6 +44,7 @@ def steel_sky():
            rrect(35, 35, 10, 8, 2.5, INK) + rrect(36, 43, 3, 5, 1.2, INK) + rrect(41, 43, 3, 5, 1.2, INK))
     arm = line(31, 27, 36.5, 33, INK, 2.8)
     return g(man + arm + bot, "translate(0 -1)")
+
 
 @reg("beyondallreason", GREY_DARK)
 def bar():
@@ -51,12 +56,13 @@ def bar():
                "M45 30.3L49.5 38", INK, w)
     return b + a + r
 
+
 @reg("bforartists", BLUE)
 def bforartists():
-
     lobe = stroke(f"M{f(pt(32, 30, 11.5, 150)[0])} {f(pt(32, 30, 11.5, 150)[1])}"
                   f"A11.5 11.5 0 0 1 {f(pt(32, 30, 11.5, 212)[0])} {f(pt(32, 30, 11.5, 212)[1])}", INK, 10.5)
     return "".join(g(lobe, f"rotate({120 * k + 20} 32 30)") for k in range(3)) 
+
 
 @reg("bibletime", INDIGO)
 def bibletime():
@@ -65,6 +71,7 @@ def bibletime():
     clock = (circle(41.5, 40, 9, DEEP_ORANGE_LIGHT) + circle(41.5, 40, 6.2, INK) +
              stroke("M41.5 36.5V40.5H45", DEEP_ORANGE_LIGHT, 2.2))
     return book + cross + clock
+
 
 @reg("big-finish-downloader", INDIGO_DARK)
 def tardis():
@@ -76,11 +83,13 @@ def tardis():
                     if y < 42) + rrect(23, 42, 7.5, 4.5, 1, HOLE) + rrect(33.5, 42, 7.5, 4.5, 1, HOLE)
     return g(lamp + roof + box + sign + panes, "translate(0 -.5)")
 
+
 @reg("biglybt", BLUE_DEEP)
 def biglybt():
     arrow = poly([(22, 13), (42, 13), (42, 28), (49, 28), (32, 47), (15, 28), (22, 28)], INK, 3)
     slot = rrect(20.5, 18, 23, 7, 3.5, HOLE)
     return arrow + slot + rrect(29, 20, 7, 3, 1.5, INK) + circle(39, 21.5, 1.5, INK)
+
 
 @reg("billard-gl", ORANGE_DEEP)
 def billard():
@@ -98,6 +107,7 @@ def billard():
         "C33.2 33.6 32.4 33.3 32 32.8", BLACK, 1.9)
     return ball + band + spot + num
 
+
 @reg("binance", AMBER_DEEP)
 def binance():
     def dia(cx, cy, s):
@@ -105,6 +115,7 @@ def binance():
     chev = (stroke("M22.5 23.5L32 14L41.5 23.5", INK, 4.6) +
             stroke("M22.5 36.5L32 46L41.5 36.5", INK, 4.6))
     return dia(CX, CY, 7) + dia(18.5, CY, 5.8) + dia(45.5, CY, 5.8) + chev
+
 
 @reg("binaryninja", RED)
 def binaryninja():
@@ -114,10 +125,12 @@ def binaryninja():
             poly([(44.5, 26), (34.5, 27), (36, 31.5), (43, 31)], INK, 1.8))
     return head + band + eyes
 
+
 @reg("bingwall", LIGHT_BLUE_DEEP)
 def bingwall():
     peaks = stroke("M15 43L24.5 25L32 38.5L39.5 23L49 43Z", INK, 4)
     return peaks + circle(21, 16.5, 3.4, INK)
+
 
 @reg("bioshock-infinite", RED_DARK)
 def bioshock():
@@ -126,12 +139,14 @@ def bioshock():
     pts = [pt(32, 30.5, 8.5 if k % 2 == 0 else 3.8, -90 + 36 * k) for k in range(10)]
     return badge + poly(pts, HOLE, 2)
 
+
 @reg("birdfont", BLUE)
 def birdfont():
     b = path("M18 14H33C39.5 14 43 17.5 43 22.5C43 25.5 41.5 27.5 39.5 28.5C43.5 29.5 46 32.5 46 37"
              "C46 43 41.5 46 35 46H18Z", INK, f' stroke="{INK}" stroke-width="2" stroke-linejoin="round"')
     fl = stroke("M25.5 40V20.5H34.5M25.5 29.5H32.5", HOLE, 4.2)
     return b + fl
+
 
 @reg("birdie", BLUE_DEEP)
 def birdie():
@@ -143,6 +158,7 @@ def birdie():
     beak = poly([(27.5, 34.5), (36.5, 34.5), (32, 39)], ORANGE_LIGHT, 2)
     return body + tuft + eyes + beak
 
+
 @reg("bisq", PURPLE_LIGHT)
 def bisq():
     tail = stroke("M20 38C14 36 12.5 27 16 21.5C18.5 17.5 23 17 25 19", INK, 3.6)
@@ -153,6 +169,7 @@ def bisq():
     nose = poly([(31, 38.5), (35, 38.5), (33, 40.5)], HOLE, 1.2)
     return g(tail + head + eyes + nose, "translate(-1 -1)")
 
+
 @reg("bitcoin", ORANGE_DEEP)
 def bitcoin():
     b = stroke("M26 21H34.5C37.5 21 39.5 22.8 39.5 25.5C39.5 28.2 37.5 30 34.5 30H26"
@@ -161,11 +178,13 @@ def bitcoin():
              line(30, 41.5, 30, 45.5, INK, 3) + line(35, 41.5, 35, 45.5, INK, 3))
     return g(b + ticks, "rotate(14 32 30) translate(-1 0)")
 
+
 @reg("bitmap2component", ORANGE_DARK)
 def bitmap2component():
     bowl = ring_b(31, 36, 6.5, INK, 4.4)
     a = stroke("M23.5 21.5C25.5 19.5 28 18.5 31 18.5C35.5 18.5 37.5 21 37.5 26V43", INK, 4.4)
     return rrect(15, 11, 34, 4, 2, ORANGE_LIGHT) + bowl + a
+
 
 @reg("bitshares2-light", LIGHT_BLUE)
 def bitshares():
@@ -175,11 +194,13 @@ def bitshares():
                      for a in range(-60, 181, 60))
     return g(stem + wheel + spokes, "translate(-.5 -2)")
 
+
 @reg("bitwig-studio", DEEP_ORANGE)
 def bitwig():
     s, r = 5.6, 2.35
     rows = [(20.5, [2, 3, 4, 5]), (27.5, [1, 2, 3, 4, 5, 6]), (34.5, [1, 2, 5, 6])]
     return "".join(circle(32 + (c - 3.5) * s, y + 3, r, INK) for y, cs in rows for c in cs)
+
 
 @reg("bizhawk", BLUE_LIGHT)
 def bizhawk():
@@ -192,11 +213,13 @@ def bizhawk():
     eye = circle(34.5, 20, 1.6, BLACK)
     return suit + lapels + tie + head + beak + eye
 
+
 @reg("black-desert", BLUE_GREY_DARK)
 def black_desert():
     outer = stroke("M32 14L44.5 26.5L32 39L19.5 26.5L27 19L36.5 28.5L32 33", INK, 3.8)
     dots = circle(20.5, 40, 3.2, RED) + circle(43.5, 40, 3.2, RED)
     return outer + dots
+
 
 @reg("black-mesa", DEEP_ORANGE_DEEP)
 def black_mesa():
@@ -206,18 +229,22 @@ def black_mesa():
     fill = path(f"M{f(32 - r)} 30H33.5V35H{f(32 + dx)}A{r} {r} 0 0 1 {f(32 - r)} 30Z", INK)
     return ring_ + fill
 
+
 def _fusion(colour):
     blob = (line(24, 23.5, 39.5, 17.5, colour, 8.5) + line(26, 24, 31.5, 32, colour, 5) +
             line(29.5, 33.5, 40.5, 29.5, colour, 7.5) + circle(32.5, 43.5, 3.4, colour))
     return blob
 
+
 @reg("blackmagic-Fusion8", INDIGO)
 def fusion8():
     return _fusion(INK)
 
+
 @reg("blackmagic-Fusion9", AMBER)
 def fusion9():
     return ring_b(CX, CY, 16, INK, 3.2) + g(_fusion(INK), "translate(32 30) scale(.78) translate(-32 -30)")
+
 
 @reg("blackmagicraw-player", ORANGE_DEEP)
 def braw_player():
@@ -226,6 +253,7 @@ def braw_player():
     play = poly([(29, 17), (49, 30), (29, 43)], INK, 4)
     return strip + play
 
+
 @reg("blackmagicraw-speedtest", BLUE_GREY_DARK)
 def braw_speed():
     dial = stroke("M20.5 42A16 16 0 1 1 43.5 42", INK, 4)
@@ -233,6 +261,7 @@ def braw_speed():
     needle = line(32, 30, 41.5, 38, INK, 3.6) + circle(CX, CY, 3.6, INK)
     tick = line(32, 17.5, 32, 21, INK, 2.6)
     return dial + red + needle + tick
+
 
 @reg("blastem", RED_DARK)
 def blastem():
@@ -246,6 +275,7 @@ def blastem():
     cx, cy = 35.8, 28
     cell = lambda c: [(f(cx + x * u), f(cy + y * u)) for x, y in c]
     return px(cell(tail), DEEP_ORANGE_LIGHT) + px(cell(outer), ORANGE_LIGHT) + px(cell(inner), INK)
+
 
 @reg("bless", BROWN_DEEP)
 def bless():
@@ -261,6 +291,7 @@ def bless():
                poly([(34, 32), (34, 38), (29, 35)], AMBER_SOFT, 1), "rotate(-40 40 35)")
     return out + g(pencil, "translate(-4 6)")
 
+
 @reg("blinken", BLUE_GREY_DARK)
 def blinken():
     cols = [RED, INDIGO_SOFT, BLUE, AMBER]
@@ -270,6 +301,7 @@ def blinken():
         p0, p1 = pt(CX, CY, 12.5, a0), pt(CX, CY, 12.5, a1)
         out += stroke(f"M{f(p0[0])} {f(p0[1])}A12.5 12.5 0 0 1 {f(p1[0])} {f(p1[1])}", c, 7.5)
     return out + circle(CX, CY, 5, INK)
+
 
 def _blob(badge):
     band = rrect(12.5, 13, 39, 9.5, 3, RED) + path("M14 18L10 30L16 26L17 21Z", RED)
@@ -283,13 +315,16 @@ def _blob(badge):
                                                          WHITE, 2.4)
     return out
 
+
 @reg("blobAndConquer", AMBER)
 def blob_conquer():
     return _blob(True)
 
+
 @reg("blobwars", AMBER)
 def blobwars():
     return _blob(False)
+
 
 @reg("blobby", BLUE_GREY)
 def blobby():
@@ -299,6 +334,7 @@ def blobby():
              stroke("M31 13.5C39 17 44.5 24.5 47.5 32.5", HOLE, 2.6))
     return ball + seams
 
+
 @reg("bloboats", INDIGO_LIGHT)
 def bloboats():
     hull = path("M13 34H51L45.5 44.5C45 45.5 44 46 43 46H20C19 46 18 45.5 17.5 44.5Z", INK)
@@ -307,12 +343,14 @@ def bloboats():
     m = stroke("M24 28.5L26.5 21.5L30 26L33.5 20.5L35.5 28", HOLE, 2.6)
     return hull + cabin + m
 
+
 @reg("blockbench", BLUE_DEEP)
 def blockbench():
     back = poly([(20, 16), (48, 20), (44, 30), (16, 26)], INK, 2.5)
     seat = poly([(15, 31.5), (43, 35), (40.5, 40), (13, 36.5)], INK, 2.5)
     legs = line(19, 38, 19.5, 46, INK, 3.2) + line(37.5, 41, 37, 47.5, INK, 3.2)
     return back + seat + legs
+
 
 @reg("blockout", CYAN_DEEP)
 def blockout():
@@ -325,6 +363,7 @@ def blockout():
             out += rrect(15 + c * 11.7, 13 + r * 11.7, 10.2, 10.2, 2.2, colour)
     return out
 
+
 @reg("blogilo", LIGHT_BLUE)
 def blogilo():
     base = rrect(15, 13, 34, 34, 8, INK)
@@ -332,6 +371,7 @@ def blogilo():
              "A2 2 0 0 1 42 31V35A6 6 0 0 1 36 41H28A6 6 0 0 1 22 35Z", HOLE)
     bars = rrect(27, 23.5, 7.5, 3.4, 1.7, INK) + rrect(27, 32, 10.5, 3.4, 1.7, INK)
     return base + b + bars
+
 
 @reg("bloomrpc", CYAN_DEEP)
 def bloomrpc():
@@ -341,6 +381,7 @@ def bloomrpc():
                "C23 27 25.5 18 32 12Z", INK)
     return left + right + mid
 
+
 @reg("bluefish", BLUE_DEEP)
 def bluefish():
     body = path("M13 31C15.5 23 24 18.5 31.5 18.5C39 18.5 43 24 44.5 29"
@@ -348,6 +389,7 @@ def bluefish():
     tail = poly([(42, 29.5), (51, 21), (49, 29.5), (51, 38)], INK, 2.5)
     fin = poly([(26, 20), (30, 14), (35, 19)], INK, 2)
     return body + tail + fin + circle(21.5, 28, 2.2, HOLE)
+
 
 @reg("bluej", BLUE_DEEP)
 def bluej():
@@ -358,6 +400,7 @@ def bluej():
     beak = poly([(22, 22), (13, 26.5), (22.5, 28)], INK, 2)
     return body + crest + beak + circle(27.5, 22, 2.2, BLACK)
 
+
 @reg("bluejeans", BLUE_DEEP)
 def bluejeans():
     box = rrect(14, 15, 28, 30, 6, INK)
@@ -365,6 +408,7 @@ def bluejeans():
     b = stroke("M22 21.5V38.5H29.5C32.5 38.5 34.5 36.8 34.5 34.2C34.5 31.7 32.5 30 29.5 30H22"
                "M22 21.5H28.8C31.5 21.5 33 23 33 25.7C33 28.3 31.5 30 28.8 30", HOLE, 4)
     return box + cam + b
+
 
 @reg("bluemail", INDIGO)
 def bluemail():
@@ -375,6 +419,7 @@ def bluemail():
     b = stroke("M29.5 14.5V22.5M29.5 20A2.8 2.8 0 1 0 35.1 20A2.8 2.8 0 1 0 29.5 20", HOLE, 2.3)
     return env + flap + badge + b
 
+
 @reg("blush-blush", PURPLE_LIGHT)
 def blush():
     pad = path("M32 29C37.5 29 43.5 35 43.5 40C43.5 44.5 39.5 46 36.5 45"
@@ -383,6 +428,7 @@ def blush():
     toes = "".join(g(f'<ellipse cx="{x}" cy="{y}" rx="4" ry="5.2" fill="{INK}"/>', f"rotate({a} {x} {y})")
                    for x, y, a in [(18, 26.5, -25), (26.5, 18.5, -8), (37.5, 18.5, 8), (46, 26.5, 25)])
     return pad + toes
+
 
 @reg("boinc", INDIGO_DARK)
 def boinc():
@@ -394,6 +440,7 @@ def boinc():
     cross = "".join(line(*pt(CX, CY, 8.5, a), *pt(CX, CY, 15, a), INK, 3.2) for a in (45, 135, 225, 315))
     return arcs + cross + circle(CX, CY, 5.5, AMBER)
 
+
 @reg("bomber", CYAN_DEEP)
 def bomber():
     ship = path("M17 26C24 22 36 21.5 43 22.5C47 23 50 25.5 50 28.5C50 32 45 36.5 36 39.5"
@@ -403,17 +450,20 @@ def bomber():
     canopy = path("M41 23C45.5 23 49.5 25 50 28.5C47 28.5 43 26.5 41 23Z", BLUE_GREY_DARK)
     return fin + ship + nozzle + canopy
 
+
 @reg("bomi", PINK)
 def bomi():
     return (ring_b(CX, CY, 15.5, INK, 3.6) + rrect(24, 21, 4, 18, 2, INK) +
             poly([(31.5, 21), (41.5, 30), (31.5, 39)], INK, 2.8))
 
+
 @reg("bookworm", PURPLE)
 def bookworm():
     book = rrect(17, 12, 30, 36, 3.5, INK) + rrect(17, 12, 5.5, 36, 2.5, PURPLE_SOFT)
     ribbon = path("M36 10.5H42V29L39 26L36 29Z", AMBER,
-                  ' stroke="#FFC006" stroke-width="1.2" stroke-linejoin="round"')
+                  f' stroke="{AMBER}" stroke-width="1.2" stroke-linejoin="round"')
     return book + ribbon
+
 
 @reg("boomaga", BLUE_GREY)
 def boomaga():
@@ -426,11 +476,13 @@ def boomaga():
                                                         "M48.5 41L46 38.5M48.5 41L46 43.5", WHITE, 2.3)
     return paper + body + tray + lines_ + led + badge
 
+
 @reg("boostnote", TEAL_LIGHT)
 def boostnote():
     plane = poly([(15, 30), (48, 14), (38, 45), (31, 36)], INK, 2.5)
     fold = poly([(31, 36), (48, 14), (29, 43)], TEAL_DEEP, 1.5)
     return plane + fold
+
 
 @small("bless")
 def bless_s():
@@ -446,11 +498,13 @@ def bless_s():
                "rotate(-40 40 35)")
     return out + g(pencil, "translate(-3 7)")
 
+
 @small("big-finish-downloader")
 def tardis_s():
     box = rrect(30, 10, 4, 4, 1.2, INK) + rrect(20, 14, 24, 35, 2.5, INK)
     panes = "".join(rrect(x, y, 7.5, 8, 1.2, HOLE) for x in (23, 33.5) for y in (20, 31))
     return g(box + panes, "translate(0 -.5)")
+
 
 @small("beyondallreason")
 def bar_s():
@@ -462,10 +516,12 @@ def bar_s():
                "M45 30.3L49.5 38", INK, w)
     return b + a + r
 
+
 @small("bitshares2-light")
 def bitshares_s():
     stem = path("M20 13L30 23V47H20Z", INK, f' stroke="{INK}" stroke-width="2" stroke-linejoin="round"')
     return g(stem + circle(35, 36, 11.5, INK) + circle(35, 36, 5, HOLE), "translate(-.5 -2)")
+
 
 @small("blastem")
 def blastem_s():
@@ -477,16 +533,19 @@ def blastem_s():
                                  for x, y in cs)
     return rect([(-3, 0), (-4, 0)], DEEP_ORANGE_LIGHT) + rect(outer, ORANGE_LIGHT) + rect(inner, INK)
 
+
 @small("bitwig-studio")
 def bitwig_s():
     s, r = 8, 3.3
     rows = [(19, [1, 2, 3]), (29, [0, 1, 2, 3, 4]), (39, [0, 1, 3, 4])]
     return "".join(circle(32 + (c - 2) * s, y + 1, r, INK) for y, cs in rows for c in cs)
 
+
 @small("billard-gl")
 def billard_s():
     full = billard()
     return full[:full.index('<path d="M28.8')] + circle(CX, CY, 3, BLACK)
+
 
 def _blob_s(badge):
     band = rrect(12.5, 12, 39, 10, 3, RED)
@@ -497,13 +556,16 @@ def _blob_s(badge):
         out += circle(44, 42, 8, RED_DEEP)
     return out
 
+
 @small("blobAndConquer")
 def blob_conquer_s():
     return _blob_s(True)
 
+
 @small("blobwars")
 def blobwars_s():
     return _blob_s(False)
+
 
 @small("bitcoin")
 def bitcoin_s():
@@ -511,16 +573,19 @@ def bitcoin_s():
                "M26 30H35C38.5 30 40.5 31.9 40.5 34.8C40.5 37.6 38.5 39.5 35 39.5H26M26 16V44", INK, 4.2)
     return g(b + line(33, 16, 33, 20, INK, 3.4) + line(33, 40, 33, 44, INK, 3.4), "rotate(14 32 30) translate(-1 0)")
 
+
 @small("bibletime")
 def bibletime_s():
     book = rrect(16, 12, 26, 35, 3.5, INK)
     cross = line(29, 17, 29, 35, HOLE, 5) + line(22, 23.5, 36, 23.5, HOLE, 5)
     return book + cross + circle(42.5, 40, 9, DEEP_ORANGE_LIGHT)
 
+
 @small("boomaga")
 def boomaga_s():
     body = rrect(21, 11, 22, 10, 2, INK) + rrect(13, 19, 38, 20, 4, INK) + rrect(20, 32, 24, 14, 2, INK)
     return body + rrect(18, 31, 28, 3, 1.5, HOLE) + circle(45, 42, 8, RED)
+
 
 @small("bluemail")
 def bluemail_s():

@@ -8,8 +8,6 @@ Trindle Icons gives your desktop round, coloured app icons. There is one set, Tr
 2. Open Settings, then Appearance, then Icons.
 3. Pick Trindle Circle.
 
-If you chose the old Squares set before, it now shows as Circles.
-
 ## Ask for an icon or report a problem
 
 You can report a problem or ask for an icon in one of two places. The choice is yours.

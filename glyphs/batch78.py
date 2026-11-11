@@ -1,9 +1,18 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Batch 78: Flathub apps Papirus lacks (gradia to rufin)."""
-from lm import *
+from lm import (
+    AMBER, AMBER_DARK, AMBER_DEEP, AMBER_LIGHT, BLUE_DARK, BLUE_DEEP, BLUE_GREY, BLUE_GREY_DARK,
+    BLUE_GREY_DEEP, BLUE_GREY_LIGHT, BLUE_GREY_SOFT, BLUE_SOFT, BROWN, BROWN_DARK, BROWN_SOFT,
+    circle, cpath, cut, CYAN, CYAN_DEEP, DEEP_ORANGE_DEEP, DEEP_ORANGE_LIGHT, DEEP_PURPLE_DEEP,
+    f, g, GREY_DARK, HOLE, INDIGO, INDIGO_DARK, INDIGO_DEEP, INK, LIGHT_BLUE_DEEP,
+    LIGHT_BLUE_LIGHT, line, ORANGE, ORANGE_DARK, ORANGE_DEEP, ORANGE_LIGHT, ORANGE_SOFT, path,
+    PINK, PINK_DEEP, PINK_LIGHT, PINK_SOFT, poly, pt, PURPLE_LIGHT, RED, RED_DARK, RED_DEEP,
+    rrect, stroke, TEAL, TEAL_DARK, YELLOW, YELLOW_LIGHT,
+)
 from glyphs.kit import arc_b, ellipse, ering, registry, ring_e, spiral_b
 
 ICONS, SMALL, reg, small = registry()
+
 
 @reg("be.alexandervanhee.gradia", BLUE_DEEP)
 def gradia():
@@ -16,12 +25,14 @@ def gradia():
     toggle = rrect(31, 34, 10, 5, 2.5, HOLE) + circle(38.5, 36.5, 1.5, INK) + line(24.5, 36.5, 27.5, 36.5, HOLE, 2.2)
     return corners + card + bar + row + toggle
 
+
 @reg("org.deskflow.deskflow", LIGHT_BLUE_DEEP)
 def deskflow():
     out = ""
     for y in (19, 30, 41):
         out += stroke(f"M15 {y + 2}C20.5 {y - 4.5} 26 {y - 4.5} 32 {y}S43.5 {y + 4.5} 49 {y - 2}", INK, 5)
     return out
+
 
 @reg("org.mozilla.vpn", DEEP_PURPLE_DEEP)
 def mozilla_vpn():
@@ -34,6 +45,7 @@ def mozilla_vpn():
         out += circle(x, y, 5, HOLE, f' stroke="{INK}" stroke-width="3.6"')
     return out
 
+
 @reg("com.vixalien.sticky", AMBER_DARK)
 def sticky():
     note = rrect(15.5, 15, 33, 33, 3.5, YELLOW_LIGHT, ' transform="rotate(-6 32 31.5)"')
@@ -42,17 +54,20 @@ def sticky():
     pin = line(34, 14, 34, 20, RED_DARK, 2.2) + circle(34, 13.5, 4.5, RED)
     return note + ink + pin
 
+
 @reg("ai.opencode.opencode", BLUE_GREY_DARK)
 def opencode():
     frame = cut("M17 12H47V48H17Z M23 18V42H41V18Z", INK)
     lower = path("M23 30H41V42H23Z", BLUE_GREY_SOFT)
     return frame + lower
 
+
 @reg("io.github.tobagin.karere", ORANGE_DARK)
 def karere():
     bubble = circle(33, 28.5, 15.5, INK) + poly([(20, 35), (16, 47.5), (29, 42)], INK, 2)
     swirl = stroke(spiral_b(33, 28.5, .8, 9.5, 2.3, 180), HOLE, 2.8)
     return bubble + swirl
+
 
 @reg("org.dupot.easyflatpak", INDIGO_DEEP)
 def easyflatpak():
@@ -64,12 +79,14 @@ def easyflatpak():
     right = poly([(33, 32), (41, 27.5), (41, 37), (33, 41.5)], INK, 1)
     return out + top + left + right
 
+
 @reg("com.keepsolid.VpnUnlimited", LIGHT_BLUE_DEEP)
 def vpn_unlimited():
     shield = path("M32 12L47.5 17.5V29C47.5 38.5 41 45 32 48.5C23 45 16.5 38.5 16.5 29V17.5Z", INK,
                   f' stroke="{INK}" stroke-width="1.5" stroke-linejoin="round"')
     loops = ering(26.5, 29.5, 4.8, 7, HOLE, 3.2) + ering(37.5, 29.5, 4.8, 7, HOLE, 3.2)
     return shield + loops
+
 
 @reg("io.github.radiolamp.mangojuice", ORANGE_DEEP)
 def mangojuice():
@@ -78,6 +95,7 @@ def mangojuice():
     juice = ellipse(32, 19, 12.5, 3.6, ORANGE_SOFT)
     straw = line(36, 21, 43.5, 11.5, INK, 2.8)
     return saucer + glass + juice + straw
+
 
 @reg("hu.irl.cameractrls", BLUE_GREY_DARK)
 def cameractrls():
@@ -91,6 +109,7 @@ def cameractrls():
         blades += line(x0, y0, x1, y1, HOLE, 1.8, "butt")
     hexa = poly([pt(32, 30, 4.8, 60 * k - 90) for k in range(6)], RED_DEEP)
     return outer + lens + blades + hexa
+
 
 @reg("io.gitlab.theevilskeleton.Upscaler", TEAL_DARK)
 def upscaler():
@@ -106,6 +125,7 @@ def upscaler():
     divider = line(32, 16, 32, 44, INK, 2.2, "butt")
     return frame + petals + px + divider
 
+
 @reg("com.github.mtkennerly.ludusavi", PINK_LIGHT)
 def ludusavi():
     w = 3.6
@@ -113,6 +133,7 @@ def ludusavi():
     box = rrect(24.5, 12.5, 23.5, 23.5, 3, "none", f' stroke="{INK}" stroke-width="{w}"')
     dots = "".join(circle(x, y, 2.4, INK) for x in (31.5, 41) for y in (19.5, 29))
     return left + box + dots
+
 
 @reg("io.github.giantpinkrobots.flatsweep", RED_DEEP)
 def flatsweep():
@@ -125,6 +146,7 @@ def flatsweep():
            line(38.8, 36, 39, 41, INK, 1.2) + line(41.7, 36, 41.5, 41, INK, 1.2))
     return hexa + edges + can
 
+
 @reg("io.github.diegopvlk.Cine", CYAN_DEEP)
 def cine():
     body = rrect(14, 12, 36, 36, 6, INK)
@@ -132,6 +154,7 @@ def cine():
     screen = rrect(18.5, 21.5, 27, 22, 3, HOLE)
     play = poly([(28.5, 26.5), (28.5, 38.5), (38.5, 32.5)], INK, 2.5)
     return body + holes + screen + play
+
 
 @reg("dev.fredol.open-tv", BLUE_GREY_DARK)
 def open_tv():
@@ -145,6 +168,7 @@ def open_tv():
     legs = line(21, 46, 19, 49, INK, 2.6) + line(43, 46, 45, 49, INK, 2.6)
     return body + bars + knobs + legs
 
+
 @reg("nl.andreasknoben.Laser", BLUE_GREY_DARK)
 def laser():
     tab = rrect(27.5, 11, 9, 7, 2, INK)
@@ -152,6 +176,7 @@ def laser():
     groove = ring_e(32, 31, 7, BLUE_GREY_SOFT, 2.2)
     led = circle(45, 44, 3.2, RED)
     return tab + disc + groove + led
+
 
 @reg("io.gitlab.news_flash.NewsFlash", DEEP_ORANGE_DEEP)
 def newsflash():
@@ -161,11 +186,13 @@ def newsflash():
     band = f'<rect x="16" y="30" width="32" height="5" fill="{HOLE}"/>'
     return paper + head + lines + band
 
+
 @reg("com.github.KRTirtho.Spotube", INDIGO_DARK)
 def spotube():
     band = stroke("M17.5 35V30A14.5 14.5 0 0 1 46.5 30V35", INK, 3.6)
     cups = rrect(14, 31.5, 9, 15, 4, INK) + rrect(41, 31.5, 9, 15, 4, INK)
     return band + cups
+
 
 @reg("org.kde.koko", PINK_DEEP)
 def koko():
@@ -174,6 +201,7 @@ def koko():
     sun = circle(30, 31, 6.5, AMBER)
     hills = poly([(18, 43), (18, 36), (25, 31.5), (31, 36), (39, 26.5), (46, 33), (46, 43)], INK)
     return frame + sun + hills
+
 
 @reg("io.github.screwys.Rufin", DEEP_ORANGE_DEEP)
 def rufin():
@@ -184,6 +212,7 @@ def rufin():
     grille = rrect(19, 43, 26, 2.4, 1.2, HOLE)
     return base + vinyl + label + arm + grille
 
+
 @reg("com.bilingify.readest", ORANGE_DARK)
 def readest():
     left = path("M31 17C26 14 20.5 13.5 14.5 15.5V43C20.5 41 26 41.5 31 44.5Z", INK)
@@ -193,12 +222,14 @@ def readest():
     mark = poly([(38, 36), (38, 48), (40.5, 45.5), (43, 48), (43, 36)], DEEP_ORANGE_LIGHT, 1)
     return left + right + lines + mark
 
+
 @reg("com.github.k4zmu2a.spacecadetpinball", INDIGO_DARK)
 def spacecadet():
     shade = circle(32, 30, 16.5, BLUE_GREY_SOFT)
     ball = circle(30, 28, 14, INK)
     shine = ellipse(25.5, 22.5, 4, 2.6, BLUE_GREY_SOFT, -40)
     return shade + ball + shine
+
 
 @reg("no.bragefuglseth.Keypunch", AMBER_DARK)
 def keypunch():
@@ -209,6 +240,7 @@ def keypunch():
     y = stroke("M19 35.5L22.5 39.5L26 35.5M22.5 39.5V43.5", HOLE, 2.4)
     bolt = poly([(43.5, 34), (37.5, 40.5), (41.3, 40.5), (40, 45.5), (46, 38.5), (42, 38.5)], INK, 1)
     return keys + k + e + y + bolt
+
 
 @reg("io.github.wivrn.wivrn", TEAL)
 def wivrn():
@@ -221,6 +253,7 @@ def wivrn():
     mouth = stroke("M26.5 42C30 44.5 34 44.5 37.5 42", HOLE, 2)
     return spikes + head + headset + nostrils + mouth
 
+
 @reg("io.github.fastrizwaan.WineZGUI", RED_DARK)
 def winezgui():
     swirl = arc_b(32, 30, 16.5, 215, 145, INK, 3.4)
@@ -228,6 +261,7 @@ def winezgui():
     wine = path("M25.7 21.5H38.3C37.6 26 35.5 28.2 32 28.5C28.5 28.2 26.4 26 25.7 21.5Z", RED)
     stem = line(32, 29, 32, 40, INK, 2.6) + line(26.5, 41.5, 37.5, 41.5, INK, 2.8)
     return swirl + bowl + wine + stem
+
 
 @reg("org.luanti.luanti", BLUE_GREY)
 def luanti():
@@ -240,11 +274,13 @@ def luanti():
             poly([(22.5, 15.5), (27.5, 13), (27.5, 17.5), (22.5, 20)], BLUE_GREY_DEEP, 1))
     return left + right + top + pool + tree
 
+
 @reg("app.xmcl.voxelum", BLUE_GREY_DEEP)
 def voxelum():
     hexa = poly([pt(32, 30, 17.5, -90 + 60 * k) for k in range(6)], INK, 3)
     x = line(25, 20.5, 39, 39.5, HOLE, 5.5) + line(39, 20.5, 25, 39.5, HOLE, 3.6)
     return hexa + x
+
 
 @reg("org.fkoehler.KTailctl", BLUE_GREY_DARK)
 def ktailctl():
@@ -256,6 +292,7 @@ def ktailctl():
             out += rrect(16 + 11.5 * c, 14 + 11.5 * r, 9, 9, 2.5, fill)
     return out
 
+
 @reg("dev.goats.xivlauncher", BLUE_DARK)
 def xivlauncher():
     main = path("M13 47C24 42 36 31 46 12C40 29 30 41 13 47Z", INK)
@@ -263,6 +300,7 @@ def xivlauncher():
     loop2 = stroke("M33 28C37 22 42 17 46 15.5C43 21 40 27 40 32", INK, 2.6)
     tail = stroke("M15 34C19 32 23 31.5 27 32", INK, 2.4)
     return main + loop1 + loop2 + tail
+
 
 @reg("io.github.fastrizwaan.WineCharm", BLUE_GREY_DARK)
 def winecharm():
@@ -279,6 +317,7 @@ def winecharm():
     stem = line(32, 31.5, 32, 35, INK, 1.8) + line(29.5, 35.5, 34.5, 35.5, INK, 1.8)
     return out + bowl + stem
 
+
 @reg("io.github.TeamWheelWizard.WheelWizard", BLUE_GREY_DEEP)
 def wheelwizard():
     tyre = cut(cpath(32, 30, 17) + cpath(32, 30, 12.5), INK)
@@ -290,6 +329,7 @@ def wheelwizard():
         holes += ellipse(x, y, 2.6, 1.9, HOLE, a + 90)
     return tyre + rim + holes + circle(32, 30, 2.2, HOLE)
 
+
 @reg("com.usebruno.Bruno", BROWN_DARK)
 def bruno():
     ears = ellipse(18.5, 27, 5.5, 10.5, ORANGE_DEEP, 18) + ellipse(45.5, 27, 5.5, 10.5, ORANGE_DEEP, -18)
@@ -300,13 +340,17 @@ def bruno():
     mouth = stroke("M27 38.5C29 40.5 31 40.5 32 38.5C33 40.5 35 40.5 37 38.5", HOLE, 2)
     return ears + head + tongue + eyes + nose + mouth
 
+
+TTL_HAIR = path('M32 16C23 14 16 19 15.5 27C15 33 12 38 9.5 40.5C17 41 22 36 22.5 30C24 34 22.5 38 20 41C26 39 28 32 26.5 25C28 21 30 18 32 16Z', INK)
+
+
 @reg("app.twintaillauncher.ttl", DEEP_PURPLE_DEEP)
 def ttl():
     ring_ = arc_b(34, 31, 13, -50, 150, INK, 4.2)
     slash = path("M50 11L22 48L27.5 48L48.5 18Z", INK)
-    hair = path("M32 16C23 14 16 19 15.5 27C15 33 12 38 9.5 40.5C17 41 22 36 22.5 30"
-                "C24 34 22.5 38 20 41C26 39 28 32 26.5 25C28 21 30 18 32 16Z", INK)
+    hair = TTL_HAIR
     return ring_ + slash + hair
+
 
 @reg("org.equicord.equibop", BLUE_GREY_DEEP)
 def equibop():
@@ -317,6 +361,7 @@ def equibop():
     hub = circle(32, 30, 5.5, INK) + circle(32, 30, 2.4, HOLE)
     return outer + bar + hub
 
+
 @reg("org.cutwire.Drift", BLUE_GREY_DARK)
 def drift():
     y = AMBER_LIGHT
@@ -324,6 +369,7 @@ def drift():
     dots = "".join(circle(x, yy, r, y) for x, yy, r in
                    [(20, 23.5, 2.2), (14.5, 26.5, 1.8), (21, 30, 2.2), (15.5, 33.5, 1.8), (20, 36.5, 2.2)])
     return g(chev + dots, "rotate(-30 32 30) translate(-2.5 0)")
+
 
 @small("be.alexandervanhee.gradia")
 def gradia_s():
@@ -333,6 +379,7 @@ def gradia_s():
     card = rrect(20, 19, 24, 22, 4, INK)
     return corners + card + rrect(24, 23.5, 16, 4, 2, HOLE) + rrect(30, 32.5, 10, 5, 2.5, HOLE)
 
+
 @small("com.github.mtkennerly.ludusavi")
 def ludusavi_s():
     w = 4
@@ -341,10 +388,12 @@ def ludusavi_s():
     dots = "".join(circle(x, y, 2.8, INK) for x in (32, 41) for y in (19.5, 28.5))
     return left + box + dots
 
+
 @small("com.keepsolid.VpnUnlimited")
 def vpn_unlimited_s():
     shield = path("M32 12L47.5 17.5V29C47.5 38.5 41 45 32 48.5C23 45 16.5 38.5 16.5 29V17.5Z", INK)
     return shield + ering(26, 29.5, 4.5, 6.5, HOLE, 3.6) + ering(38, 29.5, 4.5, 6.5, HOLE, 3.6)
+
 
 @small("com.usebruno.Bruno")
 def bruno_s():
@@ -352,16 +401,19 @@ def bruno_s():
     head = circle(32, 30, 14, ORANGE_LIGHT)
     return ears + head + circle(26.5, 27, 2.5, HOLE) + circle(37.5, 27, 2.5, HOLE) + ellipse(32, 35, 4.5, 3.2, HOLE)
 
+
 @small("hu.irl.cameractrls")
 def cameractrls_s():
     outer = cut(cpath(32, 30, 17) + cpath(32, 30, 13), INK)
     return outer + circle(32, 30, 10.5, INK) + poly([pt(32, 30, 5.5, 60 * k - 90) for k in range(6)], RED_DEEP)
+
 
 @small("io.github.TeamWheelWizard.WheelWizard")
 def wheelwizard_s():
     tyre = cut(cpath(32, 30, 17) + cpath(32, 30, 12), INK)
     rim = cut(cpath(32, 30, 10) + cpath(32, 30, 4.5), INK)
     return tyre + rim + circle(32, 30, 2.2, INK)
+
 
 @small("io.github.giantpinkrobots.flatsweep")
 def flatsweep_s():
@@ -372,10 +424,12 @@ def flatsweep_s():
         edges += line(32, 30, x, y, HOLE, 3)
     return hexa + edges
 
+
 @small("io.github.tobagin.karere")
 def karere_s():
     bubble = circle(33, 28.5, 15.5, INK) + poly([(20, 35), (16, 47.5), (29, 42)], INK, 2)
     return bubble + stroke(spiral_b(33, 28.5, 1, 9, 1.6, 180), HOLE, 3.2)
+
 
 @small("io.gitlab.theevilskeleton.Upscaler")
 def upscaler_s():
@@ -386,6 +440,7 @@ def upscaler_s():
     right = f'<rect x="33" y="22" width="7" height="16" fill="{pink}"/>'
     return frame + left + right + line(32, 16, 32, 44, INK, 2.5, "butt")
 
+
 @small("no.bragefuglseth.Keypunch")
 def keypunch_s():
     keys = (rrect(14, 12, 17, 17, 4, INK) + rrect(33, 12, 17, 17, 4, INK) +
@@ -393,11 +448,13 @@ def keypunch_s():
     bolt = poly([(44, 33.5), (37.5, 41), (41.5, 41), (40, 46), (46.5, 38.5), (42.5, 38.5)], INK, 1)
     return keys + bolt
 
+
 @small("org.cutwire.Drift")
 def drift_s():
     y = AMBER_LIGHT
     chev = "".join(stroke(f"M{x} 20L{x + 8} 30L{x} 40", y, 6) for x in (22, 32, 42))
     return g(chev + circle(15, 30, 2.6, y), "rotate(-30 32 30) translate(-2 0)")
+
 
 @small("org.deskflow.deskflow")
 def deskflow_s():
@@ -405,6 +462,7 @@ def deskflow_s():
     for y in (18.5, 30, 41.5):
         out += stroke(f"M15 {y + 2}C20.5 {y - 4.5} 26 {y - 4.5} 32 {y}S43.5 {y + 4.5} 49 {y - 2}", INK, 4)
     return out
+
 
 @small("org.dupot.easyflatpak")
 def easyflatpak_s():
@@ -414,10 +472,10 @@ def easyflatpak_s():
     right = poly([(33.2, 32.3), (42, 27.5), (42, 37.5), (33.2, 42.5)], INK, 1)
     return out + top + left + right
 
+
 @small("app.twintaillauncher.ttl")
 def ttl_s():
     ring_ = arc_b(34, 31, 13, -50, 150, INK, 4.5)
     slash = path("M50 11L21 48L28 48L48.5 18Z", INK)
-    hair = path("M32 16C23 14 16 19 15.5 27C15 33 12 38 9.5 40.5C17 41 22 36 22.5 30"
-                "C24 34 22.5 38 20 41C26 39 28 32 26.5 25C28 21 30 18 32 16Z", INK)
+    hair = TTL_HAIR
     return ring_ + slash + hair

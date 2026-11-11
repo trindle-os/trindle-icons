@@ -6,10 +6,18 @@ The mark is drawn in INK (white, or near-black on pale tiles); HOLE is
 the tile colour showing through the mark; any other shade is another
 step from the same palette.
 """
-from lm import *
+from lm import (
+    AMBER_DEEP, BLUE, BLUE_DARK, BLUE_DEEP, BLUE_GREY, BLUE_GREY_DARK, BLUE_GREY_DEEP,
+    BLUE_GREY_LIGHT, BLUE_LIGHT, BLUE_SOFT, BROWN_SOFT, circle, cpath, cut, CX, CY, CYAN,
+    CYAN_DARK, CYAN_DEEP, CYAN_SOFT, DEEP_ORANGE, DEEP_PURPLE_DARK, DEEP_PURPLE_LIGHT, f, g,
+    GREY_DARK, GREY_DEEP, GREY_SOFT, HOLE, INDIGO, INDIGO_DARK, INDIGO_LIGHT, INDIGO_SOFT, INK,
+    LIGHT_BLUE, LIGHT_BLUE_DEEP, LIGHT_BLUE_SOFT, line, ORANGE, ORANGE_DARK, ORANGE_DEEP, path,
+    PINK, PINK_SOFT, poly, pt, PURPLE_DARK, RED, RED_DEEP, RED_LIGHT, rrect, stroke, TEAL,
+)
 from glyphs.kit import _gear_g, registry, _star_e
 
 ICONS, SMALL, reg, small = registry()
+
 
 def _arrow_arc(cx, cy, r, a0, a1, col, w, head=4.5):
     x0, y0 = pt(cx, cy, r, a0)
@@ -19,15 +27,18 @@ def _arrow_arc(cx, cy, r, a0, a1, col, w, head=4.5):
     b1, b2 = pt(cx, cy, r + head, a1 - 22), pt(cx, cy, r - head, a1 - 22)
     return arc + poly([tip, b1, b2], col, 1.5)
 
+
 @reg("noson", DEEP_ORANGE)
 def noson():
     return cut(cpath(CX, CY, 16.5) + cpath(CX, CY, 11), INK) + circle(CX, CY, 7.5, INK)
+
 
 @reg("nuclear", DEEP_PURPLE_LIGHT)
 def nuclear():
     return (poly([(15.5, 17), (30.5, 17), (23, 30.5)], INK, 2.5) +
             poly([(33.5, 17), (48.5, 17), (41, 30.5)], INK, 2.5) +
             poly([(24.5, 33), (39.5, 33), (32, 46.5)], INK, 2.5))
+
 
 @reg("nulloy", GREY_DARK)
 def nulloy():
@@ -37,11 +48,13 @@ def nulloy():
                             f"C47 {y + 3} 44 {y + 6} 38 {y + 5}Z", INK) for y in (26, 33, 40))
     return top + bottom + circle(43.5, 17.5, 4.3, INK) + feathers
 
+
 @reg("odio", PINK)
 def odio():
     hs = [8, 14, 22, 28, 18, 26, 14, 8]
     return "".join(line(18 + 4 * i, CY - h / 2, 18 + 4 * i, CY + h / 2, INK, 2.8)
                    for i, h in enumerate(hs))
+
 
 @reg("ocenaudio", AMBER_DEEP)
 def ocenaudio():
@@ -52,12 +65,14 @@ def ocenaudio():
     mouth = path("M25.5 34C29.5 32.5 34.5 32.5 38.5 34C38 40 35.5 43 32 43C28.5 43 26 40 25.5 34Z", HOLE)
     return band + cups + head + eyes + mouth
 
+
 @reg("olivia", DEEP_PURPLE_LIGHT)
 def olivia():
     band = stroke("M19.5 33V29A12.5 12.5 0 0 1 44.5 29V33", INK, 4)
     cups = rrect(14.5, 29, 10, 17, 4.5, INK) + rrect(39.5, 29, 10, 17, 4.5, INK)
     bars = rrect(20, 32.5, 2.6, 10, 1.3, HOLE) + rrect(41.4, 32.5, 2.6, 10, 1.3, HOLE)
     return band + cups + bars
+
 
 @reg("nostlan", PINK_SOFT)
 def nostlan():
@@ -66,11 +81,13 @@ def nostlan():
     inner = stroke("M38.5 24C33 22 25 23.5 23.5 29", INK, 2.6)
     return outer + right + inner + path("M32 28a6 3.6 0 1 0 0.01 0Z", INK)
 
+
 @reg("notable", ORANGE)
 def notable():
     n = poly([(17, 14), (24, 14), (40, 35), (40, 14), (47, 14), (47, 46), (40, 46), (24, 25), (24, 38)], INK, 2)
     tip = poly([(17, 38), (24, 38), (20.5, 47)], INK, 1.5)
     return n + tip + line(17, 14, 17, 38, INK, 2)
+
 
 @reg("notepadqq", BROWN_SOFT)
 def notepadqq():
@@ -80,17 +97,20 @@ def notepadqq():
                 + line(x + 2.7, 27.2, x + 2.7, 35, INK, 2.2) for x in (30.5, 39.5))
     return book + n + q
 
+
 @reg("novprog", INDIGO_LIGHT)
 def novprog():
     sheet = rrect(15, 13, 34, 34, 4, INK)
     bars = rrect(21, 26, 5.5, 16, 1.5, HOLE) + rrect(29.3, 32, 5.5, 10, 1.5, HOLE) + rrect(37.6, 19, 5.5, 23, 1.5, HOLE)
     return sheet + bars
 
+
 @reg("nozbe", BLUE_LIGHT)
 def nozbe():
     ring = f'<circle cx="31" cy="31" r="14.5" fill="none" stroke="{INK}" stroke-width="4.2"/>'
     tick = circle(31, 31, 6.5, INK)
     return ring + tick
+
 
 @reg("np2", GREY_DEEP)
 def np2():
@@ -101,6 +121,7 @@ def np2():
             poly([(29.5, 32), (34.5, 32), (32, 34.5)], HOLE, 1.2))
     return paws + head + face
 
+
 @reg("numptyphysics", RED_LIGHT)
 def numptyphysics():
     curve = stroke("M14.5 25C22 23 25 42 33 43C39 43.5 44 44 49 46", INK, 3.4)
@@ -108,12 +129,14 @@ def numptyphysics():
                       "C43.5 28.5 39 28 38.5 24.5C38 21.5 41 20 43 21.5", INK, 3.4)
     return curve + scribble
 
+
 @reg("nutstore", ORANGE_DEEP)
 def nutstore():
     cap = path("M15 27C15 19 22 15 32 15C42 15 49 19 49 27Z", INK, f' stroke="{INK}" stroke-width="2" stroke-linejoin="round"')
     stem = stroke("M32 15C33 13 35 12 37.5 11.5", INK, 3)
     body = path("M18.5 30.5H45.5C45.5 40 40 46 32 48.5C24 46 18.5 40 18.5 30.5Z", INK)
     return cap + stem + body
+
 
 @reg("nutty", TEAL)
 def nutty():
@@ -124,6 +147,7 @@ def nutty():
     i = rrect(40.8, 38.5, 2.4, 6.5, 1.2, HOLE) + circle(42, 35.5, 1.5, HOLE)
     return globe + land + badge + i
 
+
 @reg("nz.scuttlebutt.Patchwork", INDIGO)
 def patchwork():
     stalks = line(24, 22, 22, 12.5, INK, 2.6) + line(30, 21, 31, 12, INK, 2.6)
@@ -133,9 +157,11 @@ def patchwork():
     horn = poly([(44, 29), (50, 26.5), (47, 31.5)], INK, 1.5)
     return stalks + body + horn + shell + patches
 
+
 @reg("nsight", CYAN_DEEP)
 def nsight():
     return circle(25, 30, 14, CYAN_DARK) + circle(36, 30, 14.5, HOLE) + circle(36, 30, 13, INK)
+
 
 @reg("nvidia", BLUE_GREY_LIGHT)
 def nvidia():
@@ -145,6 +171,7 @@ def nvidia():
              line(34, 18.5, 34, 22, HOLE, 2.2) + line(34, 38.5, 34, 41.5, HOLE, 2.2))
     return eye + swirl
 
+
 @reg("nvim", GREY_DEEP)
 def nvim():
     left = poly([(16, 19), (23.5, 12), (23.5, 48), (16, 41)], GREY_SOFT, 1.5)
@@ -152,11 +179,13 @@ def nvim():
     right = poly([(40.5, 12), (48, 19), (48, 41), (40.5, 48)], INK, 1.5)
     return left + diag + right
 
+
 @reg("nvtop", GREY_DARK)
 def nvtop():
     box = (f'<rect x="15.5" y="13.5" width="33" height="33" rx="7" fill="none" '
            f'stroke="{INK}" stroke-width="3.6"/>')
     return box + stroke("M21.5 37V23L28 37V23", INK, 3) + stroke("M31 23L36.5 37L42.5 23", INK, 3)
+
 
 @reg("nvvp", CYAN_DARK)
 def nvvp():
@@ -164,10 +193,12 @@ def nvvp():
     return "".join(rrect(16 + c * 11.5, 14 + r * 11.5, 9, 9, 2, cols[r][c])
                    for r in range(3) for c in range(3))
 
+
 @reg("nwg-clipman", GREY_DEEP)
 def nwg_clipman():
     clip = stroke("M36.5 23V40A5.5 5.5 0 0 1 25.5 40V17.5A4.7 4.7 0 0 1 34.9 17.5V37", INK, 3.4)
     return g(clip, "rotate(40 31 29)")
+
 
 @reg("nwg-icon-picker", BLUE_GREY_DEEP)
 def nwg_icon_picker():
@@ -177,9 +208,11 @@ def nwg_icon_picker():
     arrow = poly([(28, 29), (47, 37), (39.5, 39.5), (36, 47)], INK, 2.5)
     return star + diamond + square + arrow
 
+
 @reg("nwg-panel", ORANGE_DEEP)
 def nwg_panel():
     return stroke("M23 42V19M23 29C23 23.5 26.5 19.5 32 19.5C37.5 19.5 41 23.5 41 29V42", INK, 7)
+
 
 @reg("nwg-readme-browser", LIGHT_BLUE_DEEP)
 def nwg_readme():
@@ -187,16 +220,19 @@ def nwg_readme():
     fold = path("M36 11V17A3 3 0 0 0 39 20H45Z", LIGHT_BLUE_SOFT)
     return sheet + fold + rrect(29, 21, 5, 14, 2.5, HOLE) + circle(31.5, 40.5, 2.8, HOLE)
 
+
 @reg("nwg-shell", ORANGE_DEEP)
 def nwg_shell():
     diamond = g(rrect(17.5, 15.5, 29, 29, 6, INK), "rotate(45 32 30)")
     return diamond + stroke("M37.5 20.5L26.5 27L37.5 33L26.5 39.5", HOLE, 3.8)
+
 
 @reg("nwg-shell-config", ORANGE_DEEP)
 def nwg_shell_config():
     on = rrect(15, 14, 34, 13, 6.5, INK) + circle(42.5, 20.5, 4.5, HOLE)
     off = rrect(15, 33, 34, 13, 6.5, ORANGE_DARK) + circle(21.5, 39.5, 4.5, INK)
     return on + off
+
 
 @reg("nsm-legacy-gui", BLUE_GREY)
 def nsm_legacy():
@@ -205,11 +241,13 @@ def nsm_legacy():
                    "C27.5 30.5 36.5 29 36.5 34.2C36.5 36.6 34.5 38 32 38C30 38 28.5 37.2 27.5 35.5", INK, 3.6) +
             stroke("M40.5 38V22L45 31L49.5 22V38", INK, 3.6))
 
+
 @reg("nsm-proxy", BLUE_GREY)
 def nsm_proxy():
     return (stroke("M15 38V22H19.5A4.5 4.5 0 0 1 19.5 31H15", INK, 3.6) +
             stroke("M28 38V22H32.2A4.3 4.3 0 0 1 32.2 30.6H28M32 30.6L36.5 38", INK, 3.6) +
             stroke("M40.5 22L49.5 38M49.5 22L40.5 38", INK, 3.6))
+
 
 @reg("null_team-48", LIGHT_BLUE)
 def null_team():
@@ -219,15 +257,18 @@ def null_team():
                  "C40.7 36 40.3 37 39 37.5C34.5 39 24.5 29 26 24.5Z", HOLE)
     return bubble + g(phone, "translate(32.5 29) scale(1.25) translate(-33 -30.5)")
 
+
 @reg("nym-vpn-app", INDIGO_SOFT)
 def nym_vpn():
     return (rrect(16, 14, 32, 32, 6, INK) + rrect(23, 20.5, 5, 19, 1, HOLE) +
             rrect(36, 20.5, 5, 19, 1, HOLE) + poly([(23, 20.5), (28, 20.5), (41, 39.5), (36, 39.5)], HOLE))
 
+
 @reg("obconf-qt", BLUE_DEEP)
 def obconf():
     win = rrect(15, 13, 34, 34, 4.5, INK) + rrect(15, 20.5, 34, 2.4, 0, HOLE)
     return win + _gear_g(32, 34.5, 8.5, 6.2, 8, HOLE) + circle(32, 34.5, 2.8, INK)
+
 
 @reg("obdautodoctor", BLUE_GREY_DARK)
 def obdautodoctor():
@@ -238,6 +279,7 @@ def obdautodoctor():
     bolt = poly([(35, 24), (27, 33), (32, 33), (29, 40.5), (38.5, 30), (33.5, 30), (37, 24)], HOLE, 1)
     return engine + bolt
 
+
 @reg("ocaml", ORANGE_DEEP)
 def ocaml():
     body = path("M15 31C15 25 18 18.5 22.5 18.5C26 18.5 26 24.5 28 24.5C30 24.5 30 17.5 34 17.5"
@@ -247,6 +289,7 @@ def ocaml():
             line(35, 34, 34, 46, INK, 3) + line(40.5, 33, 41.5, 46, INK, 3))
     return body + legs + line(15.5, 29, 14, 37, INK, 2.2)
 
+
 @reg("ocrfeeder", BLUE_DEEP)
 def ocrfeeder():
     lens = f'<circle cx="28.5" cy="27" r="11" fill="none" stroke="{INK}" stroke-width="4.4"/>'
@@ -254,11 +297,13 @@ def ocrfeeder():
     a = stroke("M24.5 32.5L28.5 21.5L32.5 32.5M26 28.5H31", INK, 2.6)
     return lens + handle + a
 
+
 @reg("ocsstore", INDIGO_DARK)
 def ocsstore():
     segs = "".join(g(stroke("M24.5 17A14.5 14.5 0 0 1 39.5 17", INK, 5.5), f"rotate({90 * k} 32 30)")
                    for k in range(4))
     return segs + rrect(24, 22, 16, 16, 3, INDIGO_SOFT)
+
 
 @reg("octave", BLUE_DEEP)
 def octave():
@@ -266,6 +311,7 @@ def octave():
     sq = [(19, 30, 11), (41.2, 20.8, 7.5), (41.2, 39.2, 7.5)]
     return ring + "".join(rrect(x - s / 2, y - s / 2, s, s, 2, INK,
                                 f' stroke="{HOLE}" stroke-width="2.2"') for x, y, s in sq)
+
 
 @reg("octodad-dadliest-catch", AMBER_DEEP)
 def octodad():
@@ -276,6 +322,7 @@ def octodad():
     tash = stroke("M22 35C26 38 30 37 32 34C34 37 38 38 42 35", HOLE, 2.6)
     return head + eyes + tash
 
+
 @reg("octopi", ORANGE_DEEP)
 def octopi():
     body = path("M18 30A14 14 0 0 1 46 30V45L42 41.5L38 45L34 41.5L30 45L26 41.5L22 45L18 41.5Z", INK,
@@ -283,6 +330,7 @@ def octopi():
     eyes = (circle(25.5, 29, 4.5, HOLE) + circle(38.5, 29, 4.5, HOLE) +
             circle(26.5, 29, 2, INK) + circle(39.5, 29, 2, INK))
     return body + eyes
+
 
 @reg("offensive-security", RED_DEEP)
 def offsec():
@@ -292,12 +340,14 @@ def offsec():
     floor = poly([(21, 42.5), (43, 42.5), (49, 48), (15, 48)], INK, 1.5)
     return door + man + floor
 
+
 @reg("office-address-book", BLUE)
 def address_book():
     ring = f'<circle cx="31.5" cy="30" r="5" fill="none" stroke="{INK}" stroke-width="3.6"/>'
     at = stroke("M36.5 24.5V32.5C36.5 36 41 36.5 43.5 33.5C45.5 30.5 45.5 26.5 44 23.5"
                 "C41 16.5 33.5 14 26.5 16C19 18.5 15.5 26 17.5 34C20 42.5 30 46.5 39 43", INK, 3.6)
     return ring + at
+
 
 @reg("office-calendar", RED)
 def office_calendar():
@@ -306,6 +356,7 @@ def office_calendar():
     cells = "".join(rrect(18.5 + c * 7, 27 + r * 6.5, 5, 4.5, 1, HOLE)
                     for r in range(3) for c in range(4) if (r, c) != (1, 2))
     return page + rings + cells + circle(34, 35.3, 2.8, HOLE)
+
 
 @reg("okteta", BLUE_GREY_DEEP)
 def okteta():
@@ -322,12 +373,14 @@ def okteta():
     pencil = line(37.5, 43.5, 44, 37, INK, 3)
     return sheet + bits + badge + pencil
 
+
 @reg("okular", BLUE_DEEP)
 def okular():
     page = rrect(19, 12, 26, 36, 3.5, INK)
     lines = "".join(rrect(23, y, w, 2.4, 1.2, HOLE) for y, w in [(18, 18), (23, 18), (28, 14), (33, 18)])
     arc = stroke("M14.5 44C21 32 32 21 48 16", HOLE, 7) + stroke("M14.5 44C21 32 32 21 48 16", BLUE_SOFT, 3.4)
     return page + lines + arc
+
 
 @reg("ollydbg", RED_DEEP)
 def ollydbg():
@@ -338,10 +391,12 @@ def ollydbg():
         out += line(CX, CY, x, y, INK, w) + circle(x, y, w * .75, INK)
     return out
 
+
 @reg("olympus", DEEP_PURPLE_DARK)
 def olympus():
     mount = poly([(14.5, 44), (32, 15), (49.5, 44)], INK, 3.5)
     return mount + _gear_g(32, 35.5, 6.8, 5, 8, HOLE) + circle(32, 35.5, 2.2, INK)
+
 
 @reg("omnetpp", CYAN_DARK)
 def omnetpp():
@@ -349,6 +404,7 @@ def omnetpp():
     trail = stroke("M16.5 45C27 40 35 31 43 21", HOLE, 2.6)
     ball = circle(44.5, 17.5, 7, HOLE) + circle(44.5, 17.5, 5.5, INK)
     return board + trail + ball
+
 
 @reg("omnishell", BLUE_GREY)
 def omnishell():
@@ -358,6 +414,7 @@ def omnishell():
             line(21.5, 24, 42.5, 24, INK, 3) + line(21.5, 36, 42.5, 36, INK, 3))
     return rings + bars
 
+
 @reg("onboard", BLUE)
 def onboard():
     keys = (rrect(15, 13, 15, 15, 3, INK) + rrect(33, 13, 15, 15, 3, BLUE_DARK) +
@@ -366,14 +423,17 @@ def onboard():
     b = stroke("M37.5 33.5V43.5H41.5A2.6 2.6 0 0 0 41.5 38.3H37.5M37.5 38.3H41A2.4 2.4 0 0 0 41 33.5H37.5", HOLE, 2.4)
     return keys + o + b
 
+
 @reg("onionshare80", PURPLE_DARK)
 def onionshare():
     return (circle(CX, CY, 16.5, INK) + _arrow_arc(CX, CY, 10, 195, 340, HOLE, 3.8, 5) +
             _arrow_arc(CX, CY, 10, 15, 160, HOLE, 3.8, 5))
 
+
 @small("notepadqq")
 def notepadqq_s():
     return rrect(16, 12, 32, 36, 4, INK) + rrect(16, 24, 32, 11, 0, HOLE)
+
 
 @small("nsm-legacy-gui")
 def nsm_legacy_s():
@@ -381,10 +441,12 @@ def nsm_legacy_s():
             stroke("M47 23C45.5 20.8 43.5 20 41 20C37.5 20 35.5 22 35.5 25"
                    "C35.5 31 47 29 47 35C47 38.2 44.5 40 41 40C38.5 40 36.5 39 35 37", INK, 4.4))
 
+
 @small("nsm-proxy")
 def nsm_proxy_s():
     return (stroke("M17 40V20H23A5.5 5.5 0 0 1 23 31H17", INK, 4.4) +
             stroke("M34.5 40V20H40.5A5.3 5.3 0 0 1 40.5 30.6H34.5M40 30.6L46 40", INK, 4.4))
+
 
 @small("okteta")
 def okteta_s():
@@ -392,11 +454,13 @@ def okteta_s():
     bits = "".join(rrect(20.5 + c * 8, 17 + r * 8, 3, 5, 1.5, HOLE) for r in range(3) for c in range(2))
     return sheet + bits + circle(41, 40, 10, HOLE) + circle(41, 40, 8.5, RED)
 
+
 @small("office-calendar")
 def office_calendar_s():
     page = rrect(15, 15, 34, 32, 4.5, INK) + rrect(15, 21.5, 34, 3, 0, HOLE)
     cells = "".join(rrect(19 + c * 9.5, 28 + r * 8, 7, 5.5, 1.2, HOLE) for r in range(2) for c in range(3))
     return page + cells
+
 
 @small("okular")
 def okular_s():
@@ -405,10 +469,12 @@ def okular_s():
     arc = stroke("M14.5 44C21 32 32 21 48 16", HOLE, 8) + stroke("M14.5 44C21 32 32 21 48 16", BLUE_SOFT, 4)
     return page + lines + arc
 
+
 @small("nvvp")
 def nvvp_s():
     cols = [[INK, CYAN_SOFT], [INK, CYAN]]
     return "".join(rrect(15 + c * 18, 13 + r * 18, 16, 16, 3, cols[r][c]) for r in range(2) for c in range(2))
+
 
 @small("nvtop")
 def nvtop_s():
@@ -416,20 +482,24 @@ def nvtop_s():
            f'stroke="{INK}" stroke-width="3.4"/>')
     return box + stroke("M24.5 39V21L39.5 39V21", INK, 4)
 
+
 @small("nwg-icon-picker")
 def nwg_icon_picker_s():
     return rrect(15, 13, 13, 13, 3, INK) + poly([(26, 26), (48, 35.5), (39, 38.5), (35, 48)], INK, 3)
+
 
 @small("ocrfeeder")
 def ocrfeeder_s():
     lens = f'<circle cx="28" cy="26.5" r="10.5" fill="none" stroke="{INK}" stroke-width="5"/>'
     return lens + line(36.5, 35, 46, 44.5, INK, 7)
 
+
 @small("nulloy")
 def nulloy_s():
     top = path("M14 13C22 12 32 14 39 19C37.5 25 33 29.5 26.5 30.5C21 30.5 16.5 26.5 15 21Z", INK)
     bottom = path("M14 48C16 40 21 34.5 28 33C32 32.5 35.5 33.5 37.5 35.5C34 43 26.5 47 14 48Z", INK)
     return top + bottom + circle(44, 18, 5, INK) + path("M39 37C41 31 45 28 50 27C49.5 33 45.5 37 39 37Z", INK)
+
 
 @small("ocenaudio")
 def ocenaudio_s():
@@ -439,16 +509,19 @@ def ocenaudio_s():
     mouth = path("M25 32C29.5 30.5 34.5 30.5 39 32C38.5 39.5 35.5 43 32 43C28.5 43 25.5 39.5 25 32Z", HOLE)
     return band + cups + head + mouth
 
+
 @small("odio")
 def odio_s():
     return "".join(line(17 + 7.5 * i, CY - h / 2, 17 + 7.5 * i, CY + h / 2, INK, 3.6)
                    for i, h in enumerate([10, 20, 28, 20, 10]))
+
 
 @small("nuclear")
 def nuclear_s():
     return (poly([(14.5, 16), (30, 16), (22.25, 29.5)], INK, 2) +
             poly([(34, 16), (49.5, 16), (41.75, 29.5)], INK, 2) +
             poly([(24.25, 33), (39.75, 33), (32, 46.5)], INK, 2))
+
 
 @small("omnishell")
 def omnishell_s():
@@ -457,6 +530,7 @@ def omnishell_s():
     bars = (line(25, 18, 25, 42, INK, 2.6) + line(39, 18, 39, 42, INK, 2.6) +
             line(20, 23, 44, 23, INK, 2.6) + line(20, 37, 44, 37, INK, 2.6))
     return rings + bars
+
 
 @small("onionshare80")
 def onionshare_s():

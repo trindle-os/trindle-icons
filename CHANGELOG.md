@@ -10,6 +10,8 @@ Newest first. Dates are when each version was built.
 - Green icons and ticks removed from the app icons, and the Folders app gets its own Forget icon.
 - Trindle Square removed: Trindle Circle is the only theme, and the build makes only it.
 - Docs and comments say one theme and one package; the README names the publish settings and a test command.
+- Review fixes, all SVGs byte-identical: the build is made in a staging folder and moved into place; publish.sh keeps no secret file, never replaces a published package and uploads the index; icons that share a drawing share one function; batch functions are named after their apps; imports name what they use; palette names replace raw colours; a test parses every drawing.
+- The README and symbolic/LICENSE say the original designs behind the icons remain the property of their owners.
 
 ## 1.4.6 (2026-10-19)
 

@@ -1,17 +1,23 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-"""Batch 59: qphotorec to radeon-profile.
-
-Same rules as batch01: tile is the palette step nearest the brand colour,
-the mark is INK, HOLE is the tile showing through, extra shades come
-from the palette.
-"""
-from lm import *
+"""Batch 59: qphotorec to radeon-profile."""
+from lm import (
+    AMBER, AMBER_DARK, AMBER_LIGHT, BLUE, BLUE_DARK, BLUE_DEEP, BLUE_GREY, BLUE_GREY_DARK,
+    BLUE_GREY_DEEP, BLUE_GREY_LIGHT, BLUE_GREY_SOFT, BLUE_LIGHT, BLUE_SOFT, BROWN_LIGHT,
+    BROWN_SOFT, circle, cut, CYAN_DEEP, DEEP_PURPLE_DARK, DEEP_PURPLE_DEEP, DEEP_PURPLE_LIGHT,
+    DEEP_PURPLE_SOFT, f, g, GREY_DARK, GREY_DEEP, GREY_SOFT, HOLE, INDIGO, INDIGO_DARK,
+    INDIGO_DEEP, INDIGO_SOFT, INK, LIGHT_BLUE, LIGHT_BLUE_DARK, LIGHT_BLUE_DEEP,
+    LIGHT_BLUE_LIGHT, LIGHT_BLUE_SOFT, line, ORANGE_DEEP, path, PINK, PINK_SOFT, poly, pt,
+    PURPLE_SOFT, RED, RED_DARK, RED_DEEP, RED_LIGHT, rrect, stroke, TEAL_DEEP, TEAL_LIGHT,
+    TEAL_SOFT,
+)
 from glyphs.kit import arc, badge, ell_b, ering_b, gear_i, registry, ring_b, shrink
 
 ICONS, SMALL, reg, small = registry()
 
+
 def _qt_badge():
     return poly([(20.5, 16), (49, 16), (49, 38.5), (43.5, 44), (15, 44), (15, 21.5)], INK, 3)
+
 
 def _qt_letters(col, w=3.4):
     q = ering_b(24.5, 30, 5.2, 7.5, col, w) + line(27, 35, 30.5, 39.5, col, w)
@@ -19,17 +25,21 @@ def _qt_letters(col, w=3.4):
          line(34.5, 25.5, 43, 25.5, col, w))
     return q + t
 
+
 @reg("qt", BROWN_SOFT)
 def qt():
     return _qt_badge() + _qt_letters(HOLE)
+
 
 @reg("qtassistant", AMBER_DARK)
 def qtassistant():
     return _qt_badge() + stroke("M25 39.5L32 20.5L39 39.5", HOLE, 3.8) + line(27.8, 33, 36.2, 33, HOLE, 3.4)
 
+
 @reg("qtconfig", GREY_DEEP)
 def qtconfig():
     return gear_i(32, 30, 14.5, INK, None, 8) + shrink(_qt_letters(HOLE, 3.6), .78, 32.5, 30)
+
 
 @reg("qtcreator", INDIGO)
 def qtcreator():
@@ -38,19 +48,23 @@ def qtcreator():
                "C41.3 39 42.8 38.2 44 36.5", HOLE, 3.4)
     return _qt_badge() + q + c
 
+
 @reg("qtdbusviewer", DEEP_PURPLE_LIGHT)
 def qtdbusviewer():
     d = stroke("M19 21.5V38.5H21.5C25.5 38.5 28 35 28 30C28 25 25.5 21.5 21.5 21.5Z", HOLE, 3.4)
     v = stroke("M33 21.5L38.5 38.5L44 21.5", HOLE, 3.4)
     return _qt_badge() + d + v
 
+
 @reg("qtdesigner", LIGHT_BLUE_DEEP)
 def qtdesigner():
     return _qt_badge() + stroke("M27 20.5V39.5H30C35 39.5 38 35.5 38 30C38 24.5 35 20.5 30 20.5Z", HOLE, 3.8)
 
+
 @reg("qtlinguist", BLUE_GREY_LIGHT)
 def qtlinguist():
     return _qt_badge() + stroke("M28 20.5V39.5H37.5", HOLE, 3.8)
+
 
 def _qr():
     def finder(x, y):
@@ -61,13 +75,12 @@ def _qr():
               (29, 37), (37, 35.5), (44, 42), (37, 43), (29, 43.5)]
     return out + "".join(rrect(x, y, 5, 5, 0.8, INK) for x, y in blocks)
 
+
+@reg("qtqr", RED_DARK)
 @reg("qreator", RED_DEEP)
 def qreator():
     return _qr()
 
-@reg("qtqr", RED_DARK)
-def qtqr():
-    return _qr()
 
 @reg("qphotorec", BLUE_GREY_DARK)
 def qphotorec():
@@ -77,11 +90,13 @@ def qphotorec():
     lens = circle(32, 30, 9, HOLE) + circle(34.2, 27.8, 2.6, INK) + circle(29.8, 32.2, 1.6, INK)
     return quads + seams + lens
 
+
 @reg("qprompt", BLUE_GREY_DEEP)
 def qprompt():
     wedge = poly([(14.5, 20), (40, 20), (31, 41)], INK, 3)
     pill = rrect(38, 26.5, 12, 7, 3.5, LIGHT_BLUE_LIGHT)
     return wedge + pill
+
 
 @reg("qqmusic", AMBER_DARK)
 def qqmusic():
@@ -90,15 +105,18 @@ def qqmusic():
     flag = stroke("M31.5 15C35 15.5 38.5 17.5 40.5 20.5C42.5 24 42 28 39 31.5", INK, 4)
     return head + stem + flag
 
+
 @reg("qsampler", DEEP_PURPLE_DARK)
 def qsampler():
     orbit = stroke(arc(32, 30, 16, 200, 330), DEEP_PURPLE_SOFT, 2.4)
     s = stroke("M42 20.5C37 16.5 23 17 22.5 23.5C22 30 42 28 42 35.5C42 42.5 28.5 43.5 21 39", INK, 5.4)
     return orbit + s
 
+
 @reg("qsynth", ORANGE_DEEP)
 def qsynth():
     return path("M32 11.5C37 20 44 27.5 44 35A12 12 0 0 1 20 35C20 27.5 27 20 32 11.5Z", INK)
+
 
 @reg("qtemu", BLUE_DEEP)
 def qtemu():
@@ -107,12 +125,14 @@ def qtemu():
     stand = rrect(19, 43.5, 18, 4, 2, INK)
     return tower + frame + stand
 
+
 @reg("qtfm", LIGHT_BLUE_DEEP)
 def qtfm():
     quads = "".join(rrect(x, y, 16.5, 16.5, 3, INK) for x in (14.5, 33) for y in (12, 30.5))
     lid = path("M21 23.5A2 2 0 0 1 23 21.5H28L30.5 24H41A2 2 0 0 1 43 26V38A2 2 0 0 1 41 40H23"
                "A2 2 0 0 1 21 38Z", INK, f' stroke="{HOLE}" stroke-width="2.6" stroke-linejoin="round"')
     return quads + lid
+
 
 @reg("qtikz", GREY_DEEP)
 def qtikz():
@@ -123,11 +143,13 @@ def qtikz():
              "rotate(45 42.3 40)"))
     return page + curve + pen
 
+
 @reg("qtodotxt", GREY_DARK)
 def qtodotxt():
     q = ring_b(30.5, 28.5, 12.5, INK, 4.6) + line(39, 37, 46, 44, INK, 5)
     tick = stroke("M24 25H37M24 32H33", GREY_SOFT, 4.4)
     return q + tick
+
 
 @reg("qtpass-icon", BLUE_DEEP)
 def qtpass():
@@ -137,12 +159,14 @@ def qtpass():
     hole = circle(32, 31.5, 3, HOLE) + poly([(30.8, 32), (33.2, 32), (34, 39), (30, 39)], HOLE, 1)
     return shackle + heart + hole
 
+
 @reg("qtractor", BLUE_GREY_DARK)
 def qtractor():
     disc = ring_b(28.5, 30, 13, INK, 3.6) + circle(28.5, 30, 5.5, RED_LIGHT) + circle(28.5, 30, 2, INK)
     horn = poly([(31, 36.5), (46, 14), (48.5, 40)], AMBER, 2.5)
     bell = circle(45.5, 40.5, 4.2, AMBER) + circle(45.5, 40.5, 1.8, HOLE)
     return disc + horn + bell
+
 
 @reg("qtscrcpy", TEAL_DEEP)
 def qtscrcpy():
@@ -152,6 +176,7 @@ def qtscrcpy():
     base = rrect(14.5, 38.5, 35, 4, 2, INK) + rrect(25, 44, 14, 3.6, 1.8, TEAL_SOFT)
     return head + ant + eyes + base
 
+
 @reg("qtwebflix", BLUE_GREY_DARK)
 def qtwebflix():
     ears = circle(26, 13.5, 2.6, INK) + circle(38, 13.5, 2.6, INK) + line(26, 13.5, 29, 18, INK, 2.2) + line(38, 13.5, 35, 18, INK, 2.2)
@@ -159,10 +184,12 @@ def qtwebflix():
     w = stroke("M22 26L26 38L32 28.5L38 38L42 26", TEAL_LIGHT, 3.4)
     return ears + tv + w
 
+
 @reg("quadrapassel", RED)
 def quadrapassel():
     return "".join(rrect(x, y, 10, 10, 2.5, INK) for x, y in
                    [(21, 12.5), (21, 24.5), (21, 36.5), (33, 36.5)])
+
 
 def _quake(nails=1):
     ringp = stroke(arc(32, 25, 13, 300, 240), INK, 4.2)
@@ -177,17 +204,21 @@ def _quake(nails=1):
         out += rrect(24.5, 30.5, 15, 3, 1.5, INK)
     return out
 
+
 @reg("quake", ORANGE_DEEP)
 def quake():
     return _quake(1)
+
 
 @reg("quake2", INDIGO_SOFT)
 def quake2():
     return _quake(2)
 
+
 @reg("quake4", LIGHT_BLUE_DARK)
 def quake4():
     return circle(32, 30, 17, INK) + g(_quake(1).replace('"INK"', '"HOLE"'), "translate(32 30) scale(.8) translate(-32 -30)")
+
 
 def _q3(side, mid):
     horns = (path("M28.5 40C19.5 40 13.5 33.5 14 22.5C16.5 30 21.5 34 28.5 34.5Z", side) +
@@ -197,13 +228,16 @@ def _q3(side, mid):
     spike = poly([(32, 11.5), (34.8, 30), (32, 49), (29.2, 30)], mid, 1)
     return horns + prongs + spike
 
+
 @reg("quake3", RED_DEEP)
 def quake3():
     return _q3(INK, INK)
 
+
 @reg("quake3-team-arena", INDIGO_DEEP)
 def quake3_ta():
     return _q3(INK, PURPLE_SOFT)
+
 
 @reg("quanta", BLUE_DEEP)
 def quanta():
@@ -213,9 +247,11 @@ def quanta():
     handle = line(39, 37, 47, 45, INK, 5.2)
     return lens + land + handle
 
+
 @reg("quassel", LIGHT_BLUE_DEEP)
 def quassel():
     return circle(30.5, 29, 15.5, INK) + circle(37.5, 34, 7.5, HOLE)
+
 
 @reg("quaternion", BLUE)
 def quaternion():
@@ -224,6 +260,7 @@ def quaternion():
     a2 = stroke(arc(31, 29, 9, 20, 150), HOLE, 3) + poly([pt(31, 29, 9, 165), pt(31, 29, 12.5, 142), pt(31, 29, 5.5, 142)], HOLE, 1)
     return bubble + a1 + a2
 
+
 @reg("qubic", BLUE_GREY)
 def qubic():
     q = ring_b(22.5, 29, 6.5, INK, 4.6) + line(25.5, 33, 30, 39.5, INK, 4.6)
@@ -231,11 +268,13 @@ def qubic():
                "C45.5 27.5 43.5 30 40.5 30", INK, 4.4)
     return q + b
 
+
 @reg("quickaccess", CYAN_DEEP)
 def quickaccess():
     q = ring_b(30.5, 28.5, 14, INK, 4.2) + line(39.5, 38, 47, 45.5, INK, 5)
     a = ring_b(30, 30, 4.8, INK, 3.2) + line(34.8, 25, 34.8, 35.5, INK, 3.2)
     return q + a
+
 
 @reg("quickgui_512", PINK)
 def quickgui():
@@ -246,14 +285,17 @@ def quickgui():
     eye = circle(37.5, 19.5, 1.3, HOLE)
     return lines + neck + head + eye
 
+
 @reg("quickhash", CYAN_DEEP)
 def quickhash():
     return (line(27.5, 15, 24.5, 45, INK, 4.4) + line(39.5, 15, 36.5, 45, INK, 4.4) +
             line(17, 24.5, 47, 24.5, INK, 4.4) + line(16, 35.5, 46, 35.5, INK, 4.4))
 
+
 @reg("quimup", LIGHT_BLUE_DARK)
 def quimup():
     return poly([(40, 13), (20.5, 32), (31, 32), (24, 47.5), (45, 27), (34, 27)], INK, 2.5)
+
 
 @reg("quiterss", DEEP_PURPLE_SOFT)
 def quiterss():
@@ -262,12 +304,14 @@ def quiterss():
     star = badge(42, 18, AMBER, 7.5) + poly([pt(42, 18.4, 5 if k % 2 == 0 else 2.2, -90 + 36 * k) for k in range(10)], INK, 1)
     return rss + star
 
+
 @reg("quodlibet", BLUE_DEEP)
 def quodlibet():
     head = ell_b(28.5, 18.5, 4.8, 4, INK, ' transform="rotate(-20 28.5 18.5)"')
     stem = line(32, 18, 32, 46, INK, 3.4)
     flag = stroke("M32 26C38 30 41 36 37 44", INK, 3.4)
     return head + stem + flag
+
 
 @reg("qupzilla", LIGHT_BLUE_DEEP)
 def qupzilla():
@@ -276,12 +320,14 @@ def qupzilla():
     low = path("M16.5 40C24 36 36 35 47 37C44 42 39 45.5 32 46.5C24 46.5 19.5 43.5 16.5 40Z", LIGHT_BLUE_SOFT)
     return disc + wave + low
 
+
 @reg("qutebrowser", BLUE_DARK)
 def qutebrowser():
     disc = circle(32, 30, 16.5, INK)
     q = ring_b(25, 26, 5, HOLE, 3.2) + line(30, 21, 30, 43, HOLE, 3.2)
     b = ring_b(39, 34, 5, HOLE, 3.2) + line(34, 17, 34, 39, HOLE, 3.2)
     return disc + q + b
+
 
 @reg("qutim", LIGHT_BLUE_DEEP)
 def qutim():
@@ -293,6 +339,7 @@ def qutim():
     eye = circle(27, 27.5, 1.6, HOLE)
     return face + flames + eye
 
+
 @reg("qv2ray", DEEP_PURPLE_DEEP)
 def qv2ray():
     def swoosh(dy, col):
@@ -300,10 +347,12 @@ def qv2ray():
                     f"C38 {20.5 + dy} 30 {24 + dy} 25 {33 + dy}C22 {29 + dy} 19 {27 + dy} 15 {26 + dy}Z", col)
     return swoosh(-4, PINK_SOFT) + swoosh(3.5, INK) + swoosh(11, BLUE_SOFT)
 
+
 @reg("qv4l2", GREY_DEEP)
 def qv4l2():
     cam = circle(29.5, 27.5, 15, INK) + circle(29.5, 27.5, 10.5, BLUE_GREY_DARK) + circle(29.5, 27.5, 7, RED_DEEP) + circle(27.5, 25.5, 2.2, INK)
     return cam + badge(42.5, 40.5, INDIGO_SOFT, 8) + gear_i(42.5, 40.5, 4.6, INK, INDIGO_SOFT, 8, 1.9)
+
 
 @reg("qvge", BLUE_GREY_DEEP)
 def qvge():
@@ -314,16 +363,19 @@ def qvge():
     out += "".join(circle(x, y, 4.3, HOLE) + circle(x, y, 3.3, c) for (x, y), c in zip(nodes, cols))
     return out
 
+
 @reg("qvidcap", BROWN_LIGHT)
 def qvidcap():
     frame = rrect(14, 14, 36, 29, 4, INK) + rrect(17.5, 17.5, 29, 22, 2.5, HOLE) + rrect(20, 20, 24, 17, 2, INK)
     legs = rrect(18.5, 44.5, 7, 2.8, 1.4, INK) + rrect(38.5, 44.5, 7, 2.8, 1.4, INK)
     return frame + legs
 
+
 @reg("qview", BLUE_GREY_DARK)
 def qview():
     mount = poly([(15, 41), (26, 25), (33, 34), (38, 28), (49, 41)], INK, 3)
     return mount + circle(40, 19, 3.8, INK)
+
 
 @reg("qwinff", BLUE)
 def qwinff():
@@ -331,6 +383,7 @@ def qwinff():
     a2 = stroke(arc(29, 27, 11, 20, 140), INK, 3.6) + poly([pt(29, 27, 11, 160), pt(29, 27, 15.5, 134), pt(29, 27, 6.5, 134)], INK, 1)
     cam = badge(42, 40.5, RED, 8.5) + rrect(36.5, 37, 8, 7, 1.5, INK) + poly([(44.5, 40.5), (48, 38), (48, 43)], INK, 1)
     return a1 + a2 + cam
+
 
 def _racket(cx=32, cy=30, r=16.5, w=4.4):
     disc = circle(cx, cy, r, RED)
@@ -343,15 +396,18 @@ def _racket(cx=32, cy=30, r=16.5, w=4.4):
            line(cx + 0.5 * k, cy + 0.5 * k, cx - 8.5 * k, cy + 15 * k, INK, w, "butt"))
     return disc + blue + lam
 
+
 @reg("racket-logo", INDIGO_DARK)
 def racket_logo():
     return _racket()
+
 
 @reg("racket-slideshow", BLUE_GREY)
 def racket_slideshow():
     screen = rrect(13, 13, 38, 28, 3, INK) + rrect(16.5, 16.5, 31, 21, 1.5, HOLE)
     stand = rrect(27, 41, 10, 4, 1, INK) + rrect(21, 44.5, 22, 3.6, 1.8, INK)
     return screen + stand + _racket(32, 27, 9, 2.6)
+
 
 @reg("radeon-profile", RED_DEEP)
 def radeon_profile():
@@ -360,11 +416,13 @@ def radeon_profile():
     amd = shrink(outer + inner, .82, 29.5, 27.5)
     return amd + badge(43, 41, DEEP_PURPLE_LIGHT, 8) + gear_i(43, 41, 4.6, INK, DEEP_PURPLE_LIGHT, 8, 1.9)
 
+
 @small("qphotorec")
 def qphotorec_s():
     cols = [AMBER_LIGHT, BLUE_LIGHT, LIGHT_BLUE_LIGHT, RED_LIGHT]
     quads = "".join(path(arc(32, 30, 17, -90 + 90 * k, 90 * k) + "L32 30Z", c) for k, c in enumerate(cols))
     return quads + circle(32, 30, 8.5, HOLE) + circle(33.5, 28.5, 3, INK)
+
 
 @small("qt")
 def qt_s():
@@ -372,10 +430,12 @@ def qt_s():
     t = stroke("M38.5 20V33.5C38.5 36.5 40 38 44 37.5", HOLE, 2.3) + line(34, 25, 44, 25, HOLE, 2.3)
     return _qt_badge() + q + t
 
+
 @small("qtconfig")
 def qtconfig_s():
     return (gear_i(32, 30, 14.5, INK, None, 8) + ering_b(31, 29, 6, 7.5, HOLE, 3) +
             line(33.5, 34, 37, 38.5, HOLE, 3))
+
 
 @small("qtcreator")
 def qtcreator_s():
@@ -384,11 +444,13 @@ def qtcreator_s():
                "C42 39.5 43.8 38.7 45 37", HOLE, 2.3)
     return _qt_badge() + q + c
 
+
 @small("qtdbusviewer")
 def qtdbusviewer_s():
     d = stroke("M18.5 21V39H21C25.8 39 28.5 35.5 28.5 30C28.5 24.5 25.8 21 21 21Z", HOLE, 2.3)
     v = stroke("M32.5 21L38.5 39L44.5 21", HOLE, 2.3)
     return _qt_badge() + d + v
+
 
 def _qr_s():
     def finder(x, y):
@@ -397,13 +459,12 @@ def _qr_s():
     out = finder(14, 12) + finder(36, 12) + finder(14, 34)
     return out + rrect(36, 34, 6, 6, 1, INK) + rrect(44, 42, 6, 6, 1, INK)
 
+
+@small("qtqr")
 @small("qreator")
 def qreator_s():
     return _qr_s()
 
-@small("qtqr")
-def qtqr_s():
-    return _qr_s()
 
 @small("qtikz")
 def qtikz_s():
@@ -411,11 +472,13 @@ def qtikz_s():
     curve = stroke("M20.5 37C24 26 29 21.5 37 19.5", HOLE, 3)
     return page + curve + badge(42.5, 40.5, BLUE_GREY_DARK, 8.5) + line(38.5, 44.5, 46.5, 36.5, INK, 3.4)
 
+
 @small("qtractor")
 def qtractor_s():
     disc = ring_b(27, 30, 13, INK, 3.6) + circle(27, 30, 6, RED_LIGHT)
     horn = poly([(29, 38), (46, 12), (49, 42)], AMBER, 3)
     return disc + horn
+
 
 @small("qtwebflix")
 def qtwebflix_s():
@@ -423,22 +486,27 @@ def qtwebflix_s():
     w = stroke("M21.5 24L26 38L32 28L38 38L42.5 24", INK, 3.4)
     return tv + w
 
+
 def _q3_s(side, mid):
     horns = (path("M29 41C19 41 13 34 13.5 21.5C16.5 30 22 34 29 34.5Z", side) +
              path("M35 41C45 41 51 34 50.5 21.5C47.5 30 42 34 35 34.5Z", side))
     return horns + poly([(32, 11), (35.5, 30), (32, 49), (28.5, 30)], mid, 1.5)
 
+
 @small("quake3")
 def quake3_s():
     return _q3_s(INK, INK)
+
 
 @small("quake3-team-arena")
 def quake3_ta_s():
     return _q3_s(INK, PURPLE_SOFT)
 
+
 @small("quanta")
 def quanta_s():
     return circle(29.5, 27.5, 13.5, INK) + circle(27.5, 25.5, 5, HOLE) + line(39, 37, 47, 45, INK, 5)
+
 
 @small("qubic")
 def qubic_s():
@@ -447,10 +515,12 @@ def qubic_s():
                "C46 27.5 43.5 30 40.5 30", INK, 3.4)
     return q + b
 
+
 @small("quickaccess")
 def quickaccess_s():
     return (ring_b(30, 28.5, 14, INK, 3.6) + line(39.5, 38, 47, 45.5, INK, 4.4) +
             circle(30, 28.5, 4.5, INK))
+
 
 @small("qutebrowser")
 def qutebrowser_s():
@@ -459,6 +529,7 @@ def qutebrowser_s():
     b = ring_b(39, 34.5, 5, HOLE, 2.8) + line(34, 15, 34, 40, HOLE, 3)
     return disc + q + b
 
+
 @small("qv2ray")
 def qv2ray_s():
     def swoosh(dy, col):
@@ -466,10 +537,12 @@ def qv2ray_s():
                     f"C38 {21 + dy} 30 {24 + dy} 26 {31 + dy}C22 {28 + dy} 19 {27 + dy} 15 {26 + dy}Z", col)
     return swoosh(-6, PINK_SOFT) + swoosh(3, INK) + swoosh(12, BLUE_SOFT)
 
+
 @small("qv4l2")
 def qv4l2_s():
     cam = circle(29.5, 27.5, 16, INK) + circle(29.5, 27.5, 10.5, BLUE_GREY_DARK) + circle(29.5, 27.5, 6.5, RED_DEEP)
     return cam + badge(43, 41, LIGHT_BLUE, 7.5)
+
 
 @small("qvge")
 def qvge_s():
@@ -479,17 +552,20 @@ def qvge_s():
     cols = [BLUE_LIGHT, AMBER_LIGHT, PURPLE_SOFT, INK, RED_LIGHT]
     return out + "".join(circle(x, y, 5.5, HOLE) + circle(x, y, 4.3, c) for (x, y), c in zip(nodes, cols))
 
+
 @small("qwinff")
 def qwinff_s():
     a1 = stroke(arc(29, 27, 11, 200, 320), INK, 3.4) + poly([pt(29, 27, 11, 342), pt(29, 27, 16.5, 312), pt(29, 27, 5.5, 312)], INK, 1)
     a2 = stroke(arc(29, 27, 11, 20, 140), INK, 3.4) + poly([pt(29, 27, 11, 162), pt(29, 27, 16.5, 132), pt(29, 27, 5.5, 132)], INK, 1)
     return a1 + a2 + badge(43, 41, RED, 8) + rrect(38.5, 38, 9, 6, 1.5, INK)
 
+
 @small("racket-slideshow")
 def racket_slideshow_s():
     screen = rrect(12, 11, 40, 31, 3, INK) + rrect(15, 14, 34, 25, 1.5, HOLE)
     stand = rrect(20, 44, 24, 4, 2, INK)
     return screen + stand + _racket(32, 26.5, 12, 3)
+
 
 @small("radeon-profile")
 def radeon_profile_s():

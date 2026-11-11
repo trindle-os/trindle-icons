@@ -1,15 +1,18 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-"""Batch 21: desktop-environment-lxqt to distributor-logo-archlabs.
-
-Same rules as batch01: tile from the palette step nearest the brand
-colour, mark in INK, HOLE for cut-throughs, any second shade another
-palette step.
-"""
-from lm import *
+"""Batch 21: desktop-environment-lxqt to distributor-logo-archlabs."""
+from lm import (
+    AMBER, AMBER_DEEP, BLUE, BLUE_DARK, BLUE_DEEP, BLUE_GREY, BLUE_GREY_DARK, BLUE_GREY_LIGHT,
+    BLUE_GREY_SOFT, BLUE_LIGHT, BROWN, BROWN_DEEP, BROWN_LIGHT, BROWN_SOFT, circle, cpath, cut,
+    DEEP_ORANGE, DEEP_ORANGE_DEEP, DEEP_ORANGE_LIGHT, DEEP_PURPLE_LIGHT, f, g, GREY_DARK,
+    GREY_DEEP, HOLE, INDIGO, INDIGO_DARK, INDIGO_DEEP, INDIGO_LIGHT, INK, LIGHT_BLUE_DEEP, line,
+    ORANGE_DARK, ORANGE_DEEP, ORANGE_SOFT, path, poly, pt, PURPLE, PURPLE_DEEP, RED, RED_DARK,
+    RED_DEEP, rrect, stroke, TEAL_DARK, TEAL_DEEP, TEAL_LIGHT,
+)
 from glyphs.kit import badge_d, ellipse_d, gear_c, registry, _ring, star_d
 from glyphs.kit import shared_discord
 
 ICONS, SMALL, reg, small = registry()
+
 
 def nix(cx, cy, s, colour, w):
     """Nix snowflake: six bars round a hexagon, each running past a corner."""
@@ -24,6 +27,7 @@ def nix(cx, cy, s, colour, w):
         out += line(a[0], a[1], b[0], b[1], colour, w) + line(c[0], c[1], d[0], d[1], colour, w)
     return out
 
+
 @reg("desktop-environment-lxqt", LIGHT_BLUE_DEEP)
 def lxqt():
     head = circle(38, 17, 3.8, INK) + poly([(40.5, 15), (47.5, 16.5), (40.5, 19)], INK, 1.5)
@@ -33,14 +37,17 @@ def lxqt():
              stroke("M17.5 33.5C21.5 38.5 26 40 31 39", INK, 3.4))
     return head + body + wings
 
+
 @reg("desktop-environment-tde", INDIGO)
 def tde():
     return (gear_c(32, 31, 13.5, INK, HOLE, 8, 8.2) +
             stroke("M26 26H38M32 26V38", INK, 4))
 
+
 @reg("desktop-environment-unity", PURPLE_DEEP)
 def unity():
     return stroke("M24 16V32A8 8 0 0 0 40 32V16", INK, 7)
+
 
 @reg("desktop-environment-xfce", BLUE_DARK)
 def xfce():
@@ -53,10 +60,12 @@ def xfce():
     feet = line(26, 40, 24.5, 44, INK, 2.4) + line(38, 38.5, 39.5, 43, INK, 2.4)
     return body + ear + eye + tail + feet
 
+
 @reg("desktop-profiler", DEEP_PURPLE_LIGHT)
 def desktop_profiler():
     win = rrect(14, 12, 36, 36, 6, INK) + rrect(17.5, 20, 29, 24.5, 3, HOLE)
     return win + gear_c(32, 32.2, 7.5, INK, HOLE, 8)
+
 
 @reg("desmume", INDIGO_LIGHT)
 def desmume():
@@ -67,6 +76,7 @@ def desmume():
     btns = circle(42.8, 37.5, 1.2, HOLE) + circle(42.8, 41, 1.2, HOLE)
     return body + screens + hinge + dpad + btns
 
+
 @reg("desura", RED)
 def desura():
     horns = (poly([(20, 22), (17, 11), (26, 17)], INK, 2.5) +
@@ -76,6 +86,7 @@ def desura():
     mouth = stroke("M27 39.5C30 41.5 34 41.5 37 39.5", HOLE, 2.2)
     return horns + body + eye + mouth
 
+
 @reg("dev.Cogitri.Health", RED_DEEP)
 def health():
     heart = path("M32 46C24 40 15 34 15 24.5C15 19 19 15 24 15C27.5 15 30.5 17 32 20"
@@ -83,10 +94,12 @@ def health():
     pulse = stroke("M18 29.5H25L28 24.5L32 35.5L35.5 27.5L37.5 30.5H46", HOLE, 2.6)
     return heart + pulse
 
+
 @reg("dev.alextren.Spot", BLUE_GREY_DARK)
 def spot():
     band = stroke("M19.5 32V25A12.5 12.5 0 0 1 44.5 25V32", INK, 3.2)
     return band + circle(32, 33, 12, INK) + circle(32, 33, 7, AMBER)
+
 
 @reg("dev.atoft.Reactions", AMBER_DEEP)
 def reactions():
@@ -98,6 +111,7 @@ def reactions():
     mouth = path("M19 33H29A5 5 0 0 1 19 33Z", HOLE)
     return sheet + cells + face + eyes + mouth
 
+
 @reg("dev.boxi.Boxi", BLUE_GREY)
 def boxi():
     out = rrect(13, 16, 38, 28, 5, INK) + line(32, 16.5, 32, 43.5, HOLE, 2.2)
@@ -105,9 +119,11 @@ def boxi():
         out += stroke(f"M{x} 24L{x + 4} 27.5L{x} 31", HOLE, 2.4) + line(x + 5.5, 32, x + 10, 32, HOLE, 2.4)
     return out
 
+
 @reg("dev.edfloreshz.Done", BROWN_LIGHT)
 def done():
     return rrect(15, 13, 34, 34, 8, INK) + stroke("M23 26H41M23 34H41M23 42H33", HOLE, 4)
+
 
 @reg("dev.geopjr.Collision", AMBER_DEEP)
 def collision():
@@ -117,12 +133,14 @@ def collision():
         circle(32, 30, 3.2, INK)
     return bars + tick
 
+
 @reg("dev.mufeed.Wordbook", BLUE_DEEP)
 def wordbook():
     book = rrect(17, 12, 30, 35, 4, INK) + line(22.5, 12.5, 22.5, 46.5, HOLE, 2.2)
     w = stroke("M27 21L30.3 32L34 24.5L37.7 32L41 21", HOLE, 2.8)
     mark = poly([(36, 42), (41, 42), (41, 50), (38.5, 47.5), (36, 50)], RED, 1)
     return book + w + mark
+
 
 @reg("dev.tchx84.Portfolio", BROWN)
 def portfolio():
@@ -131,11 +149,13 @@ def portfolio():
     lock = circle(32, 30.5, 2.8, HOLE) + poly([(30.6, 31), (33.4, 31), (34.2, 37), (29.8, 37)], HOLE, 1)
     return handle + body + lock
 
+
 @reg("dev.vlinkz.NixSoftwareCenter", INDIGO)
 def nix_software():
     handle = stroke("M25 22V19A7 7 0 0 1 39 19V22", INK, 3)
     bag = poly([(14, 21), (50, 21), (48, 48), (16, 48)], INK, 3)
     return handle + bag + nix(32, 34.5, .82, HOLE, 2.4)
+
 
 @reg("dev.vlinkz.NixosConfEditor", TEAL_DARK)
 def nixos_conf():
@@ -145,12 +165,14 @@ def nixos_conf():
                      "C50.5 31 50 34 50 38C50 42 50.5 46 46.5 46", INK, 3))
     return braces + nix(32, 30, 1, INK, 2.6)
 
+
 @reg("devassistant", BLUE_DEEP)
 def devassistant():
     back = poly([(19, 13), (48, 13), (48, 42)], INDIGO_DEEP, 3)
     square = poly([(16, 14), (16, 47), (49, 47)], INK, 3)
     hole = poly([(21.5, 29), (21.5, 41.5), (34, 41.5)], HOLE, 1.5)
     return back + square + hole
+
 
 @reg("devdocs", ORANGE_DEEP)
 def devdocs():
@@ -159,6 +181,7 @@ def devdocs():
     key = _ring(24.5, 27, 4.2, HOLE, 3) + line(28.7, 27, 41, 27, HOLE, 3.2)
     return note + fold + key
 
+
 @reg("devhelp", RED_DEEP)
 def devhelp():
     book = rrect(16, 12, 27, 36, 4, INK) + line(21.5, 12.5, 21.5, 47.5, HOLE, 2.2)
@@ -166,10 +189,12 @@ def devhelp():
     tabs = "".join(rrect(44.5, 15 + 9.5 * k, 4.5, 7, 1.8, INK) for k in range(3))
     return book + d + tabs
 
+
 @reg("devhub", TEAL_LIGHT)
 def devhub():
     return (rrect(13, 21, 38, 18, 9, INK) +
             ellipse_d(24.5, 30, 2.8, 4, HOLE) + ellipse_d(39.5, 30, 2.8, 4, HOLE))
+
 
 def _da():
     pts = [(100, 0), (71.4, 0), (68.6, 2.9), (55.1, 28.6), (50.9, 31.4), (0, 31.4),
@@ -179,14 +204,18 @@ def _da():
     k = .228
     return [(32 - 50 * k + x * k, 11 + y * k) for x, y in pts]
 
+
 @reg("deviantart", ORANGE_DARK)
 def deviantart():
     return poly(_da(), INK, 1.5)
 
+
+DEVILUTIONX_HORNS = path('M22.5 20C17 18.5 14 14 15 9C17 13 20.5 14.5 25.5 15.5Z', INK) + path('M41.5 20C47 18.5 50 14 49 9C47 13 43.5 14.5 38.5 15.5Z', INK)
+
+
 @reg("devilutionx", RED_DARK)
 def devilutionx():
-    horns = (path("M22.5 20C17 18.5 14 14 15 9C17 13 20.5 14.5 25.5 15.5Z", INK) +
-             path("M41.5 20C47 18.5 50 14 49 9C47 13 43.5 14.5 38.5 15.5Z", INK))
+    horns = (DEVILUTIONX_HORNS)
     skull = path("M20 29C19 20 24.5 14 32 14C39.5 14 45 20 44 29C43.7 32 42.5 34.5 41 36"
                  "V41H23V36C21.5 34.5 20.3 32 20 29Z", INK)
     eyes = (poly([(23.5, 25), (30, 27.5), (28.5, 32), (24.5, 31)], HOLE, 1.5) +
@@ -196,6 +225,7 @@ def devilutionx():
     teeth = "".join(line(x, 38.5, x, 45.5, HOLE, 1.6) for x in (28, 32, 36))
     return horns + skull + eyes + nose + jaw + teeth
 
+
 @reg("devpod", DEEP_PURPLE_LIGHT)
 def devpod():
     d = path("M20 13H31C41 13 48 20.5 48 30C48 39.5 41 47 31 47H28.5V38H31"
@@ -203,10 +233,12 @@ def devpod():
     pod = path("M16 47C16 42 19.5 37.5 24.5 37.5C25 37.5 25.8 37.6 26 37.7V47Z", INK)
     return d + pod
 
+
 @reg("dia", GREY_DARK)
 def dia():
     d = stroke("M24 14V44M24 14H28A14 15 0 0 1 28 44H24", INK, 3.6)
     return d + stroke("M19.5 43.5L24 48L28.5 43.5", INK, 3.2)
+
 
 @reg("diablo-2", ORANGE_DEEP)
 def diablo2():
@@ -216,10 +248,12 @@ def diablo2():
           rrect(34.5, 27, 4.5, 21, 1.5, RED_DARK))
     return d + ii
 
+
 @reg("digikam", BLUE_GREY_DARK)
 def digikam():
     return (circle(32, 30, 16.5, INK) + circle(32, 30, 12, HOLE) +
             circle(32, 30, 8.5, BLUE_LIGHT) + circle(29.3, 27.3, 2.8, INK))
+
 
 @reg("digitallyimported", BLUE_DEEP)
 def digitallyimported():
@@ -227,11 +261,13 @@ def digitallyimported():
     i = circle(42.5, 21, 2.8, INK) + line(42.5, 27, 42.5, 39.5, INK, 4.8)
     return d + i
 
+
 @reg("dillo", BLUE_DARK)
 def dillo():
     globe = circle(29.5, 31, 15, INK)
     d = (_ring(34.5, 36, 5.8, RED, 4) + line(40.3, 14.5, 40.3, 42, RED, 4))
     return globe + d
+
 
 @reg("ding", ORANGE_DEEP)
 def ding():
@@ -239,6 +275,7 @@ def ding():
     q = stroke("M19 24.5A3.8 3.8 0 1 1 24.5 28C23 29 22.5 30 22.5 32", HOLE, 2.6) + circle(22.5, 37.5, 1.7, HOLE)
     lines = "".join(rrect(36.5, y, w, 2.6, 1.3, HOLE) for y, w in [(21, 10), (27, 10), (33, 7), (39, 10)])
     return pages + q + lines
+
 
 @reg("dino", TEAL_DEEP)
 def dino():
@@ -250,6 +287,7 @@ def dino():
     mouth = stroke("M16.5 38C21 40 26 40.5 31 39.5", HOLE, 2.2)
     return spikes + head + eye + mouth
 
+
 @reg("diodon", BLUE_GREY)
 def diodon():
     back = rrect(27, 12, 21, 26, 3, INK) + "".join(
@@ -258,10 +296,12 @@ def diodon():
     lines = "".join(rrect(20, y, w, 2.6, 1.3, HOLE) for y, w in [(27, 14), (32.5, 14), (38, 14), (43, 9)])
     return back + front + lines
 
+
 def _dirt_d(x, y, s, colour):
     return g(cut("M0 0H11C18 0 22 5 22 12C22 19 18 24 11 24H0Z"
                  "M7 6.5V17.5H10.5C13.5 17.5 15 15.5 15 12C15 8.5 13.5 6.5 10.5 6.5Z", colour),
              f"translate({f(x)} {f(y)}) scale({f(s)})")
+
 
 @reg("dirt-rally", GREY_DARK)
 def dirt_rally():
@@ -280,22 +320,23 @@ def dirt_rally():
         out += g(stroke(d_, o, 2.2), f"translate({f(x0 + 7 * k)} {y0})")
     return d + out
 
+
 @reg("dirt4", GREY_DARK)
 def dirt4():
     d = _dirt_d(14, 12, 1.1, INK)
     four = stroke("M45 47V26L34 40H49", DEEP_ORANGE, 4.5)
     return d + four
 
+
 def _discord():
     return shared_discord()
 
+
+@reg("discord-development", GREY_DARK)
 @reg("discord-canary", ORANGE_DEEP)
 def discord_canary():
     return _discord()
 
-@reg("discord-development", GREY_DARK)
-def discord_development():
-    return _discord()
 
 @reg("disk-burner", GREY_DEEP)
 def disk_burner():
@@ -306,19 +347,23 @@ def disk_burner():
                  "C42.4 37.6 42.5 36 42 34.5Z", INK)
     return disc + hub + badge_d(42, 40, DEEP_ORANGE_DEEP) + flame
 
+
 def _drive():
     body = rrect(15, 12, 30, 34, 5, INK)
     platter = path("M21.5 19H30A8.5 8.5 0 1 1 21.5 27.5Z", HOLE) + circle(30, 27.5, 3.5, INK)
     return body + platter
+
 
 @reg("disk-usage-analyzer", BLUE_GREY)
 def disk_usage():
     info = circle(42, 36.3, 1.5, INK) + line(42, 39.5, 42, 44.3, INK, 2.8)
     return _drive() + badge_d(42, 40, BLUE) + info
 
+
 @reg("disk-utility", GREY_DARK)
 def disk_utility():
     return _drive() + badge_d(42, 40, PURPLE) + gear_c(42, 40, 3.8, INK, PURPLE, 8, 1.6)
+
 
 @reg("display.im6", INDIGO)
 def imagemagick():
@@ -328,11 +373,13 @@ def imagemagick():
     stars = star_d(25.5, 36, 5.2, AMBER) + star_d(34, 26, 4.6, AMBER) + star_d(37.5, 39, 4.2, AMBER)
     return hat + stars
 
+
 @reg("dissenter-browser", LIGHT_BLUE_DEEP)
 def dissenter():
     bubble = path("M19 15H33A15 15 0 0 1 33 45H19A4 4 0 0 1 15 41V19A4 4 0 0 1 19 15Z", INK)
     lines = "".join(rrect(21, y, w, 3.4, 1.7, HOLE) for y, w in [(21.5, 19), (28.3, 19), (35.1, 13)])
     return bubble + lines
+
 
 @reg("distributor-logo-absolute", BROWN_DEEP)
 def absolute():
@@ -344,12 +391,14 @@ def absolute():
     dot = rrect(40, 38, 10, 10, 2.5, INK)
     return block + a + tall + wide + dot
 
+
 @reg("distributor-logo-academix", BLUE_DEEP)
 def academix():
     left = path("M32 13.5A16.5 16.5 0 0 0 32 46.5Z", INDIGO_DARK)
     right = path("M32 13.5A16.5 16.5 0 0 1 32 46.5Z", RED_DEEP)
     a = stroke("M21.5 44L32 16L42.5 44M26.5 34.5H37.5", INK, 4.4)
     return left + right + a
+
 
 @reg("distributor-logo-aix", BLUE_GREY_LIGHT)
 def aix():
@@ -359,12 +408,14 @@ def aix():
     x = stroke("M36 24L43.5 36M43.5 24L36 36", INK, 2.8)
     return rim + a + i + x
 
+
 @reg("distributor-logo-alpine", BLUE_DARK)
 def alpine():
     hexa = poly([pt(32, 30, 17.5, 60 * k) for k in range(6)], INK, 3)
     mts = (stroke("M17.5 37L27 27.5L32.5 33", HOLE, 4) +
            stroke("M29 37L37 29L46 37", HOLE, 4))
     return hexa + mts
+
 
 def _penguin(colour, hole):
     body = path("M21 47C18.5 38 19.5 28 24 21C26 16.5 28.5 12.5 32.5 12C35.5 11.7 37.5 13.5 38.2 16"
@@ -373,12 +424,14 @@ def _penguin(colour, hole):
                  "C34.5 40 33.8 30 36.5 21.5Z", hole)
     return body + belly + circle(33.5, 15.8, 1.2, hole)
 
+
 @reg("distributor-logo-alt-linux", AMBER)
 def alt_linux():
     big = g(_penguin(INK, HOLE), "translate(4 0)")
     little = g(_penguin(INK, HOLE).replace('fill="INK"', f'fill="INK" stroke="{HOLE}" stroke-width="3" paint-order="stroke"', 1),
                "translate(41 17.5) scale(-.62 .62)")
     return big + little
+
 
 @reg("distributor-logo-android", BLUE_GREY_LIGHT)
 def android():
@@ -387,6 +440,7 @@ def android():
     eyes = circle(25, 36, 2.2, HOLE) + circle(39, 36, 2.2, HOLE)
     return dome + ant + eyes
 
+
 @reg("distributor-logo-antix", BLUE_GREY_DARK)
 def antix():
     sphere = circle(33, 31, 14, BLUE_GREY_SOFT)
@@ -394,35 +448,42 @@ def antix():
     b = stroke("M49 12C39 22 27 36 18 47", HOLE, 8) + stroke("M49 12C39 22 27 36 18 47", INK, 4.5)
     return sphere + a + b
 
+
+ARCHBANG_ARCH = path('M32 11C37 22 43 34 50 47C44 43.5 38 41.5 32 41.5C26 41.5 20 43.5 14 47C21 34 27 22 32 11Z', INK, f' stroke="{INK}" stroke-width="1.5" stroke-linejoin="round"')
+
+
 @reg("distributor-logo-archbang", BLUE_DEEP)
 def archbang():
-    arch = path("M32 11C37 22 43 34 50 47C44 43.5 38 41.5 32 41.5C26 41.5 20 43.5 14 47"
-                "C21 34 27 22 32 11Z", INK, f' stroke="{INK}" stroke-width="1.5" stroke-linejoin="round"')
+    arch = ARCHBANG_ARCH
     bang = poly([(30.2, 22), (33.8, 22), (33, 33), (31, 33)], HOLE, 1.5) + circle(32, 37.3, 2, HOLE)
     return arch + bang
 
+
 @reg("distributor-logo-archlabs", BLUE_GREY_DARK)
 def archlabs():
-    arch = path("M32 11C37 22 43 34 50 47C44 43.5 38 41.5 32 41.5C26 41.5 20 43.5 14 47"
-                "C21 34 27 22 32 11Z", INK, f' stroke="{INK}" stroke-width="1.5" stroke-linejoin="round"')
+    arch = ARCHBANG_ARCH
     flame = path("M33 22C38 27 39.5 31 38.5 35C37.5 38.5 35 40 32 40C28.5 40 26 37.5 26 34"
                  "C26 30.5 28.5 29 29.5 26.5C30.5 28 31 29.5 31 31C32.5 29 33.5 26 33 22Z", HOLE)
     return arch + flame
+
 
 @small("desmume")
 def desmume_s():
     return (rrect(17, 11, 30, 38, 5, INK) + rrect(20.5, 14, 23, 14, 2, HOLE) +
             rrect(20.5, 32, 23, 14, 2, HOLE))
 
+
 @small("dirt-rally")
 def dirt_rally_s():
     return _dirt_d(17, 11, 1.2, INK) + rrect(15, 42, 34, 5, 2.5, DEEP_ORANGE_LIGHT)
+
 
 @small("dev.geopjr.Collision")
 def collision_s():
     bars = "".join(rrect(14 + 19.5 * k, 16, 16.5, 5, 2.5, INK) + rrect(14 + 19.5 * k, 39, 16.5, 5, 2.5, INK)
                    for k in range(2))
     return bars + circle(32, 30, 10, GREY_DEEP) + circle(32, 30, 3.4, INK)
+
 
 @small("dev.atoft.Reactions")
 def reactions_s():
@@ -431,13 +492,14 @@ def reactions_s():
     return sheet + face + circle(20.5, 28.5, 1.8, HOLE) + circle(27.5, 28.5, 1.8, HOLE) + \
         path("M18.5 33H29.5A5.5 5.5 0 0 1 18.5 33Z", HOLE)
 
+
 @small("devilutionx")
 def devilutionx_s():
-    horns = (path("M22.5 20C17 18.5 14 14 15 9C17 13 20.5 14.5 25.5 15.5Z", INK) +
-             path("M41.5 20C47 18.5 50 14 49 9C47 13 43.5 14.5 38.5 15.5Z", INK))
+    horns = (DEVILUTIONX_HORNS)
     skull = path("M20 29C19 20 24.5 14 32 14C39.5 14 45 20 44 29C43.7 32 42.5 34.5 41 36"
                  "V47H23V36C21.5 34.5 20.3 32 20 29Z", INK)
     return horns + skull + circle(26.5, 28, 3.5, HOLE) + circle(37.5, 28, 3.5, HOLE)
+
 
 @small("distributor-logo-aix")
 def aix_s():
@@ -445,11 +507,13 @@ def aix_s():
     return rim + stroke("M18.5 38L23 22L27.5 38", INK, 3.4) + line(32.5, 22, 32.5, 38, INK, 3.4) + \
         stroke("M37 22L45.5 38M45.5 22L37 38", INK, 3.4)
 
+
 @small("disk-utility")
 def disk_utility_s():
     body = rrect(14, 11, 30, 34, 5, INK) + circle(28.5, 26, 7, HOLE)
     return body + circle(42, 40, 10.5, HOLE) + circle(42, 40, 9, PURPLE) + \
         gear_c(42, 40, 4.5, INK, PURPLE, 6, 1.8)
+
 
 @small("desktop-environment-lxqt")
 def lxqt_s():
@@ -458,15 +522,18 @@ def lxqt_s():
                 "C35.5 42.5 35 39 30.5 36C25.5 32 26 24 33 18.5Z", INK)
     return head + body + stroke("M15 26C19 33 24 35.5 29 35", INK, 4)
 
+
 @small("desktop-environment-tde")
 def tde_s():
     return gear_c(32, 30, 14.5, INK, HOLE, 6, 9) + stroke("M26 25H38M32 25V38", INK, 4.2)
+
 
 @small("dev.Cogitri.Health")
 def health_s():
     heart = path("M32 47C24 41 14 34.5 14 24.5C14 18.5 18.5 14 24 14C27.5 14 30.5 16 32 19"
                  "C33.5 16 36.5 14 40 14C45.5 14 50 18.5 50 24.5C50 34.5 40 41 32 47Z", INK)
     return heart + stroke("M18 29H25L29 22L33 36L36.5 29H46", HOLE, 3.2)
+
 
 @small("dev.boxi.Boxi")
 def boxi_s():
@@ -475,11 +542,13 @@ def boxi_s():
         out += stroke(f"M{x} 24L{x + 6} 30L{x} 36", HOLE, 3.2)
     return out
 
+
 @small("dev.vlinkz.NixSoftwareCenter")
 def nix_software_s():
     handle = stroke("M25 21V18A7 7 0 0 1 39 18V21", INK, 3)
     bag = poly([(13, 21), (51, 21), (49, 49), (15, 49)], INK, 3)
     return handle + bag + circle(32, 35, 8.5, HOLE) + circle(32, 35, 4, INK)
+
 
 @small("dev.vlinkz.NixosConfEditor")
 def nixos_conf_s():
@@ -490,12 +559,14 @@ def nixos_conf_s():
     hexa = poly([pt(32, 30, 9.5, 60 * k) for k in range(6)], INK, 2)
     return braces + hexa + circle(32, 30, 4.2, HOLE)
 
+
 @small("devhelp")
 def devhelp_s():
     book = rrect(15, 12, 29, 36, 4, INK)
     d = stroke("M24 20.5V39.5H28A9.5 9.5 0 0 0 28 20.5Z", HOLE, 4)
     tabs = rrect(45.5, 16, 5, 10, 2, INK) + rrect(45.5, 30, 5, 10, 2, INK)
     return book + d + tabs
+
 
 @small("diodon")
 def diodon_s():
@@ -504,11 +575,13 @@ def diodon_s():
     lines = "".join(rrect(19.5, y, 15, 3.4, 1.7, HOLE) for y in (28, 35.5))
     return back + front + lines
 
+
 @small("disk-usage-analyzer")
 def disk_usage_s():
     body = rrect(14, 11, 30, 34, 5, INK) + circle(28.5, 26, 7, HOLE)
     return body + circle(42, 40, 10.5, HOLE) + circle(42, 40, 9, BLUE) + \
         line(42, 38, 42, 45, INK, 3) + circle(42, 34, 1.8, INK)
+
 
 @small("disk-burner")
 def disk_burner_s():
@@ -516,9 +589,11 @@ def disk_burner_s():
     return disc + circle(42, 40, 10.5, HOLE) + circle(42, 40, 9, DEEP_ORANGE_DEEP) + \
         path("M42 33.5C45.5 37 46.5 39 46.5 41.5A4.5 4.5 0 0 1 37.5 41.5C37.5 38.5 40 37 42 33.5Z", INK)
 
+
 @small("distributor-logo-alt-linux")
 def alt_linux_s():
     return g(_penguin(INK, HOLE), "translate(32 30) scale(1.1) translate(-30.5 -29.5)")
+
 
 @small("distributor-logo-absolute")
 def absolute_s():

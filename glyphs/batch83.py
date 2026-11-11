@@ -1,13 +1,17 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Batch 83: apps on Trindle's desktop that still had no icon."""
-from lm import *
+from lm import (
+    AMBER_LIGHT, BLACK, BLUE_GREY_SOFT, BLUE_LIGHT, circle, CYAN_DEEP, DEEP_ORANGE_DEEP,
+    DEEP_ORANGE_LIGHT, DEEP_PURPLE_LIGHT, g, HOLE, INDIGO_DARK, INDIGO_SOFT, INK, line,
+    ORANGE_LIGHT, path, poly, RED, rrect, stroke, TEAL_DARK, TEAL_LIGHT,
+)
 from glyphs.kit import registry
 
 ICONS, SMALL, reg, small = registry()
 
+
 @reg("eu.usdx.UltraStarDeluxe", DEEP_ORANGE_DEEP)
 def ultrastar():
-
     wings = ""
     for side in (-1, 1):
         for ang, ln_ in [(62, 15), (90, 17), (118, 14)]:
@@ -19,11 +23,13 @@ def ultrastar():
     band = rrect(27.5, 29, 9, 4, 1.5, ORANGE_LIGHT)
     return wings + handle + band + circle(32, 20, 8.8, HOLE) + head
 
+
 @reg("io.github.najepaliya.kleaner", RED)
 def kleaner():
     seven = stroke("M16 20H31L20 42", INK, 5)
     tri = poly([(38, 22), (49, 42), (27, 42)], INK, 2) + poly([(38, 30), (43.5, 38.5), (32.5, 38.5)], HOLE, 1)
     return seven + tri
+
 
 @reg("io.github.shonebinu.Defuse", BLUE_LIGHT)
 def defuse():
@@ -34,11 +40,11 @@ def defuse():
     eyes = circle(27.5, 32, 2.2, INK) + circle(33.5, 32, 2.2, INK) + circle(27.8, 32.3, 1, BLACK) + circle(33.8, 32.3, 1, BLACK)
     return frame + checks + blob + eyes
 
+
 @reg("moe.liam.audimorf", INDIGO_DARK)
 def audimorf():
-
     record = (f'<circle cx="32" cy="30" r="17" fill="none" stroke="{INK}" stroke-width="2.6"/>'
-              f'<circle cx="32" cy="30" r="12.5" fill="none" stroke="#818ECE" stroke-width="1.6"/>')
+              f'<circle cx="32" cy="30" r="12.5" fill="none" stroke="{INDIGO_SOFT}" stroke-width="1.6"/>')
     wings = (path("M31.5 22C27 14 16 14 16.5 21C17 27 24 30 31.5 29Z", INK) +
              path("M32.5 22C37 14 48 14 47.5 21C47 27 40 30 32.5 29Z", INK) +
              path("M31.5 29C25 30.5 21.5 36 24.5 40C27 42.5 30.5 38 31.5 33Z", INK) +
@@ -46,6 +52,7 @@ def audimorf():
     body = rrect(30.3, 19, 3.4, 22, 1.7, INDIGO_SOFT)
     feelers = stroke("M31 19.5L27.5 14.5M33 19.5L36.5 14.5", INK, 1.8)
     return record + wings + body + feelers
+
 
 @reg("net.fhannenheim.musicfetch", DEEP_PURPLE_LIGHT)
 def musicfetch():
@@ -55,6 +62,7 @@ def musicfetch():
     note = circle(29.5, 40, 2.8, INK) + line(31.8, 40, 31.8, 32, INK, 2.4) + line(31.8, 32.5, 36, 33.5, INK, 2.4)
     return disk + shutter + label + note
 
+
 @reg("re.sonny.Eloquent", TEAL_LIGHT)
 def eloquent():
     paper = rrect(20, 11, 20, 14, 2, INK) + line(23.5, 16, 33, 16, HOLE, 2) + line(23.5, 20.5, 30, 20.5, HOLE, 2)
@@ -63,6 +71,7 @@ def eloquent():
     tick = circle(44, 16, 6.5, TEAL_DARK) + circle(44, 16, 2.6, INK)
     return paper + body + keys + tick
 
+
 @reg("xyz.safeworlds.hiit", CYAN_DEEP)
 def hiit():
     ring = f'<circle cx="32" cy="30" r="16" fill="none" stroke="{INK}" stroke-width="3.2"/>'
@@ -70,6 +79,7 @@ def hiit():
     rest = stroke("M43.4 26.3A12 12 0 1 1 32 18", INK, 5)
     knob = circle(32, 30, 4, INK)
     return ring + rest + done + knob
+
 
 @small("eu.usdx.UltraStarDeluxe")
 def ultrastar_s():

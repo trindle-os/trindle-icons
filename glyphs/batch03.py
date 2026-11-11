@@ -6,20 +6,31 @@ The mark is drawn in INK (white, or near-black on pale tiles); HOLE is
 the tile colour showing through the mark; any other shade is another
 step from the same palette.
 """
-from lm import *
+from lm import (
+    AMBER, AMBER_DEEP, AMBER_SOFT, BLUE_DEEP, BLUE_GREY_DARK, BLUE_GREY_DEEP, BLUE_GREY_LIGHT,
+    BLUE_GREY_SOFT, BLUE_SOFT, BROWN, circle, cpath, cut, CYAN_DARK, CYAN_DEEP,
+    DEEP_ORANGE_DEEP, DEEP_ORANGE_LIGHT, DEEP_ORANGE_SOFT, DEEP_PURPLE, DEEP_PURPLE_DARK,
+    DEEP_PURPLE_DEEP, g, GREY_DARK, GREY_DEEP, GREY_LIGHT, HOLE, INDIGO, INDIGO_LIGHT,
+    INDIGO_SOFT, INK, LIGHT_BLUE, LIGHT_BLUE_DARK, LIGHT_BLUE_DEEP, LIGHT_BLUE_SOFT, line,
+    ORANGE_DARK, ORANGE_DEEP, ORANGE_SOFT, path, PINK_DARK, PINK_DEEP, PINK_LIGHT, PINK_SOFT,
+    poly, pt, RED, RED_DARK, RED_DEEP, rrect, stroke, TEAL_LIGHT, WHITE, YELLOW,
+)
 from glyphs.kit import registry
 
 ICONS, SMALL, reg, small = registry()
 
+
 def _sc(content, k, ox=32, oy=32):
     """Scale content drawn round (ox, oy) by k and centre it on (32, 30)."""
     return g(content, f"translate(32 30) scale({k}) translate({-ox} {-oy})")
+
 
 @reg("AdobePremiereRush", DEEP_PURPLE_DEEP)
 def adobe_rush():
     r = stroke("M17.5 42V18H24.5A6 6 0 0 1 24.5 30H17.5M24.5 30L30.5 42", INK, 4.4)
     u = stroke("M35 26V35.5A4.6 4.6 0 0 0 44.2 35.5M44.2 26V42", INK, 4.4)
     return r + u
+
 
 @reg("AdobeSpeedgrade", CYAN_DARK)
 def adobe_speedgrade():
@@ -29,10 +40,12 @@ def adobe_speedgrade():
           + stroke("M45.3 25.5V42.5C45.3 46 43 48 39.8 48C37.8 48 36.2 47.3 35 46", INK, 4.4))
     return s + gg
 
+
 @reg("AdobeUpdate", RED_DEEP)
 def adobe_update():
     return poly([(27, 12.6), (37, 12.6), (47.5, 47.4), (40.7, 47.4), (32, 25),
                  (26.4, 40.5), (32.6, 40.5), (35.1, 47.4), (16.5, 47.4)], INK, 1.5)
+
 
 @reg("AdobeXD", PINK_DARK)
 def adobe_xd():
@@ -41,11 +54,13 @@ def adobe_xd():
          + line(45, 18, 45, 41, INK, 4.4))
     return x + d
 
+
 @reg("Alacritty", ORANGE_DEEP)
 def alacritty():
     legs = stroke("M17.5 46L32 13.5L46.5 46", INK, 5.5)
     gem = poly([(32, 26.5), (35.5, 35.5), (32, 45), (28.5, 35.5)], INK, 1.5)
     return legs + gem
+
 
 @reg("Alva", DEEP_PURPLE)
 def alva():
@@ -56,17 +71,20 @@ def alva():
                 "L29.3 52.7C28.9 53.3 28 53 28 52.3Z", PINK_SOFT)
     return _sc(frame + bolt, .9, 31.5, 32.5)
 
+
 @reg("AmneziaVPN", DEEP_ORANGE_DEEP)
 def amnezia():
     ring = f'<circle cx="32" cy="31" r="13" fill="none" stroke="{INK}" stroke-width="3.4"/>'
     a = stroke("M20 46L32 13L44 46", INK, 4.4) + line(14.5, 35, 49.5, 27.5, INK, 4)
     return ring + a
 
+
 @reg("AppImageLauncher", LIGHT_BLUE_DARK)
 def appimagelauncher():
     ring = f'<circle cx="32" cy="30" r="15.5" fill="none" stroke="{INK}" stroke-width="3.2"/>'
     arrow = poly([(32, 18), (42.5, 38.5), (32, 33.5), (21.5, 38.5)], INK, 2.2)
     return ring + arrow
+
 
 @reg("BadlionClient", BLUE_DEEP)
 def badlion():
@@ -77,6 +95,7 @@ def badlion():
     nose = poly([(29.5, 35), (34.5, 35), (32, 38)], HOLE, 1)
     return hexa + mane + face + shades + nose
 
+
 @reg("BambooTracker", LIGHT_BLUE_DEEP)
 def bambootracker():
     out = ""
@@ -86,12 +105,14 @@ def bambootracker():
     leaf = path("M24 30C24 24 29 21.5 35 22C34.5 27.5 30 31 24 30Z", LIGHT_BLUE_SOFT)
     return out + leaf
 
+
 @reg("CMakeSetup", INDIGO)
 def cmake():
     tri = poly([(32, 12.5), (49.5, 46.5), (14.5, 46.5)], INK, 2.5)
     right = poly([(32, 12.5), (49.5, 46.5), (33.5, 39.5)], INDIGO_SOFT, 2.5)
     hole = poly([(33.5, 27), (33.5, 39.5), (23, 39.5)], HOLE, 1.5)
     return tri + right + hole
+
 
 @reg("CraftStudio", DEEP_ORANGE_DEEP)
 def craftstudio():
@@ -104,6 +125,7 @@ def craftstudio():
         star += poly(pts, HOLE, 3.5) + poly(pts, AMBER_SOFT, 1.2)
     return top + left + right + star
 
+
 @reg("CubicSDR", BLUE_GREY_DEEP)
 def cubicsdr():
     top = poly([(32, 20), (47, 27.5), (32, 35), (17, 27.5)], INK, 2.5)
@@ -113,15 +135,18 @@ def cubicsdr():
     stick = line(32, 27.5, 32, 19, BLUE_GREY_DARK, 2.6) + circle(32, 16.5, 4.5, RED)
     return top + left + right + wave + stick
 
+
 @reg("CycligentGitTool", TEAL_LIGHT)
 def cycligent():
     return stroke("M30.5 33C29.5 29.5 32.5 27 36.5 28.5C41.5 30.5 43 37 39 41C35 45 27.5 43.5 22.5 38"
                   "C17 32.5 15.5 24 20.5 19.5C26 14.5 37 16.5 44 23.5", INK, 4.2)
 
+
 @reg("Dicomizer", GREY_DARK)
 def dicomizer():
     v = stroke("M18.5 15.5L32 44.5L45.5 15.5", INK, 4)
     return v + poly([(23.2, 25.8), (40.8, 25.8), (32, 43.5)], INK, 1)
+
 
 @reg("Encryptr", PINK_DEEP)
 def encryptr():
@@ -134,12 +159,14 @@ def encryptr():
             poly([(x2, y0), (x1, y0), (x1, y1)], PINK_SOFT, 1))
     return col + tris
 
+
 @reg("FAHControl", RED)
 def fahcontrol():
     out = ""
     for cx, cy, r in [(25, 25.5, 8.5), (37.5, 34, 9.5), (41, 20, 6.5), (24.5, 40, 6), (46, 14.5, 4)]:
         out += circle(cx, cy, r, INK, f' stroke="{HOLE}" stroke-width="2"')
     return out
+
 
 @reg("FamiStudio", BLUE_GREY_DARK)
 def famistudio():
@@ -153,11 +180,13 @@ def famistudio():
     bars = "".join(rrect(28.4 + i * 2.6, 39.2, 1.6, 6, .6, HOLE) for i in range(3))
     return cells + sq + tri + chk + bars
 
+
 @reg("FlashCS6", RED_DARK)
 def flash_cs6():
     frame = rrect(15.5, 13.5, 33, 33, 4, "none", f' stroke="{INK}" stroke-width="3"')
     fl = stroke("M24 40.5V21.5H33M24 30.5H31.5", INK, 4.2) + line(38.5, 20, 38.5, 40.5, INK, 4.2)
     return frame + fl
+
 
 @reg("FreeTexturePacker", GREY_DARK)
 def freetexturepacker():
@@ -166,10 +195,12 @@ def freetexturepacker():
             stroke("M22 24.3L32 30L42 24.3M32 30V41.5", HOLE, 2.6))
     return hexa + cube
 
+
 @reg("Freeter", BLUE_GREY_DEEP)
 def freeter():
     return (rrect(17.6, 13.2, 8, 33.6, 1.2, INK) + rrect(28.8, 13.2, 17.6, 8, 1.2, INK) +
             rrect(28.8, 24.4, 8, 8, 1.2, INK))
+
 
 @reg("GP6-icon", RED_DEEP)
 def guitar_pro():
@@ -180,6 +211,7 @@ def guitar_pro():
     pl = stroke("M34.5 30.5V18.5H38.5A3.3 3.3 0 0 1 38.5 25.2H34.5", HOLE, 2.6)
     return pick + gl + pl
 
+
 @reg("GPG-Key4", ORANGE_DARK)
 def gpg_key():
     key = (cut(cpath(21, 25, 7.5) + cpath(19.8, 25, 2.8), INK) +
@@ -188,6 +220,7 @@ def gpg_key():
     badge = circle(41, 39, 9.5, INK, f' stroke="{HOLE}" stroke-width="2.4"')
     tick = circle(41, 39, 3.2, HOLE)
     return key + badge + tick
+
 
 @reg("GPU_Viewer", BLUE_GREY_DEEP)
 def gpu_viewer():
@@ -203,14 +236,17 @@ def gpu_viewer():
             fans += line(x1, y1, x2, y2, INK, 2.2)
     return card + pins + fans
 
+
 @reg("GameMakerStudio2", BLUE_GREY_DARK)
 def gamemaker():
     return cut("M32 12.4L14.4 30L32 47.6L40 39.7V30H49.6Z" "M32 30V37.4L24.6 30L32 22.6L40 30Z", INK)
+
 
 @reg("GammaRay", BLUE_DEEP)
 def gammaray():
     return stroke("M18.5 23.5C20.5 20 24 19 26.5 22C29.5 26 31 33.5 32 38.5"
                   "C33 43.5 31.5 47 29.5 45.5C27.5 44 29 38.5 32.5 33L44.5 13.5", INK, 3.8)
+
 
 @reg("ILSpy", BLUE_GREY_DEEP)
 def ilspy():
@@ -220,6 +256,7 @@ def ilspy():
     handle = line(22.5, 39, 16, 45.5, INK, 4.6)
     return win + bar + lens + handle
 
+
 @reg("Impactor", GREY_DARK)
 def impactor():
     body = rrect(24, 16, 23, 13, 4, INK)
@@ -228,11 +265,13 @@ def impactor():
     cable = line(12.5, 22.5, 17.5, 22.5, INK, 3)
     return body + grip + nozzle + cable + circle(41.5, 22.5, 2.2, HOLE)
 
+
 @reg("JForex", RED_DARK)
 def jforex():
     j = stroke("M28 14.5V36C28 42 24.5 45.5 18.5 44", INK, 5)
     ff = stroke("M35 45.5V22C35 17.5 37.5 15 41.5 15H46M35 29H44", INK, 5)
     return j + ff
+
 
 @reg("JRomManager", BLUE_GREY_DEEP)
 def jrommanager():
@@ -243,6 +282,7 @@ def jrommanager():
     o = rrect(27, 24.5, 8, 11, 3.4, "none", f' stroke="{HOLE}" stroke-width="2.4"')
     m = stroke("M38.5 35.5V24.5L42.5 30.5L46.5 24.5V35.5", HOLE, 2.4)
     return pins + body + r + o + m
+
 
 @reg("JabRef", INDIGO)
 def jabref():
@@ -255,6 +295,7 @@ def jabref():
     tip = poly([(28, 12.5), (36, 12.5), (32, 17.5)], INK, 2)
     return left + right + arcs + tip
 
+
 @reg("JavaFXSceneBuilder2.0", BLUE_GREY_DARK)
 def scenebuilder():
     hand = (rrect(26, 9, 7, 22, 3.5, INK) + rrect(33.8, 17.5, 6.4, 13, 3.2, INK) +
@@ -264,11 +305,13 @@ def scenebuilder():
     gaps = line(33.4, 23, 33.4, 30, HOLE, 2) + line(40.5, 24.5, 40.5, 30, HOLE, 2)
     return g(hand + gaps, "rotate(-30 32 30)")
 
+
 @reg("Jellyamp", DEEP_PURPLE)
 def jellyamp():
     outer = poly([(19.5, 13), (47.5, 33), (17, 46)], INK, 5)
     inner = poly([(25.5, 25), (37.5, 33.5), (24.5, 39)], HOLE, 2.5)
     return outer + inner
+
 
 @reg("KakaoTalk", YELLOW)
 def kakaotalk():
@@ -281,6 +324,7 @@ def kakaotalk():
     k = line(39.5, 24.5, 39.5, 33, HOLE, w) + stroke("M44.5 24.5L39.8 29L44.8 33", HOLE, w)
     return bubble + t + a + l_ + k
 
+
 @reg("KittehPlayer", PINK_LIGHT)
 def kittehplayer():
     ears = poly([(17.5, 23), (19.5, 11), (28, 18)], INK, 2.5) + poly([(46.5, 23), (44.5, 11), (36, 18)], INK, 2.5)
@@ -288,6 +332,7 @@ def kittehplayer():
     screen = rrect(19.5, 21.5, 25, 21, 5.5, HOLE)
     play = poly([(28.5, 26.5), (37.5, 32), (28.5, 37.5)], INK, 2.5)
     return ears + body + screen + play
+
 
 @reg("KoboDeluxe", BLUE_DEEP)
 def kobodeluxe():
@@ -297,6 +342,7 @@ def kobodeluxe():
                 "C25.5 23 28.5 16 32 12Z", INK, f' stroke="{HOLE}" stroke-width="1.8"')
     return wings + body + '<ellipse cx="32" cy="33" rx="3.5" ry="4.5" fill="HOLE"/>'
 
+
 @reg("LanguageTool", BLUE_DEEP)
 def languagetool():
     l_ = stroke("M17.5 14.5H21.5V30H28", INK, 4)
@@ -304,6 +350,7 @@ def languagetool():
     wave = stroke("M16 38.5C18.5 35.5 21.5 35.5 24 38.5C26.5 41.5 29.5 41.5 32 38.5"
                   "C34.5 35.5 37.5 35.5 40 38.5C42.5 41.5 45.5 41.5 48 38.5", BLUE_SOFT, 3.6)
     return l_ + t + wave
+
 
 @reg("LyricsFinder", LIGHT_BLUE_DEEP)
 def lyricsfinder():
@@ -314,6 +361,7 @@ def lyricsfinder():
             stroke("M41.2 44V35.5L47.7 34V42.5", INK, 1.9))
     return bino + badge + note
 
+
 @reg("MAX", INDIGO_LIGHT)
 def max_messenger():
     bubble = cut("M32.5 12.5C43 12.5 50 20.5 50 30C50 40 42.5 47.5 32.5 47.5"
@@ -323,6 +371,7 @@ def max_messenger():
                  "C25 39 26.5 37.8 27.3 37C28.8 38 30.5 38.8 32.5 38.8C37.5 38.8 41 35 41 30"
                  "C41 25.3 37 21.5 31.5 21.5Z", INK)
     return bubble
+
 
 @reg("MediaElch", BROWN)
 def mediaelch():
@@ -336,6 +385,7 @@ def mediaelch():
         circle(29.5, 42, 1.4, HOLE) + circle(34.5, 42, 1.4, HOLE)
     return ant + head + ears + face
 
+
 @reg("MediaHuman", GREY_DEEP)
 def mediahuman():
     mic = rrect(24.5, 11.5, 15, 22, 7.5, INK)
@@ -346,6 +396,7 @@ def mediahuman():
             path("M26 43L32 41L38 43L36 48H28Z", INK))
     return mic + slots + neck + base
 
+
 @reg("MesenSIcon", ORANGE_DEEP)
 def mesen():
     brow = stroke("M15.5 27C25 17.5 39 17.5 48.5 27", INK, 4.2)
@@ -353,11 +404,13 @@ def mesen():
     iris = circle(32, 32, 8.5, INK) + line(33.5, 28.5, 36.5, 31.5, HOLE, 2.4)
     return brow + lower + iris
 
+
 @reg("MotionBox", LIGHT_BLUE)
 def motionbox():
     return poly([(14.5, 45.5), (20.5, 14.5), (27, 14.5), (32, 28), (37, 14.5), (43.5, 14.5),
                  (49.5, 45.5), (42.5, 45.5), (39.5, 28), (34.5, 40), (29.5, 40), (24.5, 28),
                  (21.5, 45.5)], INK, 2)
+
 
 @reg("Nim", AMBER_DEEP)
 def nim():
@@ -368,6 +421,7 @@ def nim():
                 f' stroke="{INK}" stroke-width="2" stroke-linejoin="round"')
     return crown + band
 
+
 @reg("NoMachine-icon", RED_DEEP)
 def nomachine():
     bang = rrect(15, 16, 6.5, 18.5, 1.5, INK) + rrect(15, 37.5, 6.5, 6.5, 1.5, INK)
@@ -375,11 +429,13 @@ def nomachine():
              "A1.5 1.5 0 0 1 26.5 16Z", INK)
     return bang + m
 
+
 @reg("Notesnook", BLUE_GREY_DARK)
 def notesnook():
     top = stroke("M20.5 12.5V26A11.75 11.75 0 0 1 44 26V38.5", INK, 5)
     bottom = stroke("M20.5 32V38.5C20.5 45.5 26 50.5 32.25 50.5C37 50.5 41 47.5 42.6 43.5", INK, 5)
     return _sc(top + bottom, .8, 32.25, 31.5)
+
 
 @reg("Nvidiux", RED_DEEP)
 def nvidiux():
@@ -388,6 +444,7 @@ def nvidiux():
     needle = poly([(24.5, 33.5), (47, 16.5), (29.5, 38.5)], INK, 1.5)
     hub = circle(26, 37.5, 6.8, INK)
     return _sc(ticks + needle + hub, 1, 33, 31)
+
 
 @reg("Black_Chocobo", GREY_LIGHT)
 def black_chocobo():
@@ -398,12 +455,14 @@ def black_chocobo():
     eye = circle(30, 24, 2, WHITE) + circle(30.4, 24, 1.1, INK)
     return head + crest + beak + eye
 
+
 @reg("Diablo", RED_DARK)
 def diablo():
     d = cut("M18 13H32.5C42 13 47.5 20 47.5 30C47.5 40 42 47 32.5 47H18Z"
             "M26 20.5H32C37 20.5 39.5 24.5 39.5 30C39.5 35.5 37 39.5 32 39.5H26Z", INK)
     foot = path("M18 38L26 38V47H20C17 47 14.5 48 12.5 50C13 45 15.5 41 18 38Z", INK)
     return d + foot
+
 
 @reg("Dstroy2", DEEP_PURPLE)
 def dstroy2():
@@ -413,10 +472,12 @@ def dstroy2():
             circle(cx + r * .3, cy, r * .22, DEEP_PURPLE_DARK)
     return out
 
+
 @small("KakaoTalk")
 def kakaotalk_s():
     return ('<ellipse cx="32" cy="28.5" rx="18" ry="14" fill="INK"/>' +
             poly([(21, 36), (18, 47), (29, 40)], INK, 2))
+
 
 @small("JRomManager")
 def jrommanager_s():
@@ -424,11 +485,13 @@ def jrommanager_s():
                    for x in (18.5, 29, 39.5))
     return pins + rrect(13, 19.5, 38, 21, 4, INK)
 
+
 @small("FamiStudio")
 def famistudio_s():
     s, x0, y0 = 11.2, 15.2, 13.2
     return "".join(rrect(x0 + c * s, y0 + r * s, s - 1, s - 1, 2.2, INK)
                    for c, r in [(1, 0), (0, 1), (1, 1), (2, 1), (1, 2)])
+
 
 @small("GPU_Viewer")
 def gpu_viewer_s():
@@ -436,17 +499,20 @@ def gpu_viewer_s():
     pins = "".join(rrect(19 + i * 7.5, 38, 5, 7, 1.2, INK) for i in range(4))
     return card + pins + circle(24.5, 28, 7, HOLE) + circle(40, 28, 7, HOLE)
 
+
 @small("LyricsFinder")
 def lyricsfinder_s():
     bino = (rrect(14, 20, 14, 25, 4.5, INK) + rrect(36, 20, 14, 25, 4.5, INK) +
             rrect(26, 24, 12, 10, 1.5, INK))
     return bino + circle(43, 41, 9.5, HOLE) + circle(42, 43, 4.5, INK)
 
+
 @small("BadlionClient")
 def badlion_s():
     hexa = poly([pt(32, 30, 18, -90 + 60 * k) for k in range(6)], INK, 3)
     mane = poly([pt(32, 30.5, 13 if k % 2 == 0 else 10.5, -90 + 30 * k) for k in range(12)], HOLE, 2)
     return hexa + mane + circle(32, 31.5, 6.5, INK)
+
 
 @small("CraftStudio")
 def craftstudio_s():
@@ -456,6 +522,7 @@ def craftstudio_s():
     pts = [pt(32, 38, 10 if k % 2 == 0 else 4.5, -90 + 36 * k) for k in range(10)]
     return top + left + right + poly(pts, HOLE, 3) + poly(pts, AMBER_SOFT, 1)
 
+
 @small("CubicSDR")
 def cubicsdr_s():
     top = poly([(32, 19), (49, 27.5), (32, 36), (15, 27.5)], INK, 2.5)
@@ -463,10 +530,12 @@ def cubicsdr_s():
     right = poly([(49, 27.5), (32, 36), (32, 49), (49, 40.5)], BLUE_GREY_LIGHT, 2.5)
     return top + left + right + line(32, 27.5, 32, 18, BLUE_GREY_DARK, 3) + circle(32, 15, 5.5, RED)
 
+
 @small("FreeTexturePacker")
 def freetexturepacker_s():
     hexa = poly([pt(32, 30, 18, -90 + 60 * k) for k in range(6)], INK, 3)
     return hexa + stroke("M22 24.3L32 30L42 24.3M32 30V42", HOLE, 3)
+
 
 @small("Nvidiux")
 def nvidiux_s():
@@ -474,10 +543,12 @@ def nvidiux_s():
            'stroke-width="4" stroke-dasharray="6 3.5"/>')
     return _sc(arc + poly([(23.5, 33), (47, 16.5), (30, 39.5)], INK, 2) + circle(26, 37.5, 7.5, INK), 1, 33, 31)
 
+
 @small("AmneziaVPN")
 def amnezia_s():
     ring = f'<circle cx="32" cy="31" r="14.5" fill="none" stroke="{INK}" stroke-width="2.6"/>'
     return ring + stroke("M21.5 45L32 15L42.5 45", INK, 3.6) + line(15.5, 35, 48.5, 28, INK, 3.2)
+
 
 @small("GPG-Key4")
 def gpg_key_s():
@@ -486,12 +557,14 @@ def gpg_key_s():
     return key + circle(41, 40, 9.5, INK, f' stroke="{HOLE}" stroke-width="3"') + \
         circle(41, 40, 3.4, HOLE)
 
+
 @small("GP6-icon")
 def guitar_pro_s():
     pick = path("M32 11C43 11 50.5 14 50.5 21C50.5 31 39 46.5 32 49"
                 "C25 46.5 13.5 31 13.5 21C13.5 14 21 11 32 11Z", INK)
     return pick + stroke("M37.5 20C36 18 34 17.5 32 17.5C27.5 17.5 24.5 21 24.5 25.5"
                          "C24.5 30 27.5 33 32 33C35.5 33 38 31 38 27H32.5", HOLE, 3)
+
 
 @small("JabRef")
 def jabref_s():

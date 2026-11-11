@@ -1,13 +1,23 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-"""Batch 80: apps missing from Papirus (Flathub refs and a few found online)."""
-from lm import *
+"""Batch 80: apps missing from Papirus (Flathub apps and a few others)."""
+from lm import (
+    AMBER, AMBER_LIGHT, BLUE, BLUE_DARK, BLUE_DEEP, BLUE_GREY, BLUE_GREY_DARK, BLUE_GREY_SOFT,
+    BLUE_SOFT, BROWN_DARK, circle, cut, CX, CY, CYAN_DEEP, CYAN_SOFT, DEEP_ORANGE_DEEP,
+    DEEP_ORANGE_LIGHT, DEEP_PURPLE, DEEP_PURPLE_DEEP, DEEP_PURPLE_LIGHT, DEEP_PURPLE_SOFT, g,
+    GREY_DARK, GREY_DEEP, HOLE, INDIGO, INDIGO_DARK, INDIGO_LIGHT, INDIGO_SOFT, INK,
+    LIGHT_BLUE_DARK, LIGHT_BLUE_DEEP, LIGHT_BLUE_SOFT, line, ORANGE_DARK, ORANGE_LIGHT, path,
+    PINK_LIGHT, PINK_SOFT, poly, pt, RED_DARK, RED_DEEP, RED_LIGHT, RED_SOFT, rrect, stroke,
+    TEAL, TEAL_DARK, WHITE, YELLOW_LIGHT,
+)
 from glyphs.kit import arc, ellipse, registry, ring_b, rot_b
 
 ICONS, SMALL, reg, small = registry()
 
+
 @reg("com.thincast.client", GREY_DEEP)
 def thincast():
     return stroke("M13.5 31.5H20L24.5 21L30.5 43L36 15.5L41 36L44 30.5H50.5", INK, 3.6)
+
 
 @reg("io.github.IshuSinghSE.aurynk", RED_LIGHT)
 def aurynk():
@@ -15,6 +25,7 @@ def aurynk():
     wifi = (stroke(arc(32, 38, 8, 225, 315), INK, 2.6) + stroke(arc(32, 38, 4, 225, 315), INK, 2.6)
             + circle(32, 38, 1.6, INK))
     return screen + wifi
+
 
 @reg("docker", BLUE)
 def docker():
@@ -26,11 +37,13 @@ def docker():
     eye = circle(21.5, 36.5, 1.5, HOLE)
     return g(whale + boxes + eye, "translate(0 1)")
 
+
 @reg("chat.simplex.simplex", LIGHT_BLUE_DEEP)
 def simplex():
     small_x = line(17, 30, 30, 43, INDIGO_DARK, 5) + line(30, 30, 17, 43, INDIGO_DARK, 5)
     big_x = line(28, 16, 47, 35, INK, 5) + line(47, 16, 28, 35, INK, 5)
     return small_x + big_x
+
 
 @reg("io.github.zarestia_dev.rclone-manager", BLUE_DEEP)
 def rclone():
@@ -40,11 +53,13 @@ def rclone():
     right = stroke(arc(39, 35, r, 270, 540), BLUE_SOFT, w)
     return top + left + right
 
+
 @reg("io.github.unknownskl.greenlight", ORANGE_DARK)
 def greenlight():
     return path("M20.5 41C16 41 13.5 38 13.5 34.5C13.5 31 16 28.3 19.5 28C19.5 22.5 23.5 18.5 29 18.5"
                 "C33.5 18.5 37 21.3 38.3 25C39.3 24.5 40.3 24.3 41.5 24.3C46.5 24.3 50.5 28.5 50.5 33"
                 "C50.5 37.5 47 41 42.5 41Z", INK)
+
 
 @reg("io.github.astralvixen.geforce-infinity", BLUE_DEEP)
 def geforce_infinity():
@@ -53,6 +68,7 @@ def geforce_infinity():
     c = path("M14.5 36C19 35.5 24.5 37.5 29 44C25.5 41.5 20 40 14.5 41Z", INK)
     return g(a + b + c, "translate(0 1)")
 
+
 @reg("io.github.revisto.drum-machine", DEEP_PURPLE_LIGHT)
 def drum_machine():
     pads = "".join(rrect(15 + c * 9, 13.5 + r * 8, 7, 6, 1.8, INK) for r in range(3) for c in range(4))
@@ -60,9 +76,9 @@ def drum_machine():
     knob = rrect(26, 38, 6, 9, 2, INK) + rrect(40, 38.5, 4, 8, 2, INK)
     return pads + rail + knob
 
+
 @reg("app.devsuite.Ptyxis", BLUE_GREY)
 def ptyxis():
-
     hedge = rrect(15, 14, 34, 32, 6, BLUE_GREY_SOFT)
     for k in range(5):
         t = 15 + k * 8.5
@@ -71,11 +87,13 @@ def ptyxis():
     chev = stroke("M25 21L36 30L25 39", INK, 5.2)
     return hedge + chev
 
+
 @reg("tabby", CYAN_DEEP)
 def tabby():
     side = poly([(20, 14.5), (24, 17.5), (46, 30), (46, 36), (24, 49), (20, 46)], LIGHT_BLUE_DARK, 1.5)
     face = poly([(18, 13), (44, 27.5), (44, 33.5), (18, 48), (18, 40.5), (34.5, 30.5), (18, 20.5)], INK, 1.5)
     return g(side + face, "translate(1 -1)")
+
 
 @reg("io.github.qwersyk.Newelle", BLUE_DEEP)
 def newelle():
@@ -85,6 +103,7 @@ def newelle():
     prompt = stroke("M29.5 31L34 34.5L29.5 38", INK, 2.6) + line(36, 40, 43, 40, INK, 2.6)
     return back + front + prompt
 
+
 @reg("best.ellie.StartupConfiguration", CYAN_DEEP)
 def startup_config():
     body = path("M32 11.5C37.5 16 39.5 22.5 39 30L37.5 40H26.5L25 30C24.5 22.5 26.5 16 32 11.5Z", INK)
@@ -93,12 +112,14 @@ def startup_config():
     flame = path("M29 42.5H35L32 48.5Z", INK)
     return rot_b(body + fins + window + flame, 45, 32, 30)
 
+
 @reg("io.github.maniacx.BudsLink", DEEP_ORANGE_LIGHT)
 def budslink():
     disc_ = circle(CX, CY, 17, BLUE_SOFT) + circle(CX, CY, 13, BLUE_DARK)
     band = stroke(arc(32, 31.5, 8, 180, 360), INK, 2.6)
     cups = rrect(21.5, 30, 4.6, 8, 2, INK) + rrect(37.9, 30, 4.6, 8, 2, INK)
     return disc_ + band + cups
+
 
 @reg("org.rncbc.qpwgraph", BLUE_GREY_DARK)
 def qpwgraph():
@@ -107,6 +128,7 @@ def qpwgraph():
     nodes = "".join(circle(x, y, 3.8, INK) + circle(x, y, 1.6, HOLE)
                     for x in (16, 48) for y in (17, 30, 43))
     return wires + nodes
+
 
 @reg("io.github.bhack.mini-eq", BLUE_GREY_DARK)
 def mini_eq():
@@ -117,6 +139,7 @@ def mini_eq():
     bars = "".join(line(x, 47 - h, x, 47, CYAN_SOFT, 2.2) for x, h in [(27, 2), (30, 4), (33, 3), (36, 5), (39, 2)])
     return posts + curve + nodes + bars
 
+
 @reg("moe.kopuz.kopuz", RED_DARK)
 def kopuz():
     neck = line(35, 25, 47, 13, INK, 4.2)
@@ -125,6 +148,7 @@ def kopuz():
                 "C12 37.5 16.5 29.5 23 25.5C29 21.5 34.5 19.5 37.5 22.5Z", INK)
     hole = circle(22, 36.5, 4.3, HOLE)
     return neck + peg + body + hole
+
 
 @reg("io.github.dzheremi2.lrcmake-gtk", ORANGE_DARK)
 def chronograph():
@@ -135,6 +159,7 @@ def chronograph():
     clock = circle(22, 20, 9, INK) + circle(22, 20, 6.8, HOLE) + stroke("M22 15.5V20L25.5 22", INK, 2.2)
     return book + note + clock
 
+
 @reg("org.learningequality.Kolibri", AMBER)
 def kolibri():
     bird = stroke("M32 16C28 19.5 27 26 28.5 32C29.5 36 31 39 31.5 42C32 45.5 29.5 47 28.5 45"
@@ -144,12 +169,14 @@ def kolibri():
              + stroke(arc(32, 30, 9.5, -30, 30), INK, 2.4) + stroke(arc(32, 30, 14, -35, 35), INK, 2.4))
     return bird + waves
 
+
 @reg("net.opentabletdriver.OpenTabletDriver", BLUE_GREY_DARK)
 def opentabletdriver():
     tablet = rrect(13.5, 15, 37, 30, 4, INK)
     strip = line(18.5, 20, 18.5, 40, HOLE, 2.4)
     pen = line(26.5, 36.5, 44, 19, HOLE, 3.6) + poly([(24, 39), (25, 35), (28, 38)], HOLE, 1)
     return tablet + strip + pen
+
 
 @reg("io.gitlab.adhami3310.Converter", PINK_LIGHT)
 def switcheroo():
@@ -159,6 +186,7 @@ def switcheroo():
               + stroke(arc(30, 32, 8.5, 10, 150), HOLE, 3.2) + poly([(24.5, 42), (20.5, 33.5), (29, 35)], HOLE, 1.2))
     return back + card + arrows
 
+
 @reg("io.github.giantpinkrobots.varia", BLUE)
 def varia():
     arrow = line(28, 13, 28, 27, INK, 3.8) + stroke("M21.5 21.5L28 28L34.5 21.5", INK, 3.8)
@@ -167,6 +195,7 @@ def varia():
     dots = "".join(circle(x, y, r, INK) for x, y, r in
                    [(47, 41.5, 2), (45.5, 35.5, 1.6), (49.5, 31, 1.4), (48.5, 25.5, 1.2), (44, 29.5, 1.2)])
     return arrow + tray + bar + dots
+
 
 @reg("io.github.edewin.corex", TEAL_DARK)
 def corex():
@@ -178,6 +207,7 @@ def corex():
     pulse = stroke("M23.5 30.5H27L29.5 25L33 35.5L35.5 28.5L37 30.5H40.5", HOLE, 2.2)
     return chip + pins + pulse
 
+
 @reg("com.github.tenderowl.frog", CYAN_DEEP)
 def frog():
     head = (circle(22.5, 21, 7, INK) + circle(41.5, 21, 7, INK)
@@ -187,6 +217,7 @@ def frog():
     mouth = stroke("M20.5 34.5C27 39 37 39 43.5 34.5", HOLE, 2.6)
     return head + eyes + mouth
 
+
 @reg("io.github.JakubMelka.Pdf4qt", RED_DEEP)
 def pdf4qt():
     doc = path("M18.5 12H37L45.5 20.5V45Q45.5 48 42.5 48H21.5Q18.5 48 18.5 45V15Q18.5 12 21.5 12Z", INK)
@@ -195,6 +226,7 @@ def pdf4qt():
                 (36, 42), (36, 43.5), (32, 42.5), (28, 43.5), (28, 42), (30.7, 39.5), (30.5, 35.5),
                 (23, 37.5), (23, 35), (30.5, 30), (30.5, 26)], HOLE, 1)
     return doc + fold + jet
+
 
 @reg("ca.parallel_launcher.ParallelLauncher", INDIGO)
 def parallel_launcher():
@@ -207,6 +239,7 @@ def parallel_launcher():
         out += poly([(x, y0 + 3), (x + 4.5, y0 + 1), (x + 9, y0 + 3), (x + 4.5, y0 + 5)], AMBER_LIGHT, 0.8)
     return out
 
+
 @reg("io.github.focustimerhq.FocusTimer", RED_LIGHT)
 def focus_timer():
     egg = path("M32 12C40.5 12 46.5 23 46.5 33C46.5 42 40 47.5 32 47.5C24 47.5 17.5 42 17.5 33"
@@ -217,6 +250,7 @@ def focus_timer():
     band = line(18, 33, 46, 33, HOLE, 1.6)
     return egg + band + ticks + pointer
 
+
 @reg("com.github.Darazaki.Spedread", DEEP_PURPLE_DEEP)
 def spedread():
     paper = rrect(16, 12, 32, 36, 3.5, INK)
@@ -224,6 +258,7 @@ def spedread():
     r = stroke("M35.5 36V26M35.5 29C36.5 26.5 39 25.5 42 26", HOLE, 3)
     lines = line(21.5, 17, 42.5, 17, DEEP_PURPLE_SOFT, 2.2) + line(21.5, 42, 42.5, 42, DEEP_PURPLE_SOFT, 2.2)
     return paper + s + r + lines
+
 
 @reg("org.ecosia.Browser", LIGHT_BLUE_DARK)
 def ecosia():
@@ -234,9 +269,11 @@ def ecosia():
     e = stroke("M36.5 21.5H28V35.5H36.5M28 28.5H35", HOLE, 3.2)
     return crown + trunk + e
 
+
 @reg("io.github.cboxdoerfer.FSearch", GREY_DARK)
 def fsearch():
     return ring_b(28, 26, 10.5, INK, 4.4) + line(35.5, 33.5, 47, 45, INK, 5.2)
+
 
 @reg("com.ktechpit.typingmaster", AMBER)
 def typingmaster():
@@ -245,6 +282,7 @@ def typingmaster():
     keys += "".join(rrect(17 + c * 7.8, 30.5, 5.2, 4.4, 1.2, WHITE) for c in range(1, 3))
     keys += rrect(17, 30.5, 5.2, 4.4, 1.2, HOLE) + rrect(40.4, 30.5, 5.2, 4.4, 1.2, HOLE)
     return board + keys
+
 
 @reg("io.github.gopher64.gopher64", BLUE_DEEP)
 def gopher64():
@@ -257,6 +295,7 @@ def gopher64():
     teeth = rrect(28.8, 38, 3, 4.6, 0.8, INK) + rrect(32.2, 38, 3, 4.6, 0.8, INK)
     return ears + head + eyes + snout + nose + teeth
 
+
 @reg("org.pvermeer.WebAppHub", RED_DEEP)
 def webapphub():
     win = rrect(13, 14, 38, 30, 4, INK)
@@ -266,15 +305,18 @@ def webapphub():
     hand = path("M13 44C15.5 40 19.5 39 22 41.5L26 45.5C27 46.5 26 48 24.5 47.5L18 47.5Q14 47.5 13 44Z", RED_SOFT)
     return win + bar + top + blocks + hand
 
+
 @reg("windsurf", TEAL)
 def windsurf():
     return stroke("M13.5 20L20.5 34.5C22 37.5 25.5 36.5 25.5 33.5V26C25.5 22.5 29.5 21.5 31.5 24.5"
                   "L38.5 36C40 38.5 44 37.5 44 34.5V26.5C44 23.5 46.5 22 50.5 22", INK, 5)
 
+
 def _ente_e():
     return cut("M33.5 18.5C42.5 18.5 49 24.5 49 33V35.5H27.5C28.5 38.5 31 40.5 35 40.5C38 40.5 40.5 39.5 42 38"
             "L47 43C44 46 39.5 48 34.5 48C25 48 18 41.5 18 33C18 24.5 24.5 18.5 33.5 18.5Z"
             "M27.8 30H39.5C38.5 27 36.2 25.5 33.6 25.5C31 25.5 28.8 27 27.8 30Z", INK)
+
 
 @reg("ente-auth", DEEP_PURPLE_LIGHT)
 def ente_auth():
@@ -283,11 +325,13 @@ def ente_auth():
                   YELLOW_LIGHT, f' stroke="{HOLE}" stroke-width="2" stroke-linejoin="round"')
     return e + shield
 
+
 def _plug(fill):
     head = path("M26 30.5L33.5 38C35 39.5 35 42 33.5 43.5L31 46C29 48 26 48 24 46L18 40"
                 "C16 38 16 35 18 33L20.5 30.5C22 29 24.5 29 26 30.5Z", fill)
     prongs = line(19.5, 43.5, 15.5, 47.5, fill, 2.6) + line(24, 48, 21.5, 50.5, fill, 2.6)
     return head + prongs
+
 
 @reg("armcord", INDIGO_LIGHT)
 def armcord():
@@ -295,18 +339,20 @@ def armcord():
                   "C38 28 44 26 47 30C49.5 34 47.5 39 44.5 45", INK, 2.6)
     return cord + _plug(INK)
 
+
 @reg("legcord", DEEP_PURPLE)
 def legcord():
     cord = stroke("M30.5 33.5C35 29 37 25 37 21C37 16 40.5 13 44.5 13C48.5 13 50 16.5 48.5 19.5"
                   "C47 22 43.5 22 42.5 19.5C41.5 17.5 43 16 44.5 16.5", INK, 2.8)
     return cord + _plug(INK)
 
+
 @reg("chatgpt", TEAL)
 def chatgpt():
-
     link = "M27.75 31.3V22.2A6 6 0 0 1 39.75 22.2"
     out = "".join(rot_b(stroke(link, INK, 3), 60 * k) for k in range(6))
     return g(out, "translate(32 30) scale(1.12) translate(-32 -30)")
+
 
 @reg("claude", DEEP_ORANGE_DEEP)
 def claude():
@@ -319,12 +365,14 @@ def claude():
         rays += poly([(xa, ya), (x, y), (xb, yb)], INK, 2.6)
     return rays + circle(CX, CY, 3.2, INK)
 
+
 @small("org.learningequality.Kolibri")
 def kolibri_s():
     bird = stroke("M32 15C27.5 19 27 28 30 36C31 39 32 42 32 45M32 15C36.5 19 37 28 34 36"
                   "C33 39 32 42 32 45", INK, 3)
     waves = stroke(arc(32, 30, 12, 145, 215), INK, 3) + stroke(arc(32, 30, 12, -35, 35), INK, 3)
     return bird + waves
+
 
 @small("io.github.edewin.corex")
 def corex_s():
@@ -335,6 +383,7 @@ def corex_s():
         pins += line(13, k - 2, 17, k - 2, INK, 3) + line(47, k - 2, 51, k - 2, INK, 3)
     return chip + pins + stroke("M22 30.5H26L29.5 23.5L34 37L37.5 30.5H42", HOLE, 3)
 
+
 @small("io.github.dzheremi2.lrcmake-gtk")
 def chronograph_s():
     book = (path("M13 26C18.5 24 25.5 24 31 27V48C25.5 45 18.5 45 13 47Z", INK) +
@@ -342,9 +391,11 @@ def chronograph_s():
     clock = circle(24, 19, 9.5, INK) + circle(24, 19, 6.5, HOLE) + stroke("M24 15V19.5L27 21", INK, 2.6)
     return book + clock
 
+
 @small("io.github.revisto.drum-machine")
 def drum_machine_s():
     return "".join(rrect(14 + c * 13, 15 + r * 12, 10, 9, 2.5, INK) for r in range(3) for c in range(3))
+
 
 @small("io.github.bhack.mini-eq")
 def mini_eq_s():
@@ -353,11 +404,13 @@ def mini_eq_s():
     nodes = "".join(circle(x, y, 4.5, ORANGE_LIGHT) for x, y in [(19, 33), (32, 22), (45, 33)])
     return posts + curve + nodes
 
+
 @small("org.rncbc.qpwgraph")
 def qpwgraph_s():
     wires = stroke("M18 17C30 17 34 43 46 43", INK, 3.4) + stroke("M18 43C30 43 34 17 46 17", INK, 3.4)
     nodes = "".join(circle(x, y, 4.6, INK) for x in (16, 48) for y in (17, 43))
     return wires + nodes
+
 
 @small("chatgpt")
 def chatgpt_s():
@@ -365,16 +418,19 @@ def chatgpt_s():
     out = "".join(rot_b(stroke(link, INK, 2.4), 60 * k) for k in range(6))
     return g(out, "translate(32 30) scale(1.2) translate(-32 -30)")
 
+
 @small("com.ktechpit.typingmaster")
 def typingmaster_s():
     board = rrect(11, 17, 42, 27, 5, INK)
     keys = "".join(rrect(16 + c * 11.5, 22.5 + r * 9, 8, 6, 1.8, HOLE) for r in range(2) for c in range(3))
     return board + keys
 
+
 @small("org.pvermeer.WebAppHub")
 def webapphub_s():
     win = rrect(12, 13, 40, 33, 5, INK)
     return win + line(12, 22, 52, 22, HOLE, 2.6) + rrect(18, 28, 14, 12, 2.5, HOLE)
+
 
 @small("io.github.focustimerhq.FocusTimer")
 def focus_timer_s():
@@ -382,11 +438,13 @@ def focus_timer_s():
                "C16.5 22.5 23 11 32 11Z", INK)
     return egg + line(17, 33, 47, 33, HOLE, 3) + poly([(32, 37.5), (35.5, 43), (28.5, 43)], HOLE, 1)
 
+
 @small("com.github.Darazaki.Spedread")
 def spedread_s():
     paper = rrect(15, 11, 34, 38, 4, INK)
     s_ = stroke("M38 22C36.5 19 26 18.5 26 23.5C26 28.5 38 27.5 38 33.5C38 39 27 39.5 25.5 36", HOLE, 4)
     return paper + s_
+
 
 @small("io.github.JakubMelka.Pdf4qt")
 def pdf4qt_s():
@@ -396,18 +454,22 @@ def pdf4qt_s():
            + line(28, 42, 36, 42, HOLE, 3))
     return doc + fold + jet
 
+
 def _plug_s():
     head = path("M26.5 29L35 37.5C36.5 39 36.5 41.5 35 43L31.5 46.5C30 48 27.5 48 26 46.5L17.5 38"
                 "C16 36.5 16 34 17.5 32.5L21 29C22.5 27.5 25 27.5 26.5 29Z", INK)
     return head + line(19, 44.5, 14.5, 49, INK, 3.4) + line(24, 49, 21.5, 51.5, INK, 3.4)
 
+
 @small("armcord")
 def armcord_s():
     return stroke("M32 33C39 26 45 26 47 31C48.5 35 47 40 44 45", INK, 3) + _plug_s()
 
+
 @small("legcord")
 def legcord_s():
     return stroke("M31 32C35.5 27.5 37.5 23 37.5 19.5C37.5 15 41 12.5 44.5 12.5C48 12.5 50 15.5 49 18.5", INK, 3.2) + _plug_s()
+
 
 @small("io.github.giantpinkrobots.varia")
 def varia_s():
@@ -416,12 +478,14 @@ def varia_s():
     bar = rrect(14, 39.5, 36, 7, 3.5, BLUE_DARK) + rrect(14, 39.5, 24, 7, 3.5, INK)
     return arrow + tray + bar
 
+
 @small("io.gitlab.adhami3310.Converter")
 def switcheroo_s():
     card = rrect(12, 12, 40, 36, 6, INK)
     arrows = (stroke(arc(32, 30, 9, 200, 330), HOLE, 3.6) + poly([(37.5, 19.5), (42, 28.5), (32.5, 27)], HOLE, 1.2)
               + stroke(arc(32, 30, 9, 20, 150), HOLE, 3.6) + poly([(26.5, 40.5), (22, 31.5), (31.5, 33)], HOLE, 1.2))
     return card + arrows
+
 
 @small("io.github.gopher64.gopher64")
 def gopher64_s():
@@ -431,6 +495,7 @@ def gopher64_s():
     teeth = rrect(27.5, 36, 4, 7, 1, HOLE) + rrect(32.5, 36, 4, 7, 1, HOLE)
     return ears + head + eyes + teeth
 
+
 @small("io.github.maniacx.BudsLink")
 def budslink_s():
     disc_ = circle(CX, CY, 18, LIGHT_BLUE_SOFT) + circle(CX, CY, 13, LIGHT_BLUE_DARK)
@@ -438,11 +503,13 @@ def budslink_s():
     cups = rrect(20.5, 29.5, 6, 9, 2.5, INK) + rrect(37.5, 29.5, 6, 9, 2.5, INK)
     return disc_ + band + cups
 
+
 @small("io.github.astralvixen.geforce-infinity")
 def geforce_infinity_s():
     a = path("M14 32C22.5 21 34.5 14.5 50 14.5C38 17 29 24 23.5 34Z", INK)
     b = path("M21 38C28 29 37 24 49 23.5C39.5 26 32.5 32 28.5 41Z", INK)
     return a + b
+
 
 @small("ca.parallel_launcher.ParallelLauncher")
 def parallel_launcher_s():
@@ -451,6 +518,7 @@ def parallel_launcher_s():
         out += rrect(x, y0, 10, y1 - y0, 1.5, INK) + rrect(x, y0 - 1, 10, 5, 1.5, AMBER_LIGHT)
     return out
 
+
 @small("docker")
 def docker_s():
     whale = path("M12 30H46C47 28 49.5 27 52 28C51 30 49 31 47 31C44.5 40.5 36 46.5 26 46.5"
@@ -458,6 +526,7 @@ def docker_s():
     boxes = "".join(rrect(x, y, 7, 6.5, 1.3, INK) for x, y in
                     [(16, 21.5), (24.5, 21.5), (33, 21.5), (24.5, 13), (33, 13)])
     return whale + boxes
+
 
 @small("claude")
 def claude_s():
@@ -469,6 +538,7 @@ def claude_s():
         xb, yb = pt(CX, CY, 2.2, a - 180)
         rays += poly([(xa, ya), (x, y), (xb, yb)], INK, 3)
     return rays + circle(CX, CY, 4, INK)
+
 
 @small("ente-auth")
 def ente_auth_s():

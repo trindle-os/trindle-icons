@@ -6,6 +6,7 @@ import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+
 def main():
     with open(os.path.join(ROOT, "VERSION"), encoding="utf-8") as fh:
         version = fh.read().strip()
@@ -16,6 +17,7 @@ def main():
         return 1
     print("version badge matches VERSION")
     return 0
+
 
 if __name__ == "__main__":
     sys.exit(main())

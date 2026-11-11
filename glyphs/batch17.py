@@ -6,10 +6,18 @@ The mark is drawn in INK (white, or near-black on pale tiles); HOLE is
 the tile colour showing through the mark; any other shade is another
 step from the same palette.
 """
-from lm import *
+from lm import (
+    AMBER, AMBER_DEEP, AMBER_LIGHT, BLUE, BLUE_DEEP, BLUE_GREY_DARK, BLUE_GREY_DEEP,
+    BLUE_GREY_SOFT, BLUE_SOFT, BROWN, circle, CX, CY, CYAN_DARK, CYAN_DEEP, DEEP_ORANGE,
+    DEEP_ORANGE_DEEP, DEEP_ORANGE_LIGHT, DEEP_PURPLE, DEEP_PURPLE_LIGHT, DEEP_PURPLE_SOFT, g,
+    GREY_DARK, GREY_DEEP, GREY_SOFT, HOLE, INDIGO, INDIGO_DEEP, INK, LIGHT_BLUE_DEEP, line,
+    ORANGE, ORANGE_DEEP, ORANGE_LIGHT, path, PINK_LIGHT, poly, pt, PURPLE, PURPLE_DEEP,
+    PURPLE_SOFT, RED, RED_DEEP, RED_LIGHT, RED_SOFT, rrect, stroke,
+)
 from glyphs.kit import arc, registry, ring_b, wedge_b
 
 ICONS, SMALL, reg, small = registry()
+
 
 @reg("com.github.phase1geo.outliner", BLUE_GREY_DEEP)
 def outliner():
@@ -18,12 +26,14 @@ def outliner():
     lines = "".join(rrect(26.5, y - 1.6, 22, 3.2, 1.6, INK) for y in (18, 30, 44.5))
     return g(bullets + lines, "translate(0 -1.2)")
 
+
 @reg("com.github.philip-scott.notes-up", BLUE_DEEP)
 def notes_up():
     book = rrect(17, 12, 30, 36, 4, INK)
     spine = rrect(22, 12, 2.6, 36, 0, HOLE)
     mark = poly([(35, 12), (42, 12), (42, 25), (38.5, 22), (35, 25)], ORANGE_LIGHT, 1)
     return book + spine + mark
+
 
 @reg("com.github.thejambi.dayjournal", BLUE_DEEP)
 def dayjournal():
@@ -32,6 +42,7 @@ def dayjournal():
                    f' stroke="{HOLE}" stroke-width="2.2" stroke-dasharray="3 2.4"')
     clasp = rrect(38, 25, 11, 9, 3, HOLE) + circle(43.5, 29.5, 2, INK)
     return body + stitch + clasp
+
 
 @reg("com.github.thejambi.psnotes", BLUE_DEEP)
 def psnotes():
@@ -45,11 +56,11 @@ def psnotes():
     dots = circle(28.3, 41, 1.7, HOLE) + circle(42.5, 41, 1.7, HOLE)
     return pad + rings + bar + p + s + dots
 
+
 @reg("com.lakoliu.Furtherance", BLUE_DEEP)
 def furtherance():
     case = rrect(13.5, 14, 37, 32, 5.5, INK)
     screen = rrect(17.5, 18, 29, 16, 3, HOLE)
-
     three = stroke("M21 22.5H25V30H21M21.5 26.2H25", INK, 2.2)
     two = stroke("M34 22.5H38V26.2H34V30H38", INK, 2.2)
     five = stroke("M44 22.5H40.5V26.2H44V30H40.5", INK, 2.2)
@@ -57,9 +68,11 @@ def furtherance():
     knobs = circle(20.5, 40, 2.2, HOLE) + circle(26.5, 40, 2.2, HOLE)
     return case + screen + three + colon + g(two, "translate(-2.5 0)") + g(five, "translate(-1.8 0)") + knobs
 
+
 @reg("com.github.rickybas.date-countdown", BLUE_DEEP)
 def date_countdown():
     return circle(CX, CY, 11.5, INK) + stroke(arc(CX, CY, 16.5, -90, 190), INK, 3.6)
+
 
 @reg("com.github.sgpthomas.hourglass", BLUE_DEEP)
 def hourglass():
@@ -70,6 +83,7 @@ def hourglass():
             path("M32 35C28 36.5 25.5 38.5 24.5 41H39.5C38.5 38.5 36 36.5 32 35Z", AMBER_LIGHT))
     return caps + glass + sand
 
+
 @reg("com.github.subhadeepjasu.pebbles", BLUE_DEEP)
 def pebbles():
     tiles = "".join(rrect(x, y, 15.5, 15.5, 3.5, INK) for x in (15, 33.5) for y in (13, 31.5))
@@ -79,15 +93,18 @@ def pebbles():
     eq = stroke("M37 36.8H45.5M37 41.7H45.5", HOLE, 2.8)
     return tiles + check + minus + plus + eq
 
+
 @reg("com.github.zelikos.rannum", DEEP_PURPLE)
 def rannum():
     die = rrect(15, 13, 34, 34, 7, INK)
     pips = circle(22.5, 39.5, 3.6, HOLE) + circle(32, 30, 3.6, HOLE) + circle(41.5, 20.5, 3.6, HOLE)
     return die + pips
 
+
 @reg("com.github.stsdc.monitor", BLUE_GREY_DARK)
 def monitor():
     return stroke("M13.5 31H23L27 31L31 17L35.5 43.5L39.5 31H50.5", INK, 3.8)
+
 
 @reg("com.gitlab.miridyan.Mt", BLUE_GREY_DARK)
 def mt():
@@ -98,6 +115,7 @@ def mt():
     under = stroke("M34.5 41H46", INK, 3.8)
     return s + bar + under
 
+
 @reg("com.github.plugarut.pwned-checker", BLUE_GREY_DEEP)
 def pwned_checker():
     tick = stroke("M17.5 17V23.5", INK, 3.6)
@@ -106,12 +124,14 @@ def pwned_checker():
     dashes = stroke("M31.5 36.5H38.5M42.5 36.5H48.5", INK, 3.6)
     return g(tick + dot + semi + dashes, "translate(0 -1.5)")
 
+
 @reg("com.github.philip-scott.spice-up", BLUE)
 def spice_up():
     bar = rrect(13.5, 13, 37, 5.5, 2.5, INK)
     board = rrect(16.5, 19.5, 31, 27, 4, INK)
     play = poly([(28.5, 26), (38.5, 33), (28.5, 40)], HOLE, 2.5)
     return bar + board + play
+
 
 @reg("com.github.philip-scott.wallpaperize", PURPLE)
 def wallpaperize():
@@ -124,6 +144,7 @@ def wallpaperize():
               stroke("M38.5 24C37.5 20.5 35 18.5 32 18.5", HOLE, 2.6))
     return frame + sun + trunk + fronds
 
+
 @reg("com.github.rafostar.Clapper", INDIGO)
 def clapper():
     top = g(rrect(15, 15, 34, 7, 2, INK) +
@@ -133,11 +154,13 @@ def clapper():
     play = poly([(28.5, 29.5), (37.5, 35.5), (28.5, 41.5)], HOLE, 2.2)
     return top + body + play
 
+
 @reg("com.github.robertsanseries.karim", RED)
 def karim():
     tri = poly([(18, 13), (48, 30), (18, 47)], INK, 6)
     arrow = stroke("M27.5 20.5V36M21.5 31L27.5 37L33.5 31", HOLE, 4)
     return tri + arrow
+
 
 @reg("com.github.unrud.VideoDownloader", DEEP_ORANGE_DEEP)
 def video_downloader():
@@ -146,6 +169,7 @@ def video_downloader():
     arrow = stroke("M32 19V38M25 31.5L32 38.5L39 31.5", HOLE, 4)
     return film + holes + arrow
 
+
 @reg("com.github.weclaw1.ImageRoll", ORANGE_DEEP)
 def image_roll():
     strip = rrect(13, 19, 18, 20, 2.5, INK)
@@ -153,6 +177,7 @@ def image_roll():
     can = rrect(27, 16, 22, 32, 4, INK) + rrect(34, 11.5, 8, 5.5, 1.5, INK)
     crop = stroke("M33 24H43V36M31 28H33V38H45", HOLE, 2.6)
     return strip + sprockets + can + rrect(27, 16, 2.4, 32, 0, HOLE) + crop
+
 
 @reg("com.github.torikulhabib.mindi", DEEP_ORANGE)
 def mindi():
@@ -165,6 +190,7 @@ def mindi():
     notecut = circle(38, 42, 7, HOLE) + circle(42.3, 28, 3.2, HOLE)
     return spiral + arrowhead + notecut + note
 
+
 @reg("com.github.torikulhabib.nino", DEEP_PURPLE_LIGHT)
 def nino():
     down = stroke("M21 13V33M14.5 27L21 34L27.5 27", INK, 4.2)
@@ -173,10 +199,12 @@ def nino():
              ring_b(40.5, 38.5, 3.2, HOLE, 2, '') + stroke("M33 38.5H48", HOLE, 1.8))
     return down + up + globe
 
+
 @reg("com.github.sixpounder.GameOfLife", INDIGO_DEEP)
 def game_of_life():
     return "".join(rrect(x, y, 15, 15, 3, c) for x, y, c in
                    [(15, 13, INK), (34, 13, PURPLE_SOFT), (15, 32, INK), (34, 32, INK)])
+
 
 @reg("com.inventwithpython.flippy", BLUE_DEEP)
 def flippy():
@@ -184,6 +212,7 @@ def flippy():
     return "".join(ring_b(20 + 12 * c, 18 + 12 * r, 3.8, INK, 2.4) if (c, r) in dark
                    else circle(20 + 12 * c, 18 + 12 * r, 5, INK)
                    for r in range(3) for c in range(3))
+
 
 @reg("com.github.plugarut.wingpanel-monitor", GREY_DARK)
 def wingpanel_monitor():
@@ -195,16 +224,18 @@ def wingpanel_monitor():
                    [(18, 6), (25.2, 9), (32.4, 5), (39.6, 10)])
     return fan + blades + hub + bars
 
+
 @reg("com.github.qarmin.czkawka", PURPLE_DEEP)
 def czkawka():
     back = path("M15 17H31V44H15Z", PURPLE_SOFT,
-                ' stroke="#BE72CA" stroke-width="3" stroke-linejoin="round"')
+                f' stroke="{PURPLE_SOFT}" stroke-width="3" stroke-linejoin="round"')
     front = path("M29 12H41L49 20V44H29Z", INK,
                  f' stroke="{INK}" stroke-width="3" stroke-linejoin="round"')
     fold = path("M41 12V20H49Z", HOLE)
     lines = "".join(rrect(32, y, 13, 2.4, 1.2, HOLE) for y in (24, 29, 34))
     blines = "".join(rrect(18, y, 9, 2.4, 1.2, PURPLE_DEEP) for y in (22, 27, 32, 37))
     return back + blines + front + fold + lines
+
 
 @reg("com.github.rkoesters.xkcd-gtk", GREY_DARK)
 def xkcd():
@@ -213,11 +244,13 @@ def xkcd():
     hat = poly([(22, 31), (36, 26.5), (34.8, 21.5), (21, 26)], HOLE, 1.5)
     return disc_ + brim + hat
 
+
 @reg("com.github.ronnydo.wammer", RED_DEEP)
 def wammer():
     waves = (stroke(arc(32, 28, 7, 135, 225), INK, 3.2) + stroke(arc(32, 28, 7, -45, 45), INK, 3.2) +
              stroke(arc(32, 28, 13, 135, 225), INK, 3.2) + stroke(arc(32, 28, 13, -45, 45), INK, 3.2))
     return waves + circle(32, 28, 4, INK) + stroke("M32 30V47", INK, 3.6)
+
 
 @reg("com.github.ryonakano.konbucase", AMBER_DEEP)
 def konbucase():
@@ -227,6 +260,7 @@ def konbucase():
     arr2 = stroke("M28 44.5C23 45 20 42 20.5 37.5", INK, 2.6) + poly([(17.5, 38.5), (23.5, 38.5), (20.5, 34)], INK, 1)
     return big_a + small_a + arr1 + arr2
 
+
 @reg("com.github.ryonakano.louper", GREY_DEEP)
 def louper():
     bar = rrect(12.5, 24, 39, 12, 4, GREY_SOFT)
@@ -234,6 +268,7 @@ def louper():
     wen = (stroke("M32 19.5V21.5M24 24.5H40", HOLE, 2.6) +
            stroke("M27 25.5C29 32 33 37 40 40.5M37 25.5C35 32 31 37 24 40.5", HOLE, 2.6))
     return bar + lens + wen
+
 
 @reg("com.github.sdv43.whaler", BLUE_DEEP)
 def whaler():
@@ -245,6 +280,7 @@ def whaler():
     mouth = stroke("M33 39.5C37 40.5 41 40.5 45 39", HOLE, 2.2)
     return body + tail + eye + mouth
 
+
 @reg("com.github.spheras.desktopfolder", BLUE_DEEP)
 def desktopfolder():
     screen = rrect(13, 13, 38, 27, 4, INK)
@@ -253,10 +289,12 @@ def desktopfolder():
     stand = rrect(25, 41.5, 14, 6, 2, INK)
     return screen + panels + stand
 
+
 @reg("com.github.subhadeepjasu.enigma", BROWN)
 def enigma():
     return (stroke("M42 14.5H28.5L21 30L28.5 45.5H42", INK, 5.5) +
             stroke("M21 30H37.5", INK, 5.5))
+
 
 @reg("com.github.taiko2k.avvie", DEEP_PURPLE)
 def avvie():
@@ -264,12 +302,14 @@ def avvie():
     corners = (stroke("M40.5 12.5H49.5V21.5", INK, 3.2) + stroke("M23.5 47.5H14.5V38.5", INK, 3.2))
     return sq + corners
 
+
 @reg("com.github.tchx84.Flatseal", BLUE_GREY_DEEP)
 def flatseal():
     roll = circle(30, 28, 15, INK)
     core = circle(30, 28, 6.8, BLUE_GREY_SOFT) + circle(30, 28, 4.6, HOLE)
     tape = poly([(35, 42), (50, 42), (48, 45.5), (50, 49), (30, 49), (30, 42.5)], INK, 1.5)
     return tape + roll + core
+
 
 @reg("com.github.themix_project.Oomox", BLUE_GREY_DARK)
 def oomox():
@@ -280,12 +320,14 @@ def oomox():
                 "C25 40 21.5 35 21.5 29Z", INK)
     return wheel + blob + circle(35, 25, 2.4, BLUE)
 
+
 @reg("com.github.tkashkin.boiler", ORANGE_DEEP)
 def boiler():
     jug = path("M20 15H38L37 19.5C37.5 24 39 28 39 33V44A3 3 0 0 1 36 47H21A3 3 0 0 1 18 44V33"
                "C18 28 19.5 24 20 19.5C18 18.5 17.5 16 20 15Z", INK)
     handle = stroke("M38.5 21.5H43.5A2.5 2.5 0 0 1 46 24V34.5A2.5 2.5 0 0 1 43.5 37H39", INK, 3.6)
     return jug + handle
+
 
 @reg("com.github.tkashkin.gamehub", DEEP_PURPLE_LIGHT)
 def gamehub():
@@ -295,6 +337,7 @@ def gamehub():
     btns = "".join(circle(x, y, 1.9, HOLE) for x, y in [(41, 24.5), (41, 31.5), (37.5, 28), (44.5, 28)])
     return pad + dpad + btns + circle(32, 25, 2.2, HOLE)
 
+
 @reg("com.github.treagod.spectator", ORANGE_DEEP)
 def spectator():
     return (path("M13.5 30C13.5 23 22 18 32 18C42 18 50.5 23 50.5 30C50.5 37 42 42 32 42"
@@ -303,6 +346,7 @@ def spectator():
             path("M25.5 30C25.5 28 28.5 26.8 32 26.8C35.5 26.8 38.5 28 38.5 30"
                  "C38.5 32 35.5 33.2 32 33.2C28.5 33.2 25.5 32 25.5 30Z", INK))
 
+
 @reg("com.github.unrud.RemoteTouchpad", GREY_DARK)
 def remote_touchpad():
     dev = rrect(12.5, 15, 39, 30, 5, INK)
@@ -310,6 +354,7 @@ def remote_touchpad():
     btns = rrect(20, 34.5, 10, 5, 1.5, INK) + rrect(32, 34.5, 10, 5, 1.5, INK)
     side = rrect(47, 24, 2, 12, 1, HOLE)
     return dev + pad + btns + side
+
 
 @reg("com.github.zocker_160.SyncThingy", LIGHT_BLUE_DEEP)
 def syncthingy():
@@ -321,11 +366,13 @@ def syncthingy():
     out += "".join(circle(x, y, 3.6, INK) for x, y in nodes)
     return out + circle(*hub, 4, INK)
 
+
 @reg("com.gitlab.bitseater.meteo", DEEP_PURPLE_LIGHT)
 def meteo():
     body = stroke("M32 15V35", INK, 10) + circle(32, 39, 8.5, INK)
     merc = stroke("M32 20.5V36", BLUE_SOFT, 3.4) + circle(32, 39, 4.8, BLUE_SOFT)
     return body + merc
+
 
 @reg("com.gitlab.cunidev.Gestures", LIGHT_BLUE_DEEP)
 def gestures():
@@ -335,9 +382,11 @@ def gestures():
     btns = rrect(13.5, 38, 17.5, 9, 2.5, INK) + rrect(33, 38, 17.5, 9, 2.5, INK)
     return screen + arrow + btns
 
+
 @reg("com.gitlab.newsflash", ORANGE_DEEP)
 def newsflash():
     return poly([(35.5, 12), (22, 33), (31, 33), (27, 48), (42, 26), (33, 26), (37.5, 12)], INK, 2.5)
+
 
 @reg("com.gitlab.nvlgit.Balss", BLUE_DEEP)
 def balss():
@@ -345,6 +394,7 @@ def balss():
     spine = rrect(21, 12, 2.6, 36, 0, HOLE)
     play = poly([(29.5, 21.5), (41, 30), (29.5, 38.5)], HOLE, 2.5)
     return book + spine + play
+
 
 @reg("com.gluonhq.SceneBuilder", DEEP_ORANGE_LIGHT)
 def scene_builder():
@@ -354,6 +404,7 @@ def scene_builder():
             path("M26 27C30 22.5 38 22 42.5 25.5C47.5 29.5 48 37 44 42C40 47 32 47.5 27.5 44"
                  "C23.5 41 22 36 23.5 32Z", INK))
     return g(hand, "translate(-1 1)")
+
 
 @reg("com.hunterwittenborn.Celeste", BLUE_DEEP)
 def celeste():
@@ -365,6 +416,7 @@ def celeste():
               poly([(27, 43), (25.5, 36.5), (31.5, 38)], HOLE, 1))
     return g(cloud + arrows, "translate(0 -2.5)")
 
+
 @reg("com.jonathankang.Weibird", BLUE_DEEP)
 def weibird():
     body = poly([(32, 12), (48, 45), (16, 45)], INK, 8)
@@ -372,6 +424,7 @@ def weibird():
             circle(28.3, 30.5, 1.8, INK) + circle(35.7, 30.5, 1.8, INK))
     beak = poly([(28, 37.5), (36, 37.5), (32, 45)], AMBER, 1.5)
     return body + eyes + beak
+
 
 @reg("com.katawa_shoujo.KatawaShoujo", PINK_LIGHT)
 def katawa_shoujo():
@@ -381,12 +434,14 @@ def katawa_shoujo():
                 "rotate(-40 40.5 33)")
     return heart + plaster
 
+
 @reg("com.krillbite.ThePlan", CYAN_DARK)
 def the_plan():
     stem = rrect(18.5, 13, 7, 36, 2, INK)
     bowl = path("M22 13H33A12 12 0 0 1 33 37H22Z", INK)
     fig = (circle(34.5, 20.5, 2.4, HOLE) + stroke("M34.5 23.5V29.5M30.5 25.5L38.5 25.5M34.5 29.5L31.5 33.5M34.5 29.5L37.5 33.5", HOLE, 2.2))
     return stem + bowl + fig
+
 
 def _gwe_eye(w):
     outer = arc(32, 39.2, 20.2, -152.9, -27.1) + arc(32, 20.8, 20.2, 27.1, 152.9)
@@ -397,9 +452,11 @@ def _gwe_eye(w):
             rrect(32, 13, 18, 34, 3, INK) +
             stroke(r_outer + r_inner, HOLE, w))
 
+
 @reg("com.leinardi.gwe", CYAN_DEEP)
 def gwe():
     return _gwe_eye(3)
+
 
 @reg("com.github.rajkumaar23.badgie", AMBER_DEEP)
 def badgie():
@@ -409,12 +466,14 @@ def badgie():
     rosette = poly(pts, INK, 1.5)
     return ribbons + rosette + circle(32, 25, 9.5, HOLE) + circle(32, 25, 7.2, INK)
 
+
 @small("com.lakoliu.Furtherance")
 def furtherance_s():
     case = rrect(13, 14, 38, 32, 5.5, INK)
     screen = rrect(17, 18, 30, 17, 3, HOLE)
     colon = circle(32, 23.5, 2, INK) + circle(32, 29.5, 2, INK)
     return case + screen + colon + circle(21, 40.5, 2.5, HOLE)
+
 
 @small("com.github.thejambi.psnotes")
 def psnotes_s():
@@ -424,9 +483,11 @@ def psnotes_s():
     dot = circle(38, 41, 2.8, HOLE)
     return pad + rings + p + dot
 
+
 @small("com.github.thejambi.dayjournal")
 def dayjournal_s():
     return rrect(16, 12, 29, 36, 4.5, INK) + rrect(37, 24.5, 12, 10, 3, HOLE) + circle(43, 29.5, 2.4, INK)
+
 
 @small("com.github.plugarut.wingpanel-monitor")
 def wingpanel_monitor_s():
@@ -436,6 +497,7 @@ def wingpanel_monitor_s():
     bars = "".join(rrect(x, 48 - h, 7, h, 1.5, INK) for x, h in [(17, 7), (28.5, 10), (40, 5)])
     return fan + blades + bars
 
+
 @small("com.github.ryonakano.louper")
 def louper_s():
     bar = rrect(12, 24, 40, 12, 4, GREY_SOFT)
@@ -443,11 +505,13 @@ def louper_s():
     wen = stroke("M24 23H40M27 24C29 32 33 37 40 41M37 24C35 32 31 37 24 41", HOLE, 3.2)
     return bar + lens + wen
 
+
 @small("com.github.ryonakano.konbucase")
 def konbucase_s():
     big_a = stroke("M13.5 34L22 13L30.5 34M17 27H27", INK, 4.4)
     small_a = ring_b(40.5, 40, 5, INK, 3.6) + stroke("M45.5 34V47", INK, 3.6)
     return big_a + small_a
+
 
 @small("com.github.torikulhabib.nino")
 def nino_s():
@@ -455,15 +519,18 @@ def nino_s():
     up = stroke("M36 35V13M29.5 19L36 12.5L42.5 19", INK, 4.6)
     return down + up + circle(40.5, 38.5, 10, HOLE) + circle(40.5, 38.5, 8, INK)
 
+
 @small("com.github.torikulhabib.mindi")
 def mindi_s():
     spiral = stroke(arc(29, 31, 14, 140, 400), INK, 4) + circle(29, 31, 5, INK)
     note = circle(38, 42, 5.5, INK) + stroke("M42.5 42V14C45 18 49 19.5 48 26", INK, 3.6)
     return spiral + circle(38, 42, 7.5, HOLE) + circle(42.5, 28, 3.6, HOLE) + note
 
+
 @small("com.leinardi.gwe")
 def gwe_s():
     return _gwe_eye(3.4)
+
 
 @small("com.github.qarmin.czkawka")
 def czkawka_s():
@@ -472,16 +539,19 @@ def czkawka_s():
     lines = "".join(rrect(31, y, 16, 3.5, 1.75, HOLE) for y in (19, 26, 33))
     return back + front + lines
 
+
 @small("com.github.rajkumaar23.badgie")
 def badgie_s():
     ribbons = (poly([(24, 32), (20, 47), (31, 36)], INK, 3) + poly([(40, 32), (44, 47), (33, 36)], INK, 3))
     return ribbons + circle(32, 25, 13, INK) + ring_b(32, 25, 7.5, HOLE, 3)
+
 
 @small("com.github.ronnydo.wammer")
 def wammer_s():
     waves = (stroke(arc(32, 27, 9, 135, 225), INK, 4) + stroke(arc(32, 27, 9, -45, 45), INK, 4) +
              stroke(arc(32, 27, 16, 140, 220), INK, 4) + stroke(arc(32, 27, 16, -40, 40), INK, 4))
     return waves + circle(32, 27, 4.5, INK) + stroke("M32 30V47", INK, 4)
+
 
 @small("com.github.subhadeepjasu.pebbles")
 def pebbles_s():
@@ -491,10 +561,12 @@ def pebbles_s():
     minus = stroke("M36.5 20.5H45.5", HOLE, 3.6)
     return tiles + plus + eq + minus
 
+
 @small("com.inventwithpython.flippy")
 def flippy_s():
     return (circle(23, 21, 7, INK) + circle(41, 39, 7, INK) +
             ring_b(41, 21, 5.5, INK, 3) + ring_b(23, 39, 5.5, INK, 3))
+
 
 @small("com.github.philip-scott.wallpaperize")
 def wallpaperize_s():
@@ -503,11 +575,13 @@ def wallpaperize_s():
     palm = (stroke("M38 43V25", HOLE, 3.4) + stroke("M29 25C32 20 44 20 47 25", HOLE, 3.4))
     return frame + sun + palm
 
+
 @small("com.jonathankang.Weibird")
 def weibird_s():
     body = poly([(32, 11), (48.5, 45), (15.5, 45)], INK, 8)
     eyes = circle(27, 31, 4.6, HOLE) + circle(37, 31, 4.6, HOLE)
     return body + eyes + poly([(28, 39), (36, 39), (32, 45)], AMBER, 2)
+
 
 @small("com.gitlab.cunidev.Gestures")
 def gestures_s():

@@ -1,15 +1,14 @@
 # Icon colours for Trindle
 
-Disc colours for Trindle's new icon set: 80 of them, chosen for Trindle's dark and light looks, not taken from any icon set in use today. Every one comes from the Trindle palette (17 hues, the Base column), with two lighter and two deeper steps of each, so neighbouring icons never have to share a colour and each app can be matched closely to its own brand colour.
+Disc colours for Trindle's new icon set: 80 of them, chosen for Trindle's dark and light looks. Every one comes from the Trindle palette (16 hues, the Base column), with two lighter and two deeper steps of each, so neighbouring icons never have to share a colour and each app can be matched closely to its own brand colour.
 
-**Picture** says whether the mark on the disc should be white (`#FAFAFA`) or near-black (`#09090B`). White is the rule, so the set reads as one family; near-black only on discs too pale for white to show. **On dark** and **On light** are how much the disc stands out from Trindle's dark cards (`#1B1D29`) and light window (`#ECECF0`): under 1.5 means it relies on the hairline edge every icon has.
+**Picture** says whether the mark on the disc should be white (`#FAFAFA`) or near-black (`#09090B`). White is the rule, so the set reads as one family; near-black only on discs too pale for white to show. **On dark** and **On light** are how much the disc stands out from Trindle's dark cards (`#1B1D29`) and light window (`#ECECF0`): under 1.5 means it stands out only a little.
 
 Tips:
 
 - Pick the step closest to the app's own brand colour: Soft or Light for pale logos, Deep or Dark for strong ones.
 - Brand navy `#111827` and brand yellow `#FBC711` are Trindle's own colours, good for Trindle's own apps (Settings, Store, Activity and the like). Keep yellow discs rare otherwise, as yellow also means "chosen" in Trindle.
 - Grey and Blue grey suit system tools and utilities.
-- A picture sheet of all 80 comes with this list.
 
 ## Red (#F34236)
 

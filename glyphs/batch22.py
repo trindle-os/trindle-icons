@@ -6,14 +6,22 @@ The mark is drawn in INK (white, or near-black on pale tiles); HOLE is
 the tile colour showing through the mark; any other shade is another
 step from the same palette.
 """
-from lm import *
+from lm import (
+    AMBER, AMBER_DARK, AMBER_DEEP, AMBER_SOFT, BLUE, BLUE_DARK, BLUE_DEEP, BLUE_GREY_DARK,
+    BLUE_GREY_LIGHT, BLUE_SOFT, circle, CX, CY, CYAN, CYAN_DEEP, DEEP_PURPLE, DEEP_PURPLE_SOFT,
+    f, g, GREY_DARK, GREY_DEEP, GREY_LIGHT, HOLE, INDIGO, INDIGO_DEEP, INK, LIGHT_BLUE_DEEP,
+    line, ORANGE_DARK, ORANGE_DEEP, path, PINK_DEEP, PINK_SOFT, poly, pt, RED_DEEP, RED_SOFT,
+    rrect, stroke, TEAL, TEAL_DEEP, TEAL_LIGHT,
+)
 from glyphs.kit import crescent_c, registry, ring_b, star_e
 from glyphs.kit import shared_opensuse
 
 ICONS, SMALL, reg, small = registry()
 
+
 def D(name):
     return "distributor-logo-" + name
+
 
 ARCH = ("M32 11.5C30.4 15.5 29.4 18 27.9 21.3C28.9 22.3 30.2 23.6 32.3 25"
         "C30 24 28.4 23.1 27.1 22.1C24.6 27.2 20.8 34.4 15.5 47.5C19.6 45.2 22.8 43.7 25.7 42.7"
@@ -21,21 +29,27 @@ ARCH = ("M32 11.5C30.4 15.5 29.4 18 27.9 21.3C28.9 22.3 30.2 23.6 32.3 25"
         "C38.3 41.6 38.2 42.1 38.1 42.7C41 43.7 44.3 45.2 48.5 47.5C47.5 44.7 46.5 42.3 45.6 40.1"
         "C43.8 38.7 42 37.5 39 36.4C40.9 36.5 42.6 37.1 44.6 37.9C39.8 26.8 36.1 18.3 32 11.5Z")
 
+
 @reg(D("archlinux"), BLUE_DEEP)
 def archlinux():
     return path(ARCH, INK)
 
+
+ARCHMAN_TRI = path('M32 11.5L48.5 47.5C44 44.5 39.5 43 35 42.5H29C24.5 43 20 44.5 15.5 47.5Z', INK, f' stroke="{INK}" stroke-width="2" stroke-linejoin="round"')
+
+
 @reg(D("archman"), RED_DEEP)
 def archman():
-    tri = path("M32 11.5L48.5 47.5C44 44.5 39.5 43 35 42.5H29C24.5 43 20 44.5 15.5 47.5Z", INK,
-               f' stroke="{INK}" stroke-width="2" stroke-linejoin="round"')
+    tri = ARCHMAN_TRI
     return tri + circle(32, 35, 8, HOLE) + ring_b(32, 35, 5.6, INK, 2.4) + star_e(32, 35.6, 3.4, 1.5, INK)
+
 
 @reg(D("artix"), LIGHT_BLUE_DEEP)
 def artix():
     return (poly([(30, 12), (37.7, 32), (25.5, 25)], INK, 1.5)
             + poly([(24.6, 28.7), (42.6, 35.7), (14, 48)], INK, 1.5)
             + poly([(44.3, 38.5), (50, 48), (36.1, 43.4)], INK, 1.5))
+
 
 @reg(D("blackarch"), BLUE_GREY_DARK)
 def blackarch():
@@ -45,6 +59,7 @@ def blackarch():
     hilt = line(32, 11, 32, 18, INK, 3.2)
     return arch + blade + guard + hilt
 
+
 @reg(D("endeavouros"), DEEP_PURPLE)
 def endeavouros():
     sliver = path("M31 13C25 22 19.5 33 15.5 43C17 43.5 18.5 43.5 20 43C24 32 28 22 31 13Z", RED_SOFT)
@@ -52,10 +67,12 @@ def endeavouros():
     base = path("M20 45.5H45.5C46.5 45.5 47.5 45.3 48 45C45 47 40 48 35 48H19.5Z", DEEP_PURPLE_SOFT)
     return sliver + sail + base
 
+
 @reg(D("manjaro"), TEAL_LIGHT)
 def manjaro():
     return (path("M15 13H37V23.5H25.5V47H15Z", INK) + rrect(27.5, 25.5, 9.5, 21.5, .5, INK)
             + rrect(39, 13, 10, 34, .5, INK))
+
 
 @reg(D("hyperbola"), GREY_DARK)
 def hyperbola():
@@ -65,11 +82,13 @@ def hyperbola():
                 "C41.5 42 39 37.5 35 37.5C28 37.5 20 41.5 13.5 47Z", INK)
     return top + arch
 
+
 @reg(D("debian"), PINK_DEEP)
 def debian():
     return stroke("M34 25.5C30.5 24.5 27.5 27.5 28 31C28.5 35 33 37.5 37.5 35.5"
                   "C42.5 33 44 26.5 41 21.5C37.5 15.5 29 14 23.5 18C17.5 22.5 16.5 31 19.5 38"
                   "C21.5 42.5 24.5 45.5 28 47.5", INK, 4)
+
 
 @reg(D("devuan"), GREY_DARK)
 def devuan():
@@ -77,12 +96,14 @@ def devuan():
                 "C33.5 41.5 22.5 40.5 22.5 35.5C22.5 29 35 21.5 47 16Z", INK,
                 f' stroke="{INK}" stroke-width="1.2" stroke-linejoin="round"')
 
+
 @reg(D("deepin"), LIGHT_BLUE_DEEP)
 def deepin():
     swirl = (stroke("M18.5 25C24 20.5 33 20 38 24.5", HOLE, 2.6)
              + stroke("M22 34C21 28 26 24 32 25.5C37 27 38.5 32 36 35.5", HOLE, 2.6)
              + stroke("M47.5 30C46 37 40 41.5 33 41C28 40.5 25.5 37 27.5 33.5", HOLE, 2.6))
     return circle(CX, CY, 16.5, INK) + swirl
+
 
 @reg(D("bunsenlabs"), AMBER_DEEP)
 def bunsenlabs():
@@ -92,6 +113,7 @@ def bunsenlabs():
     core = path("M32.5 32C35 35.5 37 37 37 40.5A4.8 4.8 0 0 1 27.5 40.5C27.5 37 30.5 35.5 32.5 32Z", HOLE)
     return flame + core
 
+
 @reg(D("bodhi-linux"), BLUE)
 def bodhi():
     leaf = path("M17 17C23 11.5 36 12 43 19.5C49.5 26.5 47 35.5 46.5 43.5L50.5 49L44.5 46.5"
@@ -99,12 +121,14 @@ def bodhi():
     vein = stroke("M20 20C28 27 37 36 45.5 45.5", HOLE, 2.2)
     return leaf + vein
 
+
 @reg(D("linux-mint"), GREY_DEEP)
 def linux_mint():
     badge = path("M14 13H21V17H43A6 6 0 0 1 49 23V39A9 9 0 0 1 40 48H24A9 9 0 0 1 15 39V20H14Z", INK)
     lm = stroke("M21 16V34A7 7 0 0 0 28 41H36A6 6 0 0 0 42 35V28.5A4 4 0 0 0 34 28.5V35"
                 "M34 28.5A4 4 0 0 0 26 28.5V35", HOLE, 3)
     return badge + lm
+
 
 @reg(D("lubuntu"), BLUE_DEEP)
 def lubuntu():
@@ -116,11 +140,13 @@ def lubuntu():
              + stroke("M28 35C22 35.5 18 34.5 15.5 33", INK, 3))
     return body + beak + wings + circle(35, 19.5, 1.5, HOLE)
 
+
 @reg(D("pop-os"), CYAN_DEEP)
 def pop_os():
     p = stroke("M22 42L26 22", INK, 4.4) + ring_b(29.5, 26.5, 5.8, INK, 4.2)
     bang = line(42, 15, 39.5, 31, INK, 4.6) + circle(38.6, 37.5, 2.6, INK)
     return p + bang + rrect(16, 43, 32, 4, 2, INK)
+
 
 @reg(D("peppermint"), RED_DEEP)
 def peppermint():
@@ -136,6 +162,7 @@ def peppermint():
                     f"Q{f(c1[0])} {f(c1[1])} {CX} {CY}Z", HOLE)
     return out
 
+
 @reg(D("lxle"), GREY_DARK)
 def lxle():
     bar = rrect(15, 12, 5, 36, 1, INK)
@@ -146,6 +173,7 @@ def lxle():
          + poly([(36, 39), (48, 36), (48, 39.5), (36, 41)], INK))
     return bar + x + e
 
+
 @reg(D("fedora"), BLUE_DEEP)
 def fedora():
     bubble = path("M32 13.5A16.5 16.5 0 1 1 32 46.5H18.5A3 3 0 0 1 15.5 43.5V30A16.5 16.5 0 0 1 32 13.5Z", INK)
@@ -153,12 +181,14 @@ def fedora():
     bar = stroke("M26 31.5H39", HOLE, 4)
     return bubble + fl + bar
 
+
 @reg(D("korora"), GREY_DARK)
 def korora():
     back = path("M31 12H49V30A6 6 0 0 1 43 36H31A6 6 0 0 1 25 30V18A6 6 0 0 1 31 12Z", INK)
     front_edge = path("M15 48V32A9 9 0 0 1 24 23H30A9 9 0 0 1 39 32V39A9 9 0 0 1 30 48Z", HOLE)
     front = path("M18.5 44.5V32A5.5 5.5 0 0 1 24 26.5H30A5.5 5.5 0 0 1 35.5 32V39A5.5 5.5 0 0 1 30 44.5Z", INK)
     return back + front_edge + front
+
 
 @reg(D("rhel"), RED_DEEP)
 def rhel():
@@ -168,10 +198,12 @@ def rhel():
     band = stroke("M20.5 26C28 30.5 37 31.5 44 30", HOLE, 2.4)
     return hat + band
 
+
 @reg(D("condres"), TEAL)
 def condres():
     return (poly([(14, 14), (50, 14), (32, 46)], INK, 2.5)
             + poly([(24, 14), (40, 14), (32, 29)], HOLE, 1))
+
 
 def _tux(body, belly, cap=None):
     out = (path("M32 12C38 12 41 17 41 23C41 26 42 28 44.5 32C47.5 37 48 41 46 43.5"
@@ -188,13 +220,16 @@ def _tux(body, belly, cap=None):
                     "C47.5 19 46.5 20 45 20H23Z", cap)
     return out
 
+
 @reg(D("knoppix"), GREY_LIGHT)
 def knoppix():
     return _tux(INK, HOLE)
 
+
 @reg(D("madlinux"), BLUE_DEEP)
 def madlinux():
     return _tux(BLUE_DARK, INK, cap=INK)
+
 
 @reg(D("calculate-linux"), ORANGE_DEEP)
 def calculate():
@@ -206,12 +241,14 @@ def calculate():
     eye = circle(30, 20.5, 3.4, INK) + circle(30.8, 20.5, 1.6, ORANGE_DARK)
     return head + cap + beak + eye
 
+
 @reg(D("freebsd"), RED_DEEP)
 def freebsd():
     ball = circle(31, 32, 14, INK)
     horns = (path("M18.5 21.5C15 18.5 14 14.5 15.5 11C17.5 14.5 21.5 16.5 25 17.5C22 18 20 19.5 18.5 21.5Z", INK)
              + path("M38 16.5C41.5 13 45.5 11.5 49.5 12.5C50 16 49 20 46.5 23C45.5 20 42 17.5 38 16.5Z", INK))
     return ball + horns
+
 
 @reg(D("dragonflybsd"), AMBER_DARK)
 def dragonfly():
@@ -223,10 +260,12 @@ def dragonfly():
             + circle(32, 15, 3.8, HOLE) + circle(32, 15, 2.8, INK))
     return wings + body
 
+
 @reg(D("ghostbsd"), TEAL_DEEP)
 def ghostbsd():
     return stroke("M40 19C36.5 14 25.5 14.5 22.5 21C20 26.5 23.5 31.5 29 30.5"
                   "C34 29.5 37.5 23 39.5 18L32 42C30 47.5 22 48 19.5 43", INK, 4.2)
+
 
 @reg(D("midnightbsd"), BLUE_GREY_DARK)
 def midnightbsd():
@@ -235,6 +274,7 @@ def midnightbsd():
                 "L45.2 36.5C46.2 37.5 46.5 39 46 40.5C47.5 42 48 44.5 47 47Z", INK)
            + stroke("M47 45.5C49.5 44.5 50.5 42 49.5 39.5", INK, 1.8))
     return moon + cat
+
 
 @reg(D("netbsd"), ORANGE_DEEP)
 def netbsd():
@@ -245,6 +285,7 @@ def netbsd():
                + stroke("M30 22C34 23.5 38.5 23 42.5 21.5", HOLE, 1.8))
     return pole + flag + streaks
 
+
 @reg(D("openbsd"), AMBER_DEEP)
 def openbsd():
     body = star_e(33, 31, 15.5, 12, INK, n=14, rounding=1.2)
@@ -253,6 +294,7 @@ def openbsd():
     fin = stroke("M28 35C31 37.5 34.5 37.5 36.5 35", HOLE, 2)
     return tail + body + eye + fin
 
+
 @reg(D("aryalinux"), ORANGE_DEEP)
 def aryalinux():
     one = poly([(16, 47), (22, 47), (27, 13), (21, 13)], INK, 1.5)
@@ -260,11 +302,13 @@ def aryalinux():
     foot = rrect(29, 41.5, 19, 5.5, 1, INK)
     return one + stem + foot
 
+
 @reg(D("backbox"), BLUE_DEEP)
 def backbox():
     outer = poly([(23, 13), (49, 13), (49, 38), (40, 47), (15, 47), (15, 21)], INK, 3)
     inner = poly([(25, 17.5), (44.5, 17.5), (44.5, 36), (38, 42.5), (19.5, 42.5), (19.5, 23)], HOLE, 2)
     return outer + inner
+
 
 @reg(D("kali-linux"), BLUE_DEEP)
 def kali():
@@ -276,6 +320,7 @@ def kali():
                 + stroke("M34 22.5C29 22 23 23 18 25.5", INK, 2.2))
     return body + head + whiskers
 
+
 @reg(D("kaos"), BLUE_DEEP)
 def kaos():
     left = path("M20.5 47C17 40 16 26 21 17C23 14 26 14.5 26.5 18C27 26 25.5 37 20.5 47Z", INK)
@@ -283,12 +328,14 @@ def kaos():
     lower = path("M28 37C35 33 44 34 49.5 40C51 42 50 44 47.5 44C40 44 33 41.5 28 37Z", INK)
     return left + upper + lower
 
+
 @reg(D("linux-lite"), AMBER_DEEP)
 def linux_lite():
     feather = path("M41 11C31.5 14 23 24 22 34.5C21.5 39.5 23 43.5 25.5 46"
                    "C33 42 40 33 42.5 22C43.3 18 42.5 14 41 11Z", INK)
     quill = stroke("M39.5 16C35 27 30 37 24.5 48", HOLE, 1.8) + line(24.5, 45, 22, 50, INK, 2.2)
     return feather + quill
+
 
 @reg(D("mac"), BLUE_DEEP)
 def mac():
@@ -299,6 +346,7 @@ def mac():
             + stroke("M21.5 35.5C28 40.5 36.5 40.5 43 35.5", BLUE_DARK, 2.6))
     return right + left + face
 
+
 @reg(D("ms-dos"), INDIGO)
 def ms_dos():
     ms = (stroke("M17 27V14L22.5 22L28 14V27", INK, 3)
@@ -308,6 +356,7 @@ def ms_dos():
            + stroke("M48.5 35C47 33 40.5 32.5 40.5 36.5C40.5 40 49 38.5 49 42.5C49 46.5 42 46.5 40 44.5", AMBER_SOFT, 2.8))
     return ms + dos
 
+
 @reg(D("mx"), BLUE_GREY_DARK)
 def mx():
     mount = poly([(13, 47), (28.5, 27.5), (34, 34), (38.5, 29.5), (51, 47)], INK, 2)
@@ -315,12 +364,14 @@ def mx():
              + line(44, 14, 33.5, 25.5, INK, 3))
     return mount + cross
 
+
 @reg(D("netrunner"), BLUE_DARK)
 def netrunner():
     disc_ = circle(CX, CY, 16.5, BLUE_GREY_LIGHT)
     arrow = poly([(16, 26.5), (47, 15), (36.5, 46), (31.5, 31.5)], BLUE_GREY_DARK, 4)
     inner = poly([(20.5, 27), (43, 18.5), (35.5, 40.5), (32, 30)], INK, 1.5)
     return disc_ + arrow + inner
+
 
 @reg(D("nixos"), BLUE_DARK)
 def nixos():
@@ -334,20 +385,24 @@ def nixos():
         out += g(one.replace('"C"', f'"{c}"'), f"rotate({60 * k} {CX} {CY})")
     return out
 
+
 @reg(D("openmandriva"), BLUE_DEEP)
 def openmandriva():
     return (circle(CX, CY, 16.5, INK) + circle(34.5, 27.5, 12.8, HOLE)
             + circle(34.5, 27.5, 10, INK) + circle(35, 27, 7, HOLE))
 
+
 @reg(D("opensuse"), BLUE_GREY_LIGHT)
 def opensuse():
     return shared_opensuse()
+
 
 @reg(D("parrot"), CYAN)
 def parrot():
     return poly([(16, 17.5), (23.5, 13.5), (35, 15.5), (49.5, 42), (43, 38.5),
                  (40, 49), (38, 36), (33.5, 32), (27, 19.5), (21, 19.5),
                  (20.5, 25), (17.5, 21.5)], INK, 1.5)
+
 
 @reg(D("pclinuxos"), BLUE_DEEP)
 def pclinuxos():
@@ -358,6 +413,7 @@ def pclinuxos():
             + stroke("M22.5 31C20.5 29 20.5 26.5 22.5 25", INK, 1.8)
             + stroke("M43.5 30.5C45.5 29 46 26.5 45 24", INK, 1.8))
     return ring_b(CX, CY, 16, INK, 3.4) + bull
+
 
 @reg(D("pisilinux"), PINK_DEEP)
 def pisilinux():
@@ -371,6 +427,7 @@ def pisilinux():
                + line(36, 20, 35.5, 23.5, HOLE, 1.8))
     return head + eyes + nose + stripes
 
+
 @reg(D("puppy-linux"), GREY_DARK)
 def puppy():
     head = path("M17 26C16 19 22 14 30 14H37C44.5 14 49 19 49 26V34C49 42 43 47 35 47"
@@ -381,9 +438,11 @@ def puppy():
     mouth = stroke("M35 39.5C38 41.5 42 41 44.5 38.5", HOLE, 2)
     return head + ear + eye + nose + mouth
 
+
 @reg(D("pureos"), BLUE_GREY_DARK)
 def pureos():
     return rrect(16.5, 20.5, 31, 19, 1.5, "none", f' stroke="{INK}" stroke-width="4.2"')
+
 
 @reg(D("raspbian"), RED_DEEP)
 def raspbian():
@@ -396,10 +455,12 @@ def raspbian():
                     [(32, 33), (26.5, 40), (37.5, 40)])
     return leaves + berry + seams
 
+
 @reg(D("rosa"), INDIGO_DEEP)
 def rosa():
     return (ring_b(CX, CY, 15, INK, 3.6)
             + stroke("M20 42C19 30 27 19 43 17.5", INK, 3.6))
+
 
 @reg(D("freedos"), BLUE_GREY_LIGHT)
 def freedos():
@@ -409,11 +470,12 @@ def freedos():
             + circle(23.8, 33.5, 1.7, INK) + circle(32.3, 33.5, 1.7, INK))
     return body + eyes
 
+
 @small(D("archman"))
 def archman_s():
-    tri = path("M32 11.5L48.5 47.5C44 44.5 39.5 43 35 42.5H29C24.5 43 20 44.5 15.5 47.5Z", INK,
-               f' stroke="{INK}" stroke-width="2" stroke-linejoin="round"')
+    tri = ARCHMAN_TRI
     return tri + circle(32, 35, 6.5, HOLE) + circle(32, 35, 3, INK)
+
 
 @small(D("ms-dos"))
 def ms_dos_s():
@@ -422,6 +484,7 @@ def ms_dos_s():
             + stroke("M50 23.5C48.5 21.5 42 21 42 25.5C42 29.5 50.5 28.5 50.5 33"
                      "C50.5 37.5 44 38 41.5 36", INK, 3.4))
 
+
 @small(D("kali-linux"))
 def kali_s():
     body = stroke("M41 21.5C33.5 20 27.5 24.5 27.5 30.5C27.5 36.5 33 39 39.5 39.5"
@@ -429,6 +492,7 @@ def kali_s():
     head = poly([(37, 19), (43.5, 20), (50, 25), (44, 26.5), (39.5, 25)], INK, 2)
     return (body + head + stroke("M38.5 19.5C31 14 22 12 14 12.5", INK, 2.6)
             + stroke("M36 22C30 20 23 20.5 16 23", INK, 2.6))
+
 
 @small(D("lubuntu"))
 def lubuntu_s():
@@ -439,6 +503,7 @@ def lubuntu_s():
              + stroke("M27.5 32C22 32.5 18 31 15.5 28.5", INK, 3.4))
     return body + beak + wings
 
+
 @small(D("lxle"))
 def lxle_s():
     bar = rrect(14.5, 12, 6, 36, 1, INK)
@@ -446,12 +511,14 @@ def lxle_s():
     e = (path("M30 30H48V35.5H31.5V42.5H48V48H30A5 5 0 0 1 25 43V35A5 5 0 0 1 30 30Z", INK))
     return bar + x + e
 
+
 @small(D("pclinuxos"))
 def pclinuxos_s():
     bull = (path("M20 35C20 30 24 27.5 29 27.5H38C42 27.5 44.5 29.5 44.5 33V40H40.5L39.5 37H30L29 40H25"
                  "L24.5 37.5C22 37.5 20 36.5 20 35Z", INK)
             + stroke("M22.5 30C20.5 28 20.5 25.5 22.5 24", INK, 2.6))
     return ring_b(CX, CY, 16, INK, 3.4) + bull
+
 
 @small(D("peppermint"))
 def peppermint_s():
@@ -467,6 +534,7 @@ def peppermint_s():
                     f"Q{f(c1[0])} {f(c1[1])} {CX} {CY}Z", HOLE)
     return out
 
+
 @small(D("raspbian"))
 def raspbian_s():
     leaves = (path("M31 22C26 22.5 19 20 18 13.5C24 12.5 29.5 15.5 31 22Z", INK)
@@ -477,11 +545,13 @@ def raspbian_s():
              + stroke("M23.5 40C29 43 35 43 40.5 40", HOLE, 2.2))
     return leaves + berry + seeds
 
+
 @small(D("puppy-linux"))
 def puppy_s():
     head = path("M17 26C16 19 22 14 30 14H37C44.5 14 49 19 49 26V34C49 42 43 47 35 47"
                 "H29C21 47 16 41.5 16 34Z", INK)
     return head + circle(26, 31.5, 5.5, HOLE) + f'<ellipse cx="42.5" cy="31" rx="3.6" ry="3" fill="{HOLE}"/>'
+
 
 @small(D("openbsd"))
 def openbsd_s():

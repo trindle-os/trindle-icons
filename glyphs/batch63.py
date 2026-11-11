@@ -7,10 +7,19 @@ the tile colour showing through the mark; any other shade is another
 palette step.
 """
 import math
-from lm import *
+from lm import (
+    AMBER, AMBER_DEEP, AMBER_SOFT, BLUE, BLUE_DEEP, BLUE_GREY, BLUE_GREY_DARK, BLUE_GREY_DEEP,
+    BLUE_LIGHT, BLUE_SOFT, BROWN_DEEP, BROWN_LIGHT, BROWN_SOFT, circle, cpath, cut, CX, CY,
+    CYAN_DEEP, CYAN_LIGHT, DEEP_ORANGE, DEEP_ORANGE_DARK, DEEP_ORANGE_DEEP, DEEP_PURPLE_DEEP,
+    DEEP_PURPLE_LIGHT, g, GREY, GREY_DARK, GREY_DEEP, GREY_SOFT, HOLE, INDIGO, INK, INK_SLATE,
+    LIGHT_BLUE_DARK, LIGHT_BLUE_DEEP, LIGHT_BLUE_SOFT, line, ORANGE, ORANGE_DARK, ORANGE_LIGHT,
+    path, PINK_LIGHT, poly, pt, PURPLE_LIGHT, RED, RED_DARK, RED_DEEP, RED_LIGHT, rrect, stroke,
+    TEAL, TEAL_DEEP, TEAL_SOFT, YELLOW, YELLOW_DARK, YELLOW_SOFT,
+)
 from glyphs.kit import _gear_k, registry, _ring
 
 ICONS, SMALL, reg, small = registry()
+
 
 def _aperture(n, r=16, core=6, w=2, rot=-90):
     """Camera iris: n blades, each edge of the centre polygon run out to the rim."""
@@ -22,13 +31,13 @@ def _aperture(n, r=16, core=6, w=2, rot=-90):
         dx, dy = x1 - x0, y1 - y0
         ln = math.hypot(dx, dy)
         dx, dy = dx / ln, dy / ln
-
         fx, fy = x1 - CX, y1 - CY
         b = fx * dx + fy * dy
         c = fx * fx + fy * fy - r * r
         t = -b + math.sqrt(b * b - c)
         out += line(x0, y0, x1 + dx * t, y1 + dy * t, HOLE, w)
     return out
+
 
 @reg("servo", TEAL)
 def servo():
@@ -43,6 +52,7 @@ def servo():
         out += line(x, y, x + dx * t, y + dy * t, HOLE, 2.4, "butt")
     return out
 
+
 @reg("session-desktop", GREY_DEEP)
 def session():
     top = stroke("M41 22.5V19.5A5 5 0 0 0 36 14.5H26A5 5 0 0 0 21 19.5V21.5"
@@ -50,6 +60,7 @@ def session():
     bot = stroke("M30 33.5H38A5 5 0 0 1 43 38.5V40.5A5 5 0 0 1 38 45.5H28"
                  "A5 5 0 0 1 23 40.5V37.5", INK, 4)
     return g(top + bot, "translate(32 30) scale(.95) translate(-32 -30)")
+
 
 @reg("sftpclient", LIGHT_BLUE_DEEP)
 def sftpclient():
@@ -59,6 +70,7 @@ def sftpclient():
                    for y in (34, 39.5, 45))
     return g(cloud, "translate(-3 -4)") + rack
 
+
 @reg("sfxr-qt", BLUE_GREY)
 def sfxr():
     out = ""
@@ -66,6 +78,7 @@ def sfxr():
         out += rrect(15, y - 2, 34, 4, 2, BLUE_GREY_DARK)
         out += circle(x, y, 5.2, INK)
     return out
+
 
 @reg("sgt-launcher", GREY_DARK)
 def sgt():
@@ -75,14 +88,17 @@ def sgt():
     br = rrect(42.5, 32, 3.2, 15, 1.4, INK) + poly([(43, 33), (43, 40.5), (34.5, 36.75)], INK, 2)
     return tl + tr + bl + br
 
+
 def _shadow():
     big = cut(cpath(CX, CY, 16.5) + cpath(34, 28, 12.5), INK)
     small = circle(22.5, 39.5, 7.5, HOLE) + _ring(22.5, 39.5, 5.2, INK, 3.6)
     return big + small
 
+
 @reg("shadow", BLUE_GREY_DARK)
 def shadow():
     return _shadow()
+
 
 @reg("shadow-beta", BLUE_GREY_DARK)
 def shadow_beta():
@@ -91,12 +107,14 @@ def shadow_beta():
                   "A2.7 2.7 0 1 1 43 20.8", INK, 2.2)
     return g(_shadow(), "translate(-2 2) translate(32 30) scale(.92) translate(-32 -30)") + badge + beta
 
+
 @reg("shadow-dev", BLUE_GREY_DARK)
 def shadow_dev():
     badge = circle(45, 17, 8.5, HOLE) + circle(45, 17, 7, RED)
     alpha = stroke("M49 13.5C48 18.5 46.5 20.5 43.8 20.5A2.8 3.3 0 1 1 43.8 13.9"
                    "C46 13.9 47.3 17.5 49 20.5", INK, 2.2)
     return g(_shadow(), "translate(-2 2) translate(32 30) scale(.92) translate(-32 -30)") + badge + alpha
+
 
 @reg("shadow-tactics", RED_DARK)
 def shadow_tactics():
@@ -108,11 +126,13 @@ def shadow_tactics():
     sword = line(21, 43, 44, 30, HOLE, 2.2)
     return disc_ + hat + head + body + sword
 
+
 @reg("shadowsocks-qt5", GREY)
 def shadowsocks():
     plane = poly([(14.5, 30), (48, 14), (38.5, 46), (30.5, 36.5)], INK, 2.5)
     fold = poly([(30.5, 36.5), (48, 14), (29.5, 43.5)], GREY_SOFT, 1.5)
     return plane + fold
+
 
 @reg("shadps4", INDIGO)
 def shadps4():
@@ -121,16 +141,19 @@ def shadps4():
     x = stroke("M42 36.5L48 42.5M48 36.5L42 42.5", INK, 2.4)
     return g(four, "translate(-1.5 -1)") + ring + x
 
+
 @reg("shadwen", DEEP_PURPLE_DEEP)
 def shadwen():
     sigma = path("M18 13H45V20H41.5L40 17H26.5L35.5 30L26.5 43H40L41.5 40H45V47H18"
                  "L29.5 30Z", INK, f' stroke="{INK}" stroke-width="1.5" stroke-linejoin="round"')
     return sigma
 
+
 @reg("sharik", DEEP_PURPLE_LIGHT)
 def sharik():
     return (circle(CX, CY, 16.5, INK) + circle(CX, CY, 13, HOLE) +
             stroke("M22.5 40.5C25 31 34 22.5 43.5 19.5", INK, 4.2))
+
 
 @reg("sheepy-a-short-adventure", BLUE_GREY_DEEP)
 def sheepy():
@@ -141,6 +164,7 @@ def sheepy():
     body = path("M22 41H42L43 48H21Z", INK, f' stroke="{INK}" stroke-width="3" stroke-linejoin="round"')
     return body + ears + head + visor + eyes + rrect(30, 29.5, 4, 2.2, 1.1, INK)
 
+
 @reg("sheets", BLUE_GREY)
 def sheets():
     bars = "".join(rrect(x, 30 - h, 5, h, 1.5, INK) for x, h in
@@ -150,10 +174,12 @@ def sheets():
                     for r in range(2) for c in range(3))
     return g(bars, "translate(2 0)") + base + cells
 
+
 @reg("shellnoob", DEEP_ORANGE_DARK)
 def shellnoob():
     return (stroke("M17 20L27 29L17 38", INK, 4.6) +
             line(31.5, 40, 46, 40, INK, 4.6))
+
 
 @reg("shotcut", CYAN_DEEP)
 def shotcut():
@@ -162,19 +188,23 @@ def shotcut():
     bar = rrect(30.5, 11, 5, 38, 2.5, INK)
     return sq + gap + bar
 
+
 @reg("showtime", INDIGO)
 def showtime():
     tri = poly([(17, 13.5), (48, 30), (17, 46.5)], INK, 5)
     inner = poly([(22, 30), (32, 23.5), (32, 36.5)], HOLE, 3)
     return g(tri, "translate(1 0)") + g(inner, "translate(1 0)")
 
+
 @reg("shutter", BLUE_DEEP)
 def shutter():
     return _aperture(6, core=5.5, w=2.2, rot=-60)
 
+
 @reg("shutter-encoder", DEEP_ORANGE_DEEP)
 def shutter_encoder():
     return _aperture(5, core=6.5, w=2.4, rot=-90)
+
 
 @reg("sideka", BLUE)
 def sideka():
@@ -187,17 +217,20 @@ def sideka():
              stroke("M17 18A16 16 0 0 0 17 40", INK, 2.4))
     return body + eyes + pupils + beak + waves
 
+
 @reg("sidekick-browser", RED)
 def sidekick():
     s = poly([(20, 13), (44, 13), (44, 19), (27, 21.5), (44, 30), (44, 47),
               (20, 47), (20, 41), (37, 38.5), (20, 30)], INK, 2)
     return s
 
+
 @reg("sigil", RED_DARK)
 def sigil():
     s = stroke("M40.5 18C38 14.5 35 13.5 31.5 13.5C26 13.5 22.5 17 22.5 21.5"
                "C22.5 30 41.5 29 41.5 38C41.5 43 37 46.5 31.5 46.5C27 46.5 24 44.5 22 41", INK, 4.2)
     return s + circle(41.5, 19.5, 3, INK) + circle(22, 40, 3, INK)
+
 
 @reg("silksong", RED_DARK)
 def silksong():
@@ -207,6 +240,7 @@ def silksong():
     eyes = path("M25.5 34a2.7 4.2 0 1 0 0.01 0Z", HOLE) + path("M38.5 34a2.7 4.2 0 1 0 0.01 0Z", HOLE)
     return mask + horn + eyes
 
+
 @reg("simon", GREY_DARK)
 def simon():
     out = ""
@@ -214,6 +248,7 @@ def simon():
                         ((-8, 8), BLUE_LIGHT), ((8, 8), AMBER_SOFT)):
         out += circle(CX + dx, CY + dy, 8.8, c)
     return out + circle(CX, CY, 7, HOLE) + circle(CX, CY, 5.5, INK)
+
 
 @reg("simple-image-reducer", ORANGE_DARK)
 def simple_image_reducer():
@@ -225,6 +260,7 @@ def simple_image_reducer():
             poly([(19.5, 46), (18.5, 37.5), (26.5, 40)], INK, 1.5))
     return club + arcs
 
+
 @reg("simplenote", BLUE_DEEP)
 def simplenote():
     base = circle(CX, CY, 16.5, INK)
@@ -233,12 +269,14 @@ def simplenote():
              "C44 29.5 37.5 28 33.5 27C30 26.2 28.5 25 28.5 23C28.5 19.5 32 16.5 36.5 16.5Z", HOLE)
     return base + s
 
+
 @reg("simplescreenrecorder", RED_DEEP)
 def ssr():
     screen = rrect(13.5, 15, 37, 26, 3.5, INK)
     cam = rrect(21.5, 22, 13, 12, 2.5, HOLE) + poly([(35, 28), (42.5, 23), (42.5, 33)], HOLE, 2)
     stand = rrect(18, 43.5, 28, 3.5, 1.75, INK)
     return screen + cam + stand
+
 
 @reg("simsu", GREY_DEEP)
 def simsu():
@@ -253,6 +291,7 @@ def simsu():
     two = stroke("M41.4 40A2.6 2.6 0 1 1 46.2 41.6L41.4 45.4H46.8", d, 2.4)
     return out + six + seven + two
 
+
 @reg("simutrans", BLUE)
 def simutrans():
     gear = _gear_k(CX, CY, 13.5, 10, INK, 5, 6)
@@ -260,6 +299,7 @@ def simutrans():
     window = rrect(25, 23, 14, 7, 2, INK)
     lights = circle(27, 35, 1.8, INK) + circle(37, 35, 1.8, INK)
     return gear + body + window + lights
+
 
 @reg("singular", LIGHT_BLUE_DARK)
 def singular():
@@ -270,12 +310,14 @@ def singular():
            stroke("M41 30L49 25", INK, 2.4) + stroke("M41 30L49 35", INK, 2.4))
     return loop + lo + fan
 
+
 @reg("sioyek", BLUE_DEEP)
 def sioyek():
     left = rrect(14.5, 15, 17, 32, 3, ORANGE_LIGHT)
     right = rrect(32.5, 15, 17, 32, 3, INK)
     mark = poly([(26, 11), (32, 11), (32, 29), (29, 25.5), (26, 29)], BLUE_GREY_DARK, 1.5)
     return left + right + mark
+
 
 @reg("sirikali", LIGHT_BLUE_DEEP)
 def sirikali():
@@ -284,6 +326,7 @@ def sirikali():
     hole = circle(32, 34, 3.2, HOLE) + rrect(30.6, 34, 2.8, 7.5, 1.4, HOLE)
     return shackle + body + hole
 
+
 @reg("sk1", BLUE_GREY_DARK)
 def sk1():
     top = rrect(15, 13, 26, 7, 1.5, BLUE_LIGHT)
@@ -291,6 +334,7 @@ def sk1():
     bot = rrect(23, 40, 26, 7, 1.5, AMBER)
     left = rrect(15, 21, 7, 26, 1.5, INK)
     return top + right + bot + left
+
 
 @reg("sk1-color-picker", GREY_DARK)
 def sk1_picker():
@@ -302,11 +346,13 @@ def sk1_picker():
         out += poly([(CX, CY), a, b], c, 0.8)
     return out
 
+
 @reg("skanlite", BLUE_GREY_DEEP)
 def skanlite():
     page = rrect(19.5, 13, 25, 34, 2.5, INK)
     scan = rrect(13.5, 25, 37, 5, 2.5, RED_LIGHT)
     return page + rrect(13.5, 23.8, 37, 7.4, 3.7, HOLE) + scan
+
 
 @reg("skanpage", BLUE_DEEP)
 def skanpage():
@@ -318,6 +364,7 @@ def skanpage():
     gap = rrect(13.5, 18.2, 37, 7.2, 3.6, HOLE)
     return back + doc + lines + gap + bar
 
+
 @reg("skrooge", AMBER_DEEP)
 def skrooge():
     coin = circle(CX, CY, 16.5, INK) + _ring(CX, CY, 13.2, HOLE, 1.8)
@@ -325,15 +372,19 @@ def skrooge():
             line(22.5, 28, 33, 28, HOLE, 2.4) + line(22.5, 32.5, 33, 32.5, HOLE, 2.4))
     return coin + g(euro, "translate(1.5 0)")
 
+
+SKULLGIRLS_HEART = path('M32 46.5C24 40 14 33 14 23.5C14 17.5 18.5 13.5 23.5 13.5C27.5 13.5 30.5 16 32 19C33.5 16 36.5 13.5 40.5 13.5C45.5 13.5 50 17.5 50 23.5C50 33 40 40 32 46.5Z', INK)
+
+
 @reg("skullgirls", RED_DEEP)
 def skullgirls():
-    heart = path("M32 46.5C24 40 14 33 14 23.5C14 17.5 18.5 13.5 23.5 13.5C27.5 13.5 30.5 16 32 19"
-                 "C33.5 16 36.5 13.5 40.5 13.5C45.5 13.5 50 17.5 50 23.5C50 33 40 40 32 46.5Z", INK)
+    heart = SKULLGIRLS_HEART
     skull = circle(32, 26.5, 8.5, HOLE) + rrect(27, 30, 10, 9, 2.5, HOLE)
     eyes = (poly([(26.5, 23.5), (31, 26), (27, 28.5)], INK, 1.2) +
             poly([(37.5, 23.5), (33, 26), (37, 28.5)], INK, 1.2))
     teeth = line(30.5, 35, 30.5, 38.5, INK, 1.4) + line(33.5, 35, 33.5, 38.5, INK, 1.4)
     return heart + skull + eyes + teeth
+
 
 @reg("skydrive", BLUE_DEEP)
 def skydrive():
@@ -341,6 +392,7 @@ def skydrive():
     front = path("M23.5 44A6.5 6.5 0 0 1 23.5 31A9.5 9.5 0 0 1 41 27A7.5 7.5 0 0 1 48.5 36"
                  "A5 5 0 0 1 46 44Z", INK)
     return back + front
+
 
 @reg("skyrim-script-extender", GREY_DARK)
 def skse():
@@ -351,12 +403,14 @@ def skse():
                   f' stroke="{INK}" stroke-width="1" stroke-linejoin="round"')
     return gear + inner + dragon
 
+
 @reg("slade", BROWN_DEEP)
 def slade():
     gear = _gear_k(CX, CY, 13.5, 10, INK, 5, 6)
     s = stroke("M38 21.5C36.5 20.5 34.5 20 32.5 20C28.5 20 26 22 26 25C26 30.5 38.5 29 38.5 35"
                "C38.5 38 35.5 40 31.5 40C29 40 27 39.5 25.5 38.5", BLUE_DEEP, 4.2)
     return gear + s
+
 
 @reg("slay-the-spire", AMBER_DEEP)
 def slay_the_spire():
@@ -365,17 +419,20 @@ def slay_the_spire():
     gem = poly([(32, 27), (36.5, 34), (32, 42), (27.5, 34)], HOLE, 1.5)
     return flame + gem
 
+
 @reg("slic3r", YELLOW_DARK)
 def slic3r():
     a = path("M17.5 36.5A15 15 0 0 1 43.5 17.5Z", INK)
     b = path("M20.5 42.5L46.5 23.5A15 15 0 0 1 20.5 42.5Z", YELLOW_SOFT)
     return g(a, "translate(-2.2 -1.6)") + g(b, "translate(2.2 1.6)")
 
+
 @reg("slimbookbattery", BROWN_LIGHT)
 def slimbook():
     ring = _ring(CX, CY, 15, INK, 3.6)
     bolt = poly([(35, 17.5), (24.5, 32), (31, 32), (29, 42.5), (39.5, 28), (33, 28)], INK, 1.5)
     return ring + bolt
+
 
 @reg("slime-rancher", PINK_LIGHT)
 def slime_rancher():
@@ -384,12 +441,14 @@ def slime_rancher():
     mouth = path("M25 33H39C39 38 36 41 32 41C28 41 25 38 25 33Z", HOLE)
     return blob + eyes + mouth
 
+
 @reg("slimjet", BLUE)
 def slimjet():
     plane = path("M14.5 33L22 30.5L28.5 30.5L22.5 19H27L37.5 29.5H45C48.5 29.5 50 30.5 50 31.5"
                  "C50 32.5 48.5 33.5 45 33.5H37.5L27 44H22.5L28.5 32.5H22Z", INK,
                  f' stroke="{INK}" stroke-width="1.5" stroke-linejoin="round"')
     return g(plane, "translate(0 -1.5)")
+
 
 @reg("slingscold", GREY_DEEP)
 def slingscold():
@@ -400,6 +459,7 @@ def slingscold():
     flame = poly([(24.5, 35), (29, 39.5), (18, 46)], INK, 2)
     return body + fins + window + flame
 
+
 @reg("slingshot", TEAL_DEEP)
 def slingshot():
     planet = circle(29, 33, 14, INK)
@@ -409,49 +469,61 @@ def slingshot():
     target = circle(37, 36.5, 6.2, RED_LIGHT) + circle(37, 36.5, 3.4, INK) + circle(37, 36.5, 1.4, RED_LIGHT)
     return planet + land + band + target
 
+
+CHATTY_BUBBLE = path('M18 14H46A3.5 3.5 0 0 1 49.5 17.5V38.5A3.5 3.5 0 0 1 46 42H37L32 47.5L27 42H18A3.5 3.5 0 0 1 14.5 38.5V17.5A3.5 3.5 0 0 1 18 14Z', INK)
+
+
 @reg("sm.puri.Chatty", BROWN_SOFT)
 def chatty():
-    bubble = path("M18 14H46A3.5 3.5 0 0 1 49.5 17.5V38.5A3.5 3.5 0 0 1 46 42H37L32 47.5L27 42H18"
-                  "A3.5 3.5 0 0 1 14.5 38.5V17.5A3.5 3.5 0 0 1 18 14Z", INK)
+    bubble = CHATTY_BUBBLE
     face = (circle(25.5, 24, 2.5, HOLE) + circle(38.5, 24, 2.5, HOLE) +
             stroke("M24 31.5C28 36 36 36 40 31.5", HOLE, 3))
     return bubble + face
 
+
 def _badge_s(fill, letter):
     return (g(_shadow(), "translate(-3 3) translate(32 30) scale(.85) translate(-32 -30)") +
             circle(44, 18, 10, HOLE) + circle(44, 18, 8.5, fill) + letter)
+
 
 @small("shadow-beta")
 def shadow_beta_s():
     return _badge_s(DEEP_ORANGE, stroke("M41.5 25V15.5A3 3 0 0 1 47.5 15.5A2.6 2.6 0 0 1 44 18"
                                       "A3 3 0 1 1 41.5 22.5", INK, 2.6))
 
+
 @small("shadow-dev")
 def shadow_dev_s():
     return _badge_s(RED, stroke("M48.5 14C47.5 19.5 46 21.5 43 21.5A3 3.6 0 1 1 43 14.3"
                                       "C45.5 14.3 47 18 48.5 21.5", INK, 2.6))
+
 
 @small("shadow-tactics")
 def shadow_tactics_s():
     return (circle(CX, CY, 16.5, INK) + poly([(22, 22), (32, 15), (42, 22)], HOLE, 2) +
             poly([(27.5, 24), (36.5, 24), (38, 46), (26, 46)], HOLE, 2))
 
+
 @small("shadps4")
 def shadps4_s():
     return stroke("M36 46V15L17 38H45", INK, 6)
+
 
 @small("sheets")
 def sheets_s():
     bars = "".join(rrect(x, 29 - h, 7, h, 2, INK) for x, h in ((16, 8), (25, 14), (34, 18)))
     return bars + rrect(14, 32, 36, 16, 3.5, INK) + rrect(18, 37, 28, 3.5, 1.75, HOLE)
 
+
 @small("shutter")
 def shutter_s():
     return _aperture(5, core=6.5, w=3, rot=-90)
 
+
 @small("shutter-encoder")
 def shutter_encoder_s():
     return _aperture(5, core=7, w=3, rot=-90)
+
 
 @small("sideka")
 def sideka_s():
@@ -459,11 +531,13 @@ def sideka_s():
                 "C27 43 27.5 38 25 33C21 26 20.5 21 22 17Z", INK)
     return body + circle(30.5, 24, 4.5, HOLE) + circle(40.5, 24, 4.5, HOLE)
 
+
 @small("simple-image-reducer")
 def sir_s():
     club = (circle(32, 22.5, 6.5, INK) + circle(25, 31.5, 6.5, INK) + circle(39, 31.5, 6.5, INK) +
             poly([(32, 29), (36, 44), (28, 44)], INK, 2))
     return club
+
 
 @small("simsu")
 def simsu_s():
@@ -473,10 +547,12 @@ def simsu_s():
             out += rrect(14 + c * 18.5, 12 + r * 18.5, 17, 17, 3, GREY_SOFT if (c + r) % 2 else INK)
     return out + stroke("M18.5 17H26.5L21 26", INK_SLATE, 3.2) + stroke("M37.5 36A3.8 3.8 0 1 1 44.5 38.5L37.5 44.5H45.5", INK_SLATE, 3.2)
 
+
 @small("simutrans")
 def simutrans_s():
     return (_gear_k(CX, CY, 14, 8, INK, 6.5, 6) + rrect(22.5, 20, 19, 20, 5, HOLE) +
             rrect(25.5, 23.5, 13, 7, 2.5, INK))
+
 
 @small("singular")
 def singular_s():
@@ -484,10 +560,12 @@ def singular_s():
                   "C23 38 27 36 31 30L43 15M31 30L43 45", INK, 4)
     return loop + stroke("M38 30L48 22M38 30L48 38", INK, 3.5)
 
+
 @small("skanpage")
 def skanpage_s():
     return (rrect(19, 13, 26, 34, 3.5, INK) + rrect(13, 22.5, 38, 8, 4, HOLE) +
             rrect(13, 24, 38, 5, 2.5, INK) + rrect(23, 35, 18, 3.5, 1.75, HOLE))
+
 
 @small("skrooge")
 def skrooge_s():
@@ -495,17 +573,19 @@ def skrooge_s():
             line(22, 27.5, 33, 27.5, HOLE, 3.2) + line(22, 33, 33, 33, HOLE, 3.2))
     return circle(CX, CY, 16.5, INK) + g(euro, "translate(1.5 0)")
 
+
 @small("skullgirls")
 def skullgirls_s():
-    heart = path("M32 46.5C24 40 14 33 14 23.5C14 17.5 18.5 13.5 23.5 13.5C27.5 13.5 30.5 16 32 19"
-                 "C33.5 16 36.5 13.5 40.5 13.5C45.5 13.5 50 17.5 50 23.5C50 33 40 40 32 46.5Z", INK)
+    heart = SKULLGIRLS_HEART
     skull = circle(32, 27, 9.5, HOLE) + rrect(26.5, 30, 11, 9.5, 3, HOLE)
     return heart + skull + circle(28, 27, 2.6, INK) + circle(36, 27, 2.6, INK)
+
 
 @small("skyrim-script-extender")
 def skse_s():
     return (_gear_k(CX, CY, 14, 8, INK, 7, 6) + circle(CX, CY, 9.5, HOLE) +
             poly([(32, 22), (38, 26), (34.5, 29), (32, 39), (29.5, 29), (26, 26)], INK, 2))
+
 
 @small("slade")
 def slade_s():
@@ -513,13 +593,14 @@ def slade_s():
                "C39 38.5 35.5 40.5 31.5 40.5C28.5 40.5 26.5 39.8 25 38.5", BLUE_DEEP, 5.2)
     return _gear_k(CX, CY, 14, 8, INK, 6.5, 6) + s
 
+
 @small("slingshot")
 def slingshot_s():
     return (circle(29, 33, 14, INK) + stroke("M37.5 36C44 30 49 21 47 15.5C45.5 11.5 40 14 35 20", RED_LIGHT, 3.5) +
             circle(37, 36.5, 6.5, RED_LIGHT) + circle(37, 36.5, 3, INK))
 
+
 @small("sm.puri.Chatty")
 def chatty_s():
-    bubble = path("M18 14H46A3.5 3.5 0 0 1 49.5 17.5V38.5A3.5 3.5 0 0 1 46 42H37L32 47.5L27 42H18"
-                  "A3.5 3.5 0 0 1 14.5 38.5V17.5A3.5 3.5 0 0 1 18 14Z", INK)
+    bubble = CHATTY_BUBBLE
     return bubble + circle(25, 24, 3.2, HOLE) + circle(39, 24, 3.2, HOLE) + stroke("M23.5 31C28 36.5 36 36.5 40.5 31", HOLE, 3.5)

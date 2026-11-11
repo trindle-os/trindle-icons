@@ -15,10 +15,20 @@ KIT_NAMES = {n.name for n in KIT.body if isinstance(n, ast.FunctionDef)}
 for n in KIT.body:
     if isinstance(n, ast.Assign):
         KIT_NAMES |= {t.id for t in n.targets if isinstance(t, ast.Name)}
-KIT_NAMES -= {"ICONS"}
+
+
+def shape(fn):
+    """Arguments and body without the name or docstring, so a renamed copy compares equal."""
+    body = fn.body[1:] if isinstance(fn.body[0], ast.Expr) and isinstance(getattr(fn.body[0], "value", None), ast.Constant) else fn.body
+    return ast.dump(fn.args), tuple(ast.dump(x) for x in body)
+
+
+KIT_SHAPES = {shape(n): n.name for n in KIT.body if isinstance(n, ast.FunctionDef)}
+
 
 def modules():
     return [importlib.import_module("glyphs." + os.path.basename(p)[:-3]) for p in FILES]
+
 
 def test_no_helper_copies():
     assert FILES
@@ -33,6 +43,9 @@ def test_no_helper_copies():
             for name in names:
                 assert name not in ("reg", "small"), f"{path} defines {name}"
                 assert name not in KIT_NAMES, f"{path} redefines kit helper {name}"
+            if isinstance(n, ast.FunctionDef) and not n.decorator_list:
+                assert shape(n) not in KIT_SHAPES, f"{path} copies kit helper {KIT_SHAPES[shape(n)]} as {n.name}"
+
 
 def test_icon_names_unique():
     seen = {}
@@ -42,11 +55,8 @@ def test_icon_names_unique():
             seen[name] = mod.__name__
     assert seen
 
-def test_kit_has_no_icons():
-    kit = importlib.import_module("glyphs.kit")
-    assert kit.ICONS == {}
 
 if __name__ == "__main__":
-    for fn in (test_no_helper_copies, test_icon_names_unique, test_kit_has_no_icons):
+    for fn in (test_no_helper_copies, test_icon_names_unique):
         fn()
         print("ok", fn.__name__)

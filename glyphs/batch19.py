@@ -6,19 +6,30 @@ mark in INK, HOLE for cut-throughs, a second shade only where the logo
 really needs one.
 """
 import math
-from lm import *
+from lm import (
+    AMBER, AMBER_DEEP, BLUE, BLUE_DARK, BLUE_DEEP, BLUE_GREY, BLUE_GREY_DARK, BLUE_GREY_DEEP,
+    BLUE_GREY_LIGHT, BLUE_GREY_SOFT, BLUE_SOFT, BROWN, BROWN_LIGHT, circle, CX, CY, CYAN,
+    CYAN_SOFT, DEEP_ORANGE_DEEP, DEEP_ORANGE_LIGHT, f, g, GREY, GREY_DARK, GREY_DEEP, HOLE,
+    INDIGO_DARK, INDIGO_SOFT, INK, LIGHT_BLUE, LIGHT_BLUE_DARK, LIGHT_BLUE_DEEP, line,
+    ORANGE_DEEP, ORANGE_LIGHT, path, PINK_DARK, PINK_LIGHT, PINK_SOFT, poly, pt, RED, RED_DARK,
+    RED_DEEP, RED_LIGHT, rrect, stroke, TEAL_DARK, TEAL_DEEP, TEAL_LIGHT, YELLOW, YELLOW_DARK,
+    YELLOW_LIGHT,
+)
 from glyphs.kit import arc, ellipse_c, gear_f, registry, _ring, _star
 
 ICONS, SMALL, reg, small = registry()
+
 
 def frame(x, y, w, h, r, colour, sw):
     return (f'<rect x="{f(x)}" y="{f(y)}" width="{f(w)}" height="{f(h)}" rx="{f(r)}" '
             f'fill="none" stroke="{colour}" stroke-width="{f(sw)}"/>')
 
+
 @reg("crayon-physics-deluxe", AMBER)
 def crayon_physics():
     return (poly(_star(32, 31, 17.5, 8), INK, 5) +
             poly(_star(32, 31.3, 11, 5), HOLE, 3))
+
 
 @reg("crusader-kings-2", RED_DEEP)
 def crusader_kings():
@@ -27,9 +38,11 @@ def crusader_kings():
     cross = rrect(29.3, 17, 5.4, 27, 1, HOLE) + rrect(20.5, 24, 23, 5.4, 1, HOLE)
     return shield + cross
 
+
 def _heart(cx, cy, s, rot, colour, extra=""):
     d = "M0 7C-9 1 -11 -5 -6 -8C-3 -9.6 -0.5 -8 0 -5.5C0.5 -8 3 -9.6 6 -8C11 -5 9 1 0 7Z"
     return g(path(d, colour, extra), f"translate({cx} {cy}) rotate({rot}) scale({s})")
+
 
 @reg("crush-crush", PINK_LIGHT)
 def crush_crush():
@@ -37,6 +50,7 @@ def crush_crush():
     front = _heart(38.5, 35.5, 1.3, 12, PINK_SOFT,
                    f' stroke="{HOLE}" stroke-width="2" stroke-linejoin="round"')
     return back + front
+
 
 NECRO = ["..XXXXXXX..",
          ".XXXXXXXXX.",
@@ -49,6 +63,7 @@ NECRO = ["..XXXXXXX..",
          "..XXXXXXX..",
          "..X.X.X.X..",
          "..XXXXXXX.."]
+
 
 def _necro(rows, u, x0, y0):
     out = ""
@@ -67,9 +82,11 @@ def _necro(rows, u, x0, y0):
             c = e
     return out
 
+
 @reg("crypt-of-the-necrodancer", PINK_DARK)
 def necrodancer():
     return _necro(NECRO, 3, 15.5, 13.5)
+
 
 def _cs_soldier():
     s = HOLE
@@ -79,24 +96,18 @@ def _cs_soldier():
             stroke("M28.3 31.5L25.6 37.5L24.2 44", s, 3.2) +
             stroke("M31.6 31.5L35 37.5L35.8 44", s, 3.2))
 
+
 def _cs():
     return circle(CX, CY, 16.5, INK) + _cs_soldier()
 
+
+@reg("cscz", YELLOW_DARK)
+@reg("csgo", GREY_DARK)
+@reg("css", BLUE_DEEP)
 @reg("cs", AMBER_DEEP)
 def cs():
     return _cs()
 
-@reg("cscz", YELLOW_DARK)
-def cscz():
-    return _cs()
-
-@reg("csgo", GREY_DARK)
-def csgo():
-    return _cs()
-
-@reg("css", BLUE_DEEP)
-def css():
-    return _cs()
 
 @reg("cuphead", RED_DEEP)
 def cuphead():
@@ -106,6 +117,7 @@ def cuphead():
     eyes = ellipse_c(26.5, 32, 2.6, 4.3, HOLE) + ellipse_c(35.5, 32, 2.6, 4.3, HOLE)
     nose = circle(31, 38.5, 2.6, RED_LIGHT)
     return head + top + straw + eyes + nose
+
 
 @reg("cuttlefish", AMBER_DEEP)
 def cuttlefish():
@@ -117,6 +129,7 @@ def cuttlefish():
             circle(27.8, 26.6, 1.7, INK) + circle(37.8, 26.6, 1.7, INK))
     return dome + arms + eyes
 
+
 @reg("cuyo", BLUE_GREY_LIGHT)
 def cuyo():
     head = path("M21.5 32V23A10.5 8.5 0 0 1 42.5 23V32Z", INK)
@@ -124,6 +137,7 @@ def cuyo():
     eyes = (ellipse_c(27.5, 29.5, 3.2, 4.2, HOLE) + ellipse_c(36.5, 29.5, 3.2, 4.2, HOLE) +
             circle(27.5, 30.5, 1.8, INK) + circle(36.5, 30.5, 1.8, INK))
     return head + body + eyes
+
 
 @reg("cyberpunk-2077", YELLOW)
 def cyberpunk():
@@ -134,6 +148,7 @@ def cyberpunk():
     sev = lambda a: f"M{a} {y}H{a + w}L{a + 2} {y + h}"
     digits = "".join(stroke(d, INK, 3) for d in [two, zero, sev(xs[2]), sev(xs[3])])
     return digits + line(15.4, 44, 38, 44, CYAN, 2.6)
+
 
 @reg("danganronpa", GREY)
 def danganronpa():
@@ -146,6 +161,7 @@ def danganronpa():
     eye_r = poly([(35.5, 26.5), (43.5, 23), (40.5, 27.5), (44.5, 29.5), (36, 30)], RED, 1)
     return left + right + muzzle + nose + eye_l + eye_r
 
+
 @reg("dangerous-golf", AMBER_DEEP)
 def dangerous_golf():
     hole = ellipse_c(33, 41, 11, 4.6, INK) + ellipse_c(33, 41, 7, 2.4, HOLE)
@@ -153,10 +169,12 @@ def dangerous_golf():
     burst = stroke("M16 35L20 27L24 33.5L28 27", INK, 3)
     return hole + pin + burst
 
+
 @reg("cromite", TEAL_LIGHT)
 def cromite():
     return (_ring(CX, CY, 13, INK, 5) + circle(CX, CY, 7, TEAL_DARK) +
             line(37, 25, 48, 14, HOLE, 4.2))
+
 
 def _history(cx=32, cy=30, s=1.0):
     r = 11 * s
@@ -171,9 +189,11 @@ def _history(cx=32, cy=30, s=1.0):
     return (stroke(arc(cx, cy, r, -150, 150), INK, 4 * s) + poly([tip, c1, c2], INK, 1.5) +
             stroke(f"M{f(cx)} {f(cy - 6 * s)}V{f(cy)}L{f(cx + 4.5 * s)} {f(cy + 3.5 * s)}", INK, 3 * s))
 
+
 @reg("cronopete_preferences", GREY_DEEP)
 def cronopete_prefs():
     return _history(33, 30, 1.35)
+
 
 @reg("cronopete_restore", GREY_DEEP)
 def cronopete_restore():
@@ -182,11 +202,13 @@ def cronopete_restore():
              poly([(42, 33.5), (46.5, 37), (42, 40.5)], INK, 1))
     return _history(29, 26.5, 1.2) + badge
 
+
 @reg("crossover", DEEP_ORANGE_DEEP)
 def crossover():
     a = path("M21 44C12.5 34 18 16 37.5 13.5C27.5 19 22.5 30 27 42Z", INK)
     return a + g(path("M21 44C12.5 34 18 16 37.5 13.5C27.5 19 22.5 30 27 42Z", BLUE_SOFT),
                  "rotate(180 32 29)")
+
 
 @reg("crossstudio", BLUE_GREY_DEEP)
 def crossstudio():
@@ -194,6 +216,7 @@ def crossstudio():
     up = stroke("M17.5 14.5C22 18.5 27 24 32 30", INK, 6)
     low = stroke("M32 30C37 36 42 41.5 46.5 45.5", ORANGE_LIGHT, 6)
     return back + up + low
+
 
 @reg("crow-translate", LIGHT_BLUE_DARK)
 def crow_translate():
@@ -203,10 +226,12 @@ def crow_translate():
     quill = stroke("M16 47.5L40.5 19", HOLE, 2.2) + line(16, 47.5, 20, 43, INK, 2.6)
     return vane + notches + quill
 
+
 @reg("crunchyroll", DEEP_ORANGE_LIGHT)
 def crunchyroll():
     return (circle(CX, CY, 16.5, INK) + circle(34.5, 28.5, 10.5, HOLE) +
             circle(38, 25, 4.8, INK))
+
 
 @reg("cryptomator", INDIGO_SOFT)
 def cryptomator():
@@ -217,6 +242,7 @@ def cryptomator():
     key = circle(32, 33.5, 2.9, HOLE) + poly([(30.4, 35), (33.6, 35), (34.5, 41.5), (29.5, 41.5)], HOLE, 1)
     return head + eyes + shield + key
 
+
 @reg("cryptr", BLUE_GREY_DEEP)
 def cryptr():
     body = rrect(15, 13, 34, 34, 6, INK)
@@ -224,6 +250,7 @@ def cryptr():
     door = rrect(21.5, 19.5, 21, 21, 3, HOLE)
     key = circle(32, 27, 3.6, INK) + poly([(30, 28.5), (34, 28.5), (35.3, 36.5), (28.7, 36.5)], INK, 1)
     return body + rivets + door + key
+
 
 @reg("credentials-preferences", BLUE_GREY)
 def credentials():
@@ -234,6 +261,7 @@ def credentials():
              path("M23.5 39A6 6 0 0 1 35.5 39Z", HOLE))
     return cloud + back + front
 
+
 @reg("cs-actions", BROWN_LIGHT)
 def cs_actions():
     rows = "".join(rrect(15.5, y - 3, 6, 6, 1.5, INK) + rrect(25, y - 1.6, w, 3.2, 1.6, INK)
@@ -242,6 +270,7 @@ def cs_actions():
               poly([(37.2, 44.8), (38.4, 38.2), (43.8, 43.6)], INK, 1.2))
     return rows + pencil
 
+
 @reg("cs-applets", BLUE_DEEP)
 def cs_applets():
     screen = frame(15.5, 15, 33, 30, 4, INK, 3)
@@ -249,12 +278,14 @@ def cs_applets():
     keys = "".join(rrect(19.8 + k * 6.6, 38.3, 4.4, 4.4, 1, HOLE) for k in range(4))
     return screen + bar + keys
 
+
 @reg("cs-desktop", BLUE_DEEP)
 def cs_desktop():
     screen = frame(15.5, 14, 33, 29, 4, INK, 3)
     top = path("M15.5 18A4 4 0 0 1 19.5 14H44.5A4 4 0 0 1 48.5 18V21.5H15.5Z", INK)
     tab = rrect(25, 40, 14, 7, 2.5, INK)
     return screen + top + tab
+
 
 @reg("cs-login", GREY_DARK)
 def cs_login():
@@ -264,9 +295,11 @@ def cs_login():
         out += "".join(circle(22 + 7 * k, y + 5.5, 2.3, HOLE) for k in range(3))
     return out
 
+
 def _sparkle(x, y, s):
     return poly([(x, y - s), (x + s * .28, y - s * .28), (x + s, y), (x + s * .28, y + s * .28),
                  (x, y + s), (x - s * .28, y + s * .28), (x - s, y), (x - s * .28, y - s * .28)], INK, .8)
+
 
 @reg("cs-nightlight", INDIGO_DARK)
 def cs_nightlight():
@@ -276,6 +309,7 @@ def cs_nightlight():
     stars = _sparkle(18.5, 17.5, 4.2) + _sparkle(45.5, 15.5, 3) + _sparkle(18, 40, 2.8)
     return moon + craters + stars
 
+
 @reg("cs-overview", BLUE)
 def cs_overview():
     screen = frame(15.5, 15, 33, 30, 4, INK, 3)
@@ -283,11 +317,13 @@ def cs_overview():
     br = path("M48.5 41A4 4 0 0 1 44.5 45H38.5A10 10 0 0 1 48.5 35Z", INK)
     return screen + tl + br
 
+
 @reg("cs-panel", BLUE_DARK)
 def cs_panel():
     screen = frame(15.5, 15, 33, 30, 4, INK, 3)
     bar = path("M15.5 37H48.5V41A4 4 0 0 1 44.5 45H19.5A4 4 0 0 1 15.5 41Z", INK)
     return screen + bar
+
 
 @reg("cudatext-512", ORANGE_DEEP)
 def cudatext():
@@ -295,10 +331,12 @@ def cudatext():
     u = stroke("M28.5 22.5V31.5A4.75 4.75 0 0 0 38 31.5", INK, 4) + line(38, 22.5, 38, 38, INK, 4)
     return bracket + u
 
+
 @reg("cumulonimbus", YELLOW_LIGHT)
 def cumulonimbus():
     return (stroke(arc(31, 30, 15, 40, 320), INK, 3.8) +
             stroke(arc(31, 30, 9.4, 40, 320), INK, 3.8) + circle(31, 30, 4, INK))
+
 
 @reg("cups", GREY_DEEP)
 def cups():
@@ -309,11 +347,13 @@ def cups():
     lines = rrect(25, 36.5, 14, 2.6, 1.3, HOLE) + rrect(25, 41, 9, 2.6, 1.3, HOLE)
     return paper_in + body + led + paper_out + lines
 
+
 @reg("cura-icon", LIGHT_BLUE_DEEP)
 def cura():
     body = poly([(22, 13.5), (48.5, 13.5), (48.5, 39), (42, 46.5), (15.5, 46.5), (15.5, 21)], INK, 3)
     c = stroke("M40.5 22.5H28.5A4 4 0 0 0 24.5 26.5V33.5A4 4 0 0 0 28.5 37.5H40.5", HOLE, 6)
     return body + c
+
 
 @reg("curlew", LIGHT_BLUE)
 def curlew():
@@ -324,12 +364,14 @@ def curlew():
     legs = line(32.5, 39, 31.5, 47, INK, 2.3) + line(36.5, 39, 38, 47, INK, 2.3)
     return head + beak + body + legs
 
+
 @reg("cursor", BLUE_GREY_DARK)
 def cursor():
     v = [pt(CX, CY, 17, -90 + 60 * k) for k in range(6)]
     hexa = poly(v, BLUE_GREY_LIGHT, 2.5)
     arrow = poly([v[5], v[1], v[3]], INK, 2)
     return hexa + arrow
+
 
 @reg("custom-toolbox", GREY_DARK)
 def custom_toolbox():
@@ -338,6 +380,7 @@ def custom_toolbox():
     cog = (circle(41, 40, 10, HOLE) + gear_f(41, 40, 8.6, 6.4, 8, INK) + circle(41, 40, 2.6, HOLE))
     return tools + blade + cog
 
+
 @reg("cutecom", BLUE_GREY_DEEP)
 def cutecom():
     top = rrect(21, 13, 22, 11, 1.5, BLUE_GREY_SOFT)
@@ -345,9 +388,11 @@ def cutecom():
     lines = "".join(rrect(32 - w / 2, y, w, 3, 1.5, HOLE) for y, w in [(26, 22), (32, 16), (38, 10)])
     return top + body + lines
 
+
 @reg("cutegram", RED_DEEP)
 def cutegram():
     return poly([(46.5, 13.5), (17, 27.5), (30.5, 31), (34.5, 45)], INK, 3.5)
+
 
 @reg("cutemarked", DEEP_ORANGE_LIGHT)
 def cutemarked():
@@ -356,11 +401,13 @@ def cutemarked():
     arrow = line(40, 24.5, 40, 31, HOLE, 3) + poly([(35.5, 31), (44.5, 31), (40, 36)], HOLE, 1)
     return box + m + arrow
 
+
 @reg("cutemaze", BROWN_LIGHT)
 def cutemaze():
     walls = ["M35 15H16V45H48V15H42", "M23 21V39", "M23 21H36", "M42 21V39H29",
              "M29 27V39", "M36 27V33"]
     return "".join(stroke(d, INK, 3.4) for d in walls)
+
 
 @reg("cutentr", GREY_DARK)
 def cutentr():
@@ -370,12 +417,14 @@ def cutentr():
     btns = circle(37, 38.5, 2.2, HOLE) + circle(43, 38.5, 2.2, HOLE)
     return body + screen + pad + btns
 
+
 @reg("cutepeaks", TEAL_DEEP)
 def cutepeaks():
     up = poly([(15, 28.5), (23.5, 17), (32, 28.5)], INK, 2)
     down = poly([(15, 31.5), (32, 31.5), (23.5, 43)], CYAN_SOFT, 2)
     peak = poly([(32.5, 43), (41, 14), (49, 43)], INK, 2)
     return up + down + peak
+
 
 @reg("cutter", GREY_DARK)
 def cutter():
@@ -384,6 +433,7 @@ def cutter():
     tri = (poly([(31, 30), (37, 25.3), (37, 34.7)], INK, 1.5) +
            poly([(37.5, 30), (43.5, 25.3), (43.5, 34.7)], INK, 1.5))
     return rim + slab + tri
+
 
 @reg("cvpcb", GREY_DEEP)
 def cvpcb():
@@ -394,6 +444,7 @@ def cvpcb():
              line(29, 34.5, 29, 39.5, HOLE, 2.4))
     return leads + amp + signs
 
+
 @reg("cyan", BLUE_DARK)
 def cyan():
     pick = path("M32 47.5C24 40.5 16 30.5 16 21.5C16 15.5 23 12.5 32 12.5C41 12.5 48 15.5 48 21.5"
@@ -403,14 +454,17 @@ def cyan():
     flourish = stroke("M38.5 21C40.5 18.5 38 16.5 35.5 18.5", HOLE, 2.4)
     return pick + c + flourish
 
+
 @reg("cz.pervoj.valdo-gtk", ORANGE_DEEP)
 def valdo():
     return (gear_f(CX, CY, 17, 13.5, 10, INK, 2) + circle(CX, CY, 10, HOLE) +
             stroke("M26.5 23.5L32 37L37.5 23.5", INK, 4))
 
+
 @reg("d-feet", BLUE_GREY_DARK)
 def d_feet():
     return _ring(35.5, 25.5, 8.5, INK, 4.6) + line(28.8, 32.2, 19, 42, INK, 6)
+
 
 @reg("d-tracker", BROWN)
 def d_tracker():
@@ -420,6 +474,7 @@ def d_tracker():
     sand = poly([(26.5, 21.5), (37.5, 21.5), (32, 27.5)], INK, 1.5) + \
         path("M25.5 41.5C26 37.5 29.5 35 32 34C34.5 35 38 37.5 38.5 41.5Z", INK)
     return caps + glass + sand
+
 
 @small("crypt-of-the-necrodancer")
 def necrodancer_s():
@@ -432,9 +487,11 @@ def necrodancer_s():
             ".X.X.X."]
     return _necro(rows, 4.8, 15.2, 13.2)
 
+
 @small("cs")
 def cs_s():
     return _cs_small()
+
 
 def _cs_small():
     s = HOLE
@@ -443,17 +500,21 @@ def _cs_small():
             line(29, 24.5, 45, 24.5, s, 3.6) +
             stroke("M27 32L22.5 44", s, 4.4) + stroke("M31 32L36.5 44", s, 4.4))
 
+
 for _n in ("cscz", "csgo", "css"):
     SMALL[_n] = _cs_small
+
 
 @small("cumulonimbus")
 def cumulonimbus_s():
     return stroke(arc(31, 30, 14, 40, 320), INK, 4.2) + circle(31, 30, 5.5, INK)
 
+
 @small("cutemaze")
 def cutemaze_s():
     walls = ["M34 15H16V45H48V15H42", "M25 23V37", "M25 23H39V37"]
     return "".join(stroke(d, INK, 3.6) for d in walls)
+
 
 @small("cutemarked")
 def cutemarked_s():
@@ -462,11 +523,13 @@ def cutemarked_s():
     arrow = poly([(35, 29), (45, 29), (40, 36.5)], HOLE, 1) + line(40, 23.5, 40, 30, HOLE, 3.4)
     return box + m + arrow
 
+
 @small("cyberpunk-2077")
 def cyberpunk_s():
     x, y, w, h, gap = 17, 20, 12, 20, 6
     sev = lambda a: f"M{a} {y}H{a + w}L{a + 3} {y + h}"
     return stroke(sev(x), INK, 4.4) + stroke(sev(x + w + gap), INK, 4.4)
+
 
 @small("cs-login")
 def cs_login_s():
@@ -476,6 +539,7 @@ def cs_login_s():
         out += "".join(circle(22 + 10 * k, y + 6, 2.8, HOLE) for k in range(3))
     return out
 
+
 @small("cuttlefish")
 def cuttlefish_s():
     dome = path("M17 34C17 22 23.5 14 32 14C40.5 14 47 22 47 34Z", INK)
@@ -483,11 +547,13 @@ def cuttlefish_s():
         "M21 32C20 38 17.5 41 16 44", "M32 33V46", "M43 32C44 38 46.5 41 48 44"])
     return dome + arms + circle(26.5, 26, 4, HOLE) + circle(37.5, 26, 4, HOLE)
 
+
 @small("credentials-preferences")
 def credentials_s():
     cloud = (circle(24, 31, 8, INK) + circle(34.5, 26.5, 10.5, INK) + circle(43, 33, 6.5, INK) +
              rrect(16, 31, 33.5, 10.5, 5.25, INK))
     return cloud + circle(32, 27.5, 3.8, HOLE) + path("M25 40A7 7 0 0 1 39 40Z", HOLE)
+
 
 @small("cutter")
 def cutter_s():
@@ -495,6 +561,7 @@ def cutter_s():
     tri = (poly([(30.5, 30), (39.5, 22.5), (39.5, 37.5)], INK, 2) +
            poly([(39.5, 30), (48.5, 22.5), (48.5, 37.5)], INK, 2))
     return slab + tri
+
 
 @small("cz.pervoj.valdo-gtk")
 def valdo_s():
