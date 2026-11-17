@@ -1,12 +1,12 @@
 # Trindle Icons: help
 
-Trindle Icons gives your desktop round, coloured app icons. There is one set, Trindle Circle. It has about 6,000 app icons drawn on round tiles. Any app we have not drawn uses a Papirus icon instead.
+Trindle Icons gives your desktop coloured app icons. There are two sets with the same drawings, Trindle Circle (round tiles) and Trindle Square (rounded squares). Each has about 6,000 app icons. Any app we have not drawn uses a Papirus icon instead.
 
 ## Use the icons
 
-1. Install the package `trindle-circle-icon-theme` (see the README for the steps).
+1. Install the package `trindle-circle-icon-theme` or `trindle-square-icon-theme` (see the README for the steps).
 2. Open Settings, then Appearance, then Icons.
-3. Pick Trindle Circle.
+3. Pick Trindle Circle or Trindle Square.
 
 ## Ask for an icon or report a problem
 

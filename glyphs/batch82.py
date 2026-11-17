@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Batch 82: the publisher's own apps. Flow keeps its yellow tile and navy mark."""
 from lm import (
-    AMBER_DEEP, BLUE_GREY, BLUE_GREY_DARK, BLUE_GREY_DEEP, BLUE_LIGHT, BRAND_YELLOW, circle,
-    CYAN, DEEP_ORANGE, GREY, HOLE, INDIGO, INK, line, NAVY, ORANGE, poly, pt, RED, rrect,
+    AMBER_DEEP, BLUE_DEEP, BLUE_GREY, BLUE_GREY_DARK, BLUE_GREY_DEEP, BLUE_LIGHT, BRAND_YELLOW, circle,
+    CYAN, DEEP_ORANGE, DEEP_ORANGE_DEEP, GREY, HOLE, INDIGO, INK, line, NAVY, ORANGE, poly, pt, RED, rrect,
     stroke, TEAL,
 )
 from glyphs.kit import registry
@@ -73,3 +73,21 @@ def first_setup():
     ticks = "".join(circle(25.5, y + .5, 2, HOLE) + line(34, y + 0.5, 42, y + 0.5, HOLE, 2.6)
                     for y in (24, 35))
     return board + clip + ticks
+
+
+@reg("trindle-flatpak", BLUE_DEEP)
+def flatpak():
+    return stroke("M32 14L47 22.5V40.5L32 49L17 40.5V22.5Z", INK, 3.6) + stroke("M17 22.5L32 31L47 22.5M32 31V49", INK, 3.6)
+
+
+@reg("trindle-appimage", DEEP_ORANGE_DEEP)
+def appimage():
+    page = stroke("M20 12H35L44 21V50H20Z", INK, 3.6)
+    arrow = line(32, 26, 32, 40, INK, 3.6) + stroke("M26.5 35L32 40.5L37.5 35", INK, 3.6)
+    return page + arrow
+
+
+@reg("trindle-report", AMBER_DEEP)
+def report():
+    bubble = stroke("M16 16H48V39H31L22 47V39H16Z", INK, 3.6)
+    return bubble + line(32, 22.5, 32, 30, INK, 3.6) + circle(32, 34.5, 1.9, INK)

@@ -59,3 +59,4 @@ imagemagick display-im6.q16
 trindle-workspaces preferences-desktop-workspaces
 trindle-ring trindle
 trindle-image-viewer image-viewer
+claude-desktop claude

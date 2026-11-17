@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Build script checks on a tiny temp fixture. Run: venv/bin/python tests/test_build.py"""
-import contextlib, io, os, sys, tempfile, types
+import contextlib, io, os, shutil, sys, tempfile, types
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
@@ -14,13 +14,14 @@ def run(argv):
     return code, err.getvalue()
 
 
-err = io.StringIO()
-try:
-    with contextlib.redirect_stderr(err):
-        build.main(["square"])
-    raise AssertionError("an extra argument was accepted")
-except SystemExit as e:
-    assert e.code == 2 and "usage" in err.getvalue()
+for bad in (["cricle"], ["circle", "square"]):
+    err = io.StringIO()
+    try:
+        with contextlib.redirect_stderr(err):
+            build.main(bad)
+        raise AssertionError(f"{bad} was accepted")
+    except SystemExit as e:
+        assert e.code == 2 and "usage" in err.getvalue()
 
 with tempfile.TemporaryDirectory() as tmp:
     papirus = os.path.join(tmp, "Papirus")
@@ -54,7 +55,9 @@ with tempfile.TemporaryDirectory() as tmp:
     with open(extra, "w") as fh:
         fh.write("# none\n")
 
-    build.THEME = os.path.join(tmp, "theme")
+    real_root = build.ROOT
+    build.ROOT = os.path.join(tmp, "out")
+    os.makedirs(build.ROOT)
     build.load = lambda: ({"c": (lambda: "", "#123456")}, {})
     build.write_symbolic = lambda theme: 0
     code, _ = run([])
@@ -63,6 +66,12 @@ with tempfile.TemporaryDirectory() as tmp:
     os.remove(os.path.join(papirus, "a.svg"))
     code, _ = run([])
     assert code == 0, code
+    for folder in ("Trindle-Circle", "Trindle-Square"):
+        assert os.path.isfile(os.path.join(build.ROOT, folder, "index.theme")), folder
+    shutil.rmtree(os.path.join(build.ROOT, "Trindle-Square"))
+    assert run(["circle"])[0] == 0 and not os.path.exists(os.path.join(build.ROOT, "Trindle-Square"))
+    assert run(["square"])[0] == 0 and os.path.isfile(os.path.join(build.ROOT, "Trindle-Square", "64x64", "apps", "c.svg"))
+    build.ROOT = real_root
 
 import importlib, pkgutil
 mods = [types.SimpleNamespace(ICONS={"dup": (None, "#fff")}), types.SimpleNamespace(ICONS={"dup": (None, "#fff")})]

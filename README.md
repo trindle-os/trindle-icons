@@ -3,13 +3,13 @@
 </p>
 
 <p align="center">
-  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-1.4.7-2c3e50?style=flat-square" alt="Version 1.4.7"></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-1.4.8-2c3e50?style=flat-square" alt="Version 1.4.8"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/licence-GPL--3.0--or--later%20%2F%20MIT-2c3e50?style=flat-square" alt="Licence: GPL-3.0-or-later and MIT"></a>
   <a href="https://github.com/trindle-os/trindle-icons/releases"><img src="https://img.shields.io/badge/download-GitHub%20releases-2c3e50?style=flat-square" alt="Download from GitHub releases"></a>
   <img src="https://img.shields.io/badge/icons-drawn%20in%20code-2c3e50?style=flat-square" alt="Icons drawn in code">
 </p>
 
-Trindle Icons is a set of about 6,000 app icons for Linux desktops. Each icon is a simple mark on a round coloured tile. The theme is Trindle Circle, and it is the only one.
+Trindle Icons is a set of about 6,000 app icons for Linux desktops. Each icon is a simple mark on a coloured tile, and two themes share the same drawings: Trindle Circle (round tiles) and Trindle Square (rounded squares).
 
 Install the package and your apps get matching icons. Anything we do not draw comes from Papirus, which the package depends on.
 
@@ -21,10 +21,10 @@ Install the package and your apps get matching icons. Anything we do not draw co
 
 ## Quick start
 
-Download the `.deb` file from the latest [GitHub release](https://github.com/trindle-os/trindle-icons/releases), then install it from the folder you saved it in:
+Download the `.deb` file for the theme you want (or both) from the latest [GitHub release](https://github.com/trindle-os/trindle-icons/releases), then install from the folder you saved them in:
 
 ```bash
-sudo apt install ./trindle-circle-icon-theme_<version>_all.deb
+sudo apt install ./trindle-circle-icon-theme_<version>_all.deb ./trindle-square-icon-theme_<version>_all.deb
 ```
 
 The `./` in front of the file name matters. Without it, apt looks for a package by that name in its online lists and does not find your file. Then choose the theme in your desktop's appearance or icon settings.
@@ -42,7 +42,7 @@ Comments are stripped from the published code to keep it lean.
 ## What it does
 
 - Draws about 6,000 app icons, and uses Papirus for the ones we do not draw.
-- Ships one theme, Trindle Circle, with round tiles.
+- Ships two themes, Trindle Circle and Trindle Square, with the same drawings and names.
 - Names icon files after the apps' own names, so the theme works on them.
 - Includes one-colour symbolic icons in `symbolic/`, MIT licensed.
 - Builds the theme and the package from source with a few commands.
@@ -61,7 +61,7 @@ These are for building from source. The installed package has no settings.
 
 ## Where your data lives
 
-The theme stores nothing of yours. The package installs into `/usr/share/icons/Trindle-Circle` and removes it again when you uninstall.
+The themes store nothing of yours. The packages install into `/usr/share/icons/Trindle-Circle` and `/usr/share/icons/Trindle-Square`, and remove them again when you uninstall.
 
 ## Security
 
@@ -80,7 +80,7 @@ venv/bin/pip install -r requirements.txt
 
 2. Fetch a named Papirus release from https://github.com/PapirusDevelopmentTeam/papirus-icon-theme/releases and unpack the whole theme folder (with `index.theme` and `64x64/apps`) as `Papirus/` at the top of this repository. To use a tree somewhere else, set `PAPIRUS_DIR=/path/to/Papirus` when you run the build. The drawings were made against Papirus release `20260801`.
 
-3. Build the theme:
+3. Build the themes (add `circle` or `square` to build just one):
 
 ```bash
 venv/bin/python build.py

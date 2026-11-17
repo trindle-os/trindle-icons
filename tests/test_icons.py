@@ -20,6 +20,8 @@ def check_lm():
     assert lm.WHITE in lm.icon(glyph, lm.RED_DEEP) and lm.BLACK in lm.icon(glyph, lm.YELLOW_LIGHT)
     small = ET.fromstring(lm.small_icon(glyph, lm.RED_DEEP, 16))
     assert small.get("width") == "16" and small.get("height") == "16" and small.get("viewBox") == "0 0 64 64"
+    for shape, mark in (("circle", "<circle"), ("square", "<rect")):
+        assert mark in lm.icon(glyph, lm.RED_DEEP, shape=shape) and mark in lm.small_icon(glyph, lm.RED_DEEP, 16, shape=shape)
     lifted = lm.lift('<path d="M0 0" fill="#FFFFFF"/>')
     assert lifted.count("<g ") == 3 and lm.BLACK in lifted and "#FFFFFF" not in lifted
     ids = lm.lift('<clipPath id="a"/><path clip-path="url(#a)"/>')

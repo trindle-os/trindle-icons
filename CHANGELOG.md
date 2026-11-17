@@ -2,14 +2,19 @@
 
 Newest first. Dates are when each version was built.
 
+## 1.4.8 (2026-11-16)
+
+- Three new icons in both themes: trindle-flatpak, trindle-appimage and trindle-report.
+
 ## 1.4.7 (2026-11-05)
 
 - Glyph helpers merged, duplicate masks shared, and the palette colours named in lm.py (values unchanged; all SVGs byte-identical).
 - Packaging, licence and docs fixes: requirements.txt, VERSION file, valid copyright file, safer publish check.
 - README rebuilt with a banner, a how-it-works picture and the build steps; new pictures are drawn from HTML in docs/images/sources.
 - Green icons and ticks removed from the app icons, and the Folders app gets its own Forget icon.
-- Trindle Square removed: Trindle Circle is the only theme, and the build makes only it.
-- Docs and comments say one theme and one package; the README names the publish settings and a test command.
+- Trindle Square is back, with every icon Circle has (same names and links); `python build.py` builds both, `python build.py square` one, and the apt script makes a package for each.
+- The README names the publish settings and a test command.
+- New name `claude-desktop` for the existing Claude icon, so Trindle's own copy can go; `chatgpt` was already drawn.
 - Review fixes, all SVGs byte-identical: the build is made in a staging folder and moved into place; publish.sh keeps no secret file, never replaces a published package and uploads the index; icons that share a drawing share one function; batch functions are named after their apps; imports name what they use; palette names replace raw colours; a test parses every drawing.
 - The README and symbolic/LICENSE say the original designs behind the icons remain the property of their owners.
 

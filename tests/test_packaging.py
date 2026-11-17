@@ -17,7 +17,7 @@ for mod in ("cairosvg", "pillow", "picosvg"):
 used = set()
 for folder, _, names in os.walk(ROOT):
     top = os.path.relpath(folder, ROOT).split(os.sep)[0]
-    if top in ("venv", "Papirus", ".git", ".publish", "Trindle-Circle", "dist", "scratch"):
+    if top in ("venv", "Papirus", ".git", ".publish", "Trindle-Circle", "Trindle-Square", "dist", "scratch"):
         continue
     for name in names:
         if name.endswith(".py"):

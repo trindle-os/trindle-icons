@@ -9,7 +9,7 @@ a drawn icon is recreated, so alias names match the originals exactly.
 import importlib, json, os, pkgutil, shutil, sys
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-from lm import icon, small_icon  # noqa: E402
+from lm import SHAPES, icon, small_icon  # noqa: E402
 
 PAPIRUS = os.environ.get("PAPIRUS_DIR") or os.path.join(ROOT, "Papirus")
 SRC = os.path.join(PAPIRUS, "64x64", "apps")
@@ -17,13 +17,13 @@ EXTRA = os.path.join(ROOT, "extra_aliases.txt")
 FIT_FILE = os.path.join(ROOT, "circle_fit.json")
 FULL = [32, 48, 64, 128]
 SMALL = [16, 22, 24]
-THEME = os.path.join(ROOT, "Trindle-Circle")
-NAME = "Trindle Circle"
+THEMES = {"circle": ("Trindle-Circle", "Trindle Circle", "circles"),
+          "square": ("Trindle-Square", "Trindle Square", "rounded squares")}
 
 
-def load_fit():
+def load_fit(shape):
     """Extra shrink for the few marks too wide for a round tile (tools/circle_fit.py)."""
-    if not os.path.exists(FIT_FILE):
+    if shape != "circle" or not os.path.exists(FIT_FILE):
         return {}
     with open(FIT_FILE, encoding="utf-8") as fh:
         return json.load(fh)
@@ -127,7 +127,7 @@ def papirus_sections(theme):
     return out
 
 
-def write_hidpi_and_index(theme):
+def write_hidpi_and_index(theme, name, kind):
     """<size>@2x folders are links to <size> (identical contents, as Papirus
     does), and index.theme lists every folder so the theme is selectable."""
     sections = []
@@ -140,8 +140,8 @@ def write_hidpi_and_index(theme):
     symbolic = [f"symbolic/{c}" for c in contexts]
     borrowed = papirus_sections(theme)
     with open(os.path.join(theme, "index.theme"), "w", encoding="utf-8") as fh:
-        fh.write(f"[Icon Theme]\nName={NAME}\n"
-                 "Comment=Warm flat app icons on coloured circles\n"
+        fh.write(f"[Icon Theme]\nName={name}\n"
+                 f"Comment=Warm flat app icons on coloured {kind}\n"
                  "Inherits=Papirus,hicolor\n"
                  "Example=firefox\n"
                  "DisplayDepth=32\n"
@@ -156,46 +156,53 @@ def write_hidpi_and_index(theme):
             fh.write(f"\n[{d}]\n" + "".join(f"{k}={v}\n" for k, v in keys.items()))
 
 
+def build_theme(shape, icons, small):
+    """Build one theme; returns 0, or 1 if a link is left dangling."""
+    folder, name, kind = THEMES[shape]
+    theme = os.path.join(ROOT, folder)
+    fits = load_fit(shape)
+    stage = theme + ".new"
+    shutil.rmtree(stage, ignore_errors=True)
+    sizes = FULL + SMALL
+    outs = {size: os.path.join(stage, f"{size}x{size}", "apps") for size in sizes}
+    for out in outs.values():
+        os.makedirs(out)
+    for icon_name, (fn, tile) in icons.items():
+        fit = fits.get(icon_name, 1)
+        full = icon(fn(), tile, fit, shape)
+        tiny = small_icon(small.get(icon_name, fn)(), tile, 24, fit, shape)
+        for size in sizes:
+            svg = full if size in FULL else tiny.replace('width="24" height="24"', f'width="{size}" height="{size}"', 1)
+            with open(os.path.join(outs[size], icon_name + ".svg"), "w", encoding="utf-8") as fh:
+                fh.write(svg)
+    links = alias_links(icons)
+    for out in outs.values():
+        for link, target in links:
+            os.symlink(target, os.path.join(out, link))
+    dangling = [e.path for out in outs.values() for e in os.scandir(out)
+                if e.is_symlink() and not os.path.exists(e.path)]
+    write_hidpi_and_index(stage, name, kind)
+    nsym = write_symbolic(stage)
+    print(f"{name}: {len(icons)} icons x {len(sizes)} sizes, {len(links)} alias links each, "
+          f"{len(small)} small redraws, {nsym} symbolic, {len(dangling)} dangling")
+    if dangling:
+        return 1
+    shutil.rmtree(theme, ignore_errors=True)
+    os.replace(stage, theme)
+    return 0
+
+
 def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
-    if argv:
-        print("usage: python build.py", file=sys.stderr)
+    if len(argv) > 1 or (argv and argv[0] not in SHAPES):
+        print("usage: python build.py [circle|square]   (no argument builds both)", file=sys.stderr)
         raise SystemExit(2)
     problem = check_papirus()
     if problem:
         print(problem, file=sys.stderr)
         return 1
     icons, small = load()
-    fits = load_fit()
-    stage = THEME + ".new"
-    shutil.rmtree(stage, ignore_errors=True)
-    sizes = FULL + SMALL
-    outs = {size: os.path.join(stage, f"{size}x{size}", "apps") for size in sizes}
-    for out in outs.values():
-        os.makedirs(out)
-    for name, (fn, tile) in icons.items():
-        fit = fits.get(name, 1)
-        full = icon(fn(), tile, fit)
-        tiny = small_icon(small.get(name, fn)(), tile, 24, fit)
-        for size in sizes:
-            svg = full if size in FULL else tiny.replace('width="24" height="24"', f'width="{size}" height="{size}"', 1)
-            with open(os.path.join(outs[size], name + ".svg"), "w", encoding="utf-8") as fh:
-                fh.write(svg)
-    links = alias_links(icons)
-    for out in outs.values():
-        for name, target in links:
-            os.symlink(target, os.path.join(out, name))
-    dangling = [e.path for out in outs.values() for e in os.scandir(out)
-                if e.is_symlink() and not os.path.exists(e.path)]
-    write_hidpi_and_index(stage)
-    nsym = write_symbolic(stage)
-    print(f"{len(icons)} icons x {len(sizes)} sizes, {len(links)} alias links each, "
-          f"{len(small)} small redraws, {nsym} symbolic, {len(dangling)} dangling")
-    if dangling:
-        return 1
-    shutil.rmtree(THEME, ignore_errors=True)
-    os.replace(stage, THEME)
-    return 0
+    return max(build_theme(shape, icons, small) for shape in (argv or SHAPES))
 
 
 if __name__ == "__main__":

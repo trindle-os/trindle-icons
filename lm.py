@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 """Shared drawing kit for the Trindle icon theme.
 
-Every icon is a 64x64 canvas: a round
+Every icon is a 64x64 canvas: a round or rounded-square
 disc and a brand glyph centred on (CX, CY) inside a ~34px box.
 """
 import math
@@ -120,15 +120,18 @@ PALE = {BLUE_SOFT, LIGHT_BLUE_SOFT, CYAN_SOFT, CYAN_LIGHT, YELLOW_SOFT,
         GREY_SOFT, GREY_LIGHT, BRAND_YELLOW}
 
 
-GLYPH_SCALE = .94
+SHAPES = ("circle", "square")
+GLYPH_SCALE = {"circle": .94, "square": 1}
 
 
-def disc(fill):
-    return f'<circle cx="32" cy="32" r="25.5" fill="{fill}"/>'
+def disc(fill, shape="circle"):
+    if shape == "circle":
+        return f'<circle cx="32" cy="32" r="25.5" fill="{fill}"/>'
+    return f'<rect x="7" y="7" width="50" height="50" rx="14" fill="{fill}"/>'
 
 
-def _fit(glyph, extra=1):
-    k = GLYPH_SCALE * extra
+def _fit(glyph, extra=1, shape="circle"):
+    k = GLYPH_SCALE[shape] * extra
     return glyph if k == 1 else f'<g transform="translate(32 30) scale({k}) translate(-32 -30)">{glyph}</g>'
 
 
@@ -146,12 +149,12 @@ def _inked(glyph, tile):
     return glyph.replace('"INK"', f'"{ink}"').replace('"HOLE"', f'"{tile}"')
 
 
-def icon(glyph, tile, fit=1):
+def icon(glyph, tile, fit=1, shape="circle"):
     """Full-size icon (32px and up): tile plus a logo lifted off it."""
-    glyph = _fit(_inked(glyph, tile), fit)
+    glyph = _fit(_inked(glyph, tile), fit, shape)
     return (
         '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">'
-        + disc(tile)
+        + disc(tile, shape)
         + f'<g transform="translate(0 1)">{lift(glyph)}</g>'
         + f'<g transform="translate(0 -.5)">{glyph}</g>'
         + "</svg>\n"
@@ -162,13 +165,15 @@ def _thicken(glyph, k=1.3):
     return re.sub(r'stroke-width="([\d.]+)"', lambda m: f'stroke-width="{f(float(m[1]) * k)}"', glyph)
 
 
-def small_icon(glyph, tile, px, fit=1):
+def small_icon(glyph, tile, px, fit=1, shape="circle"):
     """16/22/24px icon: no lift, tile fills the canvas, logo enlarged and
     strokes thickened so the mark survives a handful of pixels."""
-    glyph = _fit(_thicken(_inked(glyph, tile)), fit)
+    glyph = _fit(_thicken(_inked(glyph, tile)), fit, shape)
+    tilepath = (f'<circle cx="32" cy="32" r="30.5" fill="{tile}"/>' if shape == "circle"
+                else f'<rect x="2" y="2" width="60" height="60" rx="15" fill="{tile}"/>')
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{px}" height="{px}" viewBox="0 0 64 64">'
-        + f'<circle cx="32" cy="32" r="30.5" fill="{tile}"/>'
+        + tilepath
         + f'<g transform="translate(32 32) scale(1.22) translate(-32 -30)">{glyph}</g>'
         + "</svg>\n"
     )

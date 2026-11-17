@@ -18,7 +18,7 @@ def is_green(hex6):
 
 def main():
     seen, bad, files = {}, [], 0
-    for path in own_svgs("Trindle-Circle"):
+    for path in own_svgs("Trindle-Circle", "Trindle-Square"):
         files += 1
         with open(path, encoding="utf-8") as fh:
             text = fh.read()

@@ -17,7 +17,7 @@ trap 'rm -rf "$work"' EXIT
 deb() { # package name, theme folder, description
     pkg=$1 theme=$2 desc=$3
     root="$work/$pkg"
-    [ -f "$here/$theme/index.theme" ] || { echo "$theme is not built (no index.theme). Run build.py first." >&2; exit 1; }
+    [ -f "$here/$theme/index.theme" ] || { echo "$theme is not built (no index.theme). Run build.py (both themes) first." >&2; exit 1; }
     mkdir -p "$root/DEBIAN" "$root/usr/share/icons"
     cp -a "$here/$theme" "$root/usr/share/icons/$theme"
     mkdir -p "$root/usr/share/doc/$pkg"
@@ -80,6 +80,7 @@ POSTRM
     dpkg-deb --root-owner-group -Zxz --build "$root" "$repo/pool/$component/${pkg}_${version}_all.deb" >/dev/null
 }
 
+deb trindle-square-icon-theme Trindle-Square "Trindle Square icon theme (rounded squares)"
 deb trindle-circle-icon-theme Trindle-Circle "Trindle Circle icon theme (circles)"
 
 for arch in all amd64 arm64; do
