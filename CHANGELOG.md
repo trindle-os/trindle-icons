@@ -2,6 +2,10 @@
 
 Newest first. Dates are when each version was built.
 
+## 1.4.9 (2026-11-20)
+
+- object-select-symbolic is a tick again (it was a dot).
+
 ## 1.4.8 (2026-11-16)
 
 - Three new icons in both themes: trindle-flatpak, trindle-appimage and trindle-report.

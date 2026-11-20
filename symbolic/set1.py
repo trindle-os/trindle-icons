@@ -622,7 +622,7 @@ def removable():
 
 @reg("object-select", "actions")
 def select():
-    return dot(8, 8, 3.25)
+    return p("M3.28 7.97L6.21 10.9L12.69 3.51")
 
 
 @reg("package-x-generic", "mimetypes")

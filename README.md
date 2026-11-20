@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-1.4.8-2c3e50?style=flat-square" alt="Version 1.4.8"></a>
+  <a href="CHANGELOG.md"><img src="https://img.shields.io/badge/version-1.4.9-2c3e50?style=flat-square" alt="Version 1.4.9"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/licence-GPL--3.0--or--later%20%2F%20MIT-2c3e50?style=flat-square" alt="Licence: GPL-3.0-or-later and MIT"></a>
   <a href="https://github.com/trindle-os/trindle-icons/releases"><img src="https://img.shields.io/badge/download-GitHub%20releases-2c3e50?style=flat-square" alt="Download from GitHub releases"></a>
   <img src="https://img.shields.io/badge/icons-drawn%20in%20code-2c3e50?style=flat-square" alt="Icons drawn in code">
